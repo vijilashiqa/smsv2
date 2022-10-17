@@ -1,0 +1,119 @@
+<nb-card>
+    <!-- <toaster-container></toaster-container> -->
+    <nb-card-header>Transfer Subscriber</nb-card-header>
+    <nb-card-body>
+      <form [formGroup]="TransForm" class="form-horizontal" (ngSubmit)="custtransfer();">
+        <div class="modal-body">
+          <h5>From</h5>
+          <div class="form-group row" style="padding-left: 5px ">
+            <div  class="col-sm-3">
+              <label>Headend</label>
+              <select (change)='opt[0]=[];getoperator(0);' name="headend_from" formControlName="headend_from"
+              [ngClass]="{'form-control' : true,'form-control-danger':TransForm.controls.headend_from.invalid&&submit}">
+              
+                <option value="">Select Headend</option>
+                <!-- <option *ngFor="let item of head" [ngValue]=item.headend_pk>{{item.headend_name}}</option> -->
+             
+              <small *ngIf="TransForm.hasError('required','headend_from')&&submit" class="form-text error"> Select
+                required Headend! </small>
+              </select>
+            </div>
+            <div  class="col-sm-3">
+              
+              <small *ngIf="TransForm.hasError('required','operatorid_from')&&submit" class="form-text error">Select
+                required Operator Name! </small>
+            </div>
+            <div class="col-sm-3">
+              
+              <small *ngIf="TransForm.hasError('required','location_from')&&submit" class="form-text error"> Select
+                Required Location! </small>
+            </div>
+            <div class="col-sm-3">
+              
+              <small *ngIf="TransForm.hasError('required','branch_from')&&submit" class="form-text error"> Select Required
+                Branch! </small>
+            </div>
+          </div>
+          <h5>To</h5>
+          <div class="form-group row" style="padding-left: 5px">
+            <div class="col-sm-3">
+              <label>Headend</label>
+              <select (change)='opt[1]=[];getoperator(1);' name="headend_to" formControlName="headend_to"
+              [ngClass]="{'form-control' : true,'form-control-danger':TransForm.controls.headend_to.invalid&&submit}">
+              <option value="">Select Headend</option>
+              
+            </select>
+              
+                <option value="">Select Headend</option>
+                <!-- <option *ngFor="let item of head" [ngValue]=item.headend_pk>{{item.headend_name}}</option> -->
+              
+              <small *ngIf="TransForm.hasError('required','headend_to')&&submit" class="form-text error"> Select required
+                Headend! </small>
+            </div>
+            <div  class="col-sm-3">
+                <input name='location_to' id='TransForm.value.location_to'
+                (item_id)="TransForm.controls.location_to.setValue($event);branch[1]=[];get_Branch_for_opt(1);"
+                placeholder='Select Location Name' label='Location'
+                >
+              <small>Select required Operator Name! </small>
+
+            </div>
+            <div class="col-sm-3">
+             
+              <small *ngIf="TransForm.hasError('required','location_to')&&submit" class="form-text error"> Select Required
+                Location! </small>
+            </div>
+            <div class="col-sm-3">
+              
+              <small *ngIf="TransForm.hasError('required','branch_to')&&submit" class="form-text error"> Select Required
+                Branch! </small>
+            </div>
+          </div>
+          <div class="form-group row" style="padding-left: 5px">
+            <div class="col-sm-3">
+              
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="demo-checkboxes col-sm-4">
+              <nb-checkbox formControlName="sameasold">Address same as Old Address</nb-checkbox>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-6">
+              <label>Installation Address</label>
+              <!-- <textarea
+                (keyup)="TransForm.value['checkaddr'] ? TransForm.controls['Billing'].setValue(TransForm.value['Installation']):''"
+                name="Installation" formControlName="Installation" placeholder="Installation Address "
+                [ngClass]="{'form-control' : true,'form-control-danger':TransForm.controls.Installation.invalid&&submit}"> </textarea> -->
+              <small  class="form-text error">Installation
+                Address is required! </small>
+            </div>
+            <div class="col-sm-6">
+              <label>Billing Address</label>
+              <textarea
+                (keyup)="TransForm.value['checkaddr'] ? TransForm.controls['Installation'].setValue(TransForm.value['Billing']):''"
+                name="Billing" formControlName="Billing" placeholder="Billing Address"
+                [ngClass]="{'form-control' : true,'form-control-danger':TransForm.controls.Billing.invalid&&submit}"></textarea>
+              <small *ngIf="TransForm.hasError('required','Billing')&&submit" class="form-text error"> Billing Address is
+                required! </small>
+            </div>
+          </div>
+          <div class="form-group row" [hidden]='TransForm.value["sameasold"]'>
+            <div class="demo-checkboxes col-sm-4">
+              <div class="custom-control custom-checkbox">
+                 <input
+                  
+                  type="checkbox" class="custom-control-input" id="checkaddr" formControlName="checkaddr"><label
+                  class="custom-control-label" for="checkaddr">Billing Address same as Installtion Address</label> -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" autofocus class="btn btn-md btn-success">Transfer</button>
+          <button type="button" class="btn btn-md btn-danger " [routerLink]="['/pages/customer/cust-list']">Cancel</button>
+        </div>
+      </form>
+    </nb-card-body>
+  </nb-card>

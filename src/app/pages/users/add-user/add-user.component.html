@@ -1,0 +1,701 @@
+<div class="col-12">
+    <nb-card>
+        <nb-card-header>ADD User </nb-card-header>
+        <nb-card-body>
+            <form [formGroup]="AddUserForm" class="form-horizontal" (ngSubmit)="AddUser();">
+
+                <nb-tabset>
+                    <nb-tab tabTitle="Basic Details">
+                        <div class="modal-body">
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                    <label>Headend Name<span style="color:red">*</span></label>
+                                    <auto-completen
+                                        [addclass]="{ 'error': submit && this.AddUserForm.controls.hdid.errors }"
+                                        addclass="form-control" optValues="hdname" formControlName="hdid"
+                                        (changed)="listoperator();subdistributor();listlco()" (keyUp)="getHeadend($event)"
+                                        placeholder='Select Headend' optId="hdid" [item]="listhead">
+                                    </auto-completen>
+                                    <div *ngIf="this.AddUserForm.controls.hdid.errors && (this.AddUserForm.controls.hdid.errors.required) && submit"
+                                        class="error-text">
+                                        Headend Name is required!
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <label class="control-label">Username <span style="color:red">*</span></label>
+                                    <input type="text" class="form-control" name="profileid" formControlName="profileid"
+                                        placeholder="Enter User Name"
+                                        [ngClass]="{ 'is-invalid': submit && AddUserForm.controls.profileid.errors }" />
+                                    <small
+                                        *ngIf="AddUserForm.controls.profileid.errors &&(AddUserForm.controls.profileid.errors.required )&& submit"
+                                        class="invalid-feedback">UserName is required! </small>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                    <label>Password <span style="color:red">*</span></label>
+                                    <input type="text" class="form-control" name="password"
+                                        formControlName="password" placeholder="Enter User Name"
+                                        [ngClass]="{ 'is-invalid': submit && AddUserForm.controls.password.errors }" />
+                                    <small
+                                        *ngIf="AddUserForm.controls.password.errors &&(AddUserForm.controls.password.errors.required )&& submit"
+                                        class="invalid-feedback">Password is required! </small>
+                                </div>
+                                <!-- <div class="col-sm-6">
+                                    <label>Confirm Password <span style="color:red">*</span></label>
+                                    <input type="password" name="CPassword" formControlName="CPassword"
+                                        placeholder="Confirm Password" #input
+                                        [ngClass]="{'form-control' : true,'form-control-danger':AddUserForm.value['password']!=AddUserForm.value['CPassword']}" />
+                                    <small *ngIf="AddUserForm.value['password']!=AddUserForm.value['CPassword']"
+                                        class="form-text error">Passwords does not
+                                        Match! </small>
+                                </div> -->
+                                <div class="col-sm-6">
+                                    <label>Full Name <span style="color:red">*</span></label>
+                                    <input type="text" class="form-control" name="fullname" formControlName="fullname"
+                                        placeholder="Enter First Name"
+                                        [ngClass]="{ 'is-invalid': submit && AddUserForm.controls.fullname.errors }" />
+                                    <small
+                                        *ngIf="AddUserForm.controls.fullname.errors &&(AddUserForm.controls.fullname.errors.required )&& submit"
+                                        class="invalid-feedback">FirstName is required! </small>
+                                </div>
+
+
+                            </div>
+                            <!-- <div class="form-group row">
+                              
+                                <div class="col-sm-6">
+                                    <label>Last Name </label>
+                                    <input type="text" class="form-control" name="lastname" formControlName="lastname"
+                                        placeholder="Enter LastName"
+                                        [ngClass]="{ 'is-invalid': submit && AddUserForm.controls.lastname.errors }" />
+                                    <small
+                                        *ngIf="AddUserForm.controls.lastname.errors &&(AddUserForm.controls.lastname.errors.required )&& submit"
+                                        class="invalid-feedback">LastName is required! </small>
+                                </div>
+                            </div> -->
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                    <label>Date Of Birth<span style="color:red">*</span></label>
+                                    <input type="date" class="form-control" name="dob" formControlName="dob"
+                                        placeholder="Enter First Name"
+                                        [ngClass]="{ 'is-invalid': submit && AddUserForm.controls.dob.errors }" />
+                                    <small
+                                        *ngIf="AddUserForm.controls.dob.errors &&(AddUserForm.controls.dob.errors.required )&& submit"
+                                        class="invalid-feedback">Date of birth is required! </small>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label>Gender<span style="color:red">*</span></label>
+                                    <select name="gender" formControlName="gender" class="form-control"
+                                        [ngClass]="{ 'is-invalid': submit && AddUserForm.controls.gender.errors }">
+                                        <option value=""> Select Gender</option>
+                                        <option value="1">Male</option>
+                                        <option value="2">Female</option>
+                                    </select>
+                                    <small
+                                        *ngIf="AddUserForm.controls.gender.errors &&(AddUserForm.controls.gender.errors.required )&& submit"
+                                        class="invalid-feedback">Gender is required! </small>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                    <label>Mobile No<span style="color:red">*</span></label>
+                                    <input type="number" class="form-control" name="mobile" formControlName="mobile"
+                                        placeholder="Enter Mobile NO"
+                                        [ngClass]="{ 'is-invalid': submit && AddUserForm.controls.mobile.errors }" />
+                                    <small
+                                        *ngIf="AddUserForm.controls.mobile.errors &&(AddUserForm.controls.mobile.errors.required )&& submit"
+                                        class="invalid-feedback">Mobile NO is required! </small>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label>Phone No</label>
+                                    <input type="number" class="form-control" name="phoneno" formControlName="phoneno"
+                                        placeholder="Enter phone NO"
+                                        [ngClass]="{ 'is-invalid': submit && AddUserForm.controls.phoneno.errors }" />
+                                    <small
+                                        *ngIf="AddUserForm.controls.phoneno.errors &&(AddUserForm.controls.phoneno.errors.required )&& submit"
+                                        class="invalid-feedback">Phone NO is required! </small>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                    <label>Country<span style="color:red">*</span></label>
+                                    <auto-completen
+                                        [addclass]="{ 'error': submit && this.AddUserForm.controls.country.errors }"
+                                        addclass="form-control" optValues="name" formControlName="country"
+                                        (keyUp)="getCountry($event)" (changed)="getstate();typeclearcountry('1')"
+                                        placeholder='Select Country' id="id" [item]="count">
+                                    </auto-completen>
+                                    <div *ngIf="this.AddUserForm.controls.country.errors && (this.AddUserForm.controls.country.errors.required) && submit"
+                                        class="error-text">
+                                        Country Name is required!
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label>state<span style="color:red">*</span></label>
+                                    <auto-completen
+                                        [addclass]="{ 'error': submit && this.AddUserForm.controls.state.errors }"
+                                        addclass="form-control" optValues="name" formControlName="state"
+                                        (keyUp)="getstate($event)" (changed)="getdistrict(); typeclearstate('1')"
+                                        placeholder='Select State' id="id" [item]="getstates">
+                                    </auto-completen>
+                                    <div *ngIf="this.AddUserForm.controls.state.errors && (this.AddUserForm.controls.state.errors.required) && submit"
+                                        class="error-text">
+                                        State Name is required!
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                    <label>District <span style="color:red">*</span></label>
+                                    <auto-completen
+                                        [addclass]="{ 'error': submit && this.AddUserForm.controls.district.errors }"
+                                        addclass="form-control" optValues="name" formControlName="district"
+                                        (keyUp)="getdistrict($event) " (changed)="getcity();typecleardist()"
+                                        placeholder='Select District' id="id" [item]="dist">
+                                    </auto-completen>
+                                    <div *ngIf="this.AddUserForm.controls.district.errors && (this.AddUserForm.controls.district.errors.required) && submit"
+                                        class="error-text">
+                                        District Name is required!
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label>City<span style="color:red">*</span></label>
+                                    <auto-completen
+                                        [addclass]="{ 'error': submit && this.AddUserForm.controls.city.errors }"
+                                        addclass="form-control" optValues="name"
+                                        (changed)="getarea();typeclearcity('1')" formControlName="city"
+                                        (keyUp)="getcity($event) " placeholder='Select City' id="id" [item]="citylist">
+                                    </auto-completen>
+                                    <div *ngIf="this.AddUserForm.controls.city.errors && (this.AddUserForm.controls.city.errors.required) && submit"
+                                        class="error-text">
+                                        City Name is required!
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                    <label>Area<span style="color:red">*</span></label>
+                                    <auto-completen
+                                        [addclass]="{ 'error': submit && this.AddUserForm.controls.area.errors }"
+                                        addclass="form-control" optValues="name" formControlName="area"
+                                        (keyUp)="getarea($event) " placeholder='Select Area' id="id" [item]="listarea">
+                                    </auto-completen>
+                                    <div *ngIf="this.AddUserForm.controls.area.errors && (this.AddUserForm.controls.area.errors.required) && submit"
+                                        class="error-text">
+                                        Area Name is required!
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label>Pin Code <span style="color:red">*</span></label>
+                                    <input name="pincode" placeholder="Enter Pincode" formControlName="pincode"
+                                        type="text" class="form-control"
+                                        [ngClass]="{'is-invalid': submit && this.AddUserForm.controls.pincode.errors }" />
+                                    <small
+                                        *ngIf="this.AddUserForm.controls.pincode.errors &&(this.AddUserForm.controls.pincode.errors.required)&& submit"
+                                        class="invalid-feedback">pincode is required! </small>
+                                </div>
+
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                    <label>Prof Address<span style="color:red">*</span></label>
+                                    <textarea
+                                        (keyup)="AddUserForm.value['addsflag'] ? AddUserForm.controls['billing_addr'].setValue(AddUserForm.value['installation_addr']):''"
+                                        name="installation_addr" formControlName="installation_addr"
+                                        class="form-control" placeholder="Installation Address " #input
+                                        [ngClass]="{ 'is-invalid': submit && this.AddUserForm.controls.installation_addr.errors }"> </textarea>
+                                    <small
+                                        *ngIf="this.AddUserForm.controls.installation_addr.errors &&(this.AddUserForm.controls.installation_addr.errors.required)&& submit"
+                                        class="invalid-feedback">Installation is required! </small>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label>Business Address<span style="color:red">*</span></label>
+                                    <textarea
+                                        (keyup)="AddUserForm.value['addsflag'] ? AddUserForm.controls['installation_addr'].setValue(AddUserForm.value['billing_addr']):''"
+                                        name="billing_addr" formControlName="billing_addr" class="form-control"
+                                        placeholder="business Address" #input
+                                        [ngClass]="{ 'is-invalid': submit && this.AddUserForm.controls.billing_addr.errors }"></textarea>
+                                    <small
+                                        *ngIf="this.AddUserForm.controls.billing_addr.errors &&(this.AddUserForm.controls.billing_addr.errors.required)&& submit"
+                                        class="invalid-feedback">Billing Address is required! </small>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="addsflag"
+                                            formControlName="addsflag" />
+                                        <label class="custom-control-label" for="addsflag">Billing Address same as
+                                            Installtion Address</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                    <label>Email<span style="color:red">*</span></label>
+                                    <input name="email" placeholder="Enter email" formControlName="email" type="text"
+                                        class="form-control"
+                                        [ngClass]="{ 'is-invalid': submit && this.AddUserForm.controls.email.errors }" />
+                                    <small
+                                        *ngIf="this.AddUserForm.controls.email.errors &&(this.AddUserForm.controls.email.errors.required)&& submit"
+                                        class="invalid-feedback">Email is required! </small>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label>Email 2</label>
+                                    <input name="email2" placeholder="Enter email2" formControlName="email2" type="text"
+                                        class="form-control"
+                                        [ngClass]="{ 'is-invalid': submit && this.AddUserForm.controls.email2.errors }" />
+                                    <small
+                                        *ngIf="this.AddUserForm.controls.email2.errors &&(this.AddUserForm.controls.email2.errors.required)&& submit"
+                                        class="invalid-feedback">Email is required! </small>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                    <label>Proof Type<span style="color:red">*</span></label>
+                                    <select #input
+                                        [ngClass]="{ 'is-invalid': submit && this.AddUserForm.controls.prooftype.errors }"
+                                        name="prooftype" formControlName="prooftype" class="form-control">
+                                        <option value="">Select Proof Type</option>
+                                        <option value="1">Ration Card</option>
+                                        <option value="2">Aadar Card</option>
+                                        <option value="3">PAN</option>
+                                        <option value="4">Voter ID</option>
+                                        <option value="5">Driving License</option>
+                                        <option value="6">others</option>
+                                    </select>
+                                    <small
+                                        *ngIf="this.AddUserForm.controls.prooftype.errors &&(this.AddUserForm.controls.prooftype.errors.required)&& submit"
+                                        class="invalid-feedback">Proof is required! </small>
+                                </div>
+                                <div class="col-sm-6" *ngIf='AddUserForm.value["prooftype"]!=""'>
+                                    <label>Proof ID<span style="color:red">*</span></label>
+                                    <input type="text" name="proofno" formControlName="proofno" class="form-control"
+                                        placeholder="proofno "
+                                        [ngClass]="{ 'is-invalid': submit && this.AddUserForm.controls.proofno.errors }" />
+                                    <small
+                                        *ngIf="this.AddUserForm.controls.proofno.errors &&(this.AddUserForm.controls.proofno.errors.required)&& submit"
+                                        class="invalid-feedback">Proof is required! </small>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-12">
+                                    <label>Description</label>
+                                    <input name="desc" formControlName="desc" type="text" class="form-control"
+                                        placeholder="Description" maxlength="200">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-6">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="status"
+                                            formControlName="status" />
+                                        <label class="custom-control-label" for="status">Active</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </nb-tab>
+                    <nb-tab tabTitle="Operator Type">
+                        <div class="modal-body">
+                            <div class="form-group row">
+                                <div class="col-sm-6"
+                                    (changed)='taxpayby(); listoperator();AddUserForm.controls.subdistid.setValue("");operatortype();
+                                    '
+                                    >
+                                    <label class="control-label">Operator Type<span style="color:red">*</span></label>
+                                    <select class=form-control name="usertype" formControlName="usertype" 
+                                        [ngClass]="{ 'is-invalid': submit && this.AddUserForm.controls.usertype.errors }">
+                                        <option value="">Select Operator Type</option>
+                                        <option value="444">LCO</option>
+                                        <option value="666">Distributor</option>
+                                        <option value="555">Sub-Distributor</option>
+                                        <option value="333">Hotel</option>
+                                    </select>
+                                    <small
+                                        *ngIf="this.AddUserForm.controls.usertype.errors &&(this.AddUserForm.controls.usertype.errors.required)&& submit"
+                                        class="invalid-feedback">Operator Type is required! </small>
+                                </div>
+                            </div>
+
+                            <div class="form-group row" *ngIf='AddUserForm.value["usertype"]=="444" || 
+                                                            AddUserForm.value["usertype"]=="333"' 
+                                                            (changed)='operatortype() ;listoperator();
+                                                            '
+                                                            >
+                                <div class="col-sm-6">
+                                    <label>Distributor/Subdistributer<span style="color:red">*</span></label>
+                                    <select class="form-control" 
+                                        [ngClass]="{ 'is-invalid': submit && this.AddUserForm.controls.dist_or_sub_flg.errors }"
+                                        name="dist_or_sub_flg" formControlName="dist_or_sub_flg">
+                                        <option value="">Select Distributor/Subdistributer</option>
+                                        <option value="1">None</option>
+                                        <option value="2">Distributer</option>
+                                        <option value="3">Subdistributer</option>
+                                        <option value="4" *ngIf='AddUserForm.value["usertype"]=="333"'>LCO </option>
+                                    </select>
+                                    <small
+                                        *ngIf="this.AddUserForm.controls.dist_or_sub_flg.errors &&(this.AddUserForm.controls.dist_or_sub_flg.errors.required)&& submit"
+                                        class="invalid-feedback">Operator Type is required! </small>
+                                </div>
+                            </div>
+                            <div
+                            class="form-group row" *ngIf='AddUserForm.value["dist_or_sub_flg"]=="2" || 
+                            (AddUserForm.value["dist_or_sub_flg"]=="3" &&AddUserForm.value["usertype"]=="555")||
+                            AddUserForm.value["usertype"]=="555"||
+                            (AddUserForm.value["usertype"]=="333" && AddUserForm.value["dist_or_sub_flg"]=="3")||
+                            (AddUserForm.value["usertype"]=="444" && AddUserForm.value["dist_or_sub_flg"]=="2")||
+                            (AddUserForm.value["usertype"]=="444" && AddUserForm.value["dist_or_sub_flg"]=="3")||
+                            (AddUserForm.value["usertype"]=="333" && AddUserForm.value["dist_or_sub_flg"]=="2")'
+                            (changed)='AddUserForm.controls.subdistid.setValue("")'>
+                                <div class="col-sm-6">
+                                    <label> Select Distributer Name<span style="color:red">*</span></label>
+                                    <auto-completen
+                                        [addclass]="{ 'error': submit && this.AddUserForm.controls.distid.errors }"
+                                        addclass="form-control" optValues="business_name" formControlName="distid"
+                                        (changed)="listoperator();subdistributor()"
+                                        placeholder='Select Distributer Name' Id="id" [item]="operatortypelist">
+                                    </auto-completen>
+                                    <small *ngIf="AddUserForm.hasError('required','distid')&&submit"
+                                        class="form-text error"> Distributer Name is Required !</small>
+                                </div>
+                            </div>
+                            <div class="form-group row" *ngIf='AddUserForm.value["dist_or_sub_flg"]=="555" &&
+                             (AddUserForm.value["usertype"]=="555" && AddUserForm.value["dist_or_sub_flg"]=="3")||
+                             (AddUserForm.value["usertype"]=="333" && AddUserForm.value["dist_or_sub_flg"]=="3")||
+                             (AddUserForm.value["usertype"]=="444" && AddUserForm.value["dist_or_sub_flg"]=="3") '>
+                                <div class="col-sm-6">
+                                    <label> Select Sub-Distributer Name<span style="color:red">*</span></label>
+                                    <auto-completen
+                                        [addclass]="{ 'error': submit && this.AddUserForm.controls.subdistid.errors }"
+                                        addclass="form-control" optValues="business_name" formControlName="subdistid"
+                                        placeholder='Select Sub-Distributer Name' Id="id" [item]="subdistributortype">
+                                    </auto-completen>
+                                    <small *ngIf="AddUserForm.hasError('required','subdistid')&&submit"
+                                        class="form-text error"> Sub-Distributer Name is Required !</small>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group row"
+                             *ngIf='(AddUserForm.value["usertype"]=="333" && AddUserForm.value["dist_or_sub_flg"]=="4") '>
+                               <div class="col-sm-6">
+                                   <label>LCO  Name<span style="color:red">*</span></label>
+                                   <auto-completen
+                                   [addclass]="{ 'error': submit && this.AddUserForm.controls.lcoid.errors }"
+                                   addclass="form-control" optValues="business_name" formControlName="lcoid"
+                                   placeholder='Select LCO Name' Id="id" 
+                                   (changed)="showShare();"
+                                   [item]="getlistcount">
+                               </auto-completen>
+                               <div *ngIf="this.AddUserForm.controls.lcoid.errors && (this.AddUserForm.controls.lcoid.errors.required) && submit"
+                                   class="error-text">
+                                LCO  Name is required!
+                               </div>
+                               </div>
+                           </div>
+
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                    <label>{{showtext}} Name<span style="color:red">*</span></label>
+                                    <input type="text" class="form-control" name="business_name"
+                                        formControlName="business_name" placeholder="Enter Business Name"
+                                        [ngClass]="{ 'is-invalid': submit && this.AddUserForm.controls.business_name.errors }" />
+                                    <small
+                                        *ngIf="this.AddUserForm.controls.business_name.errors &&(this.AddUserForm.controls.business_name.errors.required)&& submit"
+                                        class="invalid-feedback">Business Name is required! </small>
+                                </div>
+                            </div>
+
+                            <div class="form-group row" *ngIf='AddUserForm.value["usertype"]=="555" ||
+                             AddUserForm.value["usertype"]=="444" && AddUserForm.value["dist_or_sub_flg"] =="3" '>
+                                <div class="col-sm-6">
+                                    <label>Subdistributer Code<span style="color:red">*</span></label>
+                                    <input type="text" name="subcode" formControlName="subcode"
+                                        placeholder="Subdistributer Code " #input
+                                        [ngClass]="{'form-control' : true,'form-control-danger':AddUserForm.controls.subcode.invalid&&submit}" />
+                                    <small *ngIf="AddUserForm.hasError('required','subcode')&&submit"
+                                        class="form-text error">Subdistributer Code is required! </small>
+                                </div>
+                            </div>
+
+                            <div class="form-group row"
+                                *ngIf=' AddUserForm.value["usertype"]=="666" || 
+                                AddUserForm.value["usertype"]=="444" && AddUserForm.value["dist_or_sub_flg"] =="2"'>
+                                <div class="col-sm-6">
+                                    <label>Distributor Code<span style="color:red">*</span></label>
+                                    <input type="text" name="distributercode" formControlName="distributercode"
+                                        placeholder="Distributer Code " #input
+                                        [ngClass]="{'form-control' : true,'form-control-danger':AddUserForm.controls.distributercode.invalid&&submit}" />
+                                    <small *ngIf="AddUserForm.hasError('required','distributercode')&&submit"
+                                        class="form-text error"> Distributer Code is required! </small>
+                                </div>
+                            </div>
+
+                            <div class="form-group row" *ngIf='AddUserForm.value["usertype"]=="444" && AddUserForm.value["dist_or_sub_flg"] =="1" || 
+                            AddUserForm.value["usertype"]=="333" && AddUserForm.value["dist_or_sub_flg"] =="4"'>
+                                <div class="col-sm-6">
+                                    <label>LCO Code<span style="color:red">*</span></label>
+                                    <input name="lcocode" placeholder="Enter LCO Code " formControlName="lcocode"
+                                        type="text" class="form-control"
+                                        [ngClass]="{ 'is-invalid': submit && this.AddUserForm.controls.lcocode.errors }" />
+                                    <small
+                                        *ngIf="this.AddUserForm.controls.lcocode.errors &&(this.AddUserForm.controls.lcocode.errors.required)&& submit"
+                                        class="invalid-feedback">LCO Code is required! </small>
+                                </div>
+                            </div>
+
+
+
+
+
+                            
+                            <div class="form-group row" *ngIf='AddUserForm.value["usertype"]=="444" ||
+                            ( AddUserForm.value["usertype"]=="333" && AddUserForm.value["dist_or_sub_flg"] =="4")||
+                           ( AddUserForm.value["usertype"]=="333" && AddUserForm.value["dist_or_sub_flg"] =="1" )||
+                            AddUserForm.value["usertype"]=="666"||
+                            AddUserForm.value["usertype"]=="555 "||
+                            AddUserForm.value["usertype"]=="333" && AddUserForm.value["dist_or_sub_flg"] =="2" '>
+                                <div class="col-sm-6">
+                                    <label>Postal Registration No<span style="color:red">*</span></label>
+                                    <input name="postalregno" placeholder="Enter Registration no "
+                                        formControlName="postalregno" type="text" class="form-control"
+                                        [ngClass]="{ 'is-invalid': submit && this.AddUserForm.controls.postalregno.errors }" />
+                                    <small
+                                        *ngIf="this.AddUserForm.controls.postalregno.errors &&(this.AddUserForm.controls.postalregno.errors.required)&& submit"
+                                        class="invalid-feedback">Postal Registration is required! </small>
+                                </div>
+                            </div>
+
+                            <div class="form-group row" *ngIf='AddUserForm.value["usertype"]=="444" ||
+                             (AddUserForm.value["usertype"]=="333" && AddUserForm.value["dist_or_sub_flg"] =="4") ||
+                            (AddUserForm.value["usertype"]=="333" && AddUserForm.value["dist_or_sub_flg"] =="1") ||
+                            (AddUserForm.value["usertype"]=="333" && AddUserForm.value["dist_or_sub_flg"] =="2")'>
+                                <div class="col-sm-6">
+                                    <label>Subscription Start Date<span style="color:red">*</span></label>
+                                    <input type="date" name="subscription_start_date"
+                                        formControlName="subscription_start_date" placeholder="Select Date " #input
+                                        class="form-control"
+                                        [ngClass]="{ 'is-invalid': submit && this.AddUserForm.controls.subscription_start_date.errors }" />
+                                    <small
+                                        *ngIf="this.AddUserForm.controls.subscription_start_date.errors &&(this.AddUserForm.controls.subscription_start_date.errors.required)&& submit"
+                                        class="invalid-feedback">Subscription Start Date is required! </small>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group row" *ngIf='AddUserForm.value["usertype"]=="444" || 
+                            (AddUserForm.value["usertype"]=="333" && AddUserForm.value["dist_or_sub_flg"] =="4") ||
+                            (AddUserForm.value["usertype"]=="333" && AddUserForm.value["dist_or_sub_flg"] =="1")||
+                            (AddUserForm.value["usertype"]=="333" && AddUserForm.value["dist_or_sub_flg"] =="2")'>
+                                <div class="col-sm-6">
+                                    <label>Subscription End Date<span style="color:red">*</span></label>
+                                    <input type="date" name="subscription_end_date"
+                                        formControlName="subscription_end_date" placeholder="Select Date " #input
+                                        class="form-control"
+                                        [ngClass]="{ 'is-invalid': submit && this.AddUserForm.controls.subscription_end_date.errors }" />
+                                    <small
+                                        *ngIf="this.AddUserForm.controls.subscription_end_date.errors &&(this.AddUserForm.controls.subscription_end_date.errors.required)&& submit"
+                                        class="invalid-feedback">Subscription End Date is required! </small>
+                                </div>
+                            </div>
+
+                            <div class="form-group row"
+                                *ngIf='!AddUserForm.value["holderflg"]&&(AddUserForm.value["usertype"]=="666" || 
+                            AddUserForm.value["usertype"]=="444"||
+                             AddUserForm.value["usertype"]=="555") ||
+                             !AddUserForm.value["holderflg"]&&(AddUserForm.value["usertype"]=="333" && AddUserForm.value["dist_or_sub_flg"] =="4")||
+                             !AddUserForm.value["holderflg"]&&(AddUserForm.value["usertype"]=="333" && AddUserForm.value["dist_or_sub_flg"] =="3")||
+                             !AddUserForm.value["holderflg"]&&(AddUserForm.value["usertype"]=="333" && AddUserForm.value["dist_or_sub_flg"] =="4") ||
+                             !AddUserForm.value["holderflg"]&&(AddUserForm.value["usertype"]=="333" && AddUserForm.value["dist_or_sub_flg"] =="1")||
+                             !AddUserForm.value["holderflg"]&&(AddUserForm.value["usertype"]=="333" && AddUserForm.value["dist_or_sub_flg"] =="2")'>
+                                <div class="col-sm-6">
+                                    <label>Folio Number</label>
+                                    <input type="text" name="folino" formControlName="folino" placeholder="Select Date "
+                                        #input class="form-control"
+                                        [ngClass]="{ 'is-invalid': submit && this.AddUserForm.controls.folino.errors }" />
+                                    <small
+                                        *ngIf="this.AddUserForm.controls.folino.errors &&(this.AddUserForm.controls.folino.errors.required)&& submit"
+                                        class="invalid-feedback"> Folio Number is required! </small>
+                                </div>
+                            </div>
+
+                            <div class="form-group row" *ngIf='AddUserForm.value["usertype"]=="666" ||
+                             AddUserForm.value["usertype"]=="444"||
+                              AddUserForm.value["usertype"]=="555" ||
+                              (AddUserForm.value["usertype"]=="333" && AddUserForm.value["dist_or_sub_flg"] =="4")||
+                              (AddUserForm.value["usertype"]=="333" && AddUserForm.value["dist_or_sub_flg"] =="3")||
+                              (AddUserForm.value["usertype"]=="333" && AddUserForm.value["dist_or_sub_flg"] =="4")||
+                              (AddUserForm.value["usertype"]=="333" && AddUserForm.value["dist_or_sub_flg"] =="1")'>
+                                <div class="col-md-12">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="holderflg"
+                                            formControlName="holderflg" />
+                                        <label class="custom-control-label" for="holderflg"> Not A Share Holder</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </nb-tab>
+                    <nb-tab tabTitle="Tax Details">
+                        <div class="modal-body">
+                            <div [hidden]='AddUserForm.value["usertype"]!="444"' class="form-group row">
+                                <div class="col-sm-6">
+                                    <label>Tax Payed By</label>
+                                    <select (changed)='taxpayby();' class="form-control" name="taxpayby"
+                                        formControlName="taxpayby">
+                                        <option value="1">MSO</option>
+                                        <option value="2">LCO</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                    <label>TAN Number</label>
+                                    <input type="text" class="form-control" name="tanno" formControlName="tanno"
+                                        placeholder="TAN Number" />
+                                </div>
+                                <div class="col-sm-6">
+                                    <label>GST Number</label>
+                                    <input type="text" class="form-control" name="gstno" formControlName="gstno"
+                                        placeholder="Enter GSTNO "
+                                        [ngClass]="{ 'is-invalid': submit && this.AddUserForm.controls.gstno.errors }" />
+                                    <small
+                                        *ngIf="this.AddUserForm.controls.gstno.errors &&(this.AddUserForm.controls.gstno.errors.required)&& submit"
+                                        class="invalid-feedback">GST NO is required! </small>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                    <label>TIN Number</label>
+                                    <input type="text" class="form-control" name="tinno" formControlName="tinno"
+                                        placeholder="TIN Number" />
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <label>Service Tax Number</label>
+                                    <input type="text" class="form-control" name="srvtaxno" formControlName="srvtaxno"
+                                        placeholder="Service Tax Number" />
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                    <label>PAN Number</label>
+                                    <input type="text" class="form-control" name="panno" formControlName="panno"
+                                        placeholder="Enter PAN NO "
+                                        [ngClass]="{ 'is-invalid': submit && this.AddUserForm.controls.panno.errors }" />
+                                    <small
+                                        *ngIf="this.AddUserForm.controls.panno.errors &&(this.AddUserForm.controls.panno.errors.required)&& submit"
+                                        class="invalid-feedback">PAN NO is required! </small>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label>Entertainment Tax Number</label>
+                                    <input type="text" class="form-control" name="entertainmenttaxno"
+                                        formControlName="entertainmenttaxno" placeholder="Entertainment Tax Number" />
+                                </div>
+                            </div>
+                        </div>
+                    </nb-tab>
+                    <nb-tab tabTitle="Revenue Share">
+                        <div class="modal-body">
+                            <div class="form-group row"
+                                >
+                                <div class="col-sm-6">
+                                    <label>MSO Share</label>
+                                    <input type="number" class="form-control" name="mso_share"
+                                        formControlName="mso_share" placeholder="MSO  Share"
+                                        [ngClass]="{ 'is-invalid': submit && this.AddUserForm.controls.mso_share.errors }" />
+                                    <div *ngIf="this.AddUserForm.controls.mso_share.errors && (this.AddUserForm.controls.mso_share.errors.required) && submit"
+                                        class="error-text">
+                                        Total share not equal to 1!
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group row"
+                            *ngIf=' distShareShow || subdistshare||
+                            (AddUserForm.value["usertype"]=="666" || AddUserForm.value["dist_or_sub_flg"]=="2" || AddUserForm.value["dist_or_sub_flg"]=="3" || AddUserForm.value["usertype"]=="555")'>
+                            <div class="col-sm-6">
+                                <label>Distributer Share</label>
+                                <input type="number" class="form-control" name="dist_share"
+                                    formControlName="dist_share" placeholder="Distributer Share"
+                                    [ngClass]="{ 'is-invalid': submit && this.AddUserForm.controls.dist_share.errors }" />
+                                <div *ngIf="this.AddUserForm.controls.dist_share.errors && (this.AddUserForm.controls.dist_share.errors.required) && submit"
+                                    class="error-text">
+                                    Total share not equal to 100!
+                                </div>
+                            </div>
+                        </div>
+
+                            <div class="form-group row"
+                                *ngIf=' subdistshare ||AddUserForm.value["usertype"]=="555" || AddUserForm.value["dist_or_sub_flg"]=="3"  '>
+                                <div class="col-sm-6">
+                                    <label>Sub-Distributer Share</label>
+                                    <input type="number" class="form-control" name="sub_dist_share"
+                                        formControlName="sub_dist_share" placeholder="Sub-Distributer Share"
+                                        [ngClass]="{ 'is-invalid': submit && this.AddUserForm.controls.sub_dist_share.errors }" />
+                                    <div *ngIf="this.AddUserForm.controls.sub_dist_share.errors && (this.AddUserForm.controls.sub_dist_share.errors.required) && submit"
+                                        class="error-text">
+                                        Total share not equal to 100!
+                                    </div>
+                                </div>
+                            </div>
+                        
+                             <div class="form-group row"
+                                                      *ngIf='AddUserForm.value["usertype"]=="444" && AddUserForm.value["dist_or_sub_flg"] =="1" ||
+                                                             AddUserForm.value["usertype"]=="333" && AddUserForm.value["dist_or_sub_flg"] =="4" ||
+                                                             AddUserForm.value["usertype"]=="444" && AddUserForm.value["dist_or_sub_flg"] =="2" ||
+                                                             AddUserForm.value["usertype"]=="444" && AddUserForm.value["dist_or_sub_flg"] =="3" 
+                                                             
+                                                             '>
+
+                                <div class="col-sm-6">
+                                    <label>LCO Share</label>
+                                    <input type="number" class="form-control" name="lco_share"
+                                        formControlName="lco_share" placeholder="LCO  Share"
+                                        [ngClass]="{ 'is-invalid': submit && this.AddUserForm.controls.lco_share.errors }" />
+                                    <div *ngIf="this.AddUserForm.controls.lco_share.errors && (this.AddUserForm.controls.lco_share.errors.required) && submit"
+                                        class="error-text">
+                                        Total share not equal to 100!
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group row" 
+                            *ngIf='AddUserForm.value["usertype"]=="333" && AddUserForm.value["dist_or_sub_flg"] =="3" ||
+                                   AddUserForm.value["usertype"]=="333" && AddUserForm.value["dist_or_sub_flg"] =="2"||
+                                   AddUserForm.value["usertype"]=="333" && AddUserForm.value["dist_or_sub_flg"] =="4"||
+                                   AddUserForm.value["usertype"]=="333" && AddUserForm.value["dist_or_sub_flg"] =="1"
+                                   '>
+                                <div class="col-sm-6">
+                                    <label>Hotel Share</label>
+                                    <input type="number" class="form-control" name="hotel_share"
+                                        formControlName="hotel_share" placeholder="Hotel Share"
+                                        [ngClass]="{ 'is-invalid': submit && this.AddUserForm.controls.hotel_share.errors }" />
+                                    <div *ngIf="this.AddUserForm.controls.hotel_share.errors && (this.AddUserForm.controls.hotel_share.errors.required) && submit"
+                                        class="error-text">
+                                        Total share not equal to 100!
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </nb-tab>
+                </nb-tabset>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-md btn-success">Create</button>
+                    <button type="button" class="btn btn-md btn-danger"
+                        [routerLink]="['/pages/user/userlist']">Cancel</button>
+                </div>
+            </form>
+        </nb-card-body>
+    </nb-card>
+</div>

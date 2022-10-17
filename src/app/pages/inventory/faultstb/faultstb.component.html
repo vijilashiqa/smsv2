@@ -1,0 +1,143 @@
+
+<nb-card>
+    <nb-card-header>Fault STB List 
+    </nb-card-header>
+    <nb-card-body>
+      
+       <form [formGroup]="stbform" class="form-horizontal">
+          <hr style="border: 0px;">
+          <nb-card >
+             <nb-card-body>
+                <div class="modal-body">
+                   <div class="form-group row">
+                      <div class="col-sm-4">
+                         <div class="form-group row">
+                            <div class="col-sm-12">
+                               <label>Headend</label>
+                               <select name="headend" formControlName="headend" class="form-control">
+                                  <option value="" selected>Select Headend</option>
+                               </select>
+                            </div>
+                         </div>
+                         <div class="form-group row">
+                            <div class="col-sm-12">
+                               <label>Operator Type</label>
+                               <select name="operator_type" formControlName="operator_type" class="form-control">
+                                  <option value="" selected>Select Operator</option>
+                                  <option value="1">Distributer</option>
+                                  <option value="2">Sub-Distributer</option>
+                                  <option value="3">LCO Name/Code</option>
+                               </select>
+                            </div>
+                         </div>
+                         <div class="form-group row">
+                            <div class="col-sm-12">
+                              
+                               <ng-select name="operator_name" formControlName="operator_name" class="form-control">
+                               </ng-select>
+                            </div>
+                         </div>
+                      </div>
+                      <div class="col-sm-4">
+                         <div class="form-group row">
+                            <div class="col-sm-12">
+                               <label>STB ID</label>
+                               <ng-select name="stb_id" formControlName="stb_id" class="form-control">
+                               </ng-select>
+                            </div>
+                         </div>
+                         <div class="form-group row">
+                            <div class="col-sm-12">
+                               <label>VC Number</label>
+                               <ng-select name="vc_number" formControlName="vc_number" class="form-control">
+                               </ng-select>
+                            </div>
+                         </div>
+                         <div class="form-group row">
+                            <div class="col-sm-12">
+                               <label>Status</label>
+                               <select name="status" formControlName="status" class="form-control">
+                                  <option value="" selected>Select Status</option>
+                                  <option value="1">Scrap</option>
+                                  <option value="2">Reusable</option>
+                               </select>
+                            </div>
+                         </div>
+                      </div>
+                      <div class="col-sm-4">
+                         <div class="form-group row">
+                            <div class="col-sm-12">
+                               <label>Location</label>
+                               <ng-select name="location" formControlName="location" class="form-control">
+                               </ng-select>
+                            </div>
+                         </div>
+                         <div class="form-group row">
+                            <div class="col-sm-12">
+                               <label>Branch</label>
+                               <ng-select name="branch" formControlName="branch" class="form-control">
+                               </ng-select>
+                            </div>
+                         </div>
+                      </div>
+                   </div>
+                   <button type="button" class="btn btn-md btn-success"
+                      style="margin: auto; display: block;">Search</button>
+                </div>
+             </nb-card-body>
+          </nb-card>
+          <table class="table">
+             <tr>
+                <th>Action</th>
+                <th>STB Status</th>
+                <th>LCO Observation</th>
+                <th>Service Centre</th>
+                <th>LCO Business Name</th>
+                <th>STB Number</th>
+                <th>VC Number</th>
+             </tr>
+             <tr>
+                <td style="width: 80px" class=" last" data-title="'Action'">
+                   <div class="form-group row">
+                      <div class="dropdown ghost-dropdown" ngbDropdown>
+                         <button style="width: 75px;font-size: 10px; position: absolute;"
+                            class="btn btn-primary btn-icon" type="button" ngbDropdownToggle>Action
+                         </button>
+                         
+                      </div>
+                   </div>
+                </td>
+                <td></td>
+                <td>
+                   <div class="form-group row">
+                      <div class="col-sm-9">
+                         <textarea class="form-control" formControlName="observation" name="observation"></textarea>
+                      </div>
+                   </div>
+                </td>
+                <td>
+                   <div class="form-group row">
+                      <div class="col-sm-9">
+                         <select class="form-control" formControlName="service_center" name="service_center">
+                            <option value="" selected> Service Center</option>
+                         </select>
+                      </div>
+                   </div>
+                </td>
+                <td>
+                   <div class="form-group row">
+                      <div class="col-sm-9">
+                         <select class="form-control" formControlName="source_location" name="source_location">
+                            <option value="" selected> Source Location</option>
+                         </select>
+                      </div>
+                   </div>
+                </td>
+                <td></td>
+                <td></td>
+             </tr>
+ 
+          </table>
+       </form>
+    </nb-card-body>
+ </nb-card>

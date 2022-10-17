@@ -1,0 +1,41 @@
+<div class="col-md-12">
+    <nb-card>
+       <nb-card-header>Customer Mapping</nb-card-header>
+       <nb-card-body>
+          <!-- <toaster-container></toaster-container> -->
+          <form class="form-horizontal" (ngSubmit)="mapcust();">
+             <div class="row form-group">
+                <div class="col-sm-6">
+                   <label>Please Upload The Excel File Format</label>
+                   <input type="file"  class="form-control"
+                      accept=".xlsx">
+                   <small  class="form-text error"> File is required! </small>
+                </div>
+                <div class="col-sm-4">
+                   <br>
+                   <br>
+                   <a href="/assets/public/custmapping.xlsx" target="_blank" download><b>Download Sample Here</b></a>
+                </div>
+             </div>
+             <div class="modal-footer">
+                <button type="submit" class="btn btn-md btn-success">Map</button>
+                <button type="button" class="btn btn-md btn-danger " (click)="submit=false;">Reset</button>
+             </div>
+          </form>
+       </nb-card-body>
+    </nb-card>
+    <!-- <nb-card>
+       <nb-card-header>
+          <i (click)="Download();" class="green right fa fa-file-excel" ></i>
+       </nb-card-header>
+       <nb-card-body>
+          <table class="table table-bordered table-striped ">
+             <tr>
+                <th>Card Number</th>
+                <th>Error Msg</th>
+             </tr>
+             
+          </table>
+       </nb-card-body>
+    </nb-card> -->
+ </div>

@@ -1,0 +1,39 @@
+<!-- <p>stb-type works!</p> -->
+<nb-card>
+    <nb-card-header>List STB Types</nb-card-header>
+    <nb-card-body>
+        <div class="row" style="padding-left: 10px;">
+            <div style="padding: 2px;">
+              <button status="success" nbButton (click)="addstb()">Create</button>
+            </div>
+          </div>
+         
+          <table class="table">
+            <tr>
+              <th >Action</th>
+              <th>Headend Name </th>
+              <th>STB type</th>
+              <th>State Name</th>
+            </tr>
+            <tr *ngFor="let item of pagedItems">
+              <td style="cursor:pointer;" (click)="editstb(item)"><i class="nb-edit"></i></td>
+              <td>{{item.hdname}}</td>
+              <td>{{item.boxtypename}}</td>
+              <td><i [ngStyle]="{'color': item.status==1? 'green':'red'}"
+                [ngClass]="{'ion-close-round':item.status==0 ? true:false,'ion-checkmark-round':item.status!=0 ? true:false  }"
+                [attr.title]="item.status==0 ? 'Active' : 'Deactive'"></i></td>
+            </tr>
+          </table>
+          <div class="pagination">
+            <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+              <a [ngClass]="{disabled:pager.currentPage === 1}" (click)="page=1;getlist();">First</a>
+              <a [ngClass]="{disabled:pager.currentPage === 1}" (click)="page=page-1;getlist();">Previous</a>
+              <a *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}"
+                (click)="getlist(page);">{{page}}</a>
+              <a [ngClass]="{disabled:pager.currentPage === pager.totalPages}" (click)="page=page+1;getlist();">Next</a>
+              <a [ngClass]="{disabled:pager.currentPage === pager.totalPages}"
+                (click)="page=pager.totalPages;getlist();">Last</a>
+            </ul>
+          </div>
+        </nb-card-body>
+      </nb-card>

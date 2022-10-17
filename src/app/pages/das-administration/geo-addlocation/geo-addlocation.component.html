@@ -1,0 +1,61 @@
+
+
+
+  <nb-card>
+    <!-- <nb-card-header>{{ title }}</nb-card-header> -->
+    <nb-card-body>
+      <div class="modal-header">
+        <h4 class="modal-title">{{title}}</h4>
+        <button class="close" aria-label="Close" (click)="close();">
+          <span aria-hidden="true"  style="padding-left: 94%;">&times;</span>
+        </button>
+      </div>
+      <form [formGroup]="AddlocationForm" class="form-horizontal" (ngSubmit)="addLocation();">
+        <div class="modal-body">
+          <div class="form-group row">
+            <div class="col-sm-12">
+              <label>Headend *</label>
+              <select name="headName" formControlName="headName" placeholder="Location Name"
+                [ngClass]="{'form-control' : true,'form-control-danger':AddlocationForm.controls.headName.invalid&&submit}">
+                <option value="">Select Headend</option>
+                <option *ngFor='let item of head' [ngValue]=item.headend_pk>{{item.headend_name}}</option>
+              </select>
+              <small *ngIf="AddlocationForm.hasError('required','headName')&&submit" class="form-text error"> Headend Name is
+                required! </small>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-12">
+              <label>Location *</label>
+              <input type="text" name="locationName" formControlName="locationName" placeholder="Location Name"
+                [ngClass]="{'form-control' : true,'form-control-danger':AddlocationForm.controls.locationName.invalid&&submit}" />
+              <small *ngIf="AddlocationForm.hasError('required','locationName')&&submit" class="form-text error"> Location
+                Name is required! </small>
+            </div>
+          </div>
+        </div>
+        <nb-card-footer>
+        <div class="modal-footer">
+          <button type="submit" status="success" nbButton >Submit</button>
+          <button type="button" status="danger" nbButton (click)='close();'>Reset</button>
+        </div>
+      </nb-card-footer>
+      </form>
+    
+    
+
+
+
+
+
+
+
+
+
+
+    </nb-card-body>
+    <!-- <nb-card-footer>
+      <button nbButton hero status="primary" (click)="dismiss()">Dismiss Dialog</button>
+    </nb-card-footer> -->
+  </nb-card>
+  

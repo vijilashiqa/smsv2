@@ -1,0 +1,27 @@
+<nb-card>
+  <nb-card-body>
+    <div class="modal-header">
+      <h4 class="modal-title">{{title}}</h4>
+      <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+  <form [formGroup]="countryForm" class="form-horizontal" (ngSubmit)="Country();">
+    <div class="modal-body">
+      <div class="form-group row">
+        <div class="col-sm-12">
+          <label>Country *</label>
+            <input type="text" class="form-control" name="countryname" formControlName="countryname" placeholder="Enter Country"
+            [ngClass]="{ 'is-invalid': submit && countryForm.controls.countryname.errors }"/>
+            <small *ngIf="countryForm.controls.countryname.errors &&(countryForm.controls.countryname.errors.required )&& submit"
+            class="invalid-feedback">countryname is required! </small>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="submit" status="success" nbButton  style="cursor:pointer" >{{item ? 'Update' : 'Add'}}</button>
+      <button type="button" status="danger" nbButton  style="cursor:pointer" (click)="close()" >Cancel</button>
+    </div>
+  </form>
+  </nb-card-body>
+</nb-card>

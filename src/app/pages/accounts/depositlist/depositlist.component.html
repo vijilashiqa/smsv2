@@ -1,0 +1,156 @@
+<!-- <p>depositlist works!</p> -->
+<nb-card>
+    <nb-card-header>List Deposit<a style="text-align:right; float:right;" (click)="search=!search">Advanced Search</a>
+    </nb-card-header>
+    <nb-card-body>
+      <!-- <toaster-container></toaster-container> -->
+      <button  class="btn btn-sm btn-success"
+        [routerLink]="['/pages/accounts/adddeposit']">Add </button>
+      <hr style="border: 0px;">
+      <div class="row">
+        <div class="col-md-12">
+          <label class="left">
+            <h5>Total Count</h5>
+          </label>
+          <i (click)="Download();" class="green right fa fa-file-excel" aria-hidden="true"></i>
+        </div>
+      </div>
+      <hr style="border: 0px;">
+      <!-- <nb-card *ngIf="search"> -->
+      <!-- <nb-card-body> -->
+      <div [hidden]="!search" class="modal-body">
+        <div class="form-group row" >
+          <div class="col-sm-3" >
+            <label>Headend</label>
+            <select (change)='opt=[];getoperator();' name="headend"  class="form-control">
+              <option value="">Select Headend</option>
+            </select>
+          </div>
+          <div class="col-sm-3">
+            <label>Operator Type</label>
+            <select (change)='opt=[];getoperator();' name="op_type"  class="form-control">
+              <option value="" selected>Select Operator Type</option>
+              <option value="1">LCO</option>
+              <option value="2">Distributor</option>
+              <option value="3">SubDistributor</option>
+            </select>
+          </div>
+          <div class="col-sm-3">
+          </div>
+          <div class="col-sm-3">
+            <label>Status</label>
+            <select name="status"  class="form-control">
+              <option value="" selected="">Select Status</option>
+              <option value="0">Cancelled</option>
+              <option value="1">Success</option>
+              <option value="810">Declained By Bank</option>
+              <option value="402">Payment Incomplete</option>
+              <option value="334">Invalid Order ID</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-4">
+            <label>From Date</label>
+            <input type="text" [owlDateTime]="from_date_layout"
+              [owlDateTimeTrigger]="from_date_layout" name="from_date" placeholder="Select Date " class="form-control"
+              for />
+            <owl-date-time [pickerType]="'calendar'" #from_date_layout></owl-date-time>
+          </div>
+          <div class="col-sm-4">
+            <label>To Date</label>
+            <input type="text"  [owlDateTime]="to_date_layout" [owlDateTimeTrigger]="to_date_layout"
+              name="to_date" placeholder="Select Date " class="form-control" />
+            <owl-date-time [pickerType]="'calendar'" #to_date_layout></owl-date-time>
+          </div>
+          <div class="col-sm-4">
+            <label>Order ID</label>
+            <select  name="order_id" 
+              class="form-control">
+             
+            </select>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-4">
+            <label>Deposit Type</label>
+            <select name="deposit_type"  class="form-control">
+              <option value="" selected="">Select Deposit Type</option>
+              <option value="1">Paytm</option>
+              <option value="0">Deposit</option>
+  
+            </select>
+          </div>
+          <div class="col-sm-4">
+            <label>Paymode</label>
+            <select name="paymode" class="form-control">
+              <option value="" selected="">Select Paymode</option>
+              <option value="DC">DC-Debit Card</option>
+              <option value="UPI">UPI-Unified Payment Interface</option>
+              <option value="NB">NB-Net Banking</option>
+              <option value="CC">CC-Credit Card</option>
+              <option value="PPI">PPI-Prepaid Payment Instruments</option>
+            </select>
+          </div>
+          <div class="col-sm-4" >
+            <label>Paymode</label>
+            <select name="depmode" class="form-control">
+              <option value="" Selected>Select Paymode</option>
+              <option value="1">Credit</option>
+              <option value="2">Net Banking</option>
+              <option value="3">Bank Deposit</option>
+              <option value="4">Adjustment</option>
+            </select>
+          </div>
+  
+        </div>
+  
+        <button type="button" class="btn btn-md btn-success" style="margin: auto; display: block;"
+          (click)='page=1;initiallist();'>Search</button>
+      </div>
+  
+      <!-- </nb-card-body> -->
+      <!-- </nb-card> -->
+  
+      <table class="table">
+        <tr>
+          <th >Action</th>
+          <th >Headend</th>
+          <th>Operator Type</th>
+          <th >Operator Name</th>
+          <th>Deposit Type</th>
+          <th>OrderID</th>
+          <th>UTR</th>
+          <th>Deposit Amount</th>
+          <th>Received Amount</th>
+          <th>Status</th>
+          <th >Remarks</th>
+          <th>Deposit Date</th>
+        </tr>
+        <tr >
+          <td style="min-width: 80px" class=" last" data-title="'Action'">
+            <div class="form-group row">
+              <div class="dropdown ghost-dropdown" ngbDropdown style='position: relative;right: 20px;'>
+                <button style="width: 75px;font-size: 10px; " class="btn btn-primary btn-icon" type="button"
+                  ngbDropdownToggle>Action
+                </button>
+                
+              </div>
+            </div>
+            <i class="fas fa-check fa-sm"></i>
+          </td>
+         
+          <td>
+            <i class="ion-document-text" nbPopoverPlacement="right"></i>
+          </td>
+          
+          <td >
+            <i class="ion-email"  nbPopoverPlacement="right"></i>
+          </td>
+          
+        </tr>
+      </table>
+      <div class="pagination">  
+      </div>
+    </nb-card-body>
+  </nb-card>

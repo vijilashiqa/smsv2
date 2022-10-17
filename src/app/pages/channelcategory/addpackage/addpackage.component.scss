@@ -1,0 +1,16 @@
+ 
+
+::ng-deep .nb-theme-default nb-tabset .tab:hover .tab-link::before {
+ background-color: #e7eaf2; 
+    // visibility: hidden;
+}
+
+
+
+.error {
+    border-color: red;
+  }
+  .error-text {
+      font-size: x-small;
+      color: red;
+  }

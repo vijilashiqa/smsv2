@@ -1,0 +1,91 @@
+<nb-card>
+    <nb-card-header>Admin User List</nb-card-header>
+    <nb-card-body>
+      <!-- <toaster-container></toaster-container> -->
+      <button [hidden]='' class="btn btn-sm btn-success"
+        [routerLink]="['/pages/das-administration/create-user']">Create</button>
+      <hr style="border: 0px;">
+      <div class="row">
+        <div class="col-md-12">
+          <label class="left">
+            <h5>User Count : {{count}}</h5>
+          </label>
+          <i (click)="Download();" class="green right fa fa-file-excel" aria-hidden="true"></i>
+        </div>
+      </div>
+      <hr style="border: 0px;">
+      <div class="form-group row">
+        <div class="col-sm-3" >
+          <label>Headend</label>
+          <select (change)="getoperator();opt=[];operator_name='';" name="head_opt" 
+            class="form-control">
+            <option value="">Select Headend</option>
+            <option *ngFor="let item of head" [value]=item.headend_pk>{{item.headend_name}}</option>
+          </select>
+        </div>
+        <div class="col-sm-3" >
+          <label>User Type</label>
+          <select name="opt_type"  class="form-control">
+            <option value="">Select Operator Type</option>
+            <option value="0">Super Admin</option>
+            <option value="6">Admin</option>
+            <option value="7">Employee</option>
+            <option value="8">Accounts</option>
+            <option value="9">Operation</option>
+  
+          </select>
+        </div>
+        <div class="col-sm-3" >
+          <label>User Name</label>
+          <select name="opt_type"  class="form-control"></select>
+          <!-- <auto-complete (keyup)="getoperator($event.target.value)" name='operator_name' (item_id)='operator_name=$event;'
+            placeholder='Select User' [item]=opt></auto-complete> -->
+        </div>
+        <div class="col-sm-3" >
+          <label>Status</label>
+          <select name="status"  class="form-control">
+            <option value="">Select Status</option>
+            <option value="1">Active</option>
+            <option value="2">InActive</option>
+          </select>
+        </div>
+      </div>
+      <button type="button" class="btn btn-md btn-success" (click)='page=1;initiallist();'
+        style="margin: auto; display: block;">Search</button>
+      <hr style="border: 0px;">
+  
+      <table class="table">
+        <tr>
+          <th [hidden]=''>Action</th>
+          <th>User ID</th>
+          <th>User Name</th>
+          <th>User Login ID</th>
+          <th>Dashboard Amount</th>
+          <th>Contact Number</th>
+          <th>Email ID</th>
+          <th>Status</th>
+        </tr>
+        <tr *ngFor="let item of pagedItems">
+          <td [hidden]='role.getrole(2013)'><a><i class="nb-edit"></i></a></td>
+          <td>{{item.id}}</td>
+          <td>{{item.first_name +' '+item.last_name}}</td>
+          <td>{{item.username}}</td>
+          <td>{{item.deposit_amt}}</td>
+          <td>{{item.mobie_no}}</td>
+          <td>{{item.email1}}</td>
+          <td>{{item.status==1?'Active':'Deactive'}}</td>
+        </tr>
+      </table>
+      <div class="pagination">
+        <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+          <a [ngClass]="{disabled:pager.currentPage === 1}" (click)="page=1;list();">First</a>
+          <a [ngClass]="{disabled:pager.currentPage === 1}" (click)="page=page-1;list();">Previous</a>
+          <a *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}"
+            (click)="list(page);">{{page}}</a>
+          <a [ngClass]="{disabled:pager.currentPage === pager.totalPages}" (click)="page=page+1;list();">Next</a>
+          <a [ngClass]="{disabled:pager.currentPage === pager.totalPages}"
+            (click)="page=pager.totalPages;list();">Last</a>
+        </ul>
+      </div>
+    </nb-card-body>
+  </nb-card>

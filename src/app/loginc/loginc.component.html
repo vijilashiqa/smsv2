@@ -1,0 +1,25 @@
+
+<div class="container">
+    <div>
+        <img style="max-width: 70%;padding-left: 36%; width: 70%;" src="assets/images/whitefieldicon_sms.png">
+    </div>
+
+    <form [formGroup] ="UserForm" (ngSubmit)="login()">
+        <toaster-container [toasterconfig]></toaster-container>
+<div class="form-group">
+    <label for="Username">Usernames</label>
+    <input type="text" nbInput fullWidth status="info"  placeholder="UserName"  name="Username" class="form-control" formControlName="Username">
+    <span class="help-block"
+    *ngIf="!UserForm.get('Username').valid && UserForm.get('Username').touched ">
+    Please enter a Username</span>
+</div>
+<div class="form-group">
+    <label for="Password">Password</label>
+    <input type="password" name="Password" placeholder="Password" class="form-control" formControlName="Password">
+    <span class="help-block"
+    *ngIf="!UserForm.get('Password').valid && UserForm.get('Password').touched">
+    Please enter a  valid Password</span>
+</div>
+<button type="submit" class="btn btn-primary btn-lg btn-block">Sign In</button>
+ </form>
+</div>

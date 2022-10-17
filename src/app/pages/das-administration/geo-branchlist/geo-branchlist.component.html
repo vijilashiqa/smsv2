@@ -1,0 +1,39 @@
+
+<nb-card>
+    <nb-card-header>List Branch</nb-card-header>
+    <nb-card-body>
+      <!-- <toaster-container></toaster-container> -->
+      <div class="row" style="padding-left: 10px;">
+        <div style="padding: 2px;">
+          <!-- <button  class="btn btn-sm btn-success" (click)='Addbranch()'>Create</button> -->
+          <button status="success" nbButton (click)="Addbranch()">create</button>
+        </div>
+      </div>
+      <hr style="border: 0px;">
+      <table class="table">
+        <tr>
+          <th >Action</th>
+          <th>Headend Name</th>
+          <th>Location Name</th>
+          <th>Branch Name</th>
+        </tr>
+        <tr *ngFor="let item of pagedItems">
+          <td><a (click)="editbranch(item);"><i class="nb-edit"></i></a></td>
+          <td>{{item.headend_name}}</td>
+          <td>{{item.loc_name}}</td>
+          <td>{{item.branch_name}}</td>
+        </tr>
+      </table>
+      <div class="pagination">
+        <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+          <a [ngClass]="{disabled:pager.currentPage === 1}" (click)="page=1;getlist();">First</a>
+          <a [ngClass]="{disabled:pager.currentPage === 1}" (click)="page=page-1;getlist();">Previous</a>
+          <a *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}"
+            (click)="getlist(page);">{{page}}</a>
+          <a [ngClass]="{disabled:pager.currentPage === pager.totalPages}" (click)="page=page+1;getlist();">Next</a>
+          <a [ngClass]="{disabled:pager.currentPage === pager.totalPages}"
+            (click)="page=pager.totalPages;getlist();">Last</a>
+        </ul>
+      </div>
+    </nb-card-body>
+  </nb-card>

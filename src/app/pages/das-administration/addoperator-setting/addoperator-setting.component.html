@@ -1,0 +1,1010 @@
+<div class="col-12">
+  <nb-card-header>Operator Settings </nb-card-header>
+  <nb-card-body>
+    <form [formGroup]="SettingsForm" class="form-horizontal" (ngSubmit)="Settings();">
+      <nb-tabset>
+        <nb-tab tabTitle="Settings">
+          <div class="modal-body">
+            <div class="form-group row">
+              <div class="col-sm-4">
+                <label>Headend</label>
+                <select name="headend" formControlName="headend"
+                  [ngClass]="{'form-control' : true,'form-control-danger':SettingsForm.controls.headend.invalid&&submit}">
+                  <option value="" selected>Select Headend</option>
+                </select>
+                <small *ngIf="SettingsForm.hasError('required','headend')&&submit" class="form-text error"> Select
+                  required Headend! </small>
+              </div>
+              <div class="col-sm-4">
+                <label>Operator Type</label>
+                <select name="operator_type" formControlName="operator_type"
+                  [ngClass]="{'form-control' : true,'form-control-danger':SettingsForm.controls.operator_type.invalid&&submit}">
+                  <option value="" selected>Select Operator Type</option>
+                  <option value="1">LCO</option>
+                  <option value="2">Distributor</option>
+                  <option value="3">Sub-Distributor</option>
+                </select>
+                <small *ngIf="SettingsForm.hasError('required','operator_type')&&submit" class="form-text error">
+                  Select required Operator Type! </small>
+              </div>
+              <div class="col-sm-4">
+                <label>Operator Name</label>
+                <select name="operator_name" formControlName="operator_name" [ngClass]="{'form-control' 
+                          : true,'form-control-danger':SettingsForm.controls.operator_name.invalid&&submit}">
+                  <option value="" selected> Select Operator Name</option>
+                </select>
+                <small *ngIf="SettingsForm.hasError('required','operator_name')&&submit" class="form-text error">Select
+                  required Operator name! </small>
+              </div>
+            </div>
+            <hr>
+            <div class="form-group row">
+              <div class="col-sm-2">
+                <label>Mobile App Access</label>
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="sms_app" formControlName="sms_app" />
+                  <label class="custom-control-label" for="sms_app">Enable</label>
+                </div>
+              </div>
+              <div class="col-sm-3">
+                <label>Allow unique Mobile Number</label>
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="unique_no" formControlName="unique_no" />
+                  <label class="custom-control-label" for="unique_no">Enable</label>
+                </div>
+              </div>
+              <div class="col-sm-2">
+                <label>Allow unique Mail ID</label>
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="unique_mail" formControlName="unique_mail" />
+                  <label class="custom-control-label" for="unique_mail">Enable</label>
+                </div>
+              </div>
+              <div class="col-sm-2">
+                <label>TopUp Minimum</label>
+
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="topup_min" formControlName="topup_min" />
+                  <label class="custom-control-label" for="topup_min">Enable</label>
+                </div>
+              </div>
+              <div class="col-md-2" *ngIf="SettingsForm.value['topup_min']">
+                <label>Minimum Amount</label>
+                <input type="text" name="min_amount" formControlName="min_amount"
+                  [ngClass]="{'form-control' : true,'form-control-danger':SettingsForm.controls.min_amount.invalid&&submit}" />
+              </div>
+            </div>
+            <hr>
+            <div class="form-group row">
+              <div class="col-sm-2">
+                <label>SMS Gateway</label>
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="sms_gateway" formControlName="sms_gateway" />
+                  <label class="custom-control-label" for="sms_gateway">Enable</label>
+                </div>
+              </div>
+              <div class="col-md-2" *ngIf="SettingsForm.value['sms_gateway'] ">
+                <label>Gateway Through </label>
+                <select name="gateway_through" formControlName="gateway_through"
+                  [ngClass]="{'form-control' : true,'form-control-danger':SettingsForm.controls.gateway_through.invalid&&submit}">
+                  <option value="" selected>Gateway Through</option>
+                  <option value="4">MSO</option>
+                  <option value="5">Operator</option>
+                </select>
+              </div>
+              <div class="col-md-2" *ngIf="SettingsForm.value['sms_gateway'] && SettingsForm.value['gateway_through']">
+                <label>Select Gateway </label>
+                <select name="gateway_type" formControlName="gateway_type"
+                  [ngClass]="{'form-control' : true,'form-control-danger':SettingsForm.controls.gateway_type.invalid&&submit}">
+                  <option value="" selected>Select Gateway </option>
+                </select>
+              </div>
+              <div class="col-md-2" *ngIf="SettingsForm.value['gateway_through']==5">
+                <label>SMS Sender ID</label>
+                <input type="text" name="sender_id" formControlName="sender_id"
+                  [ngClass]="{'form-control' : true,'form-control-danger':SettingsForm.controls.sender_id.invalid&&submit}" />
+              </div>
+            </div>
+            <hr>
+            <div class="form-group row">
+              <div class="col-sm-2">
+                <label><b>Subscriber Payment Gateway</b></label>
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="pay_gateway" formControlName="pay_gateway" />
+                  <label class="custom-control-label" for="pay_gateway">Enable</label>
+                </div>
+              </div>
+              <div class="col-md-2" *ngIf="SettingsForm.value['pay_gateway']">
+                <label>Select Gateway </label>
+                <select name="pay_gateway_through" formControlName="pay_gateway_through"
+                  [ngClass]="{'form-control' : true,'form-control-danger':SettingsForm.controls.pay_gateway_through.invalid&&submit}">
+                  <option value="" selected>Gateway Through</option>
+                  <option value="4">MSO</option>
+                  <option value="5">Operator</option>
+                </select>
+              </div>
+              <div class="col-md-2" *ngIf="SettingsForm.value['pay_gateway']">
+                <label>Select Gateway</label>
+                <select name="pay_gateway_type" formControlName="pay_gateway_type"
+                  [ngClass]="{'form-control' : true,'form-control-danger':SettingsForm.controls.pay_gateway_type.invalid&&submit}">
+                  <option value="" selected>Select Gateway </option>
+                </select>
+              </div>
+              <div class="col-md-2"
+                *ngIf="SettingsForm.value['pay_gateway'] && SettingsForm.value['pay_gateway_through']==4 ">
+                <label>Amount Shared To</label>
+                <select name="amt_shared" formControlName="amt_shared"
+                  [ngClass]="{'form-control' : true,'form-control-danger':SettingsForm.controls.amt_shared.invalid&&submit}">
+                  <option value="" selected>Select </option>
+                  <option value="1">Dashboard</option>
+                  <option value="2">Bank</option>
+                </select>
+              </div>
+            </div>
+            <hr>
+            <div class="form-group row">
+              <div class="col-sm-2">
+                <label>Over Due</label>
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="over_due" formControlName="over_due" />
+                  <label class="custom-control-label" for="over_due">Enable</label>
+                </div>
+              </div>
+              <div class="col-md-2" *ngIf="SettingsForm.value['over_due']">
+                <label>Maximum Due Limit</label>
+                <input type="text" name="due_amt" formControlName="due_amt"
+                  [ngClass]="{'form-control' : true,'form-control-danger':SettingsForm.controls.due_amt.invalid&&submit}" />
+              </div>
+            </div>
+            <hr>
+            <div class="form-group row">
+              <div class="col-sm-4">
+                <label class="control-label">Reseller Invoice Logo</label>
+                <input type="file" formControlName="Logo"
+                  [ngClass]="{'form-control' : true,'form-control-danger':SettingsForm.controls.Logo.invalid&&submit}" />
+                <!--  <font size="2" color="red">( Max Upload File Size is 2MB )</font> -->
+              </div>
+            </div>
+          </div>
+        </nb-tab>
+
+        <nb-tab tabTitle="Notification">
+
+          <div class="modal-body">
+
+            <div class="modal-body">
+              <ng-template ngbTabContent>
+                <div class="form-group row">
+                  <div class="col-md-5">
+                    <label>Customer Registration Alert</label>
+                  </div>
+                  <div class="col-md-1">
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" id="registration_sms"
+                        formControlName="registration_sms" />
+                      <label class="custom-control-label" for="registration_sms">SMS</label>
+                    </div>
+                  </div>
+                  <div class="col-md-1">
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" id="registration_email"
+                        formControlName="registration_email" />
+                      <label class="custom-control-label" for="registration_email">Email</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-md-5">
+                    <label>Customer Base Package Renew Alert</label>
+                  </div>
+                  <div class="col-md-1">
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" id="basepack_renew_sms"
+                        formControlName="basepack_renew_sms" />
+                      <label class="custom-control-label" for="basepack_renew_sms">SMS</label>
+                    </div>
+                  </div>
+                  <div class="col-md-1">
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" id="basepack_renew_email"
+                        formControlName="basepack_renew_email" />
+                      <label class="custom-control-label" for="basepack_renew_email">Email</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-md-5">
+                    <label>Customer Base Package Auto Renew Alert</label>
+                  </div>
+                  <div class="col-md-1">
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" id="auto_renew_sms"
+                        formControlName="auto_renew_sms" />
+                      <label class="custom-control-label" for="auto_renew_sms">SMS</label>
+                    </div>
+                  </div>
+                  <div class="col-md-1">
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" id="auto_renew_email"
+                        formControlName="auto_renew_email" />
+                      <label class="custom-control-label" for="auto_renew_email">Email</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-md-5">
+                    <label>Customer Base Package Auto Renew Alert Send</label>
+                  </div>
+                  <div class="col-md-3 input-group input-group-sm">
+                    <select class="form-control" formControlName="auto_renew">
+                      <option value="" selected>Select</option>
+                      <option value="1">1 Day Before</option>
+                      <option value="2">2 Days Before</option>
+                      <option value="3">3 Days Before</option>
+                      <option value="4">4 Days Before</option>
+                      <option value="5">5 Days Before</option>
+                      <option value="6">6 Days Before</option>
+                      <option value="6">7 Days Before</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-md-5">
+                    <label>Customer Invoice Generated Alert</label>
+                  </div>
+                  <div class="col-md-1">
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" id="invoice_sms"
+                        formControlName="invoice_sms" />
+                      <label class="custom-control-label" for="invoice_sms">SMS</label>
+                    </div>
+                  </div>
+                  <div class="col-md-1">
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" id="invoice_email"
+                        formControlName="invoice_email" />
+                      <label class="custom-control-label" for="invoice_email">Email</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-md-5">
+                    <label>Customer Bill Paid Alert</label>
+                  </div>
+                  <div class="col-md-1">
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" id="billpaid_sms"
+                        formControlName="billpaid_sms" />
+                      <label class="custom-control-label" for="billpaid_sms">SMS</label>
+                    </div>
+                  </div>
+                  <div class="col-md-1">
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" id="billpaid_email"
+                        formControlName="billpaid_email" />
+                      <label class="custom-control-label" for="billpaid_email">Email</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-md-5">
+                    <label>Customer Alacarte Renew Alert</label>
+                  </div>
+                  <div class="col-md-1">
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" id="alacarte_renew_sms"
+                        formControlName="alacarte_renew_sms" />
+                      <label class="custom-control-label" for="alacarte_renew_sms">SMS</label>
+                    </div>
+                  </div>
+                  <div class="col-md-1">
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" id="alacarte_renew_email"
+                        formControlName="alacarte_renew_email" />
+                      <label class="custom-control-label" for="alacarte_renew_email">Email</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-md-5">
+                    <label>Customer Expiry Bmail Alert</label>
+                  </div>
+                  <div class="col-md-1">
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" id="b_mail" formControlName="b_mail" />
+                      <label class="custom-control-label" for="b_mail">Bmail</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-md-5">
+                    <label>Customer Temporary Suspended if not Paid Alert</label>
+                  </div>
+                  <div class="col-md-1">
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" id="temporary_suspend_sms"
+                        formControlName="temporary_suspend_sms" />
+                      <label class="custom-control-label" for="temporary_suspend_sms">SMS</label>
+                    </div>
+                  </div>
+                  <div class="col-md-1">
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" id="temporary_suspend_email"
+                        formControlName="temporary_suspend_email" />
+                      <label class="custom-control-label" for="temporary_suspend_email">Email</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-md-5">
+                    <label>Customer Amount Balance Add Alert</label>
+                  </div>
+                  <div class="col-md-1">
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" id="balance_add_sms"
+                        formControlName="balance_add_sms" />
+                      <label class="custom-control-label" for="balance_add_sms">SMS</label>
+                    </div>
+                  </div>
+                  <div class="col-md-1">
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" id="balance_add_email"
+                        formControlName="balance_add_email" />
+                      <label class="custom-control-label" for="balance_add_email">Email</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-md-5">
+                    <label>Customer Base Package Expiry Alert</label>
+                  </div>
+                  <div class="col-md-1">
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" id="base_expiry_sms"
+                        formControlName="base_expiry_sms" />
+                      <label class="custom-control-label" for="base_expiry_sms">SMS</label>
+                    </div>
+                  </div>
+                  <div class="col-md-1">
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" id="base_expiry_email"
+                        formControlName="base_expiry_email" />
+                      <label class="custom-control-label" for="base_expiry_email">Email</label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <div class="col-md-5">
+                    <label>Customer Base Package Expiry Alert Send</label>
+                  </div>
+                  <div class="col-md-3 input-group input-group-sm">
+                    <select class="form-control" formControlName="base_send">
+                      <option value="" selected>Select</option>
+                      <option value="1">1 Day Before</option>
+                      <option value="2">2 Days Before</option>
+                      <option value="3">3 Days Before</option>
+                      <option value="4">4 Days Before</option>
+                      <option value="5">4 Days Before</option>
+                      <option value="6">7 Days Before</option>
+                      <option value="7">7 Days Before</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-md-5">
+                    <label>Customer Alacarte Expiry Alert</label>
+                  </div>
+                  <div class="col-md-1">
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" id="alacarte_expiry_sms"
+                        formControlName="alacarte_expiry_sms" />
+                      <label class="custom-control-label" for="alacarte_expiry_sms">SMS</label>
+                    </div>
+                  </div>
+                  <div class="col-md-1">
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" id="alacarte_expiry_email"
+                        formControlName="alacarte_expiry_email" />
+                      <label class="custom-control-label" for="alacarte_expiry_email">Email</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-md-5">
+                    <label>Customer Alacarte Expiry Alert Send</label>
+                  </div>
+                  <div class="col-md-3 input-group input-group-sm">
+                    <select class="form-control" formControlName="alacarte_send">
+                      <option value="" selected>Select</option>
+                      <option value="1">1 Day Before</option>
+                      <option value="2">2 Days Before</option>
+                      <option value="3">3 Days Before</option>
+                      <option value="4">4 Days Before</option>
+                      <option value="5">5 Days Before</option>
+                      <option value="6">6 Days Before</option>
+                      <option value="6">7 Days Before</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-md-5">
+                    <label>Complaint Register Alert To user</label>
+                  </div>
+                  <div class="col-md-1">
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" id="register_alert_sms"
+                        formControlName="register_alert_sms" />
+                      <label class="custom-control-label" for="register_alert_sms">SMS</label>
+                    </div>
+                  </div>
+                  <div class="col-md-1">
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" id="register_alert_email"
+                        formControlName="register_alert_email" />
+                      <label class="custom-control-label" for="register_alert_email">Email</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-md-5">
+                    <label>Complaint Resolve Alert To user</label>
+                  </div>
+                  <div class="col-md-1">
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" id="resolve_sms"
+                        formControlName="resolve_sms" />
+                      <label class="custom-control-label" for="resolve_sms">SMS</label>
+                    </div>
+                  </div>
+                  <div class="col-md-1">
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" id="resolve_email"
+                        formControlName="resolve_email" />
+                      <label class="custom-control-label" for="resolve_email">Email</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-md-5">
+                    <label>Complaint Close Alert To user</label>
+                  </div>
+                  <div class="col-md-1">
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" id="close_sms" formControlName="close_sms" />
+                      <label class="custom-control-label" for="close_sms">SMS</label>
+                    </div>
+                  </div>
+                  <div class="col-md-1">
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" id="close_email"
+                        formControlName="close_email" />
+                      <label class="custom-control-label" for="close_email">Email</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-md-5">
+                    <label>Complaint Assigned Alert To Employee </label>
+                  </div>
+                  <div class="col-md-1">
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" id="assigned_sms"
+                        formControlName="assigned_sms" />
+                      <label class="custom-control-label" for="assigned_sms">SMS</label>
+                    </div>
+                  </div>
+                  <div class="col-md-1">
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" id="assigned_email"
+                        formControlName="assigned_email" />
+                      <label class="custom-control-label" for="assigned_email">Email</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-md-5">
+                    <label>Lead Register Alert To User </label>
+                  </div>
+                  <div class="col-md-1">
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" id="register_alert_user_sms"
+                        formControlName="register_alert_user_sms" />
+                      <label class="custom-control-label" for="register_alert_user_sms">SMS</label>
+                    </div>
+                  </div>
+                  <div class="col-md-1">
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" id="register_alert_user_email"
+                        formControlName="register_alert_user_email" />
+                      <label class="custom-control-label" for="register_alert_user_email">Email</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-md-5">
+                    <label>Lead Assign Alert To Employee </label>
+                  </div>
+                  <div class="col-md-1">
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" id="assign_alert_sms"
+                        formControlName="assign_alert_sms" />
+                      <label class="custom-control-label" for="assign_alert_sms">SMS</label>
+                    </div>
+                  </div>
+                  <div class="col-md-1">
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" id="assign_alert_email"
+                        formControlName="assign_alert_email" />
+                      <label class="custom-control-label" for="assign_alert_email">Email</label>
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+            </div>
+
+            <div class="form-group row">
+              <div class="col-md-5">
+                <label>Customer Registration Alert</label>
+              </div>
+              <div class="col-md-1">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="registration_sms"
+                    formControlName="registration_sms" />
+                  <label class="custom-control-label" for="registration_sms">SMS</label>
+                </div>
+              </div>
+              <div class="col-md-1">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="registration_email"
+                    formControlName="registration_email" />
+                  <label class="custom-control-label" for="registration_email">Email</label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-md-5">
+                <label>Customer Base Package Renew Alert</label>
+              </div>
+              <div class="col-md-1">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="basepack_renew_sms"
+                    formControlName="basepack_renew_sms" />
+                  <label class="custom-control-label" for="basepack_renew_sms">SMS</label>
+                </div>
+              </div>
+              <div class="col-md-1">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="basepack_renew_email"
+                    formControlName="basepack_renew_email" />
+                  <label class="custom-control-label" for="basepack_renew_email">Email</label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-md-5">
+                <label>Customer Base Package Auto Renew Alert</label>
+              </div>
+              <div class="col-md-1">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="auto_renew_sms"
+                    formControlName="auto_renew_sms" />
+                  <label class="custom-control-label" for="auto_renew_sms">SMS</label>
+                </div>
+              </div>
+              <div class="col-md-1">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="auto_renew_email"
+                    formControlName="auto_renew_email" />
+                  <label class="custom-control-label" for="auto_renew_email">Email</label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-md-5">
+                <label>Customer Base Package Auto Renew Alert Send</label>
+              </div>
+              <div class="col-md-3 input-group input-group-sm">
+                <select class="form-control" formControlName="auto_renew">
+                  <option value="" selected>Select</option>
+                  <option value="1">1 Day Before</option>
+                  <option value="2">2 Days Before</option>
+                  <option value="3">3 Days Before</option>
+                  <option value="4">4 Days Before</option>
+                  <option value="5">5 Days Before</option>
+                  <option value="6">6 Days Before</option>
+                  <option value="6">7 Days Before</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-md-5">
+                <label>Customer Invoice Generated Alert</label>
+              </div>
+              <div class="col-md-1">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="invoice_sms" formControlName="invoice_sms" />
+                  <label class="custom-control-label" for="invoice_sms">SMS</label>
+                </div>
+              </div>
+              <div class="col-md-1">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="invoice_email"
+                    formControlName="invoice_email" />
+                  <label class="custom-control-label" for="invoice_email">Email</label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-md-5">
+                <label>Customer Bill Paid Alert</label>
+              </div>
+              <div class="col-md-1">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="billpaid_sms"
+                    formControlName="billpaid_sms" />
+                  <label class="custom-control-label" for="billpaid_sms">SMS</label>
+                </div>
+              </div>
+              <div class="col-md-1">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="billpaid_email"
+                    formControlName="billpaid_email" />
+                  <label class="custom-control-label" for="billpaid_email">Email</label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-md-5">
+                <label>Customer Alacarte Renew Alert</label>
+              </div>
+              <div class="col-md-1">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="alacarte_renew_sms"
+                    formControlName="alacarte_renew_sms" />
+                  <label class="custom-control-label" for="alacarte_renew_sms">SMS</label>
+                </div>
+              </div>
+              <div class="col-md-1">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="alacarte_renew_email"
+                    formControlName="alacarte_renew_email" />
+                  <label class="custom-control-label" for="alacarte_renew_email">Email</label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-md-5">
+                <label>Customer Expiry Bmail Alert</label>
+              </div>
+              <div class="col-md-1">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="b_mail" formControlName="b_mail" />
+                  <label class="custom-control-label" for="b_mail">Bmail</label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-md-5">
+                <label>Customer Temporary Suspended if not Paid Alert</label>
+              </div>
+              <div class="col-md-1">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="temporary_suspend_sms"
+                    formControlName="temporary_suspend_sms" />
+                  <label class="custom-control-label" for="temporary_suspend_sms">SMS</label>
+                </div>
+              </div>
+              <div class="col-md-1">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="temporary_suspend_email"
+                    formControlName="temporary_suspend_email" />
+                  <label class="custom-control-label" for="temporary_suspend_email">Email</label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-md-5">
+                <label>Customer Amount Balance Add Alert</label>
+              </div>
+              <div class="col-md-1">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="balance_add_sms"
+                    formControlName="balance_add_sms" />
+                  <label class="custom-control-label" for="balance_add_sms">SMS</label>
+                </div>
+              </div>
+              <div class="col-md-1">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="balance_add_email"
+                    formControlName="balance_add_email" />
+                  <label class="custom-control-label" for="balance_add_email">Email</label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-md-5">
+                <label>Customer Base Package Expiry Alert</label>
+              </div>
+              <div class="col-md-1">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="base_expiry_sms"
+                    formControlName="base_expiry_sms" />
+                  <label class="custom-control-label" for="base_expiry_sms">SMS</label>
+                </div>
+              </div>
+              <div class="col-md-1">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="base_expiry_email"
+                    formControlName="base_expiry_email" />
+                  <label class="custom-control-label" for="base_expiry_email">Email</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <div class="col-md-5">
+                <label>Customer Base Package Expiry Alert Send</label>
+              </div>
+              <div class="col-md-3 input-group input-group-sm">
+                <select class="form-control" formControlName="base_send">
+                  <option value="" selected>Select</option>
+                  <option value="1">1 Day Before</option>
+                  <option value="2">2 Days Before</option>
+                  <option value="3">3 Days Before</option>
+                  <option value="4">4 Days Before</option>
+                  <option value="5">4 Days Before</option>
+                  <option value="6">7 Days Before</option>
+                  <option value="7">7 Days Before</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-md-5">
+                <label>Customer Alacarte Expiry Alert</label>
+              </div>
+              <div class="col-md-1">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="alacarte_expiry_sms"
+                    formControlName="alacarte_expiry_sms" />
+                  <label class="custom-control-label" for="alacarte_expiry_sms">SMS</label>
+                </div>
+              </div>
+              <div class="col-md-1">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="alacarte_expiry_email"
+                    formControlName="alacarte_expiry_email" />
+                  <label class="custom-control-label" for="alacarte_expiry_email">Email</label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-md-5">
+                <label>Customer Alacarte Expiry Alert Send</label>
+              </div>
+              <div class="col-md-3 input-group input-group-sm">
+                <select class="form-control" formControlName="alacarte_send">
+                  <option value="" selected>Select</option>
+                  <option value="1">1 Day Before</option>
+                  <option value="2">2 Days Before</option>
+                  <option value="3">3 Days Before</option>
+                  <option value="4">4 Days Before</option>
+                  <option value="5">5 Days Before</option>
+                  <option value="6">6 Days Before</option>
+                  <option value="6">7 Days Before</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-md-5">
+                <label>Complaint Register Alert To user</label>
+              </div>
+              <div class="col-md-1">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="register_alert_sms"
+                    formControlName="register_alert_sms" />
+                  <label class="custom-control-label" for="register_alert_sms">SMS</label>
+                </div>
+              </div>
+              <div class="col-md-1">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="register_alert_email"
+                    formControlName="register_alert_email" />
+                  <label class="custom-control-label" for="register_alert_email">Email</label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-md-5">
+                <label>Complaint Resolve Alert To user</label>
+              </div>
+              <div class="col-md-1">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="resolve_sms" formControlName="resolve_sms" />
+                  <label class="custom-control-label" for="resolve_sms">SMS</label>
+                </div>
+              </div>
+              <div class="col-md-1">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="resolve_email"
+                    formControlName="resolve_email" />
+                  <label class="custom-control-label" for="resolve_email">Email</label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-md-5">
+                <label>Complaint Close Alert To user</label>
+              </div>
+              <div class="col-md-1">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="close_sms" formControlName="close_sms" />
+                  <label class="custom-control-label" for="close_sms">SMS</label>
+                </div>
+              </div>
+              <div class="col-md-1">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="close_email" formControlName="close_email" />
+                  <label class="custom-control-label" for="close_email">Email</label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-md-5">
+                <label>Complaint Assigned Alert To Employee </label>
+              </div>
+              <div class="col-md-1">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="assigned_sms"
+                    formControlName="assigned_sms" />
+                  <label class="custom-control-label" for="assigned_sms">SMS</label>
+                </div>
+              </div>
+              <div class="col-md-1">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="assigned_email"
+                    formControlName="assigned_email" />
+                  <label class="custom-control-label" for="assigned_email">Email</label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-md-5">
+                <label>Lead Register Alert To User </label>
+              </div>
+              <div class="col-md-1">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="register_alert_user_sms"
+                    formControlName="register_alert_user_sms" />
+                  <label class="custom-control-label" for="register_alert_user_sms">SMS</label>
+                </div>
+              </div>
+              <div class="col-md-1">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="register_alert_user_email"
+                    formControlName="register_alert_user_email" />
+                  <label class="custom-control-label" for="register_alert_user_email">Email</label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-md-5">
+                <label>Lead Assign Alert To Employee </label>
+              </div>
+              <div class="col-md-1">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="assign_alert_sms"
+                    formControlName="assign_alert_sms" />
+                  <label class="custom-control-label" for="assign_alert_sms">SMS</label>
+                </div>
+              </div>
+              <div class="col-md-1">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="assign_alert_email"
+                    formControlName="assign_alert_email" />
+                  <label class="custom-control-label" for="assign_alert_email">Email</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </nb-tab>
+
+        <nb-tab tabTitle="Invoice">
+
+          <div class="modal-body">
+            <div class="form-group row">
+              <div class="col-md-4">
+                <label>SGST: </label>
+              </div>
+              <div class="col-md-4">
+                <label>143456789</label>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-md-4">
+                <label>CGST: </label>
+              </div>
+              <div class="col-md-4">
+                <label></label>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-md-4">
+                <label>IGST: </label>
+              </div>
+              <div class="col-md-4">
+                <label></label>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-md-4">
+                <label>GST No: </label>
+              </div>
+              <div class="col-md-4">
+                <label></label>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-md-4">
+                <label>HSN No:</label>
+              </div>
+              <div class="col-md-4">
+                <label></label>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-md-3">
+                <label>MSO Company Name To Show in Invoice:</label>
+              </div>
+              <div class="col-md-4">
+                <label></label>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-md-4">
+                <label>Pan Number:</label>
+              </div>
+              <div class="col-md-4">
+                <label></label>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-md-4">
+                <label>Service Tax Number:</label>
+              </div>
+              <div class="col-md-4">
+                <label></label>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-md-4">
+                <label>MSO Company Address:</label>
+              </div>
+              <div class="col-md-4">
+                <label></label>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-md btn-success">Submit</button>
+            <button type="submit" class="btn btn-md btn-danger " (click)='cancel()'>Reset</button>
+          </div>
+        </nb-tab>
+      </nb-tabset>
+    </form>
+  </nb-card-body>
+</div>
+
+
+
+<!-- </nb-card-body> -->
+<!-- </nb-tabset>
+</nb-card> -->
+<!-- </div> -->
+<!-- </form> -->
+
+<!-- </nb-tabset>  -->
+<!-- </nb-card> -->
+<!-- </div>   -->

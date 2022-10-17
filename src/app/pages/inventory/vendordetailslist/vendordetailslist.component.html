@@ -1,0 +1,41 @@
+<!-- <p>businesslist works!</p> -->
+<nb-card>
+    <nb-card-header>List Business Name</nb-card-header>
+    <nb-card-body>
+      <button  status="success" nbButton 
+      [routerLink]="['/pages/inventory/addvendordetails']">Create</button>
+    <hr style="border: 0px;">
+    <table class="table">
+      <tr>
+        <th>Action</th>
+        <th>Contact Name</th>
+        <th>Vendor Name</th>
+        <th>Mobile No</th>
+        <th>Email</th>
+        <th>Location</th>
+        <th>Address</th>
+      </tr>
+      <tr *ngFor="let item of pagedItems">
+        <td style="cursor:pointer;" [routerLink]="['/pages/inventory/addvendordetails']" [queryParams]="{id:item.vendordetid}"><i class="nb-edit"></i></td>
+        <td>{{item.contact_person}}</td>
+        <td>{{item.vendor_name}}</td>
+        <td>{{item.mobile1}}</td>
+        <td>{{item.email}}</td>
+        <td>{{item.loc}}</td>
+        <td>{{item.addr}}</td>
+       
+      </tr>
+    </table>
+    <div class="pagination">
+      <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+        <a [ngClass]="{disabled:pager.currentPage === 1}" (click)="page=1;list();">First</a>
+        <a [ngClass]="{disabled:pager.currentPage === 1}" (click)="page=page-1;list();">Previous</a>
+        <a *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}"
+          (click)="list(page);">{{page}}</a>
+        <a [ngClass]="{disabled:pager.currentPage === pager.totalPages}" (click)="page=page+1;list();">Next</a>
+        <a [ngClass]="{disabled:pager.currentPage === pager.totalPages}"
+          (click)="page=pager.totalPages;list();">Last</a>
+      </ul>
+    </div>
+  </nb-card-body>
+</nb-card>

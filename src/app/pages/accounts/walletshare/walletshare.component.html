@@ -1,0 +1,86 @@
+<!-- <p>walletshare works!</p> -->
+<nb-card>
+    <nb-card-header>Wallet Share</nb-card-header>
+    <nb-card-body>
+      <form [formGroup]="TransForm" class="form-horizontal" (ngSubmit)="walletamt();">
+        <div class="modal-body">
+          <h5 >Headend</h5>
+          <div  class="form-group row" style="padding-left: 5px ">
+            <div class="col-sm-3">
+              <select name="headend_from"
+                formControlName="headend_from">
+               
+                <option value="">Select Headend</option>
+              
+              </select>
+              <small  class="form-text error"> Select
+                required Headend! </small>
+            </div>
+          </div>
+          <h5 >From</h5>
+          <div  class="form-group row" style="padding-left: 5px ">
+            <div class="col-sm-3">
+              <label>User Type</label>
+              <select  name="opt_typefrom" formControlName="opt_typefrom"
+               >
+                <option value="">Select User Type</option>
+                <option value="2">Distributor</option>
+                <option value="3">SubDistributor</option>
+              </select>
+              <small  class="form-text error"> Select
+                required User Type! </small>
+            </div>
+            <div  class="col-sm-3">
+              
+              <small class="form-text error">Select
+                required User Name! </small>
+            </div>
+          </div>
+          <h5>To</h5>
+          <div class="form-group row" style="padding-left: 5px">
+            <div class="col-sm-3">
+              <label>User Type</label>
+              <select name="opt_typeto" formControlName="opt_typeto">
+               
+                <option value="">Select Operator Type</option>
+                <option value="1">LCO</option>
+                <option value="3" >SubDistributor</option>
+              </select>
+              <small  class="form-text error"> Select required
+                User Type! </small>
+            </div>
+            <div class="col-sm-3">
+             
+              <small  class="form-text error">Select
+                required User Name! </small>
+            </div>
+          </div>
+          <h5>Share Amount</h5>
+          <div class="form-group row" style="padding-left: 5px">
+            <div class="col-sm-6">
+              <label style="font-size: 18px">Your Wallet Balance :<i class="fa-inr">{{shareamt()}}</i></label>
+              <input type="text"
+              
+                formControlName="amt">
+              <small class="form-text error">Please Enter
+                Share Amount! </small>
+            </div>
+          </div>
+          <h5>Remarks</h5>
+          <div class="form-group row" style="padding-left: 5px">
+            <div class="col-sm-3">
+              <textarea name="remarks"
+               
+                formControlName="remarks"></textarea>
+              <small  class="form-text error">Remark is Required!
+              </small>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" autofocus class="btn btn-md btn-success">Share</button>
+          <button type="button" class="btn btn-md btn-danger " [routerLink]="['/pages/accounts/walletlist']">Cancel</button>
+        </div>
+      </form>
+    </nb-card-body>
+  </nb-card>

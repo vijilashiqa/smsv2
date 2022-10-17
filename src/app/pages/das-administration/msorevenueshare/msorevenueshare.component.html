@@ -1,0 +1,109 @@
+<div class="col-md-12">
+    <nb-card>
+       <nb-card-header> Revenue Sharing </nb-card-header>
+       <nb-card-body>
+          <form [formGroup]="AddRevenueForm" class="form-horizontal" (ngSubmit)="addNas();">
+             <div class="modal-body">
+                <div class="form-group row">
+                   <div class="col-sm-4">
+                      <label>Headend</label>
+                      <select name="headend" formControlName="headend"
+                         [ngClass]="{'form-control' : true,'form-control-danger':AddRevenueForm.controls.headend.invalid&&submit}">
+                         <option value="" selected>Select Headend</option>
+                      </select>
+                      <small *ngIf="AddRevenueForm.hasError('required','headend')&&submit" class="form-text error">
+                         Select required Headend! </small>
+                   </div>
+                   <div class="col-sm-4">
+ 
+                      <label>Operator Type</label>
+                      <select name="operator_type" formControlName="operator_type"
+                         [ngClass]="{'form-control' : true,'form-control-danger':AddRevenueForm.controls.operator_type.invalid&&submit}">
+                         <option value="" selected>Select Operator Type</option>
+                         <option value="1">LCO</option>
+                         <option value="2">Distributor</option>
+                         <option value="3">Sub-Distributor</option>
+                      </select>
+                      <small *ngIf="AddRevenueForm.hasError('required','operator_type')&&submit" class="form-text error">
+                         Select required Operator Type! </small>
+                   </div>
+                   <div class="col-sm-4">
+ 
+                      <label>Operator Name</label>
+                      <select name="operator_name" formControlName="operator_name" [ngClass]="{'form-control' 
+                               : true,'form-control-danger':AddRevenueForm.controls.operator_name.invalid&&submit}">
+                         <option value="" selected> Select Operator Name</option>
+                      </select>
+                      <small *ngIf="AddRevenueForm.hasError('required','operator_name')&&submit"
+                         class="form-text error">Select required Operator name! </small>
+                   </div>
+                </div>
+ 
+                <table class="table  table-bordered table-hover">
+                   <th>
+                      Package Name
+                   </th>
+                   <th>
+                      Actual Package Price
+                   </th>
+                   <th>
+                      MSO Share
+                   </th>
+                   <th>
+                      Distributer Share
+                   </th>
+                   <th>
+                      Sub-Distributer Share
+                   </th>
+                   <th>
+                      LCO Share
+                   </th>
+ 
+                   <tbody>
+                      <tr class="share-row">
+                         <td> All_channels_350 </td>
+                         <td>
+                            <table class="table-bordered table-hover">
+                               <tr>
+                                  <th class="tdwidth "> Days</th>
+                                  <th class="tdwidth txtAlign"> LCO Price</th>
+                                  <th class="tdwidth txtAlign"> SUbscriber Price</th>
+                               </tr>
+                               <tr>
+                                  <td class="tdwidth "> 30 </td>
+                                  <td class="tdwidth txtAlign"><i class="fas fa-rupee-sign">&nbsp;60.00</i></td>
+                                  <td class="tdwidth txtAlign"> <i class="fas fa-rupee-sign">&nbsp;120.00</i></td>
+                               </tr>
+ 
+ 
+                            </table>
+                         </td>
+                         <td>
+                            50%
+                         </td>
+                         <td>
+                            5%
+                         </td>
+                         <td>
+                            5%
+                         </td>
+                         <td>
+                            40%
+                         </td>
+                         <!-- <td *ngIf="parent_id !=null">
+                     <div class="col-sm-12 "  >                     
+                           <input class="inform-control" type="number"  id="distributor_share_{{i}}" name="distributor_share_{{i}}" formControlName="distributer_share" min="0" max="200" style="float: none;width: 70%" /><span> % </span>
+                      </div>
+                   </td> -->
+                      </tr>
+                   </tbody>
+                </table>
+ 
+ 
+ 
+             </div>
+ 
+          </form>
+       </nb-card-body>
+    </nb-card>
+ </div>

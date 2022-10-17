@@ -1,0 +1,49 @@
+
+
+<div class="col-md-12">
+   <nb-card>
+      <nb-card-header>Bulk Paring</nb-card-header>
+      <nb-card-body>
+       
+         <form class="form-horizontal" (ngSubmit)="bulkpair();">
+            <div class="row form-group">
+               <div class="col-sm-6">
+                  <label>Please Upload The Excel File Format</label>
+                  <input type="file"  class="form-control"
+                     accept=".xlsx">
+                  <small class="form-text error"> No Record Found! </small>
+                  <small class="form-text error">
+                     Activation
+                     1 - Pairing, 0 - Unpairing
+                  </small>
+               </div>
+               <div class="col-sm-2">
+                  <br>
+                  <br>
+                  <a href="/assets/public/bulkparing.xlsx" target="_blank" download><b>Download Sample Here</b></a>
+               </div>
+            </div>
+            <div class="modal-footer">
+               <button type="submit" class="btn btn-md btn-success">Map</button>
+               <button type="button" class="btn btn-md btn-danger " (click)="submit=false;">Reset</button>
+            </div>
+         </form>
+      </nb-card-body>
+   </nb-card>
+   <nb-card >
+      <nb-card-header>
+         Success : {{s}} Failure : {{f}}
+         <i (click)="Download();" class="green right fa fa-file-excel" ></i>
+      </nb-card-header>
+      <nb-card-body>
+         <table class="table table-bordered table-striped ">
+            <tr>
+               <th>VC Number</th>
+               <th>Message</th>
+               <th>Error Msg</th>
+            </tr>
+           
+         </table>
+      </nb-card-body>
+   </nb-card>
+</div>

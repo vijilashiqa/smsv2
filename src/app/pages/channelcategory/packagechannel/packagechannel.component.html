@@ -1,0 +1,20 @@
+<div class="modal-header">
+    <span style="font-weight: bold;">{{ modalHeader }}</span>
+    <button class="close" aria-label="Close" (click)="activeModal.close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  
+  <!-- <table> -->
+    <!-- <tr>
+      <th>Channel List</th>
+    </tr> -->
+    <!-- <tr *ngFor="let items of item"> -->
+      <!-- <td>{{item.channame}}</td> -->
+    <!-- </tr> -->
+    <br>
+    <ul>
+      <li *ngFor="let item of channel">{{item}} </li>
+    </ul>
+  
+  <!-- </table> -->

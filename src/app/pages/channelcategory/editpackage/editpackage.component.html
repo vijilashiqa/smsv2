@@ -1,0 +1,321 @@
+<!-- <p>addpackage works!</p> -->
+<div class="col-md-12">
+    <nb-card>
+      <nb-card-header>Edit  Package</nb-card-header>
+      <!-- <toaster-container></toaster-container> -->
+      <nb-card-body>
+        <form [formGroup]="EditPackageForm" class="form-horizontal" (ngSubmit)="addPack()">
+          <nb-tabset>
+            <nb-tab tabTitle="Package Details">
+              <div class="modal-body">
+                <div class="form-group row">
+                  <div class="col-sm-9">
+                    <div class="form-group row">
+                     <div class="col-sm-3">
+                      <input id="base" type="radio" value="0" name="package" formControlName="packtype">
+               <label>Base Package</label>
+                    </div>
+                    <div class="col-sm-3">
+                      <input id="carte" type="radio" value="1" name="package" formControlName="packtype">
+                      <label>A-La-Carte</label>
+                    </div>
+                                     
+                      <div class="col-sm-3">
+                      <input id="addon" type="radio" value="2" name="package" formControlName="packtype">
+                      <label>Add-On Package</label>
+                      </div>
+                      <div class="col-sm-3">
+                        <input id="bundle" type="radio" value="3" name="package" formControlName="packtype">
+                        <label>Bundle Package</label>
+                      </div>
+                     
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" id="active" formControlName="active" />
+                      <label class="custom-control-label" for="active">Active</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-6">
+                    <label>Headend Name</label>
+                    <auto-completen
+                    [addclass]="{'form-control':true,'form-control-danger':EditPackageForm.controls.hdid.invalid&&submit}"
+                    addclass="form-control" optValues="hdname"
+                    formControlName="hdid" (keyUp)="getHeadend($event)" (changed)="getblundledata();getbroadcaster()"
+                    placeholder='Select Headend'  optId="hdid"
+                    [item]="listhead">
+                  </auto-completen>
+                  </div>
+                    <div class="col-sm-6" *ngIf="EditPackageForm.value['packtype'] != 3">
+                      <label>Broadcaster Name</label>
+                      <auto-completen
+                      [addclass]="{'form-control':true,'form-control-danger':EditPackageForm.controls.bcid.invalid&&submit}"
+                      addclass="form-control" optValues="fullname" (changed)="getchannel()"
+                      formControlName="bcid" (keyUp)="getbroadcaster($event)"
+                      placeholder='Select Broadcaster'  Id="id"
+                      [item]="listbroadaterr">
+                    </auto-completen>
+                      <small *ngIf="
+                          EditPackageForm.hasError('required', 'broadcaster') &&
+                          submit
+                        " class="form-text error">Broadcaster Name is required!
+                      </small>
+                    </div>
+                </div>
+              
+                <div class="form-group row" >
+                  <div class="col-sm-6" *ngIf="EditPackageForm.value['packtype'] != 3">
+                    <label>Broadcaster Share</label>
+                    <input type="text" name="broadcaster_share" formControlName="broadcaster_share"
+                      placeholder="Broadcaster Share % " [ngClass]="{
+                        'form-control': true,
+                        'form-control-danger':
+                          EditPackageForm.controls.broadcaster_share.invalid &&
+                          submit
+                      }" />
+                    <small *ngIf="
+                        EditPackageForm.hasError(
+                          'required',
+                          'broadcaster_share'
+                        ) && submit
+                      " class="form-text error">Broadcaster share is required!
+                    </small>
+                    <small *ngIf="
+                        EditPackageForm.controls.broadcaster_share.errors?.max
+                      " class="form-text error">Max Share limit is 100!
+                    </small>
+                  </div>
+  
+                  <div class="col-sm-6">
+                    <label>Broadcaster Assigned Price</label>
+                    <input type="text" name="bcamt" formControlName="bcamt" placeholder="Broadcaster Price INR "
+                      [ngClass]="{
+                        'form-control': true,
+                        'form-control-danger':
+                          EditPackageForm.controls.bcamt.invalid && submit
+                      }" />
+                    <small *ngIf="
+                        EditPackageForm.hasError('required', 'bcamt') && submit
+                      " class="form-text error">Broadcaster Price is required!
+                    </small>
+                  </div>
+                </div>
+            
+                <div class="form-group row">
+                  <div class="col-sm-6">
+                    <label>Package Name</label>
+                    <input type="text" name="packname" formControlName="packname" placeholder="Package Name "
+                      [ngClass]="{
+                        'form-control': true,
+                        'form-control-danger':
+                          EditPackageForm.controls.packname.invalid && submit
+                      }" />
+                    <small *ngIf="
+                        EditPackageForm.hasError('required', 'packname') &&
+                        submit
+                      " class="form-text error">
+                      Package Name is required!
+                    </small>
+                  </div>
+                  <div class="col-sm-6">
+                    <label>Service Type</label>
+                    <select [ngClass]="{
+                        'form-control': true,
+                        'form-control-danger':
+                          EditPackageForm.controls.srvtype.invalid && submit
+                      }" name="srvtype" formControlName="srvtype">
+                      <option value="" selected>Select Service Type</option>
+                      <option value="0">prepaid</option>
+                      <option value="1">postpaid</option>
+                    </select>
+                    <small *ngIf="
+                        EditPackageForm.hasError('required', 'srvtype') &&
+                        submit
+                      " class="form-text error">Select required Service Type!
+                    </small>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  
+                    <div class="col-sm-6"  *ngIf="EditPackageForm.value['enable_tax']">
+                      <label>Tax Type</label>
+                      <select [ngClass]="{
+                          'form-control': true,
+                          'form-control-danger':
+                            EditPackageForm.controls.tax_type.invalid && submit
+                        }" name="tax_type" formControlName="tax_type">
+                        <option value="" selected>Select Tax Type</option>
+                        <option value="0">Include from MSO Price</option>
+                        <option value="1">Exclude From MSO Price</option>
+                        <option value="2">Include from LCO Price</option>
+                        <option value="3">Exclude From LCO Price</option>
+                      </select>
+                      <small *ngIf="
+                          EditPackageForm.hasError('required', 'tax_type') && submit
+                        " class="form-text error">Select required Tax Type!
+                      </small>
+                  </div>
+  
+                  <div class="col-md-6">
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" id="enable_tax" (change)="taxcontrol()"
+                        formControlName="enable_tax" />
+                      <label class="custom-control-label" for="enable_tax">Tax Enable</label>
+                    </div>
+                  
+                  </div>
+              </div>
+              </div>
+            </nb-tab>
+            <!-- <nb-tab tabTitle="CAS Product ID" *ngIf='EditPackageForm.value["packtype"]!=3'>
+              <div class="modal-body">
+                <div class="form-group row" formArrayName="serviceid">
+                  <div class="col-sm-12">
+                    <div *ngFor="let user of serviceid.controls; index as idx;let last = last;">
+                      <div class="row" [formGroupName]="idx">
+                        <div class="col-sm-5">
+                          <label>CAS Type *</label>
+                          <auto-completen
+                                      addclass="form-control" optValues="cas_name" (changed)="removeCas()"
+                                      formControlName="casid" (keyUp)="getcas($event)"
+                                      placeholder='Select Case Type'  optId="casid"
+                                      [item]="listhdcas">
+                                    </auto-completen>   
+                        </div>
+                        <div class="col-sm-5">
+                          <label>Product ID *</label>
+                          <input type="text" class="form-control" formControlName="productid" />
+                          <small class="form-text error">Product ID is required!
+                          </small>
+                        </div>
+                                  <div class="col-sm-2">
+                                <div class="btn-group"  *ngIf="last || idx !=0">
+                                   <div class="btn-group" >
+                                   <button type="button"  style="margin-top: 31%;"class="btn btn-md btn-success dropdown-toggle" data-bs-toggle="dropdown">Action</button>
+                                   <div class="dropdown-menu">
+                                       <a (click)="deleteserviceid(idx)"  class="dropdown-item" *ngIf="idx !=0"><i title="Edit Complaint" class="ion-android-delete"></i>&nbsp;Delete</a>                                
+                                       <a (click)="addserviceid()" class="dropdown-item" *ngIf="last"><i title="Edit Complaint" class="ion-ios-plus-outline"></i>&nbsp;ADD </a>    
+                                   </div>
+                               </div>
+                             </div>
+                             </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </nb-tab> -->
+            <nb-tab tabTitle="Add Channels" *ngIf='EditPackageForm.value["packtype"]!=3 ,'>
+              <div >
+                <tree-root (stateChange)="getnode()" #tree [nodes]="nodes" [options]="treeOptions"></tree-root>
+              </div>
+            </nb-tab>
+       
+            <nb-tab tabTitle="Add Bundle Package" *ngIf='EditPackageForm.value["packtype"]==3'>
+              <div class="  table-wrapper table-scroll ">
+                <table class="table table-bordered table-striped">
+                  <thead>
+                    <th colspan="5">
+                      <input placeholder="Search Base Package Here" class="form-control"
+                      [(ngModel)]="searchbase"
+                      [ngModelOptions]="{standalone: true}"
+                        style="width:30%;border: none;border-bottom: 2px solid ;font-size: 15px;">
+                    </th>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th>Select One</th>
+                      <th>Package Name</th>
+                      <!-- <th>Channel Name</th> -->
+                    </tr>
+                    <tr *ngFor="let item of bpack| grdFilter: {packname: searchbase };  let i=index;">
+                      <td class="text-center">
+                        <input type="radio" name="sizecb"  [value]="item.packid" 
+                        [(ngModel)]="baseBack"
+                        [ngModelOptions]="{standalone: true}">
+                      </td>
+                      <td><a  (click)="channels(item)">{{item.packname}}</a></td>
+                    </tr>
+                    <tr>
+                      <td [hidden]='bpack.length !=0' colspan="5" style="text-align: center;">No Packages Found</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="  table-wrapper table-scroll ">
+                <table class="table table-bordered table-striped">
+                  <thead>
+                    <th colspan="5">
+                      <input placeholder="Search Add-On Package Here" class="form-control" 
+                      [(ngModel)]="searchaddon"
+                        [ngModelOptions]="{standalone: true}"
+                        style="width:30%;border: none;border-bottom: 2px solid ;font-size: 15px;">
+                    </th>
+                  </thead>
+                  <tr>
+                    <th class="text-center">
+                      <input type="checkbox" name="all" (change)="checkaddonpack($event.target.checked)" />All
+                    </th>
+                    <th>Package Name</th>
+                    <th>Channel Name</th>
+                  </tr>
+                  <tr *ngFor="let item of addonpack  | grdFilter: {packname: searchaddon };  let i=index;">
+                    <td class="text-center">
+                      <input type="checkbox" name="sizecb" [(ngModel)]="item.state"
+                      [ngModelOptions]="{standalone: true}" [value]="item.packid" 
+                       >
+                    </td>
+                    <td><a>{{item.packname}}</a></td>
+                  
+                    <td><a (click)="channels(item)">{{item.channame}}</a></td>
+                  </tr>
+                  <tr>
+                    <td [hidden]='addonpack.length !=0' colspan="5" style="text-align: center;">No Packages Found</td>
+                  </tr>
+                </table>
+              </div>
+              <div class="  table-wrapper table-scroll ">
+                <table class="table table-bordered table-striped">
+                  <thead>
+                    <th colspan="5">
+                      <input placeholder="Search Alacarte Here..." class="form-control" 
+                      [(ngModel)]="searchalcart"
+                      [ngModelOptions]="{standalone: true}"
+                        style="width:30%;border: none;border-bottom: 2px solid ;font-size: 15px;">
+                    </th>
+                  </thead>
+                  <tr>
+                    <th class="text-center">
+                      <input type="checkbox" name="all" (change)="checkalpack($event.target.checked)" />All
+                    </th>
+                    <th>Package Name</th>
+                    <th>Channel Name</th>
+                  </tr>
+                  <tr *ngFor="let item of alacartepack  | grdFilter: {packname: searchalcart }; ; let i=index;">
+                    <td class="text-center">
+                      <input type="checkbox" [(ngModel)]="item.state" [ngModelOptions]="{standalone: true}"  name="sizecb" [value]="item.packid" 
+                       >
+                    </td>
+                    <td><a >{{item.packname}}</a></td>
+                    <td><a (click)="channels(item)">{{item.channame}}</a></td>
+                  </tr>
+                  <tr>
+                    <td [hidden]='alacartepack.length !=0' colspan="5" style="text-align: center;">No Packages Found</td>
+                  </tr>
+                </table>
+              </div>
+            </nb-tab>
+          </nb-tabset>
+          <div class="modal-footer">
+            <button type="submit" status="success" nbButton>Create</button>
+            <button type="button" status="danger" nbButton [routerLink]="['/pages/package/packagelist']">
+              Cancel
+            </button>
+          </div>
+        </form>
+      </nb-card-body>
+    </nb-card>
+  </div>

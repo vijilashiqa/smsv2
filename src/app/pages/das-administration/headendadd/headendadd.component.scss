@@ -1,0 +1,24 @@
+.ng-autocomplete {
+    width:100%;
+    max-width: 600px;
+    display: table;
+    margin: 0 auto;
+  }
+  
+  .full-name-inputs,
+.validation-checkboxes {
+  display: flex;
+  margin: 0 -0.5rem;
+
+  > * {
+    margin: 0 0.5rem;
+  }
+}
+
+.error {
+  border-color: red;
+}
+.error-text {
+    font-size: x-small;
+    color: red;
+}

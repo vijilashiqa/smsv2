@@ -1,0 +1,60 @@
+<nb-card>
+  <nb-card-body>
+<div class="modal-header">
+  <h4 class="modal-title">{{title}}</h4>
+    <!-- <button class="close" aria-label="Close"> -->
+      <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+        </button>
+  </div>
+  <form [formGroup]="districtForm" class="form-horizontal" (ngSubmit)="District();">
+    <div class="modal-body">
+      <div class="form-group row">
+        <div class="col-sm-12">
+          <label>Country *</label>
+
+              <auto-completen
+              [addclass]="{ 'error': submit && this.districtForm.controls.countryid.errors }"
+              addclass="form-control" optValues="name"
+              formControlName="countryid" (keyUp)="getCountry($event)"
+              (changed)="getstate();typecleardist('1')" placeholder='Select Country' id="id"
+              [item]="count">
+            </auto-completen>
+            <div *ngIf="this.districtForm.controls.countryid.errors && (this.districtForm.controls.countryid.errors.required) && submit" class="error-text">
+              Country Name is required!
+             </div>
+            </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-sm-12">
+          <label>State *</label>
+            <auto-completen
+            [addclass]="{ 'error': submit && this.districtForm.controls.stateid.errors }"
+            addclass="form-control" optValues="name"
+            formControlName="stateid" (keyUp)="getstate($event)"
+             placeholder='Select State' id="id"
+            [item]="getstates">
+          </auto-completen>
+          <div *ngIf="this.districtForm.controls.stateid.errors && (this.districtForm.controls.stateid.errors.required) && submit" class="error-text">
+            State Name is required!
+           </div>
+          </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-sm-12">
+          <label>District *</label>
+            <input type="text" class="form-control" name="districtName" formControlName="districtName" placeholder="Enter Distric"
+            [ngClass]="{ 'is-invalid': submit && districtForm.controls.districtName.errors }"/>
+            <small *ngIf="districtForm.controls.districtName.errors &&(districtForm.controls.districtName.errors.required )&& submit"
+            class="invalid-feedback">districtName is required! </small>
+            
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="submit" status="success" nbButton >{{item ? 'Update' : 'Add'}}</button>
+      <button type="button" status="danger" nbButton (click)="close()" >Cancel</button>
+    </div>
+  </form>
+  </nb-card-body>
+</nb-card>

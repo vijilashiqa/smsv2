@@ -1,0 +1,261 @@
+<!-- <p>packagelist works!</p> -->
+<nb-card>
+  <nb-card-header>List Package</nb-card-header>
+  <nb-card-body>
+    <!-- <toaster-container></toaster-container> -->
+    <button
+    status="success" nbButton
+      [routerLink]="['/pages/channelcategory/addpackage']"
+    >
+      Add
+    </button>
+    <hr style="border: 0px" />
+    <div class="form-group row">
+      <div class="col-sm-4">
+        <label>Headend</label>
+        <select
+          (change)="
+            opt = [];
+            getoperator();
+            operator_name = '';
+            getpack();
+            package = '';
+            cas = [];
+            getcas();
+            cas_type = '';
+            getbroadcaster();
+            broadlist = [];
+            broadcaster = ''
+          "
+          name="headend"
+          class="form-control"
+        >
+          <option value="">Select Headend</option>
+          <!-- <option *ngFor="let item of head" [value]=item.headend_pk>{{item.headend_name}}</option> -->
+        </select>
+      </div>
+      <div class="col-sm-4">
+        <label>Pack Type</label>
+        <select
+          (change)="package = ''; pack = []; getpack()"
+          class="form-control"
+          id="pack_type"
+        >
+          <option value="">All</option>
+          <option value="0">Base Pack</option>
+          <option value="1">A-La-Carte</option>
+          <option value="2">Add-On Package</option>
+          <option value="4">Bundle Pack</option>
+        </select>
+      </div>
+      <div class="col-sm-4">
+        <label>Package</label>
+        <!-- <select class="form-control" id="package" [(ngModel)]="package">
+            <option value="">Select Package</option>
+            <option style="text-transform: uppercase;" *ngFor='let item of pack' [ngValue]='item.packid'>
+              {{item.pack_name}}</option>
+          </select> -->
+      </div>
+      <!--  <div class="col-sm-4" *ngIf='role.getroleval()>699'>
+                              <label>Operator Type</label>
+                                <select (change)='opt=[];getoperator();' name="op_type" [(ngModel)]="op_type" class="form-control" >
+                                  <option value="" selected>Select Operator Type</option>
+                                  <option value="1">LCO</option>
+                                  <option value="2">Distributor</option>
+                                  <option value="3">SubDistributor</option>
+                                </select>
+                             </div>
+            <div class="col-sm-4" *ngIf='role.getroleval()>443'>
+              <auto-complete (keyup)="getoperator($event.target.value)"  name='operator_name' (item_id)='operator_name=$event; pack=[];getpack();' placeholder='Select Operator' label='Operator Name' [item]=opt ></auto-complete>
+            </div> -->
+    </div>
+    <!--  <div  class="form-group row">
+                 
+           <div class="col-sm-4">
+                              <label>Pack Type</label>
+                              <select (change)='package="";pack=[];getpack();' class="form-control" id = "pack_type" [(ngModel)] = "pack_type">
+                                  <option value="">All</option>
+                                  <option value="0" >Base Pack</option>
+                                  <option value="1" >A-La-Carte</option>
+                                  <option value="2" >Add-On Package</option>
+                                  <option value="4" >Bundle Pack</option>
+                              </select>
+                            </div>
+                            <div class="col-sm-4">
+                              <label>Package</label>
+                              <select  class="form-control" id = "package" [(ngModel)] = "package">
+                                  <option value="">Select Package</option>
+                                  <option *ngFor='let item of pack' [ngValue]='item.packid'>{{item.pack_name}}</option>
+                              </select>
+                            </div>
+                            <div class="col-sm-4">
+                              <label>CAS Type</label>
+                              <select class="form-control" id = "cas_type" [(ngModel)] = "cas_type">
+                                  <option value="">All</option>
+                                 <option *ngFor="let item of cas" [value]=item.cas_id_pk>{{item.cas_name}}</option>
+                              </select>
+                            </div>
+                          </div> -->
+    <div class="form-group row">
+      <div class="col-sm-4">
+        <label>Prod ID</label>
+        <input
+          type="text"
+          name="prod_id"
+          placeholder="Prod ID"
+          class="form-control"
+        />
+      </div>
+      <div class="col-sm-4">
+        <label>Broadcaster</label>
+        <select name="broadcaster" class="form-control">
+          <option value="">Select Broadcaster</option>
+          <!-- <option *ngFor="let item of broadlist" [value]=item.brodcaster_pk>{{item.broadcaster_name}}</option> -->
+        </select>
+      </div>
+    </div>
+    <button
+      type="button"
+      class="btn btn-md btn-success"
+      (click)="initiallist()"
+      style="margin: auto; display: block"
+    >
+      Search
+    </button>
+    <hr style="border: 0px" />
+    <div class="row">
+      <div class="col-md-12">
+        <label class="left">
+          <!-- <h5>Package Count : {{data[1]['count']}}</h5> -->
+        </label>
+        <i
+          (click)="Download()"
+          class="green right fa fa-file-excel"
+          aria-hidden="true"
+        ></i>
+      </div>
+    </div>
+    <div style="overflow: scroll">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Action</th>
+            <th>Package ID</th>
+            <th>Package Type</th>
+            <th>Package Name</th>
+            <th>View Channels</th>
+            <th>Service Type</th>
+            <th>CAS Product Name</th>
+            <th>TAX Enable</th>
+            <th>TAX Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let item of pagedItems; let i = index">
+            <div style="display: table-row">
+              <td
+                style="cursor: pointer"
+                [routerLink]="['/pages/channelcategory/editpackage']"
+                [queryParams]="{ id: item.packid }"
+              >
+                <i class="nb-edit"></i>
+              </td>
+              <!-- <td ><a (click)="Edit(item.packid);"><i class="nb-edit"></i></a></td> -->
+              <td>{{ item.packid }}</td>
+              <td>
+                {{
+                  item.packtype == 0
+                    ? "BasePackage"
+                    : item.packtype == 1
+                    ? "ALaCarte"
+                    : item.packtype == 2
+                    ? "AddOn Pack"
+                    : item.packtype == 3
+                    ? "Bundle Pack"
+                    : N / A
+                }}
+              </td>
+              <td style="cursor: pointer" (click)="packshare(i)">
+                <i
+                  [ngClass]="{
+                    'fa-caret-down': index != i,
+                    fas: true,
+                    'fa-caret-up': index == i
+                  }"
+                ></i
+                ><b> {{ item.packname }}</b>
+              </td>
+              <!-- <td>
+                  <i class="fas fa-tv" nbPopover="{{item.channelid}}" nbPopoverPlacement="top"></i>
+                </td>  -->
+              <td *ngIf="item.packtype != 3">
+                <p (click)="channels(item)">
+                  <i class="fas fa-tv" nbPopoverPlacement="top"></i>
+                </p>
+              </td>
+              <td *ngIf="item.packtype == 3">--</td>
+              <td>{{ item.srvtype == 0 ? "Prepaid" : "Postpaid" }}</td>
+              <td>{{ item.channame }}</td>
+              <td>
+                <i
+                  [ngStyle]="{ color: item.enable_tax == 1 ? 'green' : 'red' }"
+                  [ngClass]="{
+                    'ion-close-round': item.enable_tax == 0 ? true : false,
+                    'ion-checkmark-round': item.enable_tax != 0 ? true : false
+                  }"
+                  [attr.title]="item.enable_tax == 1 ? 'Active' : 'Deactive'"
+                ></i>
+              </td>
+              <td>{{ item.tax_type == 0 ? "Include" : "Exclude" }}</td>
+            </div>
+            <ng-container *ngIf="index == i">
+              <tr *ngIf="share.length != 0">
+                <th>Operator Name</th>
+                <th>Broadcaster Share</th>
+                <th>MSO Share</th>
+                <th>Distributer Share</th>
+                <th>Sub-Distributor Share</th>
+                <th>LCO Share</th>
+                <th>MSO Price</th>
+                <th>Customer Price</th>
+              </tr>
+              <!-- <tr *ngFor='let item of share;'>
+  
+                  <td>{{item.fname+''+item.lname}}</td>
+                  <td>{{item.broadcaster_share}}</td>
+                  <td>{{item.mso_share}}</td>
+                  <td>{{item.dist_share}}</td>
+                  <td>{{item.sub_dist_share}}</td>
+                  <td>{{item.lco_share}}</td>
+                  <td>{{item.mso_price}}</td>
+                  <td>{{item.cust_price}}</td>
+  
+                </tr> -->
+              <tr>
+                <td
+                  *ngIf="share.length == 0"
+                  colspan="7"
+                  style="text-align: center"
+                >
+                  <h5><b>No Data Found</b></h5>
+                </td>
+              </tr>
+            </ng-container>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+    <div class="pagination">
+      <!-- <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+          <a [ngClass]="{disabled:pager.currentPage === 1}" (click)="page=1;getPackageList();">First</a>
+          <a [ngClass]="{disabled:pager.currentPage === 1}" (click)="page=page-1;getPackageList();">Previous</a>
+          <a *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}"
+            (click)="getPackageList(page);">{{page}}</a>
+          <a [ngClass]="{disabled:pager.currentPage === pager.totalPages}"
+            (click)="page=page+1;getPackageList();">Next</a>
+          <a [ngClass]="{disabled:pager.currentPage === pager.totalPages}"
+            (click)="page=pager.totalPages;getPackageList();">Last</a>
+        </ul> -->
+    </div>
+  </nb-card-body>
+</nb-card>

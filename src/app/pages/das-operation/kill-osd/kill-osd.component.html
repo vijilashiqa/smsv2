@@ -1,0 +1,55 @@
+
+<div class="col-md-12">
+    <nb-card>
+       <nb-card-header>Kill OSD</nb-card-header>
+       <nb-card-body>
+          <nb-card>
+             <nb-card-body>
+                <form [formGroup] class="form-horizontal" >
+                   <div class="modal-body">
+                      <div class="form-group row">
+                         <div class="col-sm-12">
+                            <div class="form-group row">
+                               <div class="col-sm-4">
+                                  <label>VC Number</label>
+                                  <!-- <input type="text" name="vc_num" formControlName="vc_num" placeholder="VC Number"
+                                     [ngClass]="{'form-control' : true,'form-control-danger':ReportsForm.controls.vc_num.invalid&&submit}"> -->
+                                  <!-- <small *ngIf="ReportsForm.hasError('required','vc_num')&&submit"
+                                     class="form-text error"> VC Number is required! </small> -->
+                               </div>
+                               <div class="col-sm-4">
+                                  <label>Serial Number</label>
+                                  <input type="text" class="form-control" name="port_num" formControlName="port_num"
+                                     placeholder="Serial Number">
+                               </div>
+                               <div class="col-sm-4">
+                                  <label>Number Of Messages</label>
+                                  <input type="text" class="form-control" name="msg" formControlName="msg"
+                                     placeholder="Number Of Messages">
+                               </div>
+                            </div>
+                         </div>
+                      </div>
+                   </div>
+                   <div class="modal-footer">
+                      <button type="submit" class="btn btn-md btn-success">Search</button>
+                      <button type="Reset" class="btn btn-md btn-danger">Reset</button>
+                   </div>
+                </form>
+             </nb-card-body>
+          </nb-card>
+          <table class="table table-bordered table-striped">
+             <thead class="success">
+                <tr class="black-muted-bg">
+                   <th>VC Number</th>
+                   <th>Serial Number</th>
+                   <th>Number Of Messages</th>
+                </tr>
+             </thead>
+          </table>
+          <div class="modal-footer">
+             <button type="submit" class="btn btn-md btn-success">Kill</button>
+          </div>
+       </nb-card-body>
+    </nb-card>
+ </div>

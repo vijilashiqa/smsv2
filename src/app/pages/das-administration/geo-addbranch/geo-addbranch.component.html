@@ -1,0 +1,55 @@
+<nb-card>
+ <nb-card-body>
+
+<div class="modal-header">
+    <span>{{ modalHeader }}</span>
+    <!-- <button class="close" aria-label="Close"> -->
+      <button class="close" aria-label="Close" (click)="close();">
+       <span aria-hidden="true">&times;</span>
+    </button>
+ </div>
+ <form [formGroup]="AddbranchForm" class="form-horizontal" (ngSubmit)="addBranch();">
+    <div class="modal-body">
+       <div class="form-group row">
+          <div class="col-sm-12">
+             <label>Headend *</label>
+             <select (change)='loc=[];AddbranchForm.controls.locationname.setValue("");getlocation();' name="headName"
+                formControlName="headName" placeholder="Location Name"
+                [ngClass]="{'form-control' : true,'form-control-danger':AddbranchForm.controls.headName.invalid&&submit}">
+                <option value="">Select Headend</option>
+                <option *ngFor='let item of head' [ngValue]=item.headend_pk>{{item.headend_name}}</option>
+             </select>
+             <small *ngIf="AddbranchForm.hasError('required','headName')&&submit" class="form-text error"> Headend Name
+                is required! </small>
+          </div>
+       </div>
+       <div class="form-group row">
+          <div class="col-sm-12">
+             <label>Location *</label>
+             <select
+                [ngClass]="{'form-control' : true,'form-control-danger':AddbranchForm.controls.locationname.invalid&&submit}"
+                name="locationname" formControlName="locationname">
+                <option value="">Select Location Name</option>
+                <option *ngFor="let item of loc" [ngValue]=item.loc_pk>{{item.loc_name}}</option>
+             </select>
+             <small *ngIf="AddbranchForm.hasError('required','locationname')&&submit" class="form-text error">Select
+                required Location name! </small>
+          </div>
+       </div>
+       <div class="form-group row">
+          <div class="col-sm-12">
+             <label>Branch *</label>
+             <input type="text" name="BranchName" formControlName="BranchName" placeholder="Branch Name"
+                [ngClass]="{'form-control' : true,'form-control-danger':AddbranchForm.controls.BranchName.invalid&&submit}" />
+             <small *ngIf="AddbranchForm.hasError('required','BranchName')&&submit" class="form-text error"> Branch Name
+                is required! </small>
+          </div>
+       </div>
+    </div>
+    <div class="modal-footer">
+       <button type="submit" status="success" nbButton >Submit</button>
+       <button type="button" status="danger" nbButton >Cancel</button>
+    </div>
+ </form>
+   </nb-card-body>
+</nb-card>

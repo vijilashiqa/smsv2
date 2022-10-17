@@ -1,0 +1,94 @@
+<!-- <p>cardlist works!</p> -->
+<nb-card>
+    <nb-card-header>List Card <a style="text-align:right; float:right;" (click)="search=!search">Advanced Search</a>
+    </nb-card-header>
+    <nb-card-body>
+      <!-- <toaster-container></toaster-container> -->
+      <button status="success" nbButton  [routerLink]="['/pages/stbmanagement/uploadcard']">Upload
+        Card</button>
+      <!-- <label class="right">
+        <h5>Card Count </h5>
+      </label> -->
+     
+      <!-- <hr style="border: 0px;"> -->
+      <!-- <div class="modal-body"> -->
+        <!-- <div class="form-group row" >
+          <div class="col-sm-3">
+            <label>Headend</label>
+            <select (change)='opt=[];getoperator();getlocation();' name="headend" class="form-control"
+              >
+              <option value="">Select Headend</option>
+              <option *ngFor="let item of head"></option>
+            </select>
+          </div>
+        </div> -->
+        <!-- <div class="form-group row">
+          <div class="col-sm-4">
+            <label>STB Model</label>
+            <select (change)='vc="";stbopt="";getVc();' name="model_opt"  class="form-control">
+              <option value="" selected>Select STB Model</option>
+             
+            </select>
+          </div>
+         
+          <div class="col-sm-4">
+            <label>VC Status</label>
+            <select name="status" class="form-control">
+              <option value="" selected>Select Status</option>
+              <option value="1">Active</option>
+              <option value="0">Deactive</option>
+            </select>
+          </div>
+        </div> -->
+        <!-- <div class="form-group row">
+          <div class="col-sm-4">
+            <label>Pair/Unpair</label>
+            <select  name="pair" class="form-control">
+              <option value="" selected>Select </option>
+              <option value="1">Paired</option>
+              <option value="0">Unpaired</option>
+            </select>
+          </div>
+  
+          <div class="col-sm-4">
+            <label>From Created Date</label>
+            <input type="text" [owlDateTime]="from_date_layout"
+              [owlDateTimeTrigger]="from_date_layout" name="from_date" placeholder="Select Date " class="form-control" />
+            <owl-date-time [pickerType]="'calendar'" #from_date_layout></owl-date-time>
+          </div>
+          <div class="col-sm-4">
+            <label>To Created Date</label>
+            <input type="text" [owlDateTime]="to_date_layout" [owlDateTimeTrigger]="to_date_layout"
+              name="to_date" placeholder="Select Date " class="form-control" />
+            <owl-date-time [pickerType]="'calendar'" #to_date_layout></owl-date-time>
+          </div>
+        </div> -->
+        <!-- <button type="button" class="btn btn-md btn-success" (click)='initiallist();'
+          style="margin: auto; display: block;">Search</button> -->
+      <!-- </div> -->
+      <table class="table">
+        <tr>
+          <th >Action</th>
+          <th>Vc Status</th>
+          <th>Vc Number</th>
+          <th>Paired/Unpaired</th>
+          <th >Assign To</th>
+          <th>Assignee ID</th>
+        </tr>
+        <tr >
+         
+          <td >
+            <span
+              style="background-color:#42f456;font-weight:bold;border-radius: 3px; padding: 4px;">Active</span>
+            <span 
+              style="background-color:#f44b42;font-weight:bold;border-radius: 3px; padding: 4px;">Deactive</span>
+          </td>
+         
+        
+        </tr>
+      </table>
+      <div class="pagination">
+        
+      </div>
+    </nb-card-body>
+  </nb-card>

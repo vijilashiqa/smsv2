@@ -1,0 +1,109 @@
+<!-- <p>addchannelsrv works!</p> -->
+<div class="col-md-12">
+   <nb-card>
+      <nb-card-header>Create Channel Service</nb-card-header>
+      <!-- <toaster-container></toaster-container> -->
+      <nb-card-body>
+         <form [formGroup]="channeservlForm" class="form-horizontal" (ngSubmit)="addchannelsrv();">
+            <div class="modal-body">
+               <div class="form-group row">
+                  <div class="col-sm-5" *ngIf="role.getroleid() == 999">
+                     <label>Headend Name<span style="color:red">*</span></label>
+                     <auto-completen
+                     [addclass]="{ 'error': submit && this.channeservlForm.controls.hdid.errors }"
+                     addclass="form-control" optValues="hdname" (changed)="getcashead();getchannelname();typeclearlheadend('1')"
+                     formControlName="hdid" (keyUp)="getHeadend($event)"
+                     placeholder='Select Headend'  optId="hdid"
+                     [item]="listhead">
+                   </auto-completen>
+                   <div *ngIf="this.channeservlForm.controls.hdid.errors && (this.channeservlForm.controls.hdid.errors.required) && submit" class="error-text">
+                     Headend Name is required!
+                    </div>
+                  </div>
+
+                 <div class ="col-sm-5" *ngIf="!id">
+                              <label>Select Mode *</label>
+                               <select  class="form-control" formControlName="modetype" (change)="clearValidation()" 
+                               [ngClass]="{ 'is-invalid': submit && channeservlForm.controls.modetype.errors }">
+                                        <option value="">Select Mode</option>
+                                        <option value="0">Bulk</option>
+                                        <option value="1">Individual </option>
+                              </select>
+                              <div *ngIf="this.channeservlForm.controls.modetype.errors && (this.channeservlForm.controls.modetype.errors.required) && submit" class="error-text">
+                                 Mode is required!
+                                </div>
+               </div>
+            </div>
+               <br>
+               <div class="form-group row"  >
+                  <div class="col-sm-12" >
+                           <div class="row" >
+                              <div class="col-sm-3"  *ngIf="channeservlForm.value['modetype']=='1' || channeservlForm.value['modetype']=='0' ">
+                                 <label>Cas Type  *</label>
+                                    <auto-completen
+                                    [addclass]="{ 'error': submit && this.channeservlForm.controls.casid.errors }"
+                                    addclass="form-control" optValues="cas_name"  (changed)="getchannelname();typeclearcastype('1')"
+                                    formControlName="casid" (keyUp)="getcashead($event)"
+                                    placeholder='Select Case Type'  optId="hdcasid"
+                                    [item]="listhdcas">
+                                  </auto-completen>   
+                                  <div *ngIf="this.channeservlForm.controls.casid.errors && (this.channeservlForm.controls.casid.errors.required) && submit" class="error-text">
+                                    CAS Type is required!
+                                   </div>
+                              </div>
+                         
+                           <div class="col-sm-3"  *ngIf="channeservlForm.value['modetype']=='1'"  >
+                              <label>Channel Name *</label>
+                                 <auto-completen
+                                 [addclass]="{ 'error': submit && this.channeservlForm.controls.channelid.errors }"
+                                 addclass="form-control" optValues="channame" 
+                                 formControlName="channelid" (keyUp)="getchannelname($event)"
+                                 placeholder='Select channel Name'  optId="chanid"
+                                 [item]="listchnnel">
+                               </auto-completen> 
+                               <div *ngIf="this.channeservlForm.controls.channelid.errors && (this.channeservlForm.controls.channelid.errors.required) && submit" class="error-text">
+                                 Channel Name is required!
+                                </div>  
+                           </div>
+                           <div class="col-sm-4"   *ngIf="channeservlForm.value['modetype']=='1'"  >
+                              <label>Service ID*</label>
+                        <input type="text" class="form-control" name="casserviceid" formControlName="casserviceid" placeholder="Enter Service ID"
+                        [ngClass]="{ 'is-invalid': submit && channeservlForm.controls.casserviceid.errors }"/>
+                        <small *ngIf="channeservlForm.controls.casserviceid.errors &&(channeservlForm.controls.casserviceid.errors.required )&& submit"
+                        class="invalid-feedback">Genre name  is required! </small>
+                           </div>
+                     
+                           
+                     </div>
+                  
+               </div>
+               </div>
+
+               <div class="form-group row" *ngIf="channeservlForm.value['modetype']=='0'">
+                  <div class="col-sm-12">
+
+               <div class="col-sm-6" >
+                  <div class="mb-3">
+                     <label for="formFile" class="form-label">Bulk Upload</label>
+                     <!-- <input class="form-control" type="file" id="formFile"> -->
+                         <input #myFile type="file" (change)="changeListener($event.target.files[0])" class="form-control"
+                          accept=".xlsx" />
+                    </div>
+                  
+                </div>
+                <div class="col-sm-6">
+                  <a href="\assets\data\channelServices.xlsx" target="_blank" download><b>Download Sample Here</b></a>
+                </div>
+</div>
+</div>
+               </div>
+               <div class="modal-footer">
+                  <button type="submit" status="success" nbButton >{{id ? 'Update' : 'Add'}}</button>
+                  <button type="button" status="danger" nbButton
+                     (click)='createForm();submit=false;'>Reset</button>
+               </div>
+            <!-- </div> -->
+         </form>
+      </nb-card-body>
+   </nb-card>
+</div>

@@ -1,0 +1,193 @@
+<!-- <p>invoicelist works!</p> -->
+<nb-card>
+    
+    <nb-card-header>List Invoice<a style="text-align:right; float:right;" (click)="search=!search">Advanced Search</a>
+    </nb-card-header>
+    <nb-card-body>
+      
+ 
+       <div class="row">
+          <div class="col-md-12">
+             <label class="left">
+                <h5>Total Invoice : {{tot.count}}</h5>
+             </label>
+             <i (click)="Download();" class="green right fa fa-file-excel" aria-hidden="true"></i>
+          </div>
+       </div>
+       <hr style="border: 0px;">
+       <nb-card *ngIf="!search">
+          <nb-card-body>
+             <div class="modal-body">
+                <div class="form-group row" >
+                   <div class="col-sm-3" >
+                      <label>Headend</label>
+                      <select
+                        
+                         name="head_opt"  class="form-control">
+                         <option value="" selected>Select Headend</option>
+                         
+                      </select>
+                   </div>
+                   <div class="col-sm-3" >
+                      <label>Operator Type</label>
+                      <select (change)='operator_name="";opt=[];getoperator();' name="op_type"
+                         class="form-control">
+                         <option value="" selected>Select Operator Type</option>
+                         <option value="1">LCO</option>
+                         <option value="2">Distributor</option>
+                         <option value="3">SubDistributor</option>
+                      </select>
+                   </div>
+                   <div class="col-sm-3">
+                    
+                   </div>
+                   <div class="col-sm-3">
+                      <label>Status</label>
+                      <select name="status"  class="form-control">
+                         <option value="" selected>Select Status</option>
+                         <option value="2">Cancelled</option>
+                         <option value="1">Success</option>
+                      </select>
+                   </div>
+                </div>
+                <div class="form-group row">
+ 
+                   <div class="col-sm-4">
+                      <label>Model</label>
+                      <select class="form-control" name="model_type" >
+                         <option value="" selected>Select Model</option>
+                        
+                      </select>
+                   </div>
+ 
+                   <div class="col-sm-4">
+                    
+                   </div>
+ 
+                   <div class="col-sm-4">
+                   </div>
+                </div>
+ 
+                <div class="form-group row">
+ 
+                   <div class="col-sm-4">
+                      <label>Invoice Type</label>
+                      <select name="inv_type"  class="form-control">
+                         <option value="" selected>Select Type</option>
+                         <option value="0">Renewal</option>
+                         <option value="1">Extended</option>
+                      </select>
+                   </div>
+                   <div class="col-sm-4">
+                      <label>Pack Type</label>
+                      <select (change)='package="";pack=[];getpack();' class="form-control" id="pack_type">
+                         <option value="">All</option>
+                         <option value="0">Base Pack</option>
+                         <option value="1">A-La-Carte</option>
+                         <option value="2">Add-On Package</option>
+                         <option value="4">Bundle Pack</option>
+                      </select>
+                   </div>
+                   <div class="col-sm-4">
+                      <label>Package</label>
+                      <select class="form-control" id="package" >
+                         <option value="">Select Package</option>
+                        
+                      </select>
+                   </div>
+ 
+ 
+                </div>
+                <div class="form-group row">
+                   <div class="col-sm-4">
+                      <label>Date Type</label>
+                      <select name="dtype"  class="form-control">
+                         <option value="" selected>Select Type</option>
+                         <option value="1">Activate Date</option>
+                         <option value="2">Expiry Date</option>
+                      </select>
+                   </div>
+                   <div class="col-sm-4">
+                      <label>From Active Date</label>
+                      <input type="text" [owlDateTime]="from_date_layout"
+                         [owlDateTimeTrigger]="from_date_layout" name="from_date" placeholder="Select Date "
+                         class="form-control" for />
+                      <owl-date-time [pickerType]="'calendar'" #from_date_layout></owl-date-time>
+                   </div>
+                   <div class="col-sm-4" >
+                      <label>To Active Date</label>
+                      <input type="text"  [owlDateTime]="to_date_layout"
+                         [owlDateTimeTrigger]="to_date_layout" name="to_date" placeholder="Select Date "
+                         class="form-control" />
+                      <owl-date-time [pickerType]="'calendar'" #to_date_layout></owl-date-time>
+                   </div>
+                   <div class="col-sm-4" >
+                      <label>From Date</label>
+                      <input type="text"  [owlDateTime]="from_edate_layout"
+                         [owlDateTimeTrigger]="from_edate_layout" name="from_edate" placeholder="Select Date "
+                         class="form-control" for />
+                      <owl-date-time [pickerType]="'calendar'" #from_edate_layout></owl-date-time>
+                   </div>
+                   <div class="col-sm-4">
+                      <label>To Date</label>
+                      <input type="text" [owlDateTime]="to_edate_layout"
+                         [owlDateTimeTrigger]="to_edate_layout" name="to_edate" placeholder="Select Date "
+                         class="form-control" />
+                      <owl-date-time [pickerType]="'calendar'" #to_edate_layout></owl-date-time>
+                   </div>
+                </div>
+                <button type="button" class="btn btn-md btn-success" (click)='initiallist();'
+                   style="margin: auto; display: block;">Search</button>
+             </div>
+          </nb-card-body>
+       </nb-card>
+       <table class="table table-bordered table-striped">
+          <thead class="success">
+             <th colspan="7" class="black-muted-bg"><b> Total Share Statistics </b></th>
+          </thead>
+          <tbody>
+             <tr>
+                <td  class="changesize"><b> Broadcaster Share Amount <br><i
+                         class="fa fa-inr"></i>
+                      <span> {{tot.sumbc  |number : '1.2-2'}}</span>
+                   </b>
+                </td>
+                <td  class="changesize"><b> MSO Share Amount <br><i class="fa fa-inr"></i>
+                      <span> {{tot.sumamt  |number : '1.2-2'}}</span>
+                   </b>
+                </td>
+                <td class="changesize"><b> Distributor Share Amount <br><i
+                         class="fa fa-inr"></i>
+                      <span> {{tot.sumdamt  |number : '1.2-2'}}</span>
+                   </b>
+                </td>
+                <td class="changesize"><b> Sub-Distributor Share Amount <br><i
+                         class="fa fa-inr"></i>
+                      <span> {{tot.sumsdamt  |number : '1.2-2'}}</span>
+                   </b>
+                </td>
+                <td class="changesize"><b> Tax Amount <br><i class="fa fa-inr"></i>
+                      <span> {{tot.sumtaxamt  |number : '1.2-2'}}</span>
+                   </b>
+                </td>
+                <td class="changesize"><b> MSO Deducted Amount <br><i class="fa fa-inr"></i>
+                      <span> {{tot.msodeamt  |number : '1.2-2'}}</span>
+                   </b>
+                </td>
+                <td class="changesize"><b> LCO Share Amount <br><i class="fa fa-inr"></i>
+                     
+                   </b>
+                </td>
+             </tr>
+          </tbody>
+       </table>
+       <hr style="border: 0px;">
+       <table class="table">
+         
+         
+       </table>
+       <div class="pagination">
+          
+       </div>
+    </nb-card-body>
+ </nb-card>

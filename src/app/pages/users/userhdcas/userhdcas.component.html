@@ -1,0 +1,31 @@
+<nb-card>
+    <nb-card-body>
+      <div class="modal-header">
+        <h4 class="modal-title">{{title}}</h4>
+        <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+          </button>
+      </div>
+    <form [formGroup]="userhdcas" class="form-horizontal" (ngSubmit)="addhdcas();">
+      <div class="modal-body">
+        <div class="form-group row">
+          <div class="col-sm-12">
+           <label> Select Hd CAS *</label>
+               <!-- <input type="checkbox" class="form-control" name="hdcas"
+               [checked]="isAllCheckBoxChecked()"
+              (changed)="checkAllCheckBox($event)"  formControlName="hdcas" placeholder="Enter Country"
+           /> -->
+              <!-- <small *ngIf="userhdcas.controls.hdcas.errors &&(userhdcas.controls.hdcas.errors.required )&& submit"
+              class="invalid-feedback">hdcas is required! </small> -->
+              <input style="zoom:1.5;" type="checkbox"  formControlName="hdcas"  id="checkbox" [checked]="isAllCheckBoxChecked()"
+              (change)="checkAllCheckBox($event)">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" status="success" nbButton  style="cursor:pointer" >ADD</button>
+        <button type="button" status="danger" nbButton  style="cursor:pointer" (click)="close()" >Cancel</button>
+      </div>
+    </form>
+    </nb-card-body>
+  </nb-card>

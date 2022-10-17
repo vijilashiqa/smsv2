@@ -1,0 +1,128 @@
+<div class="col-md-12">
+    <nb-card>
+       <nb-card-header>SMS Gateway</nb-card-header>
+       <!-- <toaster-container></toaster-container> -->
+       <nb-card-body>
+          <form [formGroup]="smsgatewayForm" class="form-horizontal" (ngSubmit)="sms();">
+             <div class="modal-body">
+                <div class="form-group row">
+                   <div class="col-sm-6">
+                      <label>Gateway From</label>
+                      <select name="gateway_type"
+                         [ngClass]="{'form-control' : true,'form-control-danger':smsgatewayForm.controls.gateway_type.invalid&&submit}"
+                         formControlName="gateway_type">
+                         <option value="" selected>Select Gateway Type</option>
+                         <option value="1">MSO</option>
+                         <option value="2">Operator</option>
+                      </select>
+                      <small *ngIf="smsgatewayForm.hasError('required','gateway_type')&&submit" class="form-text error">
+                         Gateway Type is required! </small>
+                   </div>
+                   <div class="col-sm-6">
+                      <label>Headend</label>
+                      <select name="headend" formControlName="headend"
+                         [ngClass]="{'form-control' : true,'form-control-danger':smsgatewayForm.controls.headend.invalid&&submit}">
+                         <option value="" selected>Select Headend</option>
+                      </select>
+                      <small *ngIf="smsgatewayForm.hasError('required','headend')&&submit" class="form-text error">
+                         Select required Headend! </small>
+                   </div>
+                </div>
+                <div class="form-group row">
+ 
+                   <div class="col-sm-6" *ngIf="smsgatewayForm.value['gateway_type']!=1">
+                      <label>Operator Type</label>
+                      <select name="operator_type" formControlName="operator_type"
+                         [ngClass]="{'form-control' : true,'form-control-danger':smsgatewayForm.controls.operator_type.invalid&&submit}">
+                         <option value="" selected>Select Operator Type</option>
+                         <option value="1">LCO</option>
+                         <option value="2">Distributor</option>
+                         <option value="3">Sub-Distributor</option>
+                      </select>
+                      <small *ngIf="smsgatewayForm.hasError('required','operator_type')&&submit" class="form-text error">
+                         Select required Operator Type! </small>
+                   </div>
+                   <div class="col-sm-6" *ngIf="smsgatewayForm.value['gateway_type']!=1">
+ 
+                      <label>Operator Name</label>
+                      <select name="operator_name" formControlName="operator_name" [ngClass]="{'form-control' 
+                               : true,'form-control-danger':smsgatewayForm.controls.operator_name.invalid&&submit}">
+                         <option value="" selected> Select Operator Name</option>
+                      </select>
+                      <small *ngIf="smsgatewayForm.hasError('required','operator_name')&&submit"
+                         class="form-text error">Select required Operator name! </small>
+                   </div>
+                </div>
+                <hr>
+ 
+                <div class="form-group row">
+                   <div class="col-sm-6">
+                      <label>Gateway*</label>
+                      <select name="gateway"
+                         [ngClass]="{'form-control' : true,'form-control-danger':smsgatewayForm.controls.gateway.invalid&&submit}"
+                         formControlName="gateway">
+                         <option value="" selected></option>
+                         <option value="11">Zestwings.com</option>
+                         <option value="12">MSG91.com</option>
+                      </select>
+                      <small *ngIf="smsgatewayForm.hasError('required','gateway')&&submit" class="form-text error">
+                         Gateway is required! </small>
+                   </div>
+                </div>
+                <div class="form-group row">
+                   <div class="col-sm-6">
+                      <label>User ID*</label>
+                      <input type="text" name="user_id"
+                         [ngClass]="{'form-control' : true,'form-control-danger':smsgatewayForm.controls.user_id.invalid&&submit}"
+                         formControlName="user_id">
+                      <small *ngIf="smsgatewayForm.hasError('required','user_id')&&submit" class="form-text error"> User
+                         ID is required! </small>
+                   </div>
+                </div>
+                <div class="form-group row">
+                   <div class="col-sm-6">
+                      <label>Password*</label>
+                      <input type="text" name="password"
+                         [ngClass]="{'form-control' : true,'form-control-danger':smsgatewayForm.controls.password.invalid&&submit}"
+                         formControlName="password">
+                      <small *ngIf="smsgatewayForm.hasError('required','password')&&submit" class="form-text error">
+                         Password is required!</small>
+                   </div>
+                </div>
+                <div class="form-group row" *ngIf="smsgatewayForm.value['gateway']!=11">
+                   <div class="col-sm-6">
+                      <label>Authentication Key</label>
+                      <input type="text" name="auth_key"
+                         [ngClass]="{'form-control' : true,'form-control-danger':smsgatewayForm.controls.auth_key.invalid&&submit}"
+                         formControlName="auth_key">
+                      <small *ngIf="smsgatewayForm.hasError('required','auth_key')&&submit" class="form-text error">
+                         Authentication Key is required! </small>
+                   </div>
+                </div>
+                <div class="form-group row" *ngIf="smsgatewayForm.value['gateway']!=11">
+                   <div class="col-sm-6">
+                      <label>Route</label>
+                      <input type="text" name="route" class="form-control" formControlName="route">
+                   </div>
+                </div>
+                <div class="form-group row" *ngIf="smsgatewayForm.value['gateway_type']!=11">
+                   <div class="col-sm-6">
+                      <label>Country</label>
+                      <input type="text" name="country" class="form-control" formControlName="country">
+                   </div>
+                </div>
+                <div class="form-group row" *ngIf="smsgatewayForm.value['gateway_type']!=11">
+                   <div class="col-sm-6">
+                      <label>Notes</label>
+                      <textarea name="notes" class="form-control" formControlName="notes"></textarea>
+                   </div>
+                </div>
+             </div>
+             <div class="modal-footer">
+                <button type="submit" class="btn btn-md btn-success">Create</button>
+                <button type="button" class="btn btn-md btn-danger " (click)='createForm();submit=false'>Reset </button>
+             </div>
+          </form>
+       </nb-card-body>
+    </nb-card>
+ </div>

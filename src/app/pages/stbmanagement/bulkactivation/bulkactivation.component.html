@@ -1,0 +1,195 @@
+<!-- <p>bulkactivation works!</p> -->
+<nb-card>
+    <nb-card-header>Bulk Activation/Deactivation <a style="text-align:right; float:right;"></a></nb-card-header>
+    <nb-card-body>
+      <!-- <toaster-container></toaster-container> -->
+      <hr style="border: 0px;">
+      <nb-tabset>
+        <nb-tab tabTitle="STB">
+          <form [formGroup]="bulkForm" class="form-horizontal" (ngSubmit)="initiallist();">
+            <div class="modal-body">
+              <div class="form-group row">
+                <div  class="col-sm-4">
+                  <label>Headend</label>
+                  <input  (change)="branch=[];loc=[];opt=[];getoperator();" name="headendbox"
+                    list="headlist" formControlName="headendbox" class="form-control" placeholder="Select Headend">
+                  <datalist id='headlist'>
+                   
+                  </datalist>
+                </div>
+                <div  class="col-sm-4">
+                  <label>LCO Name</label>
+                  <input 
+                    name="lco_name" formControlName="lco_name" list="lco_list" class="form-control"
+                    placeholder="Select LCO">
+                  <datalist id="lco_list">
+                    <option *ngFor="let item of opt">{{item.username}}</option>
+                  </datalist>
+                </div>
+                <div class="col-sm-4">
+                  <label>Status</label>
+                  <select (change)="initiallist();" name="status" formControlName="status" class="form-control">
+                    <option value="" selected>All</option>
+                    <option value="1">Active</option>
+                    <option value="0">Deactive</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-4">
+                  <label>Location</label>
+                  <input  name="location"
+                    formControlName="location" list="loc_list" class="form-control" placeholder="Select Location">
+                 
+                </div>
+                <div class="col-sm-4">
+                  <label>Branch</label>
+                  <input name="branch" formControlName="branch" list="branch_list" class="form-control"
+                    placeholder="Select Branch">
+                  <datalist id="branch_list">
+                    <option *ngFor="let item of branch">{{item.branch_name}}</option>
+                  </datalist>
+                </div>
+                <div class="col-sm-4">
+                  <label>Paid Status</label>
+                  <select (change)="initiallist();" name="paid" formControlName="paid" class="form-control">
+                    <option value="" selected>All</option>
+                    <option value="1">Paid</option>
+                    <option value="0">Unpaid</option>
+                  </select>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-md btn-success" style="margin: auto; display: block;">Search</button>
+            </div>
+          </form>
+          <div class="row">
+            <div class="col-md-12">
+              <table class="table table-striped" style="margin-bottom: 0px; border-color: transparent !important;">
+                <thead class="success">
+                  <td colspan="4" class="green right"> <i class="fa fa-file-pdf" title="PDF"
+                      aria-hidden="true"></i>&nbsp;&nbsp;
+                    <i class="fa fa-file-excel" title="Excel" aria-hidden="true"></i>
+                  </td>
+                </thead>
+              </table>
+            </div>
+          </div>
+          <table class="table">
+            <tr>
+              <th>
+                <div class="custom-control custom-checkbox">
+                  <input id='selectedAll' class="custom-control-input" type="checkbox" 
+                    (change)="selectAll();" />
+                  <label class="custom-control-label" for="selectedAll">All</label>
+                </div>
+              </th>
+              <th>Status</th>
+              <th>Headend</th>
+              <th>LCO Name</th>
+              <th>Customer Name</th>
+              <th>Location</th>
+              <th>Branch</th>
+              <th>Serial Number</th>
+              <th>VC Number</th>
+              <th>Expiry Date</th>
+            </tr>
+            <tr *ngFor="let item of pagedItems;let i=index">
+              <td>
+                <div class="custom-control custom-checkbox">
+                  <input (change)='changes();' type="checkbox" class="custom-control-input" id="{{i}}"
+                   >
+                  <label class="custom-control-label" ></label>
+                </div>
+              </td>
+              <td>{{item.purchase_flg == 0 ? 'Deactive':'Active'}}</td>
+              <td>{{item.headend_name}}</td>
+              <td>{{item.username}}</td>
+              <td>{{item.c_user_name}}</td>
+              <td>{{item.loc_name}}</td>
+              <td>{{item.branch_name}}</td>
+              <td>{{item.SNo}}</td>
+              <td>{{item.vc_no}}</td>
+              <td>{{item.expiry_date|date:'dd/mm/yyyy'}}</td>
+            </tr>
+          </table>
+          <div class="pagination">
+           
+          </div>
+          <div class="modal-footer">
+            <button type="button" (click)="bulkactive();" 
+              class="btn btn-md btn-success">{{bulkForm.value['paid']==1&&bulkForm.value['status']==0 ? 'Activate':'De-Activate'}}</button>
+            <button type="button" class="btn btn-md btn-danger " (click)="createForm();">Reset </button>
+          </div>
+        </nb-tab>
+        <nb-tab tabTitle="Package">
+          <nb-card>
+            <form [formGroup]="bulkForm" class="form-horizontal">
+              <div class="modal-body">
+                <div  class="row form-group">
+                  <div class="col-sm-6">
+                    <label>Headend</label>
+                    <select name="headendpack" class="form-control" formControlName="headendpack">
+                      <option value="" selected>Select Headend</option>
+                  
+                    </select>
+                  </div>
+                </div>
+                <div class="row form-group">
+                  <div class="col-sm-6">
+                    <label>Active/Deactivate</label>
+                    <select name="" class="form-control" formControlName="act_de">
+                      <option value="" selected>Select</option>
+                      <option value="1">Activate</option>
+                      <option value="2">Deactivate</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row form-group">
+                  <div class="col-sm-6">
+                    <label>Please Upload The Excel File Format</label>
+                    <input autocomplete="off" type="file" 
+                      class="form-control" accept=".xlsx">
+                    <small class="form-text error"> File is required! </small>
+                    <small class="form-text error">CAS : 1 - Gospell, 2 - Secure Tv, 3 - SafeView </small>
+                  </div>
+                  <div class="col-sm-4">
+                    <br>
+                    <br>
+                    <a href="/assets/public/bulkpackageactivation.xlsx" target="_blank" download><b>Download Sample
+                        Here</b></a>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </nb-card>
+          <table class="table table-striped" style="margin-bottom: 0px; border-color: transparent !important;">
+            <thead class="success">
+              <td colspan="4" class="green right"> <i class="fa fa-file-pdf" title="PDF"
+                  aria-hidden="true"></i>&nbsp;&nbsp;
+                <i class="fa fa-file-excel" title="Excel" aria-hidden="true"></i>
+              </td>
+            </thead>
+          </table>
+          <div class="modal-footer">
+            <button type="button" (click)='packagebulk();' class="btn btn-md btn-success">Upload</button>
+            <button type="button" class="btn btn-md btn-danger " (click)="submit=false;createForm();">Reset</button>
+          </div>
+        </nb-tab>
+      </nb-tabset>
+    </nb-card-body>
+  </nb-card>
+  <nb-card >
+    <nb-card-header>
+      Success : {{s}} Failure : {{f}}
+      <i (click)="Download();" class="green right fa fa-file-excel" aria-hidden="true"></i>
+    </nb-card-header>
+    <nb-card-body>
+      <table class="table table-condensed table-hover ">
+        <tr>
+          <th>Card Number</th>
+          <th>Error Msg</th>
+        </tr>
+        
+      </table>
+    </nb-card-body>
+  </nb-card>

@@ -1,0 +1,101 @@
+<nb-card>
+    <nb-card-body>
+  <div class="modal-header">
+    <h4 class="modal-title">{{title}}</h4>
+      <!-- <button class="close" aria-label="Close"> -->
+        <button class="close" aria-label="Close" (click)="close();">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <form [formGroup]="AddmodelForm" class="form-horizontal" (ngSubmit)="Model();">
+      <div class="modal-body">
+        <div class="form-group row">
+          <div class="col-sm-6">
+            <label>Model Name *</label>
+          <input type="text" class="form-control" name="modelname" formControlName="modelname" placeholder="Enter Model Name"
+          [ngClass]="{ 'is-invalid': submit && AddmodelForm.controls.modelname.errors }"/>
+          <small *ngIf="AddmodelForm.controls.modelname.errors &&(AddmodelForm.controls.modelname.errors.required )&& submit"
+          class="invalid-feedback">Model Name is required! </small>
+          </div>
+          <div class="col-sm-6">
+            <label>Headend Name<span style="color:red">*</span></label>
+            <auto-completen
+            [addclass]="{ 'error': submit && this.AddmodelForm.controls.hdid.errors }"
+            addclass="form-control" optValues="hdname" (changed)="getcashead();getstbtype();getmake();typeclearHeadend('1')"
+            formControlName="hdid" (keyUp)="getHeadend($event)"
+            placeholder='Select Headend'  optId="hdid"
+            [item]="listhead">
+          </auto-completen>
+          <div *ngIf="this.AddmodelForm.controls.hdid.errors && (this.AddmodelForm.controls.hdid.errors.required) && submit" class="error-text">
+            Headend Name is required!
+           </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-6">
+            <label>Cas Name<span style="color:red">*</span></label>
+            <auto-completen
+            [addclass]="{ 'error': submit && this.AddmodelForm.controls.hdcasid.errors }"
+            addclass="form-control" optValues="cas_name" (changed)="typeclearcas('1')"
+            formControlName="hdcasid" (keyUp)="getcashead($event)"
+            placeholder='Select Case Type'  optId="hdcasid"
+            [item]="listhdcas">
+          </auto-completen> 
+          <div *ngIf="this.AddmodelForm.controls.hdcasid.errors && (this.AddmodelForm.controls.hdcasid.errors.required) && submit" class="error-text">
+            Cas Name is required!
+           </div>  
+      </div>
+      <div class="col-sm-6">
+        <label>Vendor Name *</label>
+        <auto-completen
+        [addclass]="{ 'error': submit && this.AddmodelForm.controls.vendorid.errors }"
+        addclass="form-control" optValues="vendor_name"
+        formControlName="vendorid" (keyUp)="getmake($event)" 
+         placeholder='Select Vendor Name' optId="vendorid"
+        [item]="listmake">
+      </auto-completen>
+      <div *ngIf="this.AddmodelForm.controls.vendorid.errors && (this.AddmodelForm.controls.vendorid.errors.required) && submit" class="error-text">
+        Vendor Name is required!
+       </div>  
+    </div>
+          </div>
+          <div class="form-group row">
+          <div class="col-sm-6">
+            <label>STB Type *</label>
+            <auto-completen
+            [addclass]="{ 'error': submit && this.AddmodelForm.controls.stbtypeid.errors }"
+            addclass="form-control" optValues="boxtypename"
+            formControlName="stbtypeid" 
+             placeholder='Select STB Type' optId="boxtypeid"
+            [item]="getstbtypeg">
+          </auto-completen>
+          <div *ngIf="this.AddmodelForm.controls.stbtypeid.errors && (this.AddmodelForm.controls.stbtypeid.errors.required) && submit" class="error-text">
+            STB Type Name is required!
+           </div>  
+          </div>     
+       
+          <div class="col-sm-6">
+            <label> Chip type</label> <br> <br>
+            &nbsp;&nbsp;
+            <input id="card" type="radio" value="0" name="card" formControlName="chiptype">
+            <label>Card </label> &nbsp; &nbsp; &nbsp; &nbsp;
+            <input id="cardless" type="radio" value="1" name="card" formControlName="chiptype">
+            <label>Card Less</label>
+        </div>
+        </div>
+   </div>
+   <div class="form-group row">
+    <div class="col-md-6">
+      <div class="custom-control custom-checkbox">
+        <input type="checkbox" class="custom-control-input" id="status" checked formControlName="status" />
+        <label class="custom-control-label" for="status">Active</label>
+      </div>
+    </div>
+  </div>
+      <div class="modal-footer">
+        <button type="submit"  status="success" nbButton>{{item ? 'Update' : 'Add'}}</button>
+        <button type="button"  status="danger" nbButton (click)="close(); ">Cancel</button>
+      </div>
+    </form>
+    </nb-card-body>
+  </nb-card>

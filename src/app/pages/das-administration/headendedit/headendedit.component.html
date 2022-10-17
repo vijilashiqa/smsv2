@@ -1,0 +1,144 @@
+<p>headendedit works!</p>
+<div class="col-md-12">
+    <nb-card>
+       <nb-card-header>Update Headend</nb-card-header>
+       <!-- <toaster-container></toaster-container> -->
+       <nb-card-body>
+          <form [formGroup]="EditheadendForm" class="form-horizontal" (ngSubmit)="EditHeadend();">
+             <div class="form-group row">
+                <div class="col-sm-6">
+                   <label>Headend Name*</label>
+                   <input type="text" name="headendname" formControlName="headendname" placeholder="Headend Name "
+                      [ngClass]="{'form-control' : true,'form-control-danger':EditheadendForm.controls.headendname.invalid&&submit}" />
+                   <small *ngIf="EditheadendForm.hasError('required','headendname')&&submit" class="form-text error">
+                      Headend Name is required! </small>
+                </div>
+                <div class="col-sm-6">
+                   <label>Headend ID*</label>
+                   <input type="text" name="headendid" formControlName="headendid" placeholder="Headend ID"
+                      [ngClass]="{'form-control' : true,'form-control-danger':EditheadendForm.controls.headendid.invalid&&submit}" />
+                   <small *ngIf="EditheadendForm.hasError('required','headendid')&&submit" class="form-text error">
+                      Headend ID is required! </small>
+                </div>
+             </div>
+             <div class="form-group row">
+                <div class="col-sm-6">
+                   <label>Mobile No*</label>
+                   <input
+                      [ngClass]="{'form-control' : true,'form-control-danger':EditheadendForm.controls.Mobile.invalid&&submit}"
+                      formControlName="Mobile" name="Mobile" type="text" placeholder="Mobile No * " size="30"
+                      maxlength="60">
+                   <small *ngIf="EditheadendForm.hasError('required','Mobile')&&submit" class="form-text error"> Mobile
+                      No is required! </small>
+                </div>
+                <div class="col-sm-6">
+                   <label>Pin Code*</label>
+                   <select (change)='area=[];EditheadendForm.controls["area"].setValue("");getarea();' list="pin"
+                      [ngClass]="{'form-control' : true,'form-control-danger':EditheadendForm.controls.pin.invalid&&submit}"
+                      name="pin" placeholder="pincode" formControlName="pin">
+                      <option value="">Select Pincode</option>
+                      <option *ngFor='let item of pincode' [ngValue]=item.id>{{item.pincode}}</option>
+                   </select>
+                   <small *ngIf="EditheadendForm.hasError('required','pin')&&submit" class="form-text error"> Pincode is
+                      required! </small>
+                </div>
+             </div>
+             <div class="form-group row">
+                <div class="col-sm-6">
+                   <label>Country*</label>
+                   <select (change)='state = [];EditheadendForm.controls["state"].setValue("");getstate();'
+                      [ngClass]="{'form-control' : true,'form-control-danger':EditheadendForm.controls.country.invalid&&submit}"
+                      formControlName="country">
+                      <option value="">Select Country </option>
+                      <option *ngFor='let item of country' [ngValue]=item.country_pk>{{item.country_name}}</option>
+                   </select>
+                   <small *ngIf="EditheadendForm.hasError('required','country')&&submit" class="form-text error"> Select
+                      Required Country! </small>
+                </div>
+                <div class="col-sm-6">
+                   <label>State*</label>
+                   <select (change)='district=[];EditheadendForm.controls["district"].setValue("");getdistrict();'
+                      [ngClass]="{'form-control' : true,'form-control-danger':EditheadendForm.controls.state.invalid&&submit}"
+                      formControlName="state">
+                      <option value="">Select State</option>
+                      <option *ngFor='let item of state' [ngValue]=item.state_pk>{{item.state_name}}</option>
+                   </select>
+                   <small *ngIf="EditheadendForm.hasError('required','state')&&submit" class="form-text error"> Select
+                      Required State! </small>
+                </div>
+             </div>
+             <div class="form-group row">
+                <div class="col-sm-6">
+                   <label>District*</label>
+                   <select (change)='city=[];EditheadendForm.controls["City"].setValue("");getcity();'
+                      [ngClass]="{'form-control' : true,'form-control-danger':EditheadendForm.controls.district.invalid&&submit}"
+                      formControlName="district">
+                      <option value="">Select District</option>
+                      <option *ngFor='let item of district' [ngValue]=item.district_pk>{{item.district_name}}</option>
+                   </select>
+                   <small *ngIf="EditheadendForm.hasError('required','district')&&submit" class="form-text error"> Select
+                      Required District! </small>
+                </div>
+                <div class="col-sm-6">
+                   <label>City*</label>
+                   <select (change)='area=[];EditheadendForm.controls["area"].setValue("");getarea();'
+                      [ngClass]="{'form-control' : true,'form-control-danger':EditheadendForm.controls.City.invalid&&submit}"
+                      formControlName="City">
+                      <option value="">Select City</option>
+                      <option *ngFor='let item of city' [ngValue]=item.id>{{item.city_name}}</option>
+                   </select>
+                   <small *ngIf="EditheadendForm.hasError('required','City')&&submit" class="form-text error"> Select
+                      Required City! </small>
+                </div>
+             </div>
+             <div class="form-group row">
+                <div class="col-sm-6">
+                   <label>Area*</label>
+                   <select
+                      [ngClass]="{'form-control' : true,'form-control-danger':EditheadendForm.controls.area.invalid&&submit}"
+                      formControlName="area">
+                      <option value="">Select Area</option>
+                      <option *ngFor='let item of area' [ngValue]=item.id>{{item.area_name}}</option>
+                   </select>
+                   <small *ngIf="EditheadendForm.hasError('required','area')&&submit" class="form-text error"> Select
+                      Required Area! </small>
+                </div>
+                <div class="col-sm-6">
+                   <label>Email*</label>
+                   <input type="email" name="Email ID" formControlName="Email" placeholder="Email "
+                      [ngClass]="{'form-control' : true,'form-control-danger':EditheadendForm.controls.Email.invalid&&submit}" />
+                   <small *ngIf="EditheadendForm.hasError('required','Email')&&submit" class="form-text error"> Email ID
+                      is required! </small>
+                </div>
+             </div>
+             <div class="form-group row">
+                <div class="col-sm-6">
+                   <label>Address*</label>
+                   <textarea name="Installation" formControlName="Installation" placeholder="Address "
+                      [ngClass]="{'form-control' : true,'form-control-danger':EditheadendForm.controls.Installation.invalid&&submit}"> </textarea>
+                   <small *ngIf="EditheadendForm.hasError('required','Installation')&&submit"
+                      class="form-text error">Address is required! </small>
+                </div>
+                <div class="col-sm-6">
+                   <label>Description</label>
+                   <textarea name="descr" formControlName="descr" class="form-control"
+                      placeholder="Description"></textarea>
+                </div>
+             </div>
+             <div class="form-group row">
+                <div class="col-sm-6">
+                   <div class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" id="status" formControlName="status" />
+                      <label class="custom-control-label" for="status">Active</label>
+                   </div>
+                </div>
+             </div>
+             <div class="modal-footer">
+                <button type="submit" class="btn btn-md btn-success">Update</button>
+                <button type="button" class="btn btn-md btn-danger " [routerLink]="['/pages/headend/headendlist']">cancel
+                </button>
+             </div>
+          </form>
+       </nb-card-body>
+    </nb-card>
+ </div>

@@ -1,0 +1,300 @@
+
+ <div class="col-md-12">
+    <nb-card>
+       <nb-card-header>GlobalFingerprint</nb-card-header>
+       <nb-card-body>
+          <form [formGroup]="AddFingerprintForm" class="form-horizontal" (ngSubmit)="sendfingerprint();"> 
+              <div class="modal-body">
+                <div class="form-group row">
+                   <div class="col-sm-4">
+                      <label>FP Type</label>
+                      <select (change)='cord()'
+                         [ngClass]="{'form-control' : true,'form-control-danger':AddFingerprintForm.controls.fp_type.invalid&&submit}"
+                         name="fp_type" formControlName="fp_type">
+                         <option value="1">Fixed</option>
+                         <option value="2">Random</option>
+                      </select>
+                      <small *ngIf="AddFingerprintForm.hasError('required','fp_type')&&submit"
+                         class="form-text error">Select required Server Type! </small>
+                   </div>
+                   <div class="col-sm-6" style="padding-top: 30px; padding-left: 215px;">
+                      <div class="custom-control custom-checkbox">
+                         <input (change)="ECM();" type="checkbox" class="custom-control-input" id="ecm"
+                            formControlName="ecm" />
+                         <label class="custom-control-label" for="ecm">ECM</label>
+                      </div>
+                   </div>
+                </div>
+                <br>
+                <div class="form-group row">
+                   <div class="col-sm-6">
+                      <div class="form-group row">
+                         <div class="col-sm-12">
+                            <label>Headend*</label>
+                            <select
+                               (change)="AddFingerprintForm.controls.castype.setValue('');cas=[];getcas();AddFingerprintForm.controls.operator_name.setValue('');opt=[];getoperator();"
+                               name="headend" formControlName="headend"
+                               [ngClass]="{'form-control' : true,'form-control-danger':AddFingerprintForm.controls.headend.invalid&&submit}">
+                               <option value="">Select Headend</option>
+                               <option *ngFor="let item of head" [ngValue]=item.headend_pk>{{item.headend_name}}</option>
+                            </select>
+                            <small *ngIf="AddFingerprintForm.hasError('required','headend')&&submit"
+                               class="form-text error">Select required Server Type! </small>
+                         </div>
+                      </div>
+                      <div class="form-group row">
+                         <div class="col-sm-12">
+                            <label>Server Type *</label>
+                            <select (change)="AddFingerprintForm.controls.vc_no.setValue('');vcdet=[];getVc();"
+                               class="form-control" formControlName="castype">
+                               <option value="">Select CAS Type</option>
+                               <option *ngFor="let item of cas" [value]=item.cas_id_pk>{{item.cas_name}}</option>
+                            </select>
+                            <small *ngIf="AddFingerprintForm.hasError('required','servertype')&&submit"
+                               class="form-text error">Select required Server Type! </small>
+                         </div>
+                      </div>
+                      <div class="form-group row">
+                         <div class="col-sm-12">
+                            <label> STB Category</label>
+                            <select (change)='individual()' formControlName="stb_cat"
+                               [ngClass]="{'form-control' : true,'form-control-danger':AddFingerprintForm.controls.stb_cat.invalid&&submit}"
+                               id="stb_cat">
+                               <option value="" selected>Select STB category</option>
+                               <option value="0">Individual</option>
+                               <option value="1">All STBs</option>
+                            </select>
+                         </div>
+                         <small *ngIf="AddFingerprintForm.hasError('required','stb_cat')&&submit"
+                            class="form-text error">Select required STB Category! </small>
+                      </div>
+                      <div class="form-group row">
+                         <div class="col-sm-12">
+                            <label>FP Text Size *</label>
+                            <select formControlName="fp_text_size"
+                               [ngClass]="{'form-control' : true,'form-control-danger':AddFingerprintForm.controls.fp_text_size.invalid&&submit}"
+                               id="fp_text_size">
+                               <option value="" selected>Select Text Size</option>
+                               <option *ngFor="let item of fontSize" [ngValue]="item.id">
+                                  {{item.name}}
+                               </option>
+                            </select>
+                            <small *ngIf="AddFingerprintForm.hasError('required','fp_text_size')&&submit"
+                               class="form-text error">Select required Text Size! </small>
+                         </div>
+                      </div>
+                      <div class="form-group row">
+                         <div class="col-sm-12">
+                            <label>FP BG COLOR* </label>
+                            <select formControlName="fp_bg_color"
+                               [ngClass]="{'form-control' : true,'form-control-danger':AddFingerprintForm.controls.fp_bg_color.invalid&&submit}"
+                               id="fp_bg_color">
+                               <option value="" selected>Select BG COLOR</option>
+                               <option *ngFor="let item of BGColor" [ngValue]="item.id">
+                                  {{item.name}}
+                               </option>
+                            </select>
+                            <small *ngIf="AddFingerprintForm.hasError('required','fp_bg_color')&&submit"
+                               class="form-text error">Select required BG COLOR! </small>
+                         </div>
+                      </div>
+                      <div class="form-group row">
+                         <div class="col-sm-12">
+                            <label>FP TEXT COLOR* </label>
+                            <select formControlName="fp_text_color"
+                               [ngClass]="{'form-control' : true,'form-control-danger':AddFingerprintForm.controls.fp_text_color.invalid&&submit}"
+                               id="fp_text_color">
+                               <option value="" selected>Select TEXT COLOR</option>
+                               <option *ngFor="let item of TextColor" [ngValue]="item.id">
+                                  {{item.name}}
+                               </option>
+                            </select>
+                            <small *ngIf="AddFingerprintForm.hasError('required','fp_text_color')&&submit"
+                               class="form-text error">Select required TEXT COLOR! </small>
+                         </div>
+                      </div>
+                      <div class="form-group row" *ngIf="AddFingerprintForm.value['ecm']">
+                         <div class="col-sm-12">
+                            <label>Broadcasters</label>
+                            <select class="form-control" name="broadcaster"
+                               [ngClass]="{'form-control' : true,'form-control-danger':AddFingerprintForm.controls.broadcaster.invalid&&submit}">
+                               <option value="" selected>Select Broadcaster Name</option>
+                            </select>
+                            <small *ngIf="AddFingerprintForm.hasError('required','broadcaster')&&submit"
+                               class="form-text error">Select required Broadcaster! </small>
+                         </div>
+                      </div>
+                      <div class="form-group row" *ngIf="AddFingerprintForm.value['ecm']">
+                         <div class="col-sm-12">
+                            <label>Packages*</label>
+                            <select class="form-control" name="packages"
+                               [ngClass]="{'form-control' : true,'form-control-danger':AddFingerprintForm.controls.packages.invalid&&submit}">
+                               <option value="" selected>Select Package Name</option>
+                            </select>
+                            <small *ngIf="AddFingerprintForm.hasError('required','packages')&&submit"
+                               class="form-text error">Select required Packages! </small>
+                         </div>
+                      </div>
+                      <div class="form-group row" *ngIf="AddFingerprintForm.value['fp_type']==1">
+                         <div class="col-sm-12">
+                            <label>X-Cord*</label>
+                            <input type="text" name="xcord" formControlName="xcord" placeholder="X-Cord"
+                               [ngClass]="{'form-control' : true,'form-control-danger':AddFingerprintForm.controls.xcord.invalid&&submit}" />
+                            <small *ngIf="AddFingerprintForm.hasError('required','xcord')&&submit"
+                               class="form-text error">X-Cord* is required! </small>
+                         </div>
+                      </div>
+                      <div class="form-group row" *ngIf="AddFingerprintForm.value['fp_type']==1">
+                         <div class="col-sm-12">
+                            <label>Y-Cord*</label>
+                            <input type="text" name="ycord" formControlName="ycord" placeholder="Y-Cord"
+                               [ngClass]="{'form-control' : true,'form-control-danger':AddFingerprintForm.controls.ycord.invalid&&submit}" />
+                            <small *ngIf="AddFingerprintForm.hasError('required','ycord')&&submit"
+                               class="form-text error">Y-Cord is required! </small>
+                         </div>
+                      </div>
+                   </div>
+                   <div class="col-sm-6">
+                      <div class="form-group row" >
+                         <div class="col-sm-12">
+                            <label>Operator Type*</label>
+                            <select
+                               (change)="op();AddFingerprintForm.controls.operator_name.setValue('');opt=[];getoperator();"
+                               class="form-control" name="user_type" formControlName="user_type">
+                               <option value="" selected>Select User Type</option>
+                               <option value="1">LCO</option>
+                               <option value="2">Distributor</option>
+                               <option value="3">SubDistributor</option>
+                            </select>
+                         </div>
+                      </div>
+                      <div class="form-group row" >
+                         <div class="col-sm-12">
+                            <label>Operator Name*</label>
+                            <input type="text"
+                            [ngClass]="{'form-control' : true,'form-control-danger':AddFingerprintForm.controls.operator_name.invalid&&submit}"
+                            id="operator_name" formControlName="operator_name" placeholder="operator_name">
+                             <!-- <auto-complete
+                               (keyup)="getoperator($event.target.value);AddFingerprintForm.controls.vc_no.setValue('');vcdet=[];getVc();"
+                               name='operator_name'
+                               (item_id)='AddFingerprintForm.controls.operator_name.setValue($event);'
+                               placeholder='Select Operator' [item]=opt></auto-complete> -->
+                            <small *ngIf="AddFingerprintForm.hasError('required','operator_name')&&submit"
+                               class="form-text error">Operator Name is required! </small>
+                         </div>
+                      </div>
+                      <div class="form-group row" *ngIf="AddFingerprintForm.value['stb_cat']==0">
+                         <div class="col-sm-12">
+                            <label>VC Number*</label>
+                            <input type="text"
+                            [ngClass]="{'form-control' : true,'form-control-danger':AddFingerprintForm.controls.vc_no.invalid&&submit}"
+                            id="vc_no" formControlName="vc_no" placeholder="vc_no">
+                            <!-- <auto-complete [item]="vcdet" name="vc_no" (keyup)="getVc($event.target.value)"
+                               (value)="AddFingerprintForm.controls.vc_no.setValue($event);"></auto-complete> -->
+                            <small *ngIf="AddFingerprintForm.hasError('required','vc_no')&&submit"
+                               class="form-text error">VC Number is required! </small>
+                         </div>
+                      </div>
+                      <div class="form-group row">
+                         <div class="col-sm-12 ">
+                            <label>Duration* </label>
+                            <input type="text"
+                               [ngClass]="{'form-control' : true,'form-control-danger':AddFingerprintForm.controls.duration.invalid&&submit}"
+                               id="duration" formControlName="duration" placeholder="Duration">
+                            <small *ngIf="AddFingerprintForm.hasError('required','duration')&&submit"
+                               class="form-text error">Duration is required! </small>
+                            <small *ngIf="AddFingerprintForm.controls.duration.errors?.max " class="form-text error">Max
+                               interval period is exceeded! </small>
+                         </div>
+                      </div>
+                      <div class="form-group row ">
+                         <div class="col-sm-12 ">
+                            <label>Repetation</label>
+                            <input type="text"
+                               [ngClass]="{'form-control' : true,'form-control-danger':AddFingerprintForm.controls.repetition.invalid&&submit}"
+                               id="repetition" formControlName="repetition" placeholder="Repetition">
+                            <small *ngIf="AddFingerprintForm.hasError('required','repetition')&&submit"
+                               class="form-text error">Interval is required! </small>
+                            <small *ngIf="AddFingerprintForm.controls.repetition.errors?.max "
+                               class="form-text error">Max interval period is exceeded! </small>
+                         </div>
+                      </div>
+                      <div class="form-group row">
+                         <div class="col-sm-12">
+                            <label>Repeat Intervals </label>
+                            <input type="text"
+                               [ngClass]="{'form-control' : true,'form-control-danger':AddFingerprintForm.controls.intervals.invalid&&submit}"
+                               id="intervals" formControlName="intervals" placeholder="Repeat Intervals">
+                            <small *ngIf="AddFingerprintForm.hasError('required','intervals')&&submit"
+                               class="form-text error">Interval is required! </small>
+                            <small *ngIf="AddFingerprintForm.controls.intervals.errors?.max " class="form-text error">Max
+                               interval period is exceeded! </small>
+                         </div>
+ 
+                      </div>
+                      <div class="form-group row">
+                         <div class="col-sm-12">
+                            <label>Overt/Covert</label>
+                            <select class="form-control" name="fp_overt" formControlName="fp_overt">
+                               <option value="1" selected>Overt</option>
+                               <option value="2">Covert</option>
+                            </select>
+                         </div>
+                      </div>
+                      <div class="form-group row" *ngIf="AddFingerprintForm.value['ecm']">
+                         <div class="col-sm-12">
+                            <label>Channels</label>
+                            <select
+                               [ngClass]="{'form-control' : true,'form-control-danger':AddFingerprintForm.controls.channels.invalid&&submit}"
+                               name="channels" formControlName="channels">
+                               <option value="" selected>Select Channel Name</option>
+                            </select>
+                            <small *ngIf="AddFingerprintForm.hasError('required','channels')&&submit"
+                               class="form-text error">Select required Channel! </small>
+                         </div>
+                      </div>
+                      <div class="form-group row" *ngIf="AddFingerprintForm.value['ecm']">
+                         <div class="col-sm-12">
+                            <label>Channel ID </label>
+                            <input type="text"
+                               [ngClass]="{'form-control' : true,'form-control-danger':AddFingerprintForm.controls.channelid.invalid&&submit}"
+                               id="channelid" formControlName="channelid" placeholder="Channel ID">
+                            <small *ngIf="AddFingerprintForm.hasError('required','channelid')&&submit"
+                               class="form-text error">Select required Channel ID! </small>
+                         </div>
+                      </div>
+                      <div class="form-group row">
+                         <div class="col-sm-12">
+                            <label>Time *</label>
+                            <select (change)="scheduletime()" name="Time" formControlName="Time"
+                               [ngClass]="{'form-control' : true,'form-control-danger':AddFingerprintForm.controls.Time.invalid&&submit}">
+                               <option value="" selected>Select Display Time</option>
+                               <option value="0">Immediate</option>
+                               <option value="1">Schedule</option>
+                            </select>
+                            <small *ngIf="AddFingerprintForm.hasError('required','Time')&&submit"
+                               class="form-text error">Schedule time is required! </small>
+                         </div>
+                      </div>
+                      <div class="form-group row" *ngIf="AddFingerprintForm.value['Time']==1">
+                         <div class="col-sm-12">
+                            <label>Schedule *</label>
+                            <input type="text" [owlDateTime]="Schedule" [owlDateTimeTrigger]="Schedule"
+                               [ngClass]="{'form-control' : true,'form-control-danger':AddFingerprintForm.controls.Schedule.invalid&&submit}"
+                               id="Schedule" formControlName="Schedule" placeholder="Time ON">
+                            <owl-date-time #Schedule></owl-date-time>
+                            <small *ngIf="AddFingerprintForm.hasError('required','Schedule')&&submit"
+                               class="form-text error">Schedule time is required! </small>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+             </div>
+             <div class="modal-footer">
+                <button type="submit" class="btn btn-md btn-success">Send</button>
+                <button type="button" class="btn btn-md btn-danger " (click)='cancel()'>Kill </button>
+             </div>
+          </form>
+          </nb-card-body>
+    </nb-card>
+ </div> 

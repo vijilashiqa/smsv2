@@ -1,0 +1,70 @@
+<nb-card>
+  <nb-card-body>
+    <div class="modal-header">
+      <h4 class="modal-title">{{title}}</h4>
+      <!-- <button class="close" aria-label="Close"> -->
+      <button class="close" aria-label="Close" (click)="close();">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <form [formGroup]="pairForm" class="form-horizontal" (ngSubmit)="paring();">
+      <div class="modal-body">
+
+        <div class="form-group row">
+          <div class="col-sm-6">
+            <input id="pair" type="radio" value="1" name="pair" formControlName="pairstatus">
+            <label>Paring</label>
+          </div>
+          <div class="col-sm-6">
+            <input id="unpair" type="radio" value="0" name="pair" formControlName="pairstatus">
+            <label>UnPairing</label>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-12">
+            <label>Headend Name<span style="color:red">*</span></label>
+            <auto-completen
+            [addclass]="{ 'error': submit && this.pairForm.controls.hdid.errors }"
+            addclass="form-control" optValues="hdname" (changed)="boxparing(); vcparing()"
+            formControlName="hdid" (keyUp)="getHeadend($event)"
+            placeholder='Select Headend'  optId="hdid"
+            [item]="listhead">
+          </auto-completen>
+          <div *ngIf="this.pairForm.controls.hdid.errors && (this.pairForm.controls.hdid.errors.required) && submit" class="error-text">
+            Headend Name is required!
+           </div>
+            </div>
+            </div>
+        <div class="form-group row">
+          <div class="col-sm-12">
+            <label>STB Number * </label>
+          <auto-completen
+          [addclass]="{ 'error': submit && this.pairForm.controls.hdid.errors }"
+          addclass="form-control" optValues="boxno" (changed)="vcparing()"
+          formControlName="boxno" placeholder='Select STB Number'  optId="boxid"
+          [item]="listboxpair">
+        </auto-completen>
+      </div>
+      <div *ngIf="this.pairForm.controls.boxno.errors && (this.pairForm.controls.boxno.errors.required) && submit" class="error-text">
+        STB NUMBER is required!
+       </div>
+    </div>
+        <div class="form-group row">
+          <div class="col-sm-12">
+            <label>VC Number * </label>
+          <select [ngClass]="{ 'is-invalid': submit && pairForm.controls.vcid.errors }"
+           name="vcid" formControlName="vcid" class="form-control"
+           placeholder='Select VC Number ' >
+          <option *ngFor='let item of listvc' [ngValue]=item.vcid>{{item.vcno}}</option>
+          </select>
+          </div>
+          <div *ngIf="this.pairForm.controls.vcid.errors && (this.pairForm.controls.vcid.errors.required) && submit" class="error-text">
+            VC NUMBER is required!
+           </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-md btn-success">{{pairForm.value['pairstatus']==1 ? 'Unpair':'pair'}}</button>
+        <button type="button" class="btn btn-md btn-danger " (click)='submit=false;createForm();'>Reset</button>
+      </div>
+    </form>

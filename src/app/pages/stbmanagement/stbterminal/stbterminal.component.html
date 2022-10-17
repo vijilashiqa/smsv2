@@ -1,0 +1,121 @@
+<!-- <p>stbterminal works!</p> -->
+<div class="col-sm-12">
+    <nb-card>
+      <nb-card-header>STB Terminal Upload</nb-card-header>
+      <nb-card-body>
+        <!-- <toaster-container></toaster-container> -->
+        <form [formGroup]="AddterminalForm" class="form-horizontal" (ngSubmit)="uploadcard();">
+          <div class="form-group row">
+            <div  class="col-sm-4">
+              <label class="control-label">Headend*</label>
+              <select (change)="cas=[];AddterminalForm.controls.cas_id.setValue('');getcashead();opt=[];getoperator();"
+               
+                name="headend" formControlName="headend">
+                <option value="">Select Headend</option>
+                
+              </select>
+              <small class="form-text error">Select
+                Required Headend!</small>
+            </div>
+            <div class="col-sm-4" >
+             
+            </div>
+            <div class="col-sm-4">
+              <label> CAS Name </label>
+              <select name="cas_id" formControlName="cas_id">
+               
+                <option value="">Select CAS</option>
+                <option value=4>Gospel Ali</option>
+              </select>
+              <small class="form-text error">Select Required
+                CAS Name!</small>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-6">
+              <label>STB Upload Date</label>
+              <input type="text" [owlDateTime]="date" [owlDateTimeTrigger]="date" name="date" formControlName="date"
+                placeholder="Select Date " class="form-control" />
+              <owl-date-time [pickerType]="'calendar'" #date></owl-date-time>
+            </div>
+            <div class="col-sm-6">
+             
+            </div>
+          </div>
+          <button type="button" class="btn btn-md btn-success" (click)='getstbter();'
+            style="margin: auto; display: block;">Search</button>
+          <br>
+          <div class="form-group row" >
+            <div class="col-sm-4">
+              <label class="control-label">Terminal Command*</label>
+              <select
+            
+                formControlName="tcmd" name="tcmd">
+                <option value="">Select Terminal Command</option>
+                <option value="1">Activate Terminal</option>
+                <option value="2">Initialze Terminal</option>
+                <option value="3">Terminal Status</option>
+              </select>
+              <small  class="form-text error"> Select required
+                Terminal Command! </small>
+            </div>
+            <div class="col-sm-4" >
+              <label class="control-label">Command Status</label>
+              <select
+                
+                formControlName="cstatus" name="cstatus">
+                <option value="">Select Command Status</option>
+                <option value="1">Enable</option>
+                <option value="0">Disable</option>
+              </select>
+              <small  class="form-text error"> Select
+                required Terminal Command! </small>
+            </div>
+            <div class="col-sm-4" style="padding-top: 25px;">
+              <button type="submit" class="btn btn-sm btn-success">Upload</button>
+            </div>
+          </div>
+        </form>
+        <hr>
+        <table class="table table-bordered table-striped" *ngIf="search">
+          <tr>
+            <th class="text-center">
+              <input type="checkbox" name="all"  />All
+            </th>
+            <th>STB Number</th>
+            <th>Initialze Terminal</th>
+            <th>Activate Terminal</th>
+            <th>Terminal Status</th>
+          </tr>
+          <tr *ngFor="let item of pagedItems;">
+            <td class="text-center">
+              <input type="checkbox" name="sizecb[]" value="{{item.stb_id}}" />
+            </td>
+            <td>{{item.SNo}}</td>
+            <td>{{item.a_ter}}</td>
+            <td>{{item.i_ter}}</td>
+            <td>{{item.s_ter}}</td>
+          </tr>
+        </table>
+        <div class="pagination">
+
+        </div>
+      </nb-card-body>
+    </nb-card>
+    <nb-card>
+      <nb-card-body>
+        <div class="row">
+          <div class="col-md-12">
+            <i (click)="Download();" class="green right fa fa-file-excel" aria-hidden="true"></i>
+          </div>
+        </div>
+        <table class="table table-condensed table-hover">
+          <tr>
+            <th>Card Number</th>
+            <th>Error Msg</th>
+          </tr>
+
+        </table>
+      </nb-card-body>
+    </nb-card>
+  </div>

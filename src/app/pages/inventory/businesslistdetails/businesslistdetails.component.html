@@ -1,0 +1,29 @@
+<!-- <p>businesslistdetails works!</p> -->
+
+
+<nb-card>
+    <nb-card-header>List Business Details</nb-card-header>
+    <nb-card-body>
+      <!-- <toaster-container></toaster-container> -->
+      <div class="row" style="padding-left: 10px;">
+        <div style="padding: 2px;">
+          <button  class="btn btn-sm btn-success"
+            [routerLink]="['/pages/inventory/addbusinessdetails']">Add</button>
+        </div>
+      </div>
+      <hr style="border: 0px;">
+      <table class="table">
+        <tr>
+          <th >Action</th>
+          <th>Business Name </th>
+          <th>Location</th>
+          <th>Sales Person</th>
+          <th>Mobile Number</th>
+          <th>Status</th>
+        </tr>
+      </table>
+      <div class="pagination">
+       
+      </div>
+    </nb-card-body>
+  </nb-card>

@@ -1,0 +1,312 @@
+<div class="col-md-12">
+    <nb-card>
+       <nb-card-header>STB Message</nb-card-header>
+       <nb-card-body>
+          <form [formGroup]="AddSTBmsg" class="form-horizontal" (ngSubmit)="sendmsg();">
+             <div class="modal-body">
+                <div class="form-group row">
+                   <div class="col-sm-6" style="padding-right: 215px;">
+                      <div class="custom-control custom-checkbox">
+                         <input type="checkbox" (change)="ECM()" class="custom-control-input" id="ecm"
+                            formControlName="ecm" />
+                         <label class="custom-control-label" for="ecm">ECM</label>
+                      </div>
+                   </div>
+                   <div class="col-sm-6" style="padding-right: 215px;">
+                      <div class="custom-control custom-checkbox">
+                         <input type="checkbox" class="custom-control-input" id="lock" formControlName="lock" />
+                         <label class="custom-control-label" for="lock">Lock</label>
+                      </div>
+                   </div>
+                </div>
+                <div class="form-group row">
+                   <div class="col-sm-6">
+                      <label>Message type</label>
+                      <select (change)="msg();scrool();osd();duration();"
+                         [ngClass]="{'form-control' : true,'form-control-danger':AddSTBmsg.controls.msg_type.invalid&&submit}"
+                         name="msg_type" formControlName="msg_type">
+                         <option value="1">OSD</option>
+                         <option value="2">Bmail</option>
+                      </select>
+                      <small *ngIf="AddSTBmsg.hasError('required','msg_type')&&submit" class="form-text error">Select
+                         required Message Type! </small>
+                   </div>
+                   <div class="col-sm-6">
+                      <label>Headend*</label>
+                      <select
+                         (change)="AddSTBmsg.controls.castype.setValue('');cas=[];getcas();AddSTBmsg.controls.operator_name.setValue('');opt=[];getoperator();"
+                         name="headend" formControlName="headend"
+                         [ngClass]="{'form-control' : true,'form-control-danger':AddSTBmsg.controls.headend.invalid&&submit}">
+                         <option value="">Select Headend</option>
+                         <option *ngFor="let item of head" [ngValue]=item.headend_pk>{{item.headend_name}}</option>
+                      </select>
+                      <small *ngIf="AddSTBmsg.hasError('required','headend')&&submit" class="form-text error">Select
+                         required Headend! </small>
+                   </div>
+                </div>
+                <div class="form-group row">
+                   <div class="col-sm-6">
+                      <div class="form-group row">
+                         <div class="col-sm-12">
+                            <label>Server Type</label>
+                            <select (change)="AddSTBmsg.controls.vc_no.setValue('');vcdet=[];getVc();"
+                               class="form-control" formControlName="castype">
+                               <option value="">Select CAS Type</option>
+                               <option *ngFor="let item of cas" [value]=item.cas_id_pk>{{item.cas_name}}</option>
+                            </select>
+                            <small *ngIf="AddSTBmsg.hasError('required','servertype')&&submit"
+                               class="form-text error">Select required Server Type! </small>
+                         </div>
+                      </div>
+                      <div class="form-group row">
+                         <div class="col-sm-12">
+                            <label> STB Category</label>
+                            <select (change)='individual()' formControlName="stb_cat"
+                               [ngClass]="{'form-control' : true,'form-control-danger':AddSTBmsg.controls.stb_cat.invalid&&submit}"
+                               id="stb_cat">
+                               <option value="" selected>Select STB category</option>
+                               <option value="0">Individual</option>
+                               <option value="1">All STBs</option>
+                            </select>
+                         </div>
+                         <small *ngIf="AddSTBmsg.hasError('required','stb_cat')&&submit" class="form-text error">Select
+                            required STB Category! </small>
+                      </div>
+                      <div class="form-group row" *ngIf="AddSTBmsg.value['stb_cat']==0">
+                         <div class="col-sm-12">
+                            <label>VC Number *</label>
+                            <!-- <auto-complete [item]="vcdet" name="vc_no" (keyup)="getVc($event.target.value)"
+                               (value)="AddSTBmsg.controls.vc_no.setValue($event);"></auto-complete> -->
+                            <small *ngIf="AddSTBmsg.hasError('required','vc_no')&&submit" class="form-text error">VC
+                               Number is required </small>
+                         </div>
+                      </div>
+                      <div class="form-group row" *ngIf="AddSTBmsg.value['ecm']">
+                         <div class="col-sm-12">
+                            <label>Broadcasters</label>
+                            <select class="form-control" name="broadcaster" formControlName="broadcaster">
+                               <option value="" selected>Select Broadcaster Name</option>
+                            </select>
+                         </div>
+                      </div>
+                      <div class="form-group row" *ngIf="AddSTBmsg.value['ecm']">
+                         <div class="col-sm-12">
+                            <label>Packages</label>
+                            <select class="form-control" name="packages" formControlName="packages">
+                               <option value="" selected>Select Package Name</option>
+                            </select>
+                         </div>
+                      </div>
+                      <div class="form-group row">
+                         <div class="col-sm-12">
+                            <label>Time *</label>
+                            <select (change)="scheduletime()" name="Time" formControlName="Time"
+                               [ngClass]="{'form-control' : true,'form-control-danger':AddSTBmsg.controls.Time.invalid&&submit}">
+                               <option value="" selected>Select Display Time</option>
+                               <option value="0">Immediate</option>
+                               <option value="1">Schedule</option>
+                            </select>
+                            <small *ngIf="AddSTBmsg.hasError('required','Time')&&submit" class="form-text error">Schedule
+                               time is required! </small>
+                         </div>
+                      </div>
+                      <div class="form-group row" *ngIf="AddSTBmsg.value['Time']==1">
+                         <div class="col-sm-12">
+                            <label>Schedule *</label>
+                            <input type="text" [owlDateTime]="Schedule" [owlDateTimeTrigger]="Schedule"
+                               [ngClass]="{'form-control' : true,'form-control-danger':AddSTBmsg.controls.Schedule.invalid&&submit}"
+                               id="Schedule" formControlName="Schedule" placeholder="Time ON">
+                            <owl-date-time #Schedule></owl-date-time>
+                            <small *ngIf="AddSTBmsg.hasError('required','Schedule')&&submit"
+                               class="form-text error">Schedule time is required! </small>
+                         </div>
+                      </div>
+                      <div class="form-group row" *ngIf="AddSTBmsg.value['msg_type']==1">
+                         <div class="col-sm-12 ">
+                            <label>Duration*</label>
+                            <input type="text"
+                               [ngClass]="{'form-control' : true,'form-control-danger':AddSTBmsg.controls.duration.invalid&&submit}"
+                               id="duration" formControlName="duration" placeholder="seconds">
+                            <small *ngIf="AddSTBmsg.hasError('required','duration')&&submit"
+                               class="form-text error">Duration is required! </small>
+                            <small *ngIf="AddSTBmsg.controls.duration.errors?.max " class="form-text error">Max Duration
+                               is exceeded! </small>
+                         </div>
+                      </div>
+                      <div class="form-group row" *ngIf="AddSTBmsg.value['msg_type']==1">
+                         <div class="col-sm-12">
+                            <label>Repetation</label>
+                            <input type="text"
+                               [ngClass]="{'form-control' : true,'form-control-danger':AddSTBmsg.controls.repetition.invalid&&submit}"
+                               id="repetition" formControlName="repetition" placeholder="seconds">
+                            <small *ngIf="AddSTBmsg.hasError('required','repetition')&&submit"
+                               class="form-text error">Repetation is required! </small>
+                            <small *ngIf="AddSTBmsg.controls.repetition.errors?.max " class="form-text error">Max
+                               repetation is exceeded! </small>
+                         </div>
+ 
+                      </div>
+                      <div class="form-group row" *ngIf="AddSTBmsg.value['msg_type']==1">
+                         <div class="col-sm-12">
+                            <label>Repeat Intervals</label>
+                            <input type="text"
+                               [ngClass]="{'form-control' : true,'form-control-danger':AddSTBmsg.controls.intervals.invalid&&submit}"
+                               id="intervals" formControlName="intervals" placeholder="seconds">
+                            <small *ngIf="AddSTBmsg.hasError('required','intervals')&&submit"
+                               class="form-text error">Interval is required! </small>
+                            <small *ngIf="AddSTBmsg.controls.intervals.errors?.max " class="form-text error">Max interval
+                               period is exceeded! </small>
+                         </div>
+                      </div>
+                   </div>
+ 
+                   <div class="col-sm-6">
+                      <div class="form-group row">
+                         <div class="col-sm-12">
+                            <label>Operator Type</label>
+                            <select (change)="AddSTBmsg.controls.operator_name.setValue('');opt=[];getoperator();"
+                               class="form-control" name="user_type" formControlName="user_type">
+                               <option value="" selected>Select User Type</option>
+                               <option value="1">LCO</option>
+                               <option value="2">Distributor</option>
+                               <option value="3">SubDistributor</option>
+                            </select>
+                         </div>
+                      </div>
+                      <div class="form-group row">
+                         <div class="col-sm-12">
+                            <label>Operator Name</label>
+                            <!-- <auto-complete
+                               (keyup)="getoperator($event.target.value);AddSTBmsg.controls.vc_no.setValue('');vcdet=[];getVc();"
+                               name='operator_name' (item_id)='AddSTBmsg.controls.operator_name.setValue($event);'
+                               placeholder='Select Operator' [item]=opt></auto-complete> -->
+                            <small *ngIf="AddSTBmsg.hasError('required','operator_name')&&submit"
+                               class="form-text error">Operator Name is required </small>
+ 
+                         </div>
+                      </div>
+                      <div class="form-group row" *ngIf="AddSTBmsg.value['ecm']">
+                         <div class="col-sm-12">
+                            <label>Channels</label>
+                            <select class="form-control" name="channels" formControlName="channels">
+                               <option value="" selected>Select Channel Name</option>
+                            </select>
+                         </div>
+                      </div>
+                      <div class="form-group row" *ngIf="AddSTBmsg.value['ecm']">
+                         <div class="col-sm-12">
+                            <label>Channel ID </label>
+                            <input type="text" class="form-control" id="channelid" formControlName="channelid"
+                               placeholder="Channel ID">
+                         </div>
+                      </div>
+                      <div class="form-group row" *ngIf="AddSTBmsg.value['msg_type']==2">
+                         <div class="col-sm-12">
+                            <label>Message Title</label>
+                            <input type="text"
+                               [ngClass]="{'form-control' : true,'form-control-danger':AddSTBmsg.controls.msg_title.invalid&&submit}"
+                               id="msg_title" formControlName="msg_title" placeholder="Title">
+                            <small *ngIf="AddSTBmsg.hasError('required','msg_title')&&submit"
+                               class="form-text error">Message Title is Required! </small>
+                         </div>
+ 
+                      </div>
+                      <div class="form-group row">
+                         <div class="col-sm-12">
+                            <label>Message </label>
+                            <textarea
+                               [ngClass]="{'form-control' : true,'form-control-danger':AddSTBmsg.controls.msg.invalid&&submit}"
+                               id="msg" formControlName="msg"></textarea>
+                            <small *ngIf="AddSTBmsg.hasError('required','msg')&&submit" class="form-text error">Message
+                               is Required </small>
+                         </div>
+                      </div>
+ 
+                      <div class="form-group row" *ngIf="AddSTBmsg.value['msg_type']==1">
+                         <div class="col-sm-12">
+                            <label>OSD Type</label>
+                            <select class="form-control" name="osd_type" formControlName="osd_type">
+                               <option value="" selected>Select OSD Type</option>
+                               <option value="1">Normal</option>
+                               <option value="0">Scrool</option>
+                            </select>
+                         </div>
+                      </div>
+                      <div class="form-group row" *ngIf="AddSTBmsg.value['msg_type']==1">
+                         <div class="col-sm-12">
+                            <label>Scrool Type</label>
+                            <select
+                               [ngClass]="{'form-control' : true,'form-control-danger':AddSTBmsg.controls.scrool_type.invalid&&submit}"
+                               name="scrool_type" formControlName="scrool_type">
+                               <option value="" selected>Select Scroll Type</option>
+                               <option value="1">scroll right to left at the top of the screen</option>
+                               <option value="2">scroll right to left at the bottom of the screen</option>
+                               <option value="3">scroll right to left at the middle of the screen</option>
+                               <option value="4" *ngIf="AddSTBmsg.value['castype']==4">scroll left to right at the middle
+                                  of the screen</option>
+                               <option value="5" *ngIf="AddSTBmsg.value['castype']==4">scroll left to right at the top of
+                                  the screen</option>
+                               <option value="0" *ngIf="AddSTBmsg.value['castype']==4">scroll left to right at the bottom
+                                  of the screen</option>
+                            </select>
+                            <small *ngIf="AddSTBmsg.hasError('required','scrool_type')&&submit"
+                               class="form-text error">Select required Scrool Type! </small>
+                         </div>
+                      </div>
+                      <div class="form-group row" *ngIf="AddSTBmsg.value['msg_type']==1">
+                         <div class="col-sm-12">
+                            <label>FP Text Size *</label>
+                            <select formControlName="fp_text_size"
+                               [ngClass]="{'form-control' : true,'form-control-danger':AddSTBmsg.controls.fp_text_size.invalid&&submit}"
+                               id="fp_text_size">
+                               <option value="" selected>Select Text Size</option>
+                               <option *ngFor="let item of fontSize" [ngValue]="item.id">
+                                  {{item.name}}
+                               </option>
+                            </select>
+                            <small *ngIf="AddSTBmsg.hasError('required','fp_text_size')&&submit"
+                               class="form-text error">Select required Text Size! </small>
+                         </div>
+                      </div>
+                      <div class="form-group row" *ngIf="AddSTBmsg.value['msg_type']==1">
+                         <div class="col-sm-12">
+                            <label>FP BG COLOR* </label>
+                            <select formControlName="fp_bg_color"
+                               [ngClass]="{'form-control' : true,'form-control-danger':AddSTBmsg.controls.fp_bg_color.invalid&&submit}"
+                               id="fp_bg_color">
+                               <option value="" selected>Select BG COLOR</option>
+                               <option *ngFor="let item of BGColor" [ngValue]="item.id">
+                                  {{item.name}}
+                               </option>
+                            </select>
+                            <small *ngIf="AddSTBmsg.hasError('required','fp_bg_color')&&submit"
+                               class="form-text error">Select required BG COLOR! </small>
+                         </div>
+                      </div>
+                      <div class="form-group row" *ngIf="AddSTBmsg.value['msg_type']==1">
+                         <div class="col-sm-12">
+                            <label>FP TEXT COLOR* </label>
+                            <select formControlName="fp_text_color"
+                               [ngClass]="{'form-control' : true,'form-control-danger':AddSTBmsg.controls.fp_text_color.invalid&&submit}"
+                               id="fp_text_color">
+                               <option value="" selected>Select TEXT COLOR</option>
+                               <option *ngFor="let item of TextColor" [ngValue]="item.id">
+                                  {{item.name}}
+                               </option>
+                            </select>
+                            <small *ngIf="AddSTBmsg.hasError('required','fp_text_color')&&submit"
+                               class="form-text error">Select required TEXT COLOR! </small>
+                         </div>
+                      </div>
+ 
+                   </div>
+                </div>
+             </div>
+             <div class="modal-footer">
+                <button type="submit" class="btn btn-md btn-success">Send</button>
+                <button type="button" class="btn btn-md btn-danger " (click)='cancel()'>Kill </button>
+             </div>
+          </form>
+       </nb-card-body>
+    </nb-card>
+ </div>

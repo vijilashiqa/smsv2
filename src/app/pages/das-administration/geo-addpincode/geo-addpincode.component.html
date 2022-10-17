@@ -1,0 +1,28 @@
+<nb-card>
+  <nb-card-body>
+<div class="modal-header">
+  <h4 class="modal-title">{{title}}</h4>
+    <!-- <button class="close" aria-label="Close" > -->
+      <button class="close" aria-label="Close" (click)="close();">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <form [formGroup]="PincodeForm" class="form-horizontal" (ngSubmit)="addPin();">
+    <div class="modal-body">
+      <div class="form-group row">
+        <div class="col-sm-12">
+          <label>Pin Code *</label>          
+          <input type="text" class="form-control" name="pincode" formControlName="pincode" placeholder="Enter City"
+          [ngClass]="{ 'is-invalid': submit && PincodeForm.controls.pincode.errors }"/>
+          <small *ngIf="PincodeForm.controls.pincode.errors &&(PincodeForm.controls.pincode.errors.required )&& submit"
+          class="invalid-feedback">Pincode name  is required! </small>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="submit" status="success" nbButton>{{item ? 'Update' : 'Add'}}</button>
+      <button type="button" status="danger" nbButton  (click)="close()" >Cancel</button>
+    </div>
+  </form>
+  </nb-card-body>
+</nb-card>

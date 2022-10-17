@@ -1,0 +1,35 @@
+<nb-card>
+    <nb-card-header>List Channel Services</nb-card-header>
+    <nb-card-body>
+      <!-- <toaster-container></toaster-container> -->
+      <button  status="success" nbButton 
+        [routerLink]="['/pages/channelcategory/addchannelsrv']">Create</button>
+      <table class="table">
+        <tr>
+          <th >Action</th>
+          <th>Headend Name</th>
+          <th>Channel Name</th>
+          <th>Case Type</th>
+          <th>Service ID</th>
+        </tr>
+        <tr *ngFor="let item of pagedItems">
+          <td style="cursor:pointer;" [routerLink]="['/pages/channelcategory/addchannelsrv']" [queryParams]="{id:item.id}"><i class="nb-edit"></i></td>
+          <td>{{item.hdname}}</td>
+          <td>{{item.channame}}</td>
+          <td>{{item.cas_name}}</td>
+          <td>{{item.casserviceid}}</td>
+        </tr>
+      </table>
+      <div class="pagination">
+        <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+          <a [ngClass]="{disabled:pager.currentPage === 1}" (click)="page=1;initiallist();">First</a>
+          <a [ngClass]="{disabled:pager.currentPage === 1}" (click)="page=page-1;initiallist();">Previous</a>
+          <a *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}"
+            (click)="initiallist(page);">{{page}}</a>
+          <a [ngClass]="{disabled:pager.currentPage === pager.totalPages}" (click)="page=page+1;initiallist();">Next</a>
+          <a [ngClass]="{disabled:pager.currentPage === pager.totalPages}"
+            (click)="page=pager.totalPages;initiallist();">Last</a>
+        </ul>
+      </div>
+    </nb-card-body>
+  </nb-card>

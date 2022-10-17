@@ -1,0 +1,79 @@
+<!-- <p>liststock works!</p> -->
+<nb-card>
+    <nb-card-header>Stock Inward List</nb-card-header>
+    <nb-card-body>
+      <!-- <toaster-container></toaster-container> -->
+      <div class="row" style="padding-left: 10px;">
+        <div style="padding: 2px;">
+          <button  status="success" nbButton 
+            [routerLink]="['/pages/inventory/addstock']">Add</button>
+        </div>
+      </div>
+      <div style="overflow: scroll">
+      <table class="table table-hover table-striped">
+        <thead>
+        <tr>
+          <th >Action</th>
+          <th>Headend Name</th>
+          <th>Stock ID</th>
+          <th>Invoice Number</th>
+          <th>Invoice Date</th>
+          <th>Vendor</th>
+          <th>Warrenty</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+        <tbody>
+      <ng-container *ngFor="let item of pagedItems; let i=index">
+        <div style="display: table-row">
+        <td style="cursor:pointer;" [routerLink]="['/pages/inventory/editstock']" [queryParams]="{id:item.stockinid}"><i class="nb-edit"></i></td>
+        <td>{{item.hdname}}</td>
+        <!-- <td>{{item.stockinid}}</td> -->
+        <td style="cursor: pointer;" (click)="materialdetails(item.stockinid,i);"><i
+          [ngClass]="{'fa-caret-down':index!=i,'fas':true,'fa-caret-up':index==i }"></i><b>
+          {{item.stockinid }}</b></td>
+        <td>{{item.invoiceno}}</td>
+        <td>{{item.invoice_date |date:'longDate'}}</td>
+        <td>{{item.vendor_name}}</td>
+        <td>{{item.warranty_period +" "+ (item.warranty_type == 1 ? 'Month':'Year')}}</td>     
+        <td>{{item.price}}</td>
+</div>
+        <ng-container *ngIf="show==i"   class="center">
+            <tr >
+              <th></th>
+            <th>Material ID</th>
+            <th>Stockin ID </th>
+            <th>Vendor Name</th>
+            <th>Quantity </th>
+            <th>Price</th>
+            <th>Amount</th>
+            <th></th>
+          </tr>
+           <tr *ngFor='let item of getitem;'>
+            <td></td>
+            <td>{{item.materialid}}</td>
+            <td>{{item.stockinid}}</td>
+            <td>{{item.modelname}}</td>
+            <td>{{item.qty}}</td>
+            <td>{{item.price}}</td>
+            <td>{{item.amt}}</td>
+            <td></td>
+          </tr>
+          </ng-container>
+      </ng-container>
+     </tbody>
+    </table>
+    </div>
+    <div class="pagination">
+      <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+        <a [ngClass]="{disabled:pager.currentPage === 1}" (click)="page=1;list();">First</a>
+        <a [ngClass]="{disabled:pager.currentPage === 1}" (click)="page=page-1;list();">Previous</a>
+        <a *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}"
+          (click)="list(page);">{{page}}</a>
+        <a [ngClass]="{disabled:pager.currentPage === pager.totalPages}" (click)="page=page+1;list();">Next</a>
+        <a [ngClass]="{disabled:pager.currentPage === pager.totalPages}"
+          (click)="page=pager.totalPages;list();">Last</a>
+      </ul>
+    </div>
+  </nb-card-body>
+</nb-card>

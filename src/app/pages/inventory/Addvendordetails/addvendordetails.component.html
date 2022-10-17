@@ -1,0 +1,171 @@
+<div class="col-md-12">
+  <nb-card>
+    <nb-card-header>Add Vendor Details</nb-card-header>
+    <nb-card-body>
+      <form [formGroup]="AddVendordetailsForm" class="form-horizontal" (ngSubmit)="addVendorDetail()">
+        <div class="modal-body">
+          <div class="form-group row">
+            <div class="col-sm-6">
+              <label>Headend Name<span style="color:red">*</span></label>
+              <auto-completen
+              [addclass]="{ 'error': submit && this.AddVendordetailsForm.controls.hdid.errors }"
+              addclass="form-control" optValues="hdname" (changed)="getVendor();typeClearheadend()"
+              formControlName="hdid" (keyUp)="getHeadend($event)"
+              placeholder='Select Headend'  optId="hdid"
+              [item]="listhead">
+            </auto-completen>
+            <div *ngIf="this.AddVendordetailsForm.controls.hdid.errors && (this.AddVendordetailsForm.controls.hdid.errors.required) && submit" class="error-text">
+              Headend Name is required!
+             </div>
+            </div>
+            </div>
+
+          <div class="form-group row">
+            <div class="col-sm-6">
+              <label>Vendor Name<span style="color:red">*</span></label>
+                <input type="text" class="form-control" name="contact_person" formControlName="contact_person" placeholder="Enter Vendor Name"
+                [ngClass]="{ 'is-invalid': submit && AddVendordetailsForm.controls.contact_person.errors }"/>
+                <small *ngIf="AddVendordetailsForm.controls.contact_person.errors &&(AddVendordetailsForm.controls.contact_person.errors.required )&& submit"
+                class="invalid-feedback">Vendor Name is required! </small>
+                
+            </div>
+            <div class="col-sm-6">
+              <label>Vendor Id<span style="color:red">*</span></label>
+              <auto-completen
+              [addclass]="{ 'error': submit && this.AddVendordetailsForm.controls.vendorid.errors }"
+              addclass="form-control" optValues="vendor_name"
+              formControlName="vendorid" 
+               placeholder='Select Vendor' optId="vendorid"
+              [item]="getvendorlist">
+            </auto-completen>
+            <div *ngIf="this.AddVendordetailsForm.controls.vendorid.errors && (this.AddVendordetailsForm.controls.vendorid.errors.required) && submit" class="error-text">
+              Vendor ID is required!
+             </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-6">
+              <label>Location Name</label>
+              <input type="text" class="form-control" name="loc" formControlName="loc" placeholder=" Enter Location"
+                [ngClass]="{ 'is-invalid': submit && this.AddVendordetailsForm.controls.loc.errors }" />
+              <small
+                *ngIf="this.AddVendordetailsForm.controls.loc.errors && (this.AddVendordetailsForm.controls.loc.errors.required) && submit"
+                class="invalid-feedback">Location Name is required! </small>
+
+            </div>
+            <div class="col-sm-6">
+              <label>Mobile 1<span style="color:red">*</span></label>
+                <input type="text" class="form-control" name="mobile1" formControlName="mobile1" placeholder=" Enter Mobile NO"
+                [ngClass]="{ 'is-invalid': submit && this.AddVendordetailsForm.controls.mobile1.errors }" />
+              <small
+                *ngIf="this.AddVendordetailsForm.controls.mobile1.errors && (this.AddVendordetailsForm.controls.mobile1.errors.required) && submit"
+                class="invalid-feedback">Mobile 1 No is required! </small>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-6">
+              <label>Mobile 2<span style="color:red">*</span></label>
+              <input type="text" class="form-control" name="mobile2" formControlName="mobile2" placeholder=" Enter Mobile NO" 
+              [ngClass]="{ 'is-invalid': submit && this.AddVendordetailsForm.controls.mobile2.errors }" />
+              <small
+              *ngIf="this.AddVendordetailsForm.controls.mobile2.errors && (this.AddVendordetailsForm.controls.mobile2.errors.required) && submit"
+              class="invalid-feedback">Mobile 2 No is required! </small>
+            </div>
+            <div class="col-sm-6">
+              <label>Email<span style="color:red">*</span></label>
+              <input type="text"  class="form-control" name="email" formControlName="email" placeholder=" Enter Email ID"
+              [ngClass]="{ 'is-invalid': submit && this.AddVendordetailsForm.controls.email.errors }"/>
+              <small *ngIf="this.AddVendordetailsForm.controls.email.errors && (this.AddVendordetailsForm.controls.email.errors.required) && submit"
+              class="invalid-feedback">Email ID is required! </small>  
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-6">
+              <label> Address<span style="color:red">*</span></label>
+              <textarea name="addr" formControlName="addr" placeholder="Enter Address " class="form-control" 
+              [ngClass]="{ 'is-invalid': submit && this.AddVendordetailsForm.controls.addr.errors }" > </textarea>
+                <small *ngIf="this.AddVendordetailsForm.controls.addr.errors && (this.AddVendordetailsForm.controls.addr.errors.required) && submit"
+                class="invalid-feedback"> Address is required! </small>  
+            </div>
+            <div class="col-sm-6">
+              <label> GST<span style="color:red">*</span></label>
+              <input name="gst" formControlName="gst" placeholder="Enter GST NO " class="form-control" 
+              [ngClass]="{ 'is-invalid': submit && this.AddVendordetailsForm.controls.gst.errors }" > 
+                <small *ngIf="this.AddVendordetailsForm.controls.gst.errors && (this.AddVendordetailsForm.controls.gst.errors.required) && submit"
+                class="invalid-feedback"> GST NO is required! </small>  
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-6">
+              <label> CIN<span style="color:red">*</span></label>
+              <input name="cin" formControlName="cin" placeholder="Enter CIN NO " class="form-control" 
+              [ngClass]="{ 'is-invalid': submit && this.AddVendordetailsForm.controls.cin.errors }" > 
+                <small *ngIf="this.AddVendordetailsForm.controls.cin.errors && (this.AddVendordetailsForm.controls.cin.errors.required) && submit"
+                class="invalid-feedback"> CIN NO is required! </small>  
+            </div>
+            <div class="col-sm-6">
+                                  <label>GST Type</label>
+                                  <select name="gst_type" formControlName="gst_type" class="form-control" (change)="gstValidation()"
+                                  [ngClass]="{ 'is-invalid': submit && this.AddVendordetailsForm.controls.gst_type.errors }" > 
+                                     <option value="" selected>Select GST Type</option>
+                                     <option value="1">SGST & CGST</option>
+                                     <option value="2">IGST</option>
+                                  </select>
+                                  <div *ngIf="this.AddVendordetailsForm.controls.gst_type.errors && (this.AddVendordetailsForm.controls.gst_type.errors.required) && submit" class="error-text">
+                                    GST Type  is required!
+                                   </div>
+            </div>
+          </div>
+        
+          <div class="form-group row">
+            <div class="col-sm-6"  *ngIf='AddVendordetailsForm.value["gst_type"]==1'>
+              <label>CGST<span style="color:red">*</span></label>
+              <input name="c_gst" formControlName="c_gst" placeholder="Enter CGST NO " class="form-control" 
+              [ngClass]="{ 'is-invalid': submit && this.AddVendordetailsForm.controls.c_gst.errors }" > 
+              <small *ngIf="this.AddVendordetailsForm.controls.c_gst.errors && (this.AddVendordetailsForm.controls.c_gst.errors.required) && submit"
+              class="invalid-feedback"> CGST NO is required! </small> 
+            </div>
+            <div class="col-sm-6"  *ngIf='AddVendordetailsForm.value["gst_type"]==1'>
+              <label>SGST</label>
+              <input name="s_gst" formControlName="s_gst" placeholder="Enter SGST NO " class="form-control" 
+              [ngClass]="{ 'is-invalid': submit && this.AddVendordetailsForm.controls.s_gst.errors }" > 
+                <small *ngIf="this.AddVendordetailsForm.controls.s_gst.errors && (this.AddVendordetailsForm.controls.s_gst.errors.required) && submit"
+                class="invalid-feedback">CGST NO is required! </small>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-6"  *ngIf='AddVendordetailsForm.value["gst_type"]==2'>
+              <label>IGST<span style="color:red">*</span></label>
+              <input name="c_gst" formControlName="i_gst" placeholder="Enter IGST NO " class="form-control" 
+              [ngClass]="{ 'is-invalid': submit && this.AddVendordetailsForm.controls.i_gst.errors }" > 
+                <small *ngIf="this.AddVendordetailsForm.controls.i_gst.errors && (this.AddVendordetailsForm.controls.i_gst.errors.required) && submit"
+                class="invalid-feedback">IGST NO is required! </small>  
+            </div>
+            <div class="col-sm-6">
+              <label>Description</label>
+              <textarea name="descr" formControlName="descr" class="form-control"
+              [ngClass]="{ 'is-invalid': submit && this.AddVendordetailsForm.controls.descr.errors }" placeholder="Description"></textarea>
+              <small *ngIf="this.AddVendordetailsForm.controls.descr.errors &&(this.AddVendordetailsForm.controls.descr.errors.required) && submit"
+              class="invalid-feedback">descr is required! </small>
+            </div>
+          </div>
+      
+          <div class="form-group row">
+            <div class="col-md-6">
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="status" checked formControlName="status" />
+                <label class="custom-control-label" for="status">Active</label>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit"  status="success" nbButton>Create</button>
+            <button type="button" status="danger" nbButton (click)="submit = false; createForm()">
+              Reset
+            </button>
+          </div>
+        </div>
+      </form>
+    </nb-card-body>
+  </nb-card>
+</div>

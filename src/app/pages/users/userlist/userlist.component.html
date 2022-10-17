@@ -1,0 +1,175 @@
+<nb-card>
+  <nb-card-body>
+    <nb-card-header>List Operator </nb-card-header>
+    <button status="success" nbButton  [routerLink]="['/pages/users/add-user']">
+      Create
+    </button>
+    <!-- <label style="text-align: right; float: right"> -->
+      <!-- <h5><b>Operator Count : </b>{{count}}</h5> -->
+    <!-- </label> -->
+    <!-- <div class="row">
+      <div class="col-md-12"> -->
+        <!-- <i (click)="Download();" class="green right fa fa-file-excel" aria-hidden="true"></i> -->
+      <!-- </div>
+    </div> -->
+    <!-- <hr style="border: 0px;"> -->
+    <!-- <div class="modal-body" >
+        <div class="form-group row" >
+          <div class="col-sm-3" >
+            <label>Headend</label>
+            <select  name="headend" class="form-control">
+             
+              <option value="">Select Headend</option>
+              <option[ngValue]=item.headend_pk>{{item.headend_name}}</option>
+            </select>
+          </div>
+          <div class="col-sm-3" >
+            <label>Operator Type</label>
+            <select >
+              <option value="" selected>Select Operator Type</option>
+              <option value="1">LCO</option>
+              <option value="2">Distributor</option>
+              <option value="3">SubDistributor</option>
+            </select>
+          </div>
+          <div class="col-sm-3">
+            <auto-complete (keyup)="getoperator($event.target.value)" name='operator_name'
+              (item_id)='operator_name=$event; getlocation();' placeholder='Select Operator' label='Operator Name'
+              [item]=opt></auto-complete>
+          </div>
+          <div class="col-sm-3">
+            <auto-complete name='loc' (item_id)='loc=$event; getBranch();' placeholder='Select Location'
+              label='Location Name' [item]=locitem></auto-complete>
+          </div>
+          <div class="col-sm-3">
+            <auto-complete name='branch' (item_id)='branch=$event' placeholder='Select Branch' label='Branch Name'
+              [item]=branchitem></auto-complete>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-3">
+            <label>Status</label>
+            <select name="status" class="form-control">
+              <option value="" selected="true">Select Status</option>
+              <option value="1">Active</option>
+              <option value="0">Inactive</option>
+            </select>
+          </div>
+        </div>
+        <button type="button" class="btn btn-md btn-success" 
+          style="margin: auto; display: block;">Search</button>
+      </div> -->
+    <table class="table">
+      <tr>
+        <th>Action</th>
+        <th>test</th>
+        <th>ID</th>
+        <th>Status</th>
+        <th>Headend Name</th>
+        <th>User Type</th>
+        <th>Login ID</th>
+        <th>Operator Name</th>
+        <th>Business Name</th>
+        <th>Mobile Number</th>
+        <th>Email</th>
+        
+      </tr>
+
+      <tr *ngFor='let item of pagedItems'>
+        <!-- <td  style="width: 80px" class=" last" data-title="'Action'">
+          <div class="dropdown ghost-dropdown" ngbDropdown>
+            <button  class="btn btn-primary btn-icon" type="button"
+              ngbDropdownToggle>Action
+            </button>
+            <ul style="width: 75px;" class="dropdown-menu" ngbDropdownMenu>
+              <li   style="cursor:pointer;" [routerLink]="['/pages/users/edit-user']" [queryParams]="{id:item.id}"
+               class="dropdown-item">
+               <i title="Edit Complaint" class="far fa-edit">&nbsp;Edit</i></li>
+              <li [routerLink]="['/pages/users/userhdcas']" class="dropdown-item"><i
+                  title="View Complaint" class="far fa-eye">&nbsp;View</i></li>
+            </ul>
+          </div>
+        </td> -->
+
+        <div class="form-group" 
+          >
+          <div class="btn-group" >
+          <button type="button"  
+          class="btn btn-sm btn-success dropdown-toggle" data-bs-toggle="dropdown">Action</button>
+          <div class="dropdown-menu" style="min-width: 0rem;">
+              <a   class="dropdown-item"  style="cursor:pointer;" [routerLink]="['/pages/users/edit-user']" [queryParams]="{id:item.id}" >
+                <i title="Edit Complaint" class="far fa-edit"></i>&nbsp;Edit </a>                                
+              <a class="dropdown-item"  (click)="Adduser()"  >
+                <i title="Edit Complaint" class="ion-ios-plus-outline"></i>&nbsp;ADD </a>    
+          </div>
+      </div>
+    <!-- </div> -->
+    </div>
+
+
+
+<!-- 
+        <div mdbDropdown class="dropdown">
+          <button
+            class="btn btn-primary dropdown-toggle"
+            type="button"
+            id="dropdownMenu2"
+            mdbDropdownToggle
+            aria-expanded="false"
+          >
+            Dropdown
+          </button>
+          <ul mdbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownMenu2">
+            <li><button class="dropdown-item" type="button">Action</button></li>
+            <li><button class="dropdown-item" type="button">Another action</button></li>
+            <li>
+              <button class="dropdown-item" type="button">Something else here</button>
+            </li>
+          </ul>
+        </div>
+
+
+ -->
+ <!-- <div ngbDropdown class="d-inline-block">
+  <button type="button" class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Toggle dropdown</button>
+  <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+    <button ngbDropdownItem>Action - 1</button>
+    <button ngbDropdownItem>Another Action</button>
+    <button ngbDropdownItem>Something else is here</button>
+  </div>
+</div> -->
+
+
+
+      <!-- <tr *ngFor="let item of pagedItems"> -->
+        <!-- <td><i class="nb-edit"></i></td> -->
+        <td>{{item.id}}</td> 
+        <td><i [ngStyle]="{'color': item.status==1? 'green':'red'}"
+              [ngClass]="{'ion-close-round':item.status==0 ? true:false,'ion-checkmark-round':item.status!=0 ? true:false  }"
+              [attr.title]="item.status==1 ? 'Active' : 'Deactive'"></i></td>
+          <!-- <td>
+            {{item.user_type == 0 ? 'Admin':item.user_type == 1 ? 'LCO':item.user_type == 2 ? 'Distributer':item.user_type == 3 ? 'SubDistributor': 'Broadcaster'}}
+          </td> -->
+          <td>{{item.hdname}}</td>
+          <td>{{item.rolename}} </td>
+          <td>{{item.profileid}}</td>
+          <td>{{item.fullname}}</td>
+          <td>{{item.business_name}}</td>
+          <td>{{item.mobile}}</td>
+          <td>{{item.email1}}</td>
+
+        </tr>
+    </table>
+    <div class="pagination">
+      <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+          <a [ngClass]="{disabled:pager.currentPage === 1}" (click)="page=1;getUserList();">First</a>
+          <a [ngClass]="{disabled:pager.currentPage === 1}" (click)="page=page-1;getUserList();">Previous</a>
+          <a *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}"
+            (click)="getUserList(page);">{{page}}</a>
+          <a [ngClass]="{disabled:pager.currentPage === pager.totalPages}" (click)="page=page+1;getUserList();">Next</a>
+          <a [ngClass]="{disabled:pager.currentPage === pager.totalPages}"
+            (click)="page=pager.totalPages;getUserList();">Last</a>
+        </ul>
+    </div>
+  </nb-card-body>
+</nb-card>

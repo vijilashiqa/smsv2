@@ -1,0 +1,112 @@
+<!-- <p>adddeposit works!</p> -->
+<div class="col-md-12">
+    <nb-card>
+       <!-- <toaster-container></toaster-container> -->
+       <nb-card-header> </nb-card-header>
+       <nb-card-body>
+          <form [formGroup]="depositForm" class="form-horizontal" (ngSubmit)="deposit();">
+             <div class="modal-body">
+                <div class="form-group row">
+                   <div class="col-sm-4">
+                      <label>Headend</label>
+                      <select (change)='depositForm.controls.operator_name.setValue("");getoperator();' name="headend"
+                         formControlName="headend">
+                         <option value="" selected>Select Headend</option>
+                      
+                      </select>
+                      <small  class="form-text error"> Select
+                         required Headend! </small>
+                   </div>
+                   <div class="col-sm-4">
+                      <label>Operator Type</label>
+                      <select 
+                         name="operator_type" formControlName="operator_type">
+                         <option value="" selected>Select Operator Type</option>
+                         <option value="1">LCO</option>
+                         <option value="2">Distributor</option>
+                         <option value="3">Sub-Distributor</option>
+                      </select>
+                      <small  class="form-text error">
+                         Select required Operator Type! </small>
+                   </div>
+                   <div class="col-sm-4">
+                      <label>Operator Name</label>
+                      <select name="operator_name" formControlName="operator_name" >
+                         <option value="" selected> Select Operator Name</option>
+                      </select>
+                      <small 
+                         class="form-text error">Select required Operator name! </small>
+                   </div>
+                </div>
+                <hr>
+                <div class="form-group row">
+                   <div class="col-sm-6">
+                      <label> Deposit Type</label>
+                      <select (change)='paytype();' name="pay_type" formControlName="pay_type">
+                         <option value="" selected>Select Pay Type</option>
+                         <option value="1">Credit</option>
+                         <option value="2">Net Banking</option>
+                         <option value="3">Bank Deposit</option>
+                         <option value="4">Adjustment</option>
+                         <option value="5">Maintenance</option>
+                         <option value="6">Duplicate Deposit</option>
+                         <option value="7">Others</option>
+                      </select>
+                      <small class="form-text error">Select
+                         required Pay Type! </small>
+                   </div>
+ 
+                </div>
+ 
+                <div class="form-group row">
+                   <div class="col-sm-6">
+                      <label> Reason</label>
+                      <textarea name="reason"
+                         
+                         formControlName="reason"></textarea>
+                   </div>
+                </div>
+                <div class="form-group row">
+                   <div class="col-sm-6">
+                      <label>UTR</label>
+                      <input type="text" name="utr"
+                        
+                         formControlName="utr">
+                      <small  class="form-text error">UTR required!
+                      </small>
+                   </div>
+                </div>
+                <div class="form-group row">
+                   <div class="col-sm-6">
+                      <label>Upload Challan</label>
+                      <input type="file" name="upload" 
+                      formControlName="upload">
+                      <small  class="form-text error">Pls Select
+                         Img! </small>
+                   </div>
+                   <div class="col-sm-6">
+                      <label>Challan</label>
+                      <img [src]="imageURL" style="width: 100%;height: 150px">
+                   </div>
+                </div>
+                <div class="form-group row">
+                   <div class="col-sm-6">
+                      <label>Deposit Amount</label>
+                      <input type="text" name="deposit_amount" formControlName="deposit_amount" placeholder="INR">
+                       
+                      <small 
+                         class="form-text error">Select required Deposit Amount! </small>
+                      <small
+                         class="form-text error">Enter The Valid Amount! </small>
+                   </div>
+                </div>
+             </div>
+             <div class="modal-footer">
+                <button type="submit" class="btn btn-sm btn-success">Submit</button>
+                <button type="button" class="btn btn-sm btn-danger"
+                   [routerLink]="['/pages/accounts/depositlist']">Cancel</button>
+             </div>
+          </form>
+       </nb-card-body>
+    </nb-card>
+ </div>

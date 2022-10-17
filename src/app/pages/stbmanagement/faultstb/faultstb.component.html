@@ -1,0 +1,107 @@
+<!-- <p>faultstb works!</p> -->
+<nb-card>
+    <nb-card-header>Fault STB List <a style="text-align:right; float:right;" (click)="search=!search">Advanced Search</a>
+    </nb-card-header>
+    <nb-card-body>
+       <!-- <toaster-container></toaster-container> -->
+       <form [formGroup]="stbform" class="form-horizontal">
+          <hr style="border: 0px;">
+          <nb-card>
+             <nb-card-body>
+                <div class="modal-body">
+                   <div class="form-group row">
+                      <div class="col-sm-4">
+                         <div class="form-group row">
+                            <div class="col-sm-12">
+                               <label>Location</label>
+                               <select name="location" formControlName="location" class="form-control">
+                               </select>
+                            </div>
+                         </div>
+                         <div class="form-group row">
+                            <div class="col-sm-12">
+                               <label>Branch</label>
+                               <select name="branch" formControlName="branch" class="form-control">
+                               </select>
+                            </div>
+                         </div>
+                      </div>
+                      <div class="col-sm-4">
+                         <div class="form-group row">
+                            <div class="col-sm-12">
+                               <label>STB Number</label>
+                               <nb-select name="stb_id" formControlName="stb_id" class="form-control">
+                               </nb-select>
+                            </div>
+                         </div>
+                         <div class="form-group row">
+                            <div class="col-sm-12">
+                               <label>VC Number</label>
+                               <ng-select name="vc_number" formControlName="vc_number" class="form-control">
+                               </ng-select>
+                            </div>
+                         </div>
+                      </div>
+                      <div class="col-sm-4">
+                         <div class="form-group row">
+                            <div class="col-sm-12">
+                               <label>Status</label>
+                               <select name="status" formControlName="status" class="form-control">
+                                  <option value="" selected>Select Status</option>
+                                  <option value="1">Scrap</option>
+                                  <option value="2">Reusable</option>
+                                  <option value="3">Service</option>
+                               </select>
+                            </div>
+                         </div>
+                      </div>
+                   </div>
+                   <button type="button" class="btn btn-md btn-success"
+                      style="margin: auto; display: block;">Search</button>
+                </div>
+             </nb-card-body>
+          </nb-card>
+          <table class="table">
+             <tr>
+                <th>Action</th>
+                <th>STB Number</th>
+                <th>Vc Number</th>
+                <th>Fault Description</th>
+                <th>Status</th>
+             </tr>
+             <tr>
+                <td style="width: 80px" class=" last" data-title="'Action'">
+                   <div class="form-group row">
+                      <div class="dropdown ghost-dropdown" ngbDropdown>
+                         <button style="width: 75px;font-size: 10px" class="btn btn-primary btn-icon" type="button"
+                            >Action
+                         </button>
+                         
+                      </div>
+                   </div>
+                </td>
+                <td></td>
+                <td></td>
+                <td>
+                   <div class="form-group row">
+                      <div class="col-sm-7">
+                         <select class="form-control" formControlName="fault_des" name="fault_des">
+                            <option value="1">AV Issue</option>
+                            <option value="2">HDMI Issue</option>
+                            <option value="3">Power Cord Issue</option>
+                            <option value="4">Front Panel Issue</option>
+                            <option value="5">Rebooting</option>
+                            <option value="6">Others</option>
+                         </select>
+                      </div>
+                      <div class="col-sm-5" >
+                         <textarea class="form-control" formControlName="other_fault" name="other_fault"></textarea>
+                      </div>
+                   </div>
+                </td>
+                <td>Received/Waiting for Response</td>
+             </tr>
+          </table>
+       </form>
+    </nb-card-body>
+ </nb-card>

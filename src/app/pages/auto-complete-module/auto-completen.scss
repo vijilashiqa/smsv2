@@ -1,0 +1,44 @@
+/*.dropdown-content a:first-child {
+	border-top-right-radius: 5px; 
+	border-top-left-radius: 5px; 
+}
+*/
+.dropdown-content a:last-child {
+	border-bottom: 0px;
+}
+
+.dropdown-content a:hover{
+	background-color: #20a8d875;
+	color: #fff;
+}
+
+.dropdown-content a {
+	padding: 10px;
+	display: block;
+	text-align: left;
+	border-bottom-width: 0px;
+	color: #000;
+}
+
+.dropdown-content{
+	border:1px solid #8ad4ee;
+	border-radius: 5px;
+	position: absolute;
+	background-color: #fff;
+	overflow: scroll;
+	max-height: 400px;
+	min-width: 200px;
+	z-index: 9999;
+    top: 4.8em;
+}
+
+// Multi Select
+.sticky{
+    position: sticky;
+    top: 0px;
+    z-index: 1;
+}
+::-webkit-scrollbar { 
+    display: none; 
+}
+ 

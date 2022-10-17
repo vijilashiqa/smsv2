@@ -1,0 +1,222 @@
+<div class="col-md-12">
+    <nb-card>
+      <nb-card-header>Create Broadcaster</nb-card-header>
+      <nb-card-body>
+        <form [formGroup]="AddBroadcasterForm" class="form-horizontal" (ngSubmit)="addbroadcaster();">
+          <div class="modal-body">
+            <div class="form-group row">
+              <div class="col-sm-6">
+                <label>Headend Name<span style="color:red">*</span></label>
+                <auto-completen
+                [addclass]="{ 'error': submit && this.AddBroadcasterForm.controls.hdid.errors }"
+                addclass="form-control" optValues="hdname"
+                formControlName="hdid" (keyUp)="getHeadend($event)"
+                placeholder='Select Headend'  optId="hdid"
+                [item]="listhead">
+              </auto-completen>
+              <div *ngIf="this.AddBroadcasterForm.controls.hdid.errors && (this.AddBroadcasterForm.controls.hdid.errors.required) && submit" class="error-text">
+                Headend Name is required!
+               </div>
+       </div>
+
+       <div class="col-sm-6">
+        <label>Profile ID<span style="color:red">*</span></label>
+          <input [readonly]="disabled" type="text"  class="form-control" name="profileid" formControlName="profileid" placeholder=" Enter Profile ID"
+          [ngClass]="{ 'is-invalid': submit && this.AddBroadcasterForm.controls.profileid.errors }"/>
+          <small *ngIf="this.AddBroadcasterForm.controls.profileid.errors && this.AddBroadcasterForm.controls.profileid.errors.required && submit"
+          class="invalid-feedback">Profile ID is required! </small>
+      </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-sm-6">
+                <label>Fullname<span style="color:red">*</span></label>
+                  <input type="text"  class="form-control" name="fullname" formControlName="fullname" placeholder=" Enter Fullname"
+                  [ngClass]="{ 'is-invalid': submit && this.AddBroadcasterForm.controls.fullname.errors }"/>
+                  <small *ngIf="this.AddBroadcasterForm.controls.fullname.errors && (this.AddBroadcasterForm.controls.fullname.errors.required) && submit"
+                  class="invalid-feedback">Fullname No is required! </small>  
+              </div>
+              <div class="col-sm-6" *ngIf="!id" >
+                <label>Password<span style="color:red">*</span></label>
+                 <input [readonly]="disabled" type="password"  class="form-control" name="password" formControlName="password" placeholder="Enter Password "
+                  [ngClass]="{ 'is-invalid': submit && this.AddBroadcasterForm.controls.password.errors }"/>
+                  <small *ngIf="this.AddBroadcasterForm.controls.password.errors && (this.AddBroadcasterForm.controls.password.errors.required) && submit"
+                  class="invalid-feedback">Password is required! </small>
+              </div>
+            </div>
+
+
+            <div class="form-group row">
+              <div class="col-sm-6">
+                <label>Mobile<span style="color:red">*</span></label>
+                  <input type="text"  class="form-control" name="mobile" formControlName="mobile" placeholder=" Enter Mobile NO"
+                  [ngClass]="{ 'is-invalid': submit && this.AddBroadcasterForm.controls.mobile.errors }"/>
+                  <small *ngIf="this.AddBroadcasterForm.controls.mobile.errors && (this.AddBroadcasterForm.controls.mobile.errors.required) && submit"
+                  class="invalid-feedback">Mobile No is required! </small>  
+              </div>
+              
+                <div class="col-sm-6">
+                  <label>phoneno<span style="color:red">*</span></label>  
+                  <input type="text"  class="form-control" name="phoneno" formControlName="phoneno" placeholder="Phone No"
+                    [ngClass]="{ 'is-invalid': submit && this.AddBroadcasterForm.controls.phoneno.errors }"/>
+                    <small *ngIf="this.AddBroadcasterForm.controls.phoneno.errors && (this.AddBroadcasterForm.controls.phoneno.errors.required) && submit"
+                    class="invalid-feedback">phone No is required! </small>  
+                </div>
+             
+            </div>
+            <div class="form-group row">
+              <div class="col-sm-6">
+                <label>Email<span style="color:red">*</span></label>
+                  <input type="text"  class="form-control" name="email1" formControlName="email1" placeholder=" Enter Email ID"
+                  [ngClass]="{ 'is-invalid': submit && this.AddBroadcasterForm.controls.email1.errors }"/>
+                  <small *ngIf="this.AddBroadcasterForm.controls.email1.errors && (this.AddBroadcasterForm.controls.email1.errors.required) && submit"
+                  class="invalid-feedback">Email ID is required! </small>  
+           </div>
+           <div class="col-sm-6">
+            <label>Alternate Email<span style="color:red">*</span></label>
+              <input type="text"  class="form-control" name="email2" formControlName="email2" placeholder="  Enter Email ID "
+              [ngClass]="{ 'is-invalid': submit && this.AddBroadcasterForm.controls.email2.errors }"/>
+              <small *ngIf="this.AddBroadcasterForm.controls.email2.errors && (this.AddBroadcasterForm.controls.email2.errors.required) && submit"
+              class="invalid-feedback">Email ID is required! </small>  
+         </div>
+            </div>
+
+            <div class="form-group row">
+
+           
+              <div class="col-sm-6">
+                <label>Country<span style="color:red">*</span></label>
+                <auto-completen
+                [addclass]="{ 'error': submit && this.AddBroadcasterForm.controls.countryid.errors }"
+                addclass="form-control" optValues="name"
+                formControlName="countryid" (keyUp)="getCountry($event)"
+                (changed)="getstate();typeclearcountry('1')" placeholder='Select Country' id="id"
+                [item]="count">
+              </auto-completen>
+              <div *ngIf="this.AddBroadcasterForm.controls.countryid.errors && (this.AddBroadcasterForm.controls.countryid.errors.required) && submit" class="error-text">
+                Country Name is required!
+               </div>
+             </div>
+             <div class="col-sm-6">
+              <label>state<span style="color:red">*</span></label>
+              <auto-completen
+              [addclass]="{ 'error': submit && this.AddBroadcasterForm.controls.stateid.errors }"
+              addclass="form-control" optValues="name"
+              formControlName="stateid" (keyUp)="getstate($event)"
+              (changed)="getdistrict(); typeclearstate('1')"
+               placeholder='Select State' id="id"
+              [item]="getstates">
+            </auto-completen>
+            <div *ngIf="this.AddBroadcasterForm.controls.stateid.errors && (this.AddBroadcasterForm.controls.stateid.errors.required) && submit" class="error-text">
+              State Name is required!
+             </div>
+           </div>
+             </div>
+            
+
+            <div class="form-group row">
+             
+             
+              <div class="col-sm-6">
+                <label>District <span style="color:red">*</span></label>
+                <auto-completen
+                [addclass]="{ 'error': submit && this.AddBroadcasterForm.controls.districtid.errors }"
+                addclass="form-control" optValues="name"
+                formControlName="districtid" (keyUp)="getdistrict($event) "
+                (changed)="getcity();typecleardist()"
+                 placeholder='Select District' id="id"
+                [item]="dist">
+              </auto-completen>
+              <div *ngIf="this.AddBroadcasterForm.controls.districtid.errors && (this.AddBroadcasterForm.controls.districtid.errors.required) && submit" class="error-text">
+                District Name is required!
+               </div>
+             </div>
+             <div class="col-sm-6">
+              <label>City<span style="color:red">*</span></label>
+                <auto-completen
+                [addclass]="{ 'error': submit && this.AddBroadcasterForm.controls.cityid.errors }"
+                addclass="form-control" optValues="name" (changed)="getarea();typeclearcity('1')"
+                formControlName="cityid" (keyUp)="getcity($event) "
+                 placeholder='Select City' id="id"
+                [item]="citylist">
+              </auto-completen>
+              <div *ngIf="this.AddBroadcasterForm.controls.cityid.errors && (this.AddBroadcasterForm.controls.cityid.errors.required) && submit" class="error-text">
+                City Name is required!
+               </div>
+             
+           </div>
+
+           </div>
+
+           <div class="form-group row">
+            <div class="col-sm-6">
+              <label>Area<span style="color:red">*</span></label>
+                <auto-completen
+                [addclass]="{ 'error': submit && this.AddBroadcasterForm.controls.area.errors }"
+                addclass="form-control" optValues="name"
+                formControlName="area" (keyUp)="getarea($event) "
+                 placeholder='Select Area' id="id"
+                [item]="listarea">
+              </auto-completen>
+              <div *ngIf="this.AddBroadcasterForm.controls.area.errors && (this.AddBroadcasterForm.controls.area.errors.required) && submit" class="error-text">
+                Area Name is required!
+               </div>
+           </div>
+           <div class="col-sm-6">
+              <label>Pin Code <span style="color:red">*</span></label>
+              <input  name="pincode" placeholder="Enter Pincode" formControlName="pincode" type="text" class="form-control"
+              [ngClass]="{ 'is-invalid': submit && this.AddBroadcasterForm.controls.pincode.errors }"/>
+              <small *ngIf="this.AddBroadcasterForm.controls.pincode.errors &&(this.AddBroadcasterForm.controls.pincode.errors.required)&& submit"
+              class="invalid-feedback">pincode is required! </small>
+           </div>
+
+            </div>
+
+         
+         <!-- </div> -->
+           <div class="form-group row">
+             
+              
+              <div class="col-sm-6">
+                <label>Installation Address<span style="color:red">*</span></label>
+                <textarea name="installation_addr" formControlName="installation_addr" placeholder="installation_addr Address " class="form-control" 
+                [ngClass]="{ 'is-invalid': submit && this.AddBroadcasterForm.controls.installation_addr.errors }" > </textarea>
+                  <small *ngIf="this.AddBroadcasterForm.controls.installation_addr.errors && (this.AddBroadcasterForm.controls.installation_addr.errors.required) && submit"
+                  class="invalid-feedback">Installation Address is required! </small>  
+                </div>
+                <div class="col-sm-6">
+                  <label>Description</label>
+                  <textarea name="descr" formControlName="descr" placeholder="descr Address " class="form-control" 
+                  [ngClass]="{ 'is-invalid': submit && this.AddBroadcasterForm.controls.descr.errors }" > </textarea>
+                    <small *ngIf="this.AddBroadcasterForm.controls.descr.errors && (this.AddBroadcasterForm.controls.descr.errors.required) && submit"
+                    class="invalid-feedback">Installation Address is required! </small>  
+                </div>
+           </div>
+<!-- 
+            <div class="form-group row">
+        
+              
+           </div>  -->
+            <!-- <div class="form-group row">
+              <div class="col-sm-12">
+                <label>Description</label>
+                <input name="descr" formControlName="descr" type="text" class="form-control" placeholder="Description"
+                  maxlength="200">
+              </div>
+            </div> -->
+            <div class="form-group row">
+              <div class="col-md-6">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="status" checked #status>
+                  <label class="custom-control-label" for="status">Active</label>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" status="success" nbButton >{{id ? 'Update' : 'Add'}}</button>
+              <button type="button" status="danger" nbButton (click)='submit=false;createForm();'>Reset </button>
+            </div>
+          </div>
+        </form>
+      </nb-card-body>
+    </nb-card>
+  </div>

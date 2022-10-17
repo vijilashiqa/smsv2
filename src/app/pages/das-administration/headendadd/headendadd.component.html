@@ -1,0 +1,274 @@
+
+<div class="col-md-12">
+    <nb-card>
+       <nb-card-header>Create Headend</nb-card-header>
+        <nb-card-body>
+          <form [formGroup]="AddheadendForm" class="form-horizontal" (ngSubmit)="AddHeadend();">
+             <nb-tabset>
+                <nb-tab tabTitle="Headend Details">
+                   <div class="modal-body">
+                      <div class="form-group row">
+                         <div class="col-sm-6">
+                            <label>Headend Name<span style="color:red">*</span></label>
+                            <input type="text"   status="info" class="form-control" name="hdname" formControlName="hdname" placeholder=" Enter Headend Name "
+                               [ngClass]="{ 'is-invalid': submit && ctrl.hdname.errors }"/>
+                               <small *ngIf="ctrl.hdname.errors && (ctrl.hdname.errors.required) && submit"
+                               class="invalid-feedback">Headend Name is required! </small>
+                         </div>
+
+                         <div class="col-sm-6">
+                            <label>Headend ID<span style="color:red">*</span></label>
+                            <input type="text"  nbInput fullWidth status="info" class="form-control" name="headendid" formControlName="headendid" placeholder="Enter Headend ID"
+                            [ngClass]="{ 'is-invalid': submit && ctrl.headendid.errors }"/>
+                            <small *ngIf="ctrl.headendid.errors &&(ctrl.headendid.errors.required) && submit"
+                            class="invalid-feedback">Headend Id is required! </small>
+                         </div>
+                      </div>
+                      <div class="form-group row">
+                         <div class="col-sm-6">
+                            <label>Mobile No<span style="color:red">*</span></label>
+                            <input type="text" class="form-control" name="mobileno" formControlName="mobileno" placeholder="Enter Mobile NO"
+                            [ngClass]="{ 'is-invalid': submit && ctrl.mobileno.errors }"/>
+                            <small *ngIf="ctrl.mobileno.errors &&(ctrl.mobileno.errors.required )&& submit"
+                            class="invalid-feedback">Mobile No is required! </small>
+                         </div>
+                         <div class="col-sm-6">
+                           <label>Email<span style="color:red">*</span></label>
+                           <input  name="email" placeholder="Enter Email " formControlName="email" type="text" class="form-control"
+                           [ngClass]="{ 'is-invalid': submit && ctrl.email.errors }"/>
+                           <small *ngIf="ctrl.email.errors &&(ctrl.email.errors.required) && submit"
+                           class="invalid-feedback">Email is required! </small>
+                         </div>
+                      </div>
+                      <div class="form-group row">
+                         <div class="col-sm-6">
+                            <label>Country*</label>
+                            <auto-completen
+                            [addclass]="{ 'error': submit && this.AddheadendForm.controls.countryid.errors }"
+                            addclass="form-control" optValues="name"
+                            formControlName="countryid" (keyUp)="getCountry($event)"
+                            (changed)="getstate();typeClear('1')" placeholder='Select Country' id="id"
+                            [item]="count">
+                          </auto-completen>
+                          <div *ngIf="this.AddheadendForm.controls.countryid.errors && (this.AddheadendForm.controls.countryid.errors.required) && submit" class="error-text">
+                           Country Name is required!
+                          </div>
+                         </div>
+                         <div class="col-sm-6">
+                            <label>state<span style="color:red">*</span></label>
+                            <auto-completen
+                            [addclass]="{ 'error': submit && this.AddheadendForm.controls.stateid.errors }"
+                            addclass="form-control" optValues="name"
+                            formControlName="stateid" (keyUp)="getstate($event)"
+                            (changed)="getdistrict();typeClearstate('1')"
+                             placeholder='Select State' id="id"
+                            [item]="getstates">
+                          </auto-completen>
+                          <div *ngIf="this.AddheadendForm.controls.stateid.errors && (this.AddheadendForm.controls.stateid.errors.required) && submit" class="error-text">
+                           State  Name is required!
+                          </div>
+                         </div>
+                      </div>
+                      <div class="form-group row">
+                         <div class="col-sm-6">
+                            <label>District <span style="color:red">*</span></label>
+                            <auto-completen
+                            [addclass]="{ 'error': submit && this.AddheadendForm.controls.districtid.errors }"
+                            addclass="form-control" optValues="name"
+                            formControlName="districtid" (keyUp)="getdistrict($event) "
+                            (changed)="getcity(); typedist('1')"
+                             placeholder='Select District' id="id"
+                            [item]="dist">
+                          </auto-completen>
+                          <div *ngIf="this.AddheadendForm.controls.districtid.errors && (this.AddheadendForm.controls.districtid.errors.required) && submit" class="error-text">
+                           District  Name is required!
+                          </div>
+                         </div>
+                         <div class="col-sm-6">
+                            <label>City<span style="color:red">*</span></label>
+                              <auto-completen
+                              [addclass]="{ 'error': submit && this.AddheadendForm.controls.cityid.errors }"
+                              addclass="form-control" optValues="name"
+                              formControlName="cityid" (keyUp)="getcity($event) "
+                              (changed)="getarea();typeClearcity('1')"
+                               placeholder='Select city' id="id"
+                              [item]="citylist">
+                            </auto-completen>
+                            <div *ngIf="this.AddheadendForm.controls.cityid.errors && (this.AddheadendForm.controls.cityid.errors.required) && submit" class="error-text">
+                              City  Name is required!
+                             </div>
+                         </div>
+                      </div>
+                      <div class="form-group row">
+                         <div class="col-sm-6">
+                            <label>Area<span style="color:red">*</span></label>
+                              <auto-completen
+                              [addclass]="{ 'error': submit && this.AddheadendForm.controls.areaid.errors }"
+                              addclass="form-control" optValues="name"
+                              formControlName="areaid" (keyUp)="getarea($event) "
+                               placeholder='Select Area' id="id"
+                              [item]="listarea">
+                            </auto-completen>
+                            <div *ngIf="this.AddheadendForm.controls.areaid.errors && (this.AddheadendForm.controls.areaid.errors.required) && submit" class="error-text">
+                              Area  Name is required!
+                             </div>
+                         </div>
+                         <div class="col-sm-6">
+                   
+
+
+                            <label>Pin Code <span style="color:red">*</span></label>
+                            <input  name="pincode" placeholder="Enter Pincode" formControlName="pincode" type="text" class="form-control"
+                            [ngClass]="{ 'is-invalid': submit && ctrl.pincode.errors }"/>
+                            <small *ngIf="ctrl.pincode.errors &&(ctrl.pincode.errors.required)&& submit"
+                            class="invalid-feedback">pincode is required! </small>
+                         </div>
+                      </div>
+                      <div class="form-group row">
+                         <div class="col-sm-6">
+                            <label>COP-Address<span style="color:red">*</span></label>
+                            <textarea name="crop_addr" type="text" class="form-control" formControlName="crop_addr" placeholder="Enter COP-Address"
+                            [ngClass]="{ 'is-invalid': submit && ctrl.crop_addr.errors }"> </textarea>
+                            <small *ngIf="ctrl.crop_addr.errors &&(ctrl.crop_addr.errors.required) && submit"
+                            class="invalid-feedback">Installation is required! </small>
+                         </div>
+                         <div class="col-sm-6">
+                            <label>COM-Address</label>
+                            <textarea name="comm_addr" formControlName="comm_addr" class="form-control"
+                            [ngClass]="{ 'is-invalid': submit && ctrl.comm_addr.errors }" placeholder="Enter COM-ADDRESS"></textarea>
+                            <small *ngIf="ctrl.comm_addr.errors &&(ctrl.comm_addr.errors.required) && submit"
+                            class="invalid-feedback">Describition  is required! </small>
+                           </div>
+                      </div>
+
+
+                      <div class="form-group row">
+                      
+                        <div class="col-sm-6">
+                           <label>Date <span style="color:red">*</span></label>
+                           <input type="number" class="form-control" formControlName="postpaiddate" min="1" max="31"
+                            placeholder="Enter Date" 
+                            [ngClass]="{ 'is-invalid': submit && ctrl.postpaiddate.errors }"/>
+                            <small *ngIf="ctrl.postpaiddate.errors &&(ctrl.postpaiddate.errors.required) && submit"
+                            class="invalid-feedback">Date is required! </small>
+                        </div>
+                          <div class="col-sm-6">
+                           <label>Time <span style="color:red">*</span></label>
+                           <input type="time" class="form-control" formControlName="postpaidtime"
+                           [ngClass]="{ 'is-invalid': submit && ctrl.postpaidtime.errors }" />
+                           <small *ngIf="ctrl.postpaidtime.errors &&(ctrl.postpaidtime.errors.required) && submit"
+                           class="invalid-feedback">Time is required! </small>
+                        </div>
+                     </div>
+
+
+                     <div class="form-group row">
+                     <div class="col-sm-6">
+                        <label>Description</label>
+                        <textarea name="descr" formControlName="descr" class="form-control"
+                        [ngClass]="{ 'is-invalid': submit && ctrl.descr.errors }" placeholder="Description"></textarea>
+                        <small *ngIf="ctrl.descr.errors &&(ctrl.descr.errors.required) && submit"
+                        class="invalid-feedback">descr is required! </small>
+                       </div>
+</div>
+
+                      <div class="form-group row">
+                         <div class="col-sm-6">
+                            <div class="custom-control custom-checkbox">
+                               <input type="checkbox" class="custom-control-input" id="status"
+                                  formControlName="status" />
+                               <label class="custom-control-label" for="status">Active</label>
+                            </div>
+                         </div>
+                      </div>
+ 
+                   </div>
+                </nb-tab>
+                <nb-tab tabTitle="Invoice Details">
+                   <div class="modal-body">
+                      <div class="form-group row">
+                         <div class="col-sm-6">
+ 
+                            <!-- <div class="form-group row">
+                               <div class="col-sm-12">
+                                  <label>GST Type</label>
+                                  <select name="GST_Type" formControlName="GST_Type" class="form-control"
+                                  [ngClass]="{ 'is-invalid': submit && ctrl.GST_Type.errors }">
+                                     <option value="" selected>Select GST Type</option>
+                                     <option value="1">SGST & CGST</option>
+                                     <option value="2">IGST</option>
+                                  </select>
+                                  <small *ngIf="ctrl.hdname.errors &&(ctrl.GST_Type.errors.required)&& submit"
+                                  class="invalid-feedback">GST_Type is required! </small>
+                               </div>
+                            </div> -->
+                            <div class="form-group row" >
+                               <div class="col-sm-12">
+                                  <label>SGST</label>
+                                  <input type="number" name="sgst" formControlName="sgst" class="form-control" name="sgst"   min="0"  placeholder="Enter SGST"
+                                  [ngClass]="{ 'is-invalid': submit && ctrl.sgst.errors }">
+                                  <small *ngIf="ctrl.hdname.errors &&(ctrl.sgst.errors.required) && submit"
+                                  class="invalid-feedback">SGST is required! </small>
+                                    </div>
+                            </div>
+                            <div class="form-group row" >
+                               <div class="col-sm-12">
+                                  <label>CGST</label>
+                                  <input type="number" name="cgst" formControlName="cgst" class="form-control"  min="0" name="cgst"  placeholder="Enter CGST"
+                                  [ngClass]="{ 'is-invalid': submit && ctrl.cgst.errors }">
+                                         <small *ngIf="ctrl.hdname.errors &&(ctrl.cgst.errors.required) && submit"
+                                  class="invalid-feedback">CGST No is required! </small>
+                                    </div>  
+                            </div>
+                            <div class="form-group row">
+                               <div class="col-sm-12">
+                                  <label>GST NO</label>
+                                  <input type="text" name="gst" formControlName="gst" class="form-control" placeholder="Enter GST" 
+                                  [ngClass]="{ 'is-invalid': submit && ctrl.gst.errors }">
+                                  <small *ngIf="ctrl.hdname.errors &&(ctrl.gst.errors.required)&& submit"
+                                  class="invalid-feedback">GST No is required! </small>
+                                    </div>
+                            </div>
+                            <div class="form-group row">
+                               <div class="col-sm-12">
+                                  <label>IGST</label>
+                                  <input type="text" name="igst" formControlName="igst" class="form-control" min="0" placeholder="Enter IGST"
+                                  [ngClass]="{ 'is-invalid': submit && ctrl.igst.errors }">
+                                  <small *ngIf="ctrl.hdname.errors &&(ctrl.igst.errors.required)&& submit"
+                                  class="invalid-feedback">IGST  is required! </small>
+                              </div>
+                            </div>
+                         </div>
+                         <div class="col-sm-6">
+                             <div class="form-group row">
+                               <div class="col-sm-12">
+                                  <label>Company Name To Show In Invoice</label>
+                                  <input type="text" name="com_invid" formControlName="com_invid" class="form-control"
+                                  placeholder="Enter company Name"
+                                  [ngClass]="{ 'is-invalid': submit && ctrl.com_invid.errors }">
+                                  <small *ngIf="ctrl.hdname.errors &&(ctrl.com_invid.errors.required)&& submit"
+                                  class="invalid-feedback">Company is required! </small>
+                                    </div>
+                            </div>
+                            <div class="form-group row">
+                               <div class="col-sm-12">
+                                  <label class="control-label">ISP Invoice Logo</label>
+                                  <input type="file" formControlName="Logo" class="form-control"
+                                     [ngClass]="{'form-control' : true,'form-control-danger':ctrl.Logo.invalid&&submit}" />
+                                     <small *ngIf="ctrl.hdname.errors &&(ctrl.Logo.errors.required) && submit"
+                                     class="invalid-feedback">Logo is required! </small>
+                               </div>
+                            </div>
+                         </div>
+                      </div>
+                   </div>
+                </nb-tab>
+             </nb-tabset>
+             <div class="modal-footer">
+                <button  type="submit" status="success" nbButton  >{{id ? 'Update' : 'Add'}}</button>
+                <button type="button"  status="danger" nbButton [routerLink]="['/pages/das-administration/headendlist']">cancel</button>
+             </div>
+          </form>
+       </nb-card-body>
+    </nb-card>
+ </div>

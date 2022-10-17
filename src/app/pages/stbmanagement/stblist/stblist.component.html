@@ -1,0 +1,191 @@
+<nb-card>
+    <nb-card-header>List STB <a class="right" (click)="search=!search">Advanced Search</a></nb-card-header>
+    <nb-card-body>
+      <!-- <toaster-container></toaster-container> -->
+     <button status="success" nbButton  [routerLink]="['/pages/stbmanagement/addstb']">ADD STB</button> &nbsp;
+     <button status="success" nbButton (click)="addpair()">Pair/unpair</button>
+
+     <!-- <button status="success" nbButton  [routerLink]="['/pages/stbmanagement/stbparing']">Pair/Unparing</button> -->
+
+     
+     <!--   <button  class="btn btn-sm btn-success" (click)='paring()'>Pair/Unpair</button>
+      <label class="right">
+        <h5>STB Count </h5>
+      </label>
+      <hr style="border: 0px;">
+      <form [hidden]='!search' class="form-horizontal">
+        <div class="modal-body">
+          <div class="form-group row">
+            <div class="col-sm-3">
+              <label>Headend</label>
+              <select (change)='opt=[];getoperator();' name="headend" class="form-control">
+                <option value="">Select Headend</option>
+              </select>
+            </div>
+            <div class="col-sm-3">
+            </div>
+            <div class="col-sm-3">
+            </div>
+            <div class="col-sm-3">
+              
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-3">
+              <label>STB Status</label>
+              <select name="status" class="form-control">
+                <option value="" selected>Select Status</option>
+                <option value="1">Active</option>
+                <option value="0">Inactive</option>
+              </select>
+            </div>
+            <div class="col-sm-3">
+              <label>STB Model</label>
+              <select (change)='vc="";stbopt="";getSTB();getVc();' name="model_opt" 
+                class="form-control">
+                <option value="" selected>Select STB Model</option>
+              </select>
+            </div>
+  
+            <div class="col-sm-3">
+
+            
+            </div>
+            <div class="col-sm-3">
+             
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-3">
+              <label>Pair/Unpair</label>
+              <select  name="pair" class="form-control">
+                <option value="" selected>Select </option>
+                <option value="1">Paired</option>
+                <option value="0">Unpaired</option>
+              </select>
+            </div>
+            <div class="col-sm-3">
+              <label>Assigned/Unassigned</label>
+              <select name="assign" class="form-control">
+                <option value="" selected>Select </option>
+                <option value="1">Assigned</option>
+                <option value="0">Unassigned</option>
+              </select>
+            </div>
+  
+            <div class="col-sm-3">
+              <label>From Created Date</label>
+              <input type="text" [owlDateTime]="from_date_layout"
+                [owlDateTimeTrigger]="from_date_layout" name="from_date" placeholder="Select Date "
+                class="form-control" />
+              <owl-date-time [pickerType]="'calendar'" #from_date_layout></owl-date-time>
+            </div>
+            <div class="col-sm-3">
+              <label>To Created Date</label>
+              <input type="text"  [owlDateTime]="to_date_layout"
+                [owlDateTimeTrigger]="to_date_layout" name="to_date" placeholder="Select Date " class="form-control" />
+              <owl-date-time [pickerType]="'calendar'" #to_date_layout></owl-date-time>
+            </div>
+          </div>
+  
+          <button type="button" class="btn btn-md btn-success" (click)='initiallist();'
+            style="margin: auto; display: block;">Search</button>
+          <div class="col-sm-12">
+            <div class="form-group row">
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input " name="status_check" id="status_check"
+                  />
+                <label class="custom-control-label" for="status_check">STB Status</label>
+              </div>
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input " name="cas_check" id="cas_check"
+                  />
+                <label class="custom-control-label" for="cas_check">STB Model</label>
+              </div>
+              <div class="custom-control custom-checkbox" >
+                <input type="checkbox" class="custom-control-input " name="id_check" id="id_check"
+                  />
+                <label class="custom-control-label" for="id_check">STB ID</label>
+              </div>
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input " name="stb_check" id="stb_check"
+                 />
+                <label class="custom-control-label" for="stb_check">STB Number</label>
+              </div>
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input " name="vc_check" id="vc_check"
+                 />
+                <label class="custom-control-label" for="vc_check">VC Number</label>
+              </div>
+               </div> -->
+              <!-- <div class="form-group row"> -->
+              <!-- <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input " name="act_check" id="act_check"
+                  />
+                <label class="custom-control-label" for="act_check">Start Date</label>
+              </div>
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input " name="exp_check" id="exp_check"
+                 />
+                <label class="custom-control-label" for="exp_check">End Date</label>
+              </div>
+              <div  class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input " name="optname_check" id="optname_check"
+                  />
+                <label class="custom-control-label" for="optname_check">Operator Name</label>
+              </div>
+              <div>
+                <input type="checkbox" class="custom-control-input " name="lco_check" id="lco_check"
+                 />
+                <label class="custom-control-label" for="lco_check">Location</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+       -->
+      <!-- <div class="row">
+        <div class="col-md-12">
+          <i (click)="Download();" class="green right fa fa-file-excel" ></i>
+        </div>
+      </div> -->
+      <table class="table table-condensed table-hover">
+        <tr>
+          <!-- <th>Action</th> -->
+          <th>Headend ID</th>
+          <th>CAS Name</th>
+          <th>STB Model</th>
+          <th>Invoice NO</th>
+          <th>VC Number</th>
+          <th>Serial NO</th>
+        </tr>
+        <!-- <tr > -->
+          <tr *ngFor="let item of pagedItems">
+            <!-- <td style="cursor:pointer;" [routerLink]="['/pages/stbmanagement/addstb']" [queryParams]="{id:item.stockinid}"><i class="nb-edit"></i></td> -->
+            <td>{{item.hdname}}</td>
+            <td>{{item.cas_name}}</td>
+            <td>{{item.modelname}}</td>
+            <td>{{item.invoiceno}}</td>
+            <!-- <td><i>[ngStyle]="{ item.vcno ==item.vcno ?'item.vcno' :'-'}"</td></i> -->
+            <td>{{item.vcno }}</td>
+            <td>{{item.boxno}}</td>
+            <!-- <td><i [ngStyle]="{'color': item.status==1? 'green':'red'}"
+              [ngClass]="{'ion-close-round':item.status==0 ? true:false,'ion-checkmark-round':item.status!=0 ? true:false  }"
+              [attr.title]="item.status==0 ? 'Active' : 'Deactive'"></i></td> -->
+            <!-- <td>{{item.stbprimary==1 ? 'SD':'HD'}}</td> -->
+
+          </tr>
+        </table>
+        <div class="pagination">
+          <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+            <a [ngClass]="{disabled:pager.currentPage === 1}" (click)="page=1;getlist();">First</a>
+            <a [ngClass]="{disabled:pager.currentPage === 1}" (click)="page=page-1;getlist();">Previous</a>
+            <a *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}"
+              (click)="getlist(page);">{{page}}</a>
+            <a [ngClass]="{disabled:pager.currentPage === pager.totalPages}" (click)="page=page+1;getlist();">Next</a>
+            <a [ngClass]="{disabled:pager.currentPage === pager.totalPages}"
+              (click)="page=pager.totalPages;getlist();">Last</a>
+          </ul>
+        </div>
+      </nb-card-body>
+  </nb-card>

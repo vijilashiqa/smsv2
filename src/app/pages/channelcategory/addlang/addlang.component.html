@@ -1,0 +1,65 @@
+<div class="modal-header">
+  <h4 class="modal-title">{{ title }}</h4>
+  <button type="button" class="close" aria-label="Close" (click)="close()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<form
+  [formGroup]="addlanguageForm"
+  class="form-horizontal"
+  (ngSubmit)="addchannel()"
+>
+  <div class="modal-body">
+    <div class="form-group row">
+      <div class="col-sm-6">
+          <label>Headend Name<span style="color:red">*</span></label>
+          <auto-completen
+          [addclass]="{ 'error': submit && this.addlanguageForm.controls.hdid.errors }"
+          addclass="form-control" optValues="hdname"
+          formControlName="hdid" (keyUp)="getHeadend($event)"
+          placeholder='Select Headend'  optId="hdid"
+          [item]="listhead">
+        </auto-completen>
+        <div *ngIf="this.addlanguageForm.controls.hdid.errors && (this.addlanguageForm.controls.hdid.errors.required) && submit" class="error-text">
+          Headend Name is required!
+         </div>
+      </div>
+      <div class="col-sm-6">
+        <label>Language<span style="color: red">*</span></label>
+        <input
+          type="text" class="form-control" name="langname" formControlName="langname" placeholder="Enter Language"
+          [ngClass]="{'is-invalid': submit && this.addlanguageForm.controls.langname.errors}"/>
+        <small
+          *ngIf="this.addlanguageForm.controls.langname.errors && this.addlanguageForm.controls.langname.errors.required && submit" class="invalid-feedback" >
+          Language required!
+        </small>
+      </div>
+  </div>
+    <div class="form-group row">
+      <div class="col-sm-3">
+        <div class="custom-control custom-checkbox">
+          <input
+            type="checkbox"
+            class="custom-control-input"
+            id="activestatus"
+            formControlName="activestatus"/>
+          <label class="custom-control-label" for="activestatus">Active</label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button type="submit" status="success" nbButton >{{item ? 'Update' : 'Add'}}</button>
+    <button
+      type="button"
+      status="danger" nbButton
+      style="cursor: pointer"
+      (click)="close()"
+    >
+      Cancel
+    </button>
+  </div>
+</form>
+<!-- </nb-card-body>
+  </nb-card> -->

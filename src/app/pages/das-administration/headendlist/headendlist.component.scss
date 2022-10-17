@@ -1,0 +1,11 @@
+.pagination{
+    display: -ms-flexbox;
+    display: flex;
+    padding-left: 0;
+    list-style: none;
+    border-radius: .25rem;
+} 
+
+ng-deep ::after nb-theme-default a {
+    text-decoration: none !important;
+}

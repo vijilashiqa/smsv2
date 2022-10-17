@@ -1,0 +1,48 @@
+<nb-card>
+    <nb-card-body>
+      <div class="modal-header">
+        <h4 class="modal-title">{{title}}</h4>
+        <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+          </button>
+      </div>
+    <form [formGroup]="createmakeForm" class="form-horizontal" (ngSubmit)="addmake();">
+      <div class="modal-body">
+        <div class="form-group row">
+          <div class="col-sm-6">
+            <label>Headend Name<span style="color:red">*</span></label>
+            <auto-completen
+            [addclass]="{ 'error': submit && this.createmakeForm.controls.hdid.errors }"
+            addclass="form-control" optValues="hdname"
+            formControlName="hdid" (keyUp)="getHeadend($event)"
+            placeholder='Select Headend'  optId="hdid"
+            [item]="listhead">
+          </auto-completen>
+          <div *ngIf="this.createmakeForm.controls.hdid.errors && (this.createmakeForm.controls.hdid.errors.required) && submit" class="error-text">
+            Headend Name is required!
+           </div>
+          </div>
+
+          <div class="col-sm-6">
+            <label>Vendor Name *</label>
+              <input type="text" class="form-control" name="vendor_name" formControlName="vendor_name" placeholder="Enter Vendor Name"
+              [ngClass]="{ 'is-invalid': submit && createmakeForm.controls.vendor_name.errors }"/>
+              <small *ngIf="createmakeForm.controls.vendor_name.errors &&(createmakeForm.controls.vendor_name.errors.required )&& submit"
+              class="invalid-feedback">Vendor Name is required! </small>
+          </div>
+
+          <div class="col-md-3">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="status" formControlName="status" />
+              <label class="custom-control-label" for="status">Active</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit"  status="success" nbButton style="cursor:pointer" >{{datas ? 'Update' : 'Add'}}</button>
+        <button type="button"  status="danger" nbButton style="cursor:pointer" (click)="close()" >Cancel</button>
+      </div>
+    </form>
+    </nb-card-body>
+  </nb-card>

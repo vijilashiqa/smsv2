@@ -1,0 +1,124 @@
+<p>surender-stb works!</p>
+<nb-card>
+    <!-- <ngx-loading [show]="loading"
+      [config]="{animationType: ngxLoadingAnimationTypes.wanderingCubes, primaryColour: primaryColour, secondaryColour: secondaryColour, backdropBorderRadius: '3px'}">
+    </ngx-loading> -->
+    <nb-card-header>
+      Surrendered Subscriber's List
+      <a style="text-align:right; float:right;" (click)="search=!search">Advanced Search</a>
+    </nb-card-header>
+    <nb-card-body>
+      <!-- <toaster-container></toaster-container> -->
+      <button class="btn btn-sm btn-success"
+        [routerLink]="['/pages/cutomer/add-cust']">Add</button>
+      <div class="row">
+        <div class="col-md-12">
+          <label class="left">
+            <h5>Subscriber Count : {{count}}</h5>
+          </label>
+          <!-- <i (click)="Download();" class="green right fa fa-file-excel" aria-hidden="true"></i> -->
+        </div>
+      </div>
+      <hr style="border: 0px;">
+      <form autocomplete="off" [hidden]='!search' class="form-horizontal">
+        <div class="modal-body">
+          <div class="form-group row">
+            <div class="col-sm-3" >
+              <label>Headend</label>
+              <select (change)='opt=[];getoperator();' name="headend"  class="form-control">
+                <option value="">Select Headend</option>
+                <option *ngFor="let item of head" [value]=item.headend_pk>{{item.headend_name}}</option>
+              </select>
+            </div>
+            <div class="col-sm-4" >
+              <label>Operator Type</label>
+              <select (change)='opt=[];getoperator();' name="op_type"  class="form-control">
+                <option value="" selected>Select Operator Type</option>
+                <option value="1">LCO</option>
+                <option value="2">Distributor</option>
+                <option value="3">SubDistributor</option>
+              </select>
+            </div>
+            <div class="col-sm-4" >
+              <!-- <auto-complete (keyup)="getoperator($event.target.value)" name='operator_name'
+                (item_id)='operator_name=$event;getlocation(); getBranch();' placeholder='Select Operator'
+                label='Operator Name' [item]=opt></auto-complete> -->
+            </div>
+  
+  
+          </div>
+          <div class="form-group row">
+            <div >
+              <!-- <auto-complete name='branch' (item_id)='branch=$event' placeholder='Select Branch' label='Branch Name'
+                [item]=branchitem></auto-complete> -->
+            </div>
+            <div class="col-sm-4">
+              <!-- <auto-complete name='loc' (item_id)='loc=$event; getBranch();' placeholder='Select Location'
+                label='Location Name' [item]=locitem></auto-complete> -->
+            </div>
+          </div>
+          <div class="form-group row">
+  
+            <div class="col-sm-4">
+              <label>From Date</label>
+              <input type="text"  [owlDateTime]="from_date_layout"
+                [owlDateTimeTrigger]="from_date_layout" name="from_date" placeholder="Select Date "
+                class="form-control" />
+              <owl-date-time [pickerType]="'calendar'" #from_date_layout></owl-date-time>
+            </div>
+            <div class="col-sm-4">
+              <label>To Date</label>
+              <input type="text" [owlDateTime]="to_date_layout"
+                [owlDateTimeTrigger]="to_date_layout" name="to_date" placeholder="Select Date " class="form-control" />
+              <owl-date-time [pickerType]="'calendar'" #to_date_layout></owl-date-time>
+            </div>
+          </div>
+  
+  
+  
+          <button type="button" class="btn btn-md btn-success" (click)='page=1;initiallist();'
+            style="margin: auto; display: block;">Search</button>
+        </div>
+      </form>
+      <table class="table table-condensed table-hover">
+        <tr>
+          <th>Caf No</th>
+          <th>Subscriber ID</th>
+          <th>Subscriber Name</th>
+          <th>Address</th>
+          <th>Mobile Number</th>
+          <th>Operator Name</th>
+          <th>Last Activation Date</th>
+          <th>Last Expiry Date</th>
+          <th>Last Package Active</th>
+        </tr>
+        <tr >
+          <!-- <td>{{item.caf_no}}</td>
+          <td>{{item.cust_id_pk}}</td>
+          <td>{{item.first_name + " "}}{{item.last_name ? item.last_name : ''}}</td>
+          <td> -->
+            <!-- <i class="fas fa-home" nbPopover="{{item.billing_addr}}" nbPopoverPlacement="right"></i>
+          </td>
+          <td>{{item.mobile}}</td>
+          <td>{{item.ufname + " " + item.ulname}}</td>
+          <td>{{item.active_date |date:'dd-MM-yyyy h:mm:ss a'}}</td>
+          <td>{{item.expiry_date |date:'dd-MM-yyyy h:mm:ss a'}}</td>
+          <td>{{item.pack_name}}</td> -->
+        </tr>
+        <tr>
+          <!-- <td [hidden]='pagedItems.length !=0' colspan="13" style="text-align: center;">No Data Found</td> -->
+        </tr>
+      </table>
+      <div class="pagination">
+        <!-- <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+          <a [ngClass]="{disabled:pager.currentPage === 1}" (click)="page=1;getcustList();">First</a>
+          <a [ngClass]="{disabled:pager.currentPage === 1}" (click)="page=page-1;getcustList();">Previous</a>
+          <a *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}"
+            (click)="getcustList(page)">{{page}}</a>
+          <a [ngClass]="{disabled:pager.currentPage === pager.totalPages}" (click)="page=page+1;getcustList();">Next</a>
+          <a [ngClass]="{disabled:pager.currentPage === pager.totalPages}"
+            (click)="page=pager.totalPages;getcustList();">Last</a>
+        </ul> -->
+      </div>
+    </nb-card-body>
+  </nb-card>

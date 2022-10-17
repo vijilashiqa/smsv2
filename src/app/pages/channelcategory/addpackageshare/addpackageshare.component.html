@@ -1,0 +1,98 @@
+<!-- <p>addpackageshare works!</p> -->
+<!-- <p>packagesharelist works!</p> -->
+<div class="col-md-12">
+	<nb-card>
+		<nb-card-header>Package Share/Price</nb-card-header>
+		<!-- <toaster-container></toaster-container> -->
+		<nb-card-body>
+			<form [formGroup]="AddPackageshareForm" class="form-horizontal" (ngSubmit)="addPackShare();">
+				<div class="modal-body">
+					<div class="row">
+
+						<div class="form-group" class="col-sm-3">
+							<label>Headend *</label>
+							<select class="form-control" formControlName="headend">
+								<option value="">Select Headend</option>
+								<!-- <option *ngFor="let item of opt" [ngValue]=item.id>{{item.username}}</option> -->
+							</select>
+							<small *ngIf="AddPackageshareForm.hasError('required','headend')&&submit"
+								class="form-text error">Select required Operator! </small>
+						</div>
+						<div class="col-sm-3">
+							<label>Package</label>
+							<select (change)='opt=[];getoperator();'
+								[ngClass]="{'form-control' : true,'form-control-danger':AddPackageshareForm.controls.package.invalid&&submit}"
+								id="package" formControlName="package">
+								<option value="">Select Package</option>
+								<option *ngFor='let item of package' >
+								 </option>  -->
+							</select> 
+							<small *ngIf="AddPackageshareForm.hasError('required','package')&&submit"
+								class="form-text error">Select required Package! </small>
+						</div>
+						<div class="form-group" class="col-sm-3">
+							<label>Operator *</label>
+							<select list="operator" class="form-control"
+								formControlName="operator">
+								<option value="">Select Operator</option>
+								<!-- <option *ngFor="let item of opt" [ngValue]=item.id>{{item.username}}</option> -->
+							</select> 
+							<small *ngIf="AddPackageshareForm.hasError('required','operator')&&submit"
+								class="form-text error">Select required Operator! </small>
+						</div>
+
+
+
+
+					</div>
+					<div class="row">
+						<div class="form-group" class="col-sm-2">
+							<label>MSO Price*</label>
+							<input type="number" class="form-control" formControlName="mso_price">
+							<small *ngIf="AddPackageshareForm.hasError('required','mso_price')&&submit"
+								class="form-text error">Select required MSO Share! </small>
+						</div>
+						<div class="form-group" class="col-sm-2">
+							<label>LCO Price*</label>
+							<input type="number" class="form-control" formControlName="lco_price">
+							<small *ngIf="AddPackageshareForm.hasError('required','lco_price')&&submit"
+								class="form-text error">Select required MSO Share! </small>
+						</div>
+						<div class="form-group" class="col-sm-2">
+							<label>MSO*</label>
+							<input type="number" class="form-control" formControlName="mso">
+							<small *ngIf="AddPackageshareForm.hasError('required','mso')&&submit"
+								class="form-text error">Select required MSO Share! </small>
+						</div>
+						<div class="form-group" class="col-sm-2">
+							<label>Distribute*</label>
+							<input type="number" class="form-control" formControlName="dist">
+							<small *ngIf="AddPackageshareForm.hasError('required','dist')&&submit"
+								class="form-text error">Select required Distribute Share! </small>
+						</div>
+						<div class="form-group" class="col-sm-2">
+							<label>Sub Distribute*</label>
+							<input type="number" class="form-control" formControlName="subdist">
+							<small *ngIf="AddPackageshareForm.hasError('required','subdist')&&submit"
+								class="form-text error">Select required Sub Distribute Share! </small>
+						</div>
+						<div class="form-group" class="col-sm-2">
+							<label>LCO*</label>
+							<input type="number" class="form-control" formControlName="lco">
+							<small *ngIf="AddPackageshareForm.hasError('required','lco')&&submit"
+								class="form-text error">Select required LCO Share! </small>
+						</div>
+					</div>
+
+				</div>
+
+
+
+
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-md btn-success">Create</button>
+				</div>
+			</form>
+		</nb-card-body>
+	</nb-card>
+</div>

@@ -1,0 +1,25 @@
+<button style="text-align: left;" *ngIf="MultiSelect" (focus)="onTouched();hidden=false;" (click)="onTouched();hidden=false;" #btn
+    [ngClass]=addclass>{{multiselectLabel}}</button>
+<div *ngIf="MultiSelect" #dropDown [hidden]="hidden" class="dropdown-content">
+    <input  [(ngModel)]="textbox" [disabled]=disabled (keydown)='onOutput($event);'
+    autocomplete="off" class="form-control sticky" type="text">
+    <a (mouseover)="index=i;" [ngStyle]="{'background-color': i==index ? '#20a8d875':'','color':i==index ? '#fff':''}"
+        *ngFor="let item of itemsFilter;let i=index;">
+        <div class="custom-control custom-checkbox">
+            <input (change)="onCheck();" type="checkbox" [(ngModel)]="item.status" class="custom-control-input" id="multiSelect_{{item[optId]}}" />
+            <label class="custom-control-label" for="multiSelect_{{item[optId]}}">{{item[optValues]}}</label>
+        </div>
+    </a>
+    <a [hidden]='itemsFilter.length!=0'>No Data Found</a>
+</div>
+<input class="form-control"  *ngIf="!MultiSelect" [(ngModel)]="textbox" [disabled]=disabled (keydown)='onOutput($event);' #input
+    autocomplete="off" (focus)="onTouched();hidden=false" (blur)="onClick();hidden=true" [ngClass]=addclass
+    placeholder='{{placeholder}}' [id]='_ID' [name]='_Name' type="text">
+<div *ngIf="!MultiSelect" #dropDown [hidden]="hidden" class="dropdown-content">
+    <a (mouseover)="index=i;" (click)="onClick();"
+        [ngStyle]="{'background-color': i==index ? '#20a8d875':'','color':i==index ? '#fff':''}"
+        *ngFor="let item of itemsFilter;let i=index;">
+        {{item[optValues]}}
+    </a>
+    <a [hidden]='itemsFilter.length!=0'>No Data Found</a>
+</div>

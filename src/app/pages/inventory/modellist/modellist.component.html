@@ -1,0 +1,43 @@
+<!-- <p>modellist works!</p> -->
+<nb-card>
+    <nb-card-header>List Model</nb-card-header>
+    <nb-card-body>
+      <!-- <toaster-container></toaster-container> -->
+      <div class="row" style="padding-left: 10px;">
+        <div style="padding: 2px;">
+          <button  status="success" nbButton  (click)='Addmodel()'>Create</button>
+        </div>
+      </div>
+    
+      <table class="table">
+        <tr>
+          <th >Action</th>
+          <th>Model Name</th>
+          <th>Heandend Name</th>
+          <th>CAS Type</th>
+          <th>Vendor Name</th>
+          <th>STB Type</th>
+        </tr>
+      <tr *ngFor="let item of pagedItems">
+        <td ><a (click)="Editmodel(item)" title="Update"><i class="nb-edit"></i></a></td>
+        <td>{{item.modelname}}</td>
+        <td>{{item.hdname}}</td>
+        <td>{{item.cas_name}}</td>
+        <td>{{item.vendor_name}}</td>
+        <td>{{item.boxtypename}}</td>
+      </tr>
+    </table>
+
+      <div class="pagination">
+        <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+          <a [ngClass]="{disabled:pager.currentPage === 1}" (click)="page=1;getlist();">First</a>
+          <a [ngClass]="{disabled:pager.currentPage === 1}" (click)="page=page-1;getlist();">Previous</a>
+          <a *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}"
+            (click)="getlist(page);">{{page}}</a>
+          <a [ngClass]="{disabled:pager.currentPage === pager.totalPages}" (click)="page=page+1;getlist();">Next</a>
+          <a [ngClass]="{disabled:pager.currentPage === pager.totalPages}"
+            (click)="page=pager.totalPages;getlist();">Last</a>
+        </ul>
+      </div>
+    </nb-card-body>
+  </nb-card>

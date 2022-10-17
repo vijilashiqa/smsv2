@@ -1,0 +1,39 @@
+<nb-card>
+    <nb-card-header>List Genre</nb-card-header>
+    <nb-card-body>
+    <!-- <toaster-container></toaster-container> -->
+   <div class="row" style="padding-left: 10px;">
+        <div style="padding: 2px;">
+      <button
+      status="success" nbButton (click)='AddSub()'>Create</button>
+    </div>
+  </div>
+      <!-- <hr style="border: 0px;"> -->
+      <table class="table">
+        <tr>
+        <th>Action</th>
+        <th>Headend Name</th>
+        <th>Language</th>
+        <th>Genre</th>
+        <th>Status</th>
+        </tr>
+
+        <tr *ngFor="let item of pagedItems">
+          <td ><a (click)="Edit(item)" title="Update"><i class="nb-edit"></i></a></td>
+          <td>{{item.hdname}}</td>
+          <td>{{item.langname}}</td>
+          <td>{{item.genrename}}</td>
+          <td><i [ngStyle]="{'color': item.status==0? 'red':'green'}" [ngClass]="{'ion-close-round':item.status==0 ? true:false,'ion-checkmark-round':item.status!=0 ? true:false  }" [attr.title]="item.status==1 ? 'Active' : 'Deactive'"></i></td>
+        </tr>
+      </table>
+       <div class="pagination">
+      <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+          <a [ngClass]="{disabled:pager.currentPage === 1}" (click)="page=1;list();">First</a>
+          <a [ngClass]="{disabled:pager.currentPage === 1}" (click)="page=page-1;list();">Previous</a>
+          <a *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}" (click)="list(page);">{{page}}</a>
+          <a [ngClass]="{disabled:pager.currentPage === pager.totalPages}" (click)="page=page+1;list();">Next</a>
+          <a [ngClass]="{disabled:pager.currentPage === pager.totalPages}" (click)="page=pager.totalPages;list();">Last</a>
+      </ul>
+      </div>
+    </nb-card-body>
+  </nb-card>

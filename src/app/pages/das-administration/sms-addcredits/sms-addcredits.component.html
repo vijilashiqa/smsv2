@@ -1,0 +1,120 @@
+
+<div class="col-md-12">
+    <nb-card>
+       <nb-card-header>Add SMS Credit </nb-card-header>
+       <nb-card-body>
+          <form [formGroup]="smsForm" class="form-horizontal" (ngSubmit)="SmsCredit();">
+             <div class="modal-body">
+                <div class="form-group row">
+                   <div class="col-sm-4">
+                      <label>Headend</label>
+                      <select name="headend" formControlName="headend"
+                         [ngClass]="{'form-control' : true,'form-control-danger':smsForm.controls.headend.invalid&&submit}">
+                         <option value="" selected>Select Headend</option>
+                      </select>
+                      <small *ngIf="smsForm.hasError('required','headend')&&submit" class="form-text error"> Select
+                         required Headend! </small>
+                   </div>
+                   <div class="col-sm-4">
+                      <label>Operator Type</label>
+                      <select name="operator_type" formControlName="operator_type"
+                         [ngClass]="{'form-control' : true,'form-control-danger':smsForm.controls.operator_type.invalid&&submit}">
+                         <option value="" selected>Select Operator Type</option>
+                         <option value="1">LCO</option>
+                         <option value="2">Distributor</option>
+                         <option value="3">Sub-Distributor</option>
+                      </select>
+                      <small *ngIf="smsForm.hasError('required','operator_type')&&submit" class="form-text error"> Select
+                         required Operator Type! </small>
+                   </div>
+                   <div class="col-sm-4">
+                      <label>Operator Name</label>
+                      <select name="operator_name" formControlName="operator_name" [ngClass]="{'form-control' 
+                               : true,'form-control-danger':smsForm.controls.operator_name.invalid&&submit}">
+                         <option value="" selected> Select Operator Name</option>
+                      </select>
+                      <small *ngIf="smsForm.hasError('required','operator_name')&&submit" class="form-text error">Select
+                         required Operator name! </small>
+                   </div>
+                </div>
+                <div class="form-group row">
+                   <div class="col-sm-1">
+                      <label>SMS Limit</label>
+                      <div class="custom-control custom-checkbox">
+                         <input type="checkbox" class="custom-control-input" id="sms_limit"
+                            formControlName="sms_limit" />
+                         <label class="custom-control-label" for="sms_limit">Enable</label>
+                      </div>
+                   </div>
+                   <div class="col-md-2" *ngIf="smsForm.value['sms_limit']">
+                      <label>Limit</label>
+                      <input type="text" name="limit" formControlName="limit" class="form-control">
+                   </div>
+                </div>
+                <div class="form-group row">
+                   <div class="col-md-3">
+                      <label> Validity</label>
+                      <select name="limit_validity" formControlName="limit_validity"
+                         [ngClass]="{'form-control' : true,'form-control-danger':smsForm.controls.limit_validity.invalid&&submit}">
+                         <option value="" selected>Select Validity</option>
+                         <option value="1">Months</option>
+                         <option value="2">Years</option>
+                      </select>
+                   </div>
+ 
+                   <div class="col-md-3" *ngIf="smsForm.value['limit_validity']">
+                      <label>Period</label>
+                      <input type="text" name="validity_period" formControlName="validity_period"
+                         [ngClass]="{'form-control' : true,'form-control-danger':smsForm.controls.validity_period.invalid&&submit}" />
+                   </div>
+                   <div class="col-md-3">
+                      <label> Price</label>
+                      <input type="text" name="price" formControlName="price" class="form-control">
+                   </div>
+                   <div class="col-md-3">
+                      <label> Pay Type</label>
+                      <select name="pay_type" formControlName="pay_type"
+                         [ngClass]="{'form-control' : true,'form-control-danger':smsForm.controls.pay_type.invalid&&submit}">
+                         <option value="" selected>Select Pay Type</option>
+                         <option value="1">Credit</option>
+                         <option value="2">Net Banking</option>
+                         <option value="3">Bank Deposit</option>
+                         <option value="4">Adjustment</option>
+                      </select>
+                   </div>
+                </div>
+                <div class="col-md-3">
+                   <div class="form-group row" *ngIf="smsForm.value['pay_type']==1">
+                      <label>Note</label>
+                      <textarea name="note"
+                         [ngClass]="{'form-control' : true,'form-control-danger':smsForm.controls.note.invalid&&submit}"
+                         formControlName="note"></textarea>
+                   </div>
+                   <div class="form-group row" *ngIf="smsForm.value['pay_type']==4">
+                      <label>Reason</label>
+                      <textarea name="reason"
+                         [ngClass]="{'form-control' : true,'form-control-danger':smsForm.controls.reason.invalid&&submit}"
+                         formControlName="reason"></textarea>
+                   </div>
+                   <div class="form-group row" *ngIf="smsForm.value['pay_type']==2">
+                      <label>UTR</label>
+                      <input type="text" name="utr"
+                         [ngClass]="{'form-control' : true,'form-control-danger':smsForm.controls.utr.invalid&&submit}"
+                         formControlName="utr">
+                   </div>
+                   <div class="form-group row" *ngIf="smsForm.value['pay_type']==3">
+                      <label>Upload</label>
+                      <input type="file" name="upload"
+                         [ngClass]="{'form-control' : true,'form-control-danger':smsForm.controls.upload.invalid&&submit}"
+                         formControlName="utr">
+                   </div>
+                </div>
+             </div>
+             <div class="modal-footer">
+                <button type="submit" class="btn btn-md btn-success">Submit</button>
+                <button type="submit" class="btn btn-md btn-danger ">Reset</button>
+             </div>
+          </form>
+       </nb-card-body>
+    </nb-card>
+ </div>

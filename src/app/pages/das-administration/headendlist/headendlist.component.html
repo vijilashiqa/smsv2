@@ -1,0 +1,43 @@
+<nb-card>
+    <nb-card-header>List Headend</nb-card-header>
+    <nb-card-body>
+      <!-- <toaster-container></toaster-container> -->
+      <button status="success" nbButton 
+        [routerLink]="['/pages/das-administration/headendadd']">Create</button>
+      <hr style="border: 0px;">
+      <table class="table table-condensed table-hover">
+        <tr>
+          <th>Action</th>
+          <th>Headend Name</th>
+          <th>Headend ID</th>
+          <th>No Of Pay</th>
+          <th>No Of Broadcaster</th>
+          <th>No Of User</th>
+          <th>No Of Active STB</th>
+          <th>No Of Deactive STB</th>
+        </tr>
+  
+        <tr *ngFor="let item of pagedItems" >
+          <td style="cursor:pointer;" [routerLink]="['/pages/das-administration/headendadd']" [queryParams]="{id:item.hdid}"><i class="nb-edit"></i></td>
+          <td>{{item.hdname}}</td>
+          <td>{{item.hdid}}</td>       
+          </tr>
+      </table>
+      <div class="row">
+        <div class="col-md-6">
+      <div class="pagination">
+        <ul  *ngIf="pager.pages && pager.pages.length" class="pagination">
+       
+          <a [ngClass]="{active:pager.currentPage === 1}" (click)="page=1;getList();">First</a>
+          <a [ngClass]="{active:pager.currentPage === 1}" (click)="page=page-1;getList();">Previous</a>
+          <a *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}"
+            (click)="getList(page);">{{page}}</a>
+          <a [ngClass]="{active:pager.currentPage === pager.totalPages}" (click)="page=page+1;getList();">Next</a>
+          <a [ngClass]="{active:pager.currentPage === pager.totalPages}"
+            (click)="page=pager.totalPages;getList();">Last</a>
+        </ul>
+      </div>
+    </div>
+  </div>
+    </nb-card-body>
+  </nb-card>
