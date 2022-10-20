@@ -24,8 +24,8 @@ export class StbparingComponent implements OnInit {
   async ngOnInit() {
     await this.createForm();
     await this.getHeadend();
-    // await this.boxparing();
-    await this.vcparing();
+    await this.boxparing();
+ this.vcparing();
   }
 
   async paring() {
@@ -46,7 +46,8 @@ export class StbparingComponent implements OnInit {
     console.log('result', this.result)
     if (this.result && this.result[0].err_code == 0) {
       this.toast.success(this.result[0]['msg']);
-      this.route.navigate(['/pages/stbmanagement/stblist'])
+      this.close();
+      //this.route.navigate(['/pages/stbmanagement/stblist'])
     } else {
       this.toast.warning(this.result[0]['msg'])
     }
@@ -56,15 +57,15 @@ export class StbparingComponent implements OnInit {
     console.log('listboxpair', this.listboxpair)
   }
 
-  vcparing() {
+  async vcparing() {
     const [boxvc_data] = this.listboxpair?.filter(x => x.boxid == this.value['boxno'])
-    console.log('vcid', boxvc_data.vcid, boxvc_data.pairflg);
+  //console.log('vcid', boxvc_data.vcid, boxvc_data.pairflg);
     this.pair_status = boxvc_data.pairflg;
     this.listvc = [];
     if (boxvc_data.vcid) {
-      console.log("boxdata@@@@@@@@", boxvc_data.vcid)
+    //  console.log("boxdata@@@@@@@@", boxvc_data.vcid)
       this.listvc = [{ vcid: boxvc_data.vcid, vcno: boxvc_data.vcno }]
-      console.log('listvc**********', this.listvc)
+      //console.log('listvc**********', this.listvc)
     } else {
       const data = []
       let vclist = this.listboxpair.filter(x => x.vcno !== 0 && x.vcno !== null).reduce((a, v) => {
@@ -73,7 +74,7 @@ export class StbparingComponent implements OnInit {
         return data
       }, [])
       this.listvc = vclist
-      console.log('vclist', vclist);
+     // console.log('vclist', vclist);
     }
   }
 

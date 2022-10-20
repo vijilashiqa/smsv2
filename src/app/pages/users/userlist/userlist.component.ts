@@ -31,13 +31,14 @@ export class UserlistComponent implements OnInit {
 
   }
 
-  Adduser() {
-    const modalRef = this.modal.open(UserhdcasComponent, { container: 'nb-layout', backdrop: false });
-    modalRef.componentInstance.title = 'Add Hd user';
+  update(item) {
+    const modalRef = this.modal.open(UserhdcasComponent, { container: 'nb-layout',  backdrop: false });
+    modalRef.componentInstance.title = 'UPDATE HDCAS';
+    modalRef.componentInstance.item = item
     modalRef.result.then((data) => {
-      this.initiallist();
-    })
-  };
+    this.initiallist();
+  })
+}
 
   getlist(page) {
     var total = Math.ceil(this.count / this.limit);

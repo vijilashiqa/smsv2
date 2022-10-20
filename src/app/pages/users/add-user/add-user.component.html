@@ -43,15 +43,7 @@
                                         *ngIf="AddUserForm.controls.password.errors &&(AddUserForm.controls.password.errors.required )&& submit"
                                         class="invalid-feedback">Password is required! </small>
                                 </div>
-                                <!-- <div class="col-sm-6">
-                                    <label>Confirm Password <span style="color:red">*</span></label>
-                                    <input type="password" name="CPassword" formControlName="CPassword"
-                                        placeholder="Confirm Password" #input
-                                        [ngClass]="{'form-control' : true,'form-control-danger':AddUserForm.value['password']!=AddUserForm.value['CPassword']}" />
-                                    <small *ngIf="AddUserForm.value['password']!=AddUserForm.value['CPassword']"
-                                        class="form-text error">Passwords does not
-                                        Match! </small>
-                                </div> -->
+                
                                 <div class="col-sm-6">
                                     <label>Full Name <span style="color:red">*</span></label>
                                     <input type="text" class="form-control" name="fullname" formControlName="fullname"
@@ -62,20 +54,7 @@
                                         class="invalid-feedback">FirstName is required! </small>
                                 </div>
 
-
                             </div>
-                            <!-- <div class="form-group row">
-                              
-                                <div class="col-sm-6">
-                                    <label>Last Name </label>
-                                    <input type="text" class="form-control" name="lastname" formControlName="lastname"
-                                        placeholder="Enter LastName"
-                                        [ngClass]="{ 'is-invalid': submit && AddUserForm.controls.lastname.errors }" />
-                                    <small
-                                        *ngIf="AddUserForm.controls.lastname.errors &&(AddUserForm.controls.lastname.errors.required )&& submit"
-                                        class="invalid-feedback">LastName is required! </small>
-                                </div>
-                            </div> -->
                             <div class="form-group row">
                                 <div class="col-sm-6">
                                     <label>Date Of Birth<span style="color:red">*</span></label>
@@ -305,9 +284,7 @@
                         <div class="modal-body">
                             <div class="form-group row">
                                 <div class="col-sm-6"
-                                    (changed)='taxpayby(); listoperator();AddUserForm.controls.subdistid.setValue("");operatortype();
-                                    '
-                                    >
+                                    (changed)='taxpayby(); listoperator();AddUserForm.controls.subdistid.setValue("");operatortype();'>
                                     <label class="control-label">Operator Type<span style="color:red">*</span></label>
                                     <select class=form-control name="usertype" formControlName="usertype" 
                                         [ngClass]="{ 'is-invalid': submit && this.AddUserForm.controls.usertype.errors }">
@@ -325,9 +302,7 @@
 
                             <div class="form-group row" *ngIf='AddUserForm.value["usertype"]=="444" || 
                                                             AddUserForm.value["usertype"]=="333"' 
-                                                            (changed)='operatortype() ;listoperator();
-                                                            '
-                                                            >
+                                                            (changed)='operatortype() ;listoperator();'>
                                 <div class="col-sm-6">
                                     <label>Distributor/Subdistributer<span style="color:red">*</span></label>
                                     <select class="form-control" 
@@ -449,12 +424,6 @@
                                         class="invalid-feedback">LCO Code is required! </small>
                                 </div>
                             </div>
-
-
-
-
-
-                            
                             <div class="form-group row" *ngIf='AddUserForm.value["usertype"]=="444" ||
                             ( AddUserForm.value["usertype"]=="333" && AddUserForm.value["dist_or_sub_flg"] =="4")||
                            ( AddUserForm.value["usertype"]=="333" && AddUserForm.value["dist_or_sub_flg"] =="1" )||
@@ -605,8 +574,7 @@
                     </nb-tab>
                     <nb-tab tabTitle="Revenue Share">
                         <div class="modal-body">
-                            <div class="form-group row"
-                                >
+                            <div class="form-group row">
                                 <div class="col-sm-6">
                                     <label>MSO Share</label>
                                     <input type="number" class="form-control" name="mso_share"

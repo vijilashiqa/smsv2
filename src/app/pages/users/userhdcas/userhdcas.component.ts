@@ -4,6 +4,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
  import { CountryService, HeadendService } from '../../_services';
  import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
  import { ToastrService } from 'ngx-toastr';
+ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { OperatorService } from '../../_services/operator.service';
 @Component({
   selector: 'ngx-userhdcas',
   templateUrl: './userhdcas.component.html',
@@ -11,82 +13,76 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class UserhdcasComponent implements OnInit {
 modalHeader: string;
-submit: boolean = false; userhdcas;editdatas;
-item; result;id;result1;listhdcas
-@Input() title: string;
+submit: boolean = false; userhdcas;editdatas;data='';checkedValdata;resellercheckre
+item; result;id;result1;listhdcas;searchresell ='';checkedVal;resu
+@Input() title: string;isMasterSel =false
  
 constructor(
    private headend : HeadendService,
     public activeModal: NgbActiveModal,
     private toast: ToastrService,
+    private operator : OperatorService,
   ){}
 
 async ngOnInit(){
    
   this.createForm();
   console.log('Item----',this.item);
-  // if(this.item){
-  //   await this.editgenre()
-  // }
+  this.onCheck();
+  
+}
 
-  this.getcashead();
+async onCheck() {
+  this.listhdcas = await this.operator.gethdcas({hdid: this.item.hdid , id : this.item.id});
+  this.result = this.listhdcas[0];
+  console.log("hd cas list", this.result)
+
+}
+
+
+checkhdcas(checked) {
+  this.result.forEach(x => x.casstatus = checked)
   
 }
 
 
-async getcashead($event = "") {
-  this.listhdcas = await this.headend.listHdcas({  });
-  this.listhdcas = this.listhdcas[0];
-  console.log("hd cas list", this.listhdcas);
+isAllSelected() {
+  this.isMasterSel = this.result.every(function(item:any) {
+      return item.casstatus == true;
+    })
+  
 }
 
 
-
-checkAllCheckBox(ev) {
-  // console.log('Check All event', ev);
-
-  this.listhdcas[0].forEach(x => x.checked = ev.target.checked);
-  // console.log('Data',this.listhdcas);
-
-}
-
-
-isAllCheckBoxChecked() {
-  if (this.listhdcas && this.listhdcas[0]) {
-    return this.listhdcas[0].every(x => x.checked)
-  }
-}
 async addhdcas() {
-  // this.submit = true;
-  // console.log('items============',this.item)
-  // if (!this.userhdcas.valid) {
-  //   return;
-  // // }
-  // let method = this.item ? 'editcountrygeo' : 'addcountrygeo'
-  // console.log('updatelist', method);
-  // if (this.item) this.userhdcas.value['country_pk'] = this.item['country_pk']
-  // console.log('countyr_pk========',this.item)
-  // let result = await this.country[method](this.userhdcas.value)
-  // if (result && result['status'] == 1) {
-  //   this.toast.success(result['msg']);
-  //   this.close();
-  // } else {
-  //   this.toast.warning(result['msg'])
-  //   // console.log('add...', this.userhdcas.value);
-  // }
+  this.submit = true;
+  console.log('items============',this.item)
+  if (!this.userhdcas.valid) {
+    return;
+  }
+  let checkhdcas = this.result.filter(item => item.casstatus).map(item => item.hdcasid)
+   this.userhdcas.value['id']=this.item.id;
+  this.userhdcas.value['hdid']=this.item.hdid;
+   this.userhdcas.value.hdcasid =checkhdcas;
 
+     this.resu = await this.operator.assignusercas(this.userhdcas.value)  ;
 
-
-
+    console.log('result,,,,,',this.resu)
+    if (this.resu && this.resu['err_code'] == 1) {
+        this.toast.success(this.resu['msg']);
+        this.close();
+      } else {
+        this.toast.warning(this.resu['msg'])
+        console.log('add...', this.userhdcas.value);
+      }
 }
-
 close(){
 console.log('Status========= close----------');
   this.activeModal.close();
 }
 async createForm() {
   this.userhdcas = new FormGroup({
-    hdcas: new FormControl(this.item? this.item['hdcas']:'', Validators.required)
+    // hdcas: new FormControl(this.item? this.item['hdcas']:'', Validators.required)
   });
 }
 }

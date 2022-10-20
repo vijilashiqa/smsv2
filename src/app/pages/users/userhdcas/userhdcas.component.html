@@ -8,19 +8,76 @@
       </div>
     <form [formGroup]="userhdcas" class="form-horizontal" (ngSubmit)="addhdcas();">
       <div class="modal-body">
-        <div class="form-group row">
-          <div class="col-sm-12">
-           <label> Select Hd CAS *</label>
-               <!-- <input type="checkbox" class="form-control" name="hdcas"
-               [checked]="isAllCheckBoxChecked()"
-              (changed)="checkAllCheckBox($event)"  formControlName="hdcas" placeholder="Enter Country"
-           /> -->
-              <!-- <small *ngIf="userhdcas.controls.hdcas.errors &&(userhdcas.controls.hdcas.errors.required )&& submit"
-              class="invalid-feedback">hdcas is required! </small> -->
-              <input style="zoom:1.5;" type="checkbox"  formControlName="hdcas"  id="checkbox" [checked]="isAllCheckBoxChecked()"
-              (change)="checkAllCheckBox($event)">
+
+<!-- 
+        <div class="col-sm-12">
+          <table class="table table-header table-bordered table-striped">
+            <thead>
+              <th colspan="5">
+                <input placeholder="Search HD CAS Here" class="form-control"
+                  [ngModelOptions]="{standalone:true}" [(ngModel)]="searchresell"
+                  style="width:30%;border: none;border-bottom: 2px solid ;font-size: 15px;">
+              </th>
+            </thead>
+          </table>
+          <div class="table-wrapper">
+            <table class="table table-bordered table-striped">
+              <tr>
+                <th class="text-center">
+                  <label class="containerbox">All
+                    <input type="checkbox" name="all"
+                      (change)="resellcheck($event.target.checked);checkedresel();" />
+                    <span class="checkmarkbox"></span>
+                  </label>
+                </th>
+                <th>HD CAS  Name <span style="color:red;">*</span></th>
+              </tr>
+              <tr *ngFor="let item of result | grdFilter: {cas_name: searchresell }; let i=index;"
+                style="text-transform: uppercase;">
+                <td class="text-center">
+                  <label class="containerbox">
+                    <input type="checkbox" name="sizecb[]" [ngModelOptions]="{standalone:true}"
+                      [(ngModel)]="item.cas_name" (change)="checkedresel()" />
+                    <span class="checkmarkbox"></span>
+                  </label>
+                </td>
+                <td><a>{{item.cas_name}}</a> </td>
+              </tr>
+            </table>
           </div>
+        </div> -->
+
+        <div class="  table-wrapper table-scroll ">
+          <table class="table table-bordered table-striped">
+            <thead>
+              <th colspan="5">
+                <input placeholder="Search hdcas Here" class="form-control" [(ngModel)]="searchresell"
+                  [ngModelOptions]="{standalone: true}"
+                  style="width:30%;border: none;border-bottom: 2px solid ;font-size: 15px;">
+              </th>
+            </thead>
+            <tr>
+              <th class="text-center">
+                <input type="checkbox" name="all" (change)="checkhdcas($event.target.checked)" />All
+              </th>
+              <th>CAS ID </th>
+              <th>HD CAS Name</th>
+            </tr>
+            <tr *ngFor="let item of result  | grdFilter: {cas_name: searchresell };  let i=index;">
+              <td class="text-center">
+                <input type="checkbox" name="sizecb" [(ngModel)]="item.casstatus" [ngModelOptions]="{standalone: true}"
+                  [value]="item.hdcasid"  (change)="isAllSelected()">
+              </td>
+              <td><a>{{item.hdcasid}}</a></td>
+
+              <td>{{item.cas_name}}</td>
+            </tr>
+            <tr>
+              <td [hidden]='item.length !=0' colspan="5" style="text-align: center;">No HD CAS Found</td>
+            </tr>
+          </table>
         </div>
+
       </div>
       <div class="modal-footer">
         <button type="submit" status="success" nbButton  style="cursor:pointer" >ADD</button>

@@ -44,4 +44,15 @@ async getlcocode(params){
   return await this.http.post("/operator/getlcooperator",params).toPromise();
 }
 
+async gethdcas(params){
+
+  return await this.http.post("/operator/gethdcas",params).toPromise();
+}
+
+
+async assignusercas(params){
+
+  return await this.http.post("/operator/assignusercas" ,params).toPromise();
+}
+
 }

@@ -34,8 +34,7 @@ import { ToasterModule } from 'angular2-toaster';
 import { TimePickerModule } from '@syncfusion/ej2-angular-calendars';
 import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
-
+// import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 @NgModule({
   declarations: [AppComponent, LoginComponent,],
@@ -62,6 +61,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ThemeModule.forRoot(),
     ToasterModule.forRoot(),
     NgbModule,
+//    NgMultiSelectDropDownModule.forRoot(),
     FormsModule
    ],
   bootstrap: [AppComponent],

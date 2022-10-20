@@ -13,13 +13,13 @@ import { WalletlistComponent } from './walletlist/walletlist.component';
 import { NbAccordionModule, NbButtonModule, NbCardModule, NbListModule, NbRouteTabsetModule, NbStepperModule, NbTabsetModule, NbTreeGridModule, NbUserModule } from '@nebular/theme';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { LayoutRoutingModule } from '../layout/layout-routing.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule,FormsModule } from '@angular/forms';
 import { PagerService } from '../_services/index';
 import { ThemeModule } from '../../@theme/theme.module';
 import { AutoCompleteNModule } from '../auto-complete-module/auto-completen-module';
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 import { UserhdcasComponent } from './userhdcas/userhdcas.component';
-
+import { filterModule } from '../filter/filter-module';
 @NgModule({
   declarations: [
     AddUserComponent,
@@ -53,7 +53,10 @@ import { UserhdcasComponent } from './userhdcas/userhdcas.component';
     ReactiveFormsModule,
     ThemeModule,
     AutocompleteLibModule,
-    AutoCompleteNModule
+    AutoCompleteNModule,
+    filterModule,
+    FormsModule,
+  //  NgMultiSelectDropDownModule.forRoot()
 
   ],
 

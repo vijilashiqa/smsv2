@@ -16,7 +16,6 @@ export class EditstockComponent implements OnInit {
   submit: boolean = false; editstockForm; getvendorlist; getmodellist; locationlist; gethsn; editfirstarray;
   vendor; loc;; STB; listhead; editdata = {}; id; editflag = false; editable: boolean = false;
   materialArray;
-
   constructor(
     private _fb: FormBuilder,
     private hsn: HsnService,
@@ -25,16 +24,18 @@ export class EditstockComponent implements OnInit {
     private route: Router,
     private aRoute: ActivatedRoute,
     private stock: StockService
-  ) { }
+  ) {
+    this.getHeadend();
+    this.createForm()
+  }
   async addstockIn() {
     this.submit = true;
     if (this.editstockForm.invalid) {
-      // this.toast.warning('Please fill mandatory fields')
+      this.toast.warning('Please fill mandatory fields')
       return;
     }
     this.editstockForm.value.id = this.id;
     let result = await this.stock.editstock(this.editstockForm.value);
-
     console.log('result in stock', result)
     if (result[0]['err_code'] == 0) {
       this.toast.success(result[0]['msg'])
@@ -42,8 +43,6 @@ export class EditstockComponent implements OnInit {
     } else {
       this.toast.warning(result[0]['msg'])
     }
-
-
   }
 
 
@@ -68,12 +67,10 @@ export class EditstockComponent implements OnInit {
       this.editable = true
       this.editflag = true;
       await this.edit();
-      await this.createForm();
-      await this.getHeadend();
       await this.getVendor();
       await this.getlocation();
       await this.gethsnlistg();
-      await this.getModel();
+      this.getModel();
 
     }
 
@@ -82,9 +79,12 @@ export class EditstockComponent implements OnInit {
   async getVendor() {
 
     this.getvendorlist = await this.stock.getstockvendor({ hdid: this.editstockForm.value['hdid'] });
+    console.log("get vendor ", this.getvendorlist)
   }
   async getHeadend($event = '') {
     this.listhead = await this.headend.getHeadend({})
+    console.log('headend--', this.listhead);
+
 
   }
   async getModel() {
@@ -101,15 +101,15 @@ export class EditstockComponent implements OnInit {
   }
   async edit() {
     this.editdata = await this.stock.geteditstock({ stockinid: this.id });
-    console.log('editdata .....', this.editdata)
     this.editfirstarray = this.editdata[0][0]
     console.log('editfirst', this.editfirstarray)
     this.materialArray = this.editdata[1]
-    await this.createForm()
-    this.gethsnlistg();
+    this.createForm()
 
-    this.getlocation();
+
+
     for (let item of this.materialArray) {
+      console.log("item/////////////////", item)
       let total = item.qty * item.price
       this.addMaterial(item.materialid, item.boxmodelid, item.qty, item.price, total)
     }
@@ -160,7 +160,7 @@ export class EditstockComponent implements OnInit {
       vendorid: new FormControl(this.editfirstarray?.['vendorid'] || '', Validators.required),
       vendordetid: new FormControl(this.editfirstarray?.['vendordetid'] || '', Validators.required),
       stocktype: new FormControl(this.editfirstarray?.['stocktype'] || '', Validators.required),
-      stockinid: new FormArray([this.createMaterial()])
+      stockinid: new FormArray([])
     });
   }
 }

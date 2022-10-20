@@ -21,7 +21,7 @@
             <label>Headend Name<span style="color:red">*</span></label>
             <auto-completen
             [addclass]="{ 'error': submit && this.AddmodelForm.controls.hdid.errors }"
-            addclass="form-control" optValues="hdname" (changed)="getcashead();getstbtype();getmake();typeclearHeadend('1')"
+            addclass="form-control" optValues="hdname" (changed)="getcashead($event);getstbtype();getmake();typeclearHeadend('1')"
             formControlName="hdid" (keyUp)="getHeadend($event)"
             placeholder='Select Headend'  optId="hdid"
             [item]="listhead">

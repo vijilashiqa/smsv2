@@ -80,7 +80,7 @@ export class AddpackageComponent implements OnInit {
   }
 
   async getbroadcaster() {
-    this.listbroadaterr = await this.broadcast.listbroadcaster({hdid:this.val['hdid']})
+    this.listbroadaterr = await this.broadcast.listbroadcaster({ hdid:this.AddPackageForm.value['hdid']})
     this.listbroadaterr = this.listbroadaterr[0]
   }
 
@@ -218,8 +218,6 @@ this.AddPackageForm.value.package = [...checkaddonpack, ...checkalacatepack,this
 let packages = [this.AddPackageForm.value];
 console.log('bunde ***************',packages)
 const result= await this.packageser.addpackage(this.AddPackageForm.value);
-// if(this.AddPackageForm.value['packtype'] == 3) result =await this.packageser.addpackage( {addpack : packages})
-// else result = await this.packageser.addpackage(this.AddPackageForm.value)
 console.log(' add package',result)
 if (result && result[0].err_code == 0) {
   this.toast.success(result[0]['msg']);

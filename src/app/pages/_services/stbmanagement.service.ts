@@ -57,5 +57,11 @@ async addstbpair(params){
   return await this.http.post("/stbm/addstbpair",params).toPromise();
 }
 
+async getoperatortype (params){
+
+  return await this.http.post("/stbm/getoperatortype",params).toPromise();
+  
+}
+
 
 }

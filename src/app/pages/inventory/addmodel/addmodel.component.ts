@@ -30,10 +30,14 @@ export class AddmodelComponent implements OnInit {
     private toast: ToastrService,  private route: Router,) { }
 
   ngOnInit(): void {
-    // console.log("item*********",this.item)
+    console.log("item*********",this.item)
     this.createForm();
     this.getHeadend();
-  //  this.getcashead();
+    if(this.item){
+     
+      this.getcashead();
+    }
+  
     this.getmake();
     this.getstbtype();
   }
@@ -62,7 +66,7 @@ export class AddmodelComponent implements OnInit {
     return this.AddmodelForm.value
   }
   async getmake($event = '') {
-    this.listmake = await this.vendorservices.getvendor({hdid :this.AddmodelForm.value['hdid']});
+    this.listmake = await this.vendorservices.getvendor({ hdid :this.AddmodelForm.value['hdid']});
   }
   async getcashead($event = '') {
     this.listhdcas = await this.headend.listHdcas({ hdid :this.AddmodelForm.value['hdid'] , like: $event })
@@ -70,7 +74,7 @@ export class AddmodelComponent implements OnInit {
     console.log('zxcxc',this.listhdcas)
   }
   async getstbtype() {
-    this.getstbtypeg = await this.boxtype.selectboxtype({hdid :this.AddmodelForm.value['hdid']})
+    this.getstbtypeg = await this.boxtype.selectboxtype({ hdid :this.AddmodelForm.value['hdid']})
     console.log('stb type',this.getstbtypeg)
   }
   close() {

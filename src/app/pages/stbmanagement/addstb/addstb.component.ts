@@ -17,7 +17,7 @@ const EXCEL_EXTENSION = '.xlsx';
 export class AddstbComponent implements OnInit {
   arrayBuffer: any; bulk: any = []; failure: any = []; getstbtypeg; result; bulkmeta: any = [];
   submit: boolean = false; AddStbForm; head; cas; listhead; listhdcas; getmodel; getmodelar; getinvoicedet;
-  model: any = []; stb_type; invoice; opt: any = []; s = 0; f = 0; file: any;
+  model: any = []; stb_type; invoice; opt: any = []; s = 0; f = 0; file: any;operatortype;
   vc_status = false;bulkData:any;
 
   constructor(private headend: HeadendService,
@@ -28,14 +28,12 @@ export class AddstbComponent implements OnInit {
     private stock:StockService,
     private stb: StbmanagementService) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.createForm();
-    this.getHeadend();
-    // this.getstbtype();
-   // this.getModelcas();
-   // this.getcashead();
-   // this.getInvoicefun();
-    this.serialValidation();
+     this.getHeadend();
+
+     this.serialValidation();
+     this.getoperatortypef();
   }
 
 
@@ -82,7 +80,7 @@ export class AddstbComponent implements OnInit {
     if (this.val['status']) {
       this.AddStbForm.value['status'] =this.AddStbForm.value['status'] == 'false' ? 0: 1 ;
       let result = await this.stb.addstb(this.val)
-      console.log('add...', this.result);
+      console.log('add...',result);
       if (result && result[0].err_code == 0) {
         this.toast.success(result[0]['msg']);
         this.route.navigate(['/pages/stbmanagement/stblist'])
@@ -144,9 +142,8 @@ export class AddstbComponent implements OnInit {
     console.log('getstb type',this.getstbtypeg)
   }
   async getInvoicefun() {
-this.getinvoicedet =await this.stb.getinvoice({hdid : this.AddStbForm.value['hdid'], bmid : this.AddStbForm.value['modelid']})
-
-    console.log('get invoice', this.getinvoicedet)
+  this.getinvoicedet =await this.stb.getinvoice({hdid : this.AddStbForm.value['hdid'], bmid : this.AddStbForm.value['modelid']})
+  console.log('get invoice', this.getinvoicedet)
   }
   typeClear(val = '1') {
     this.changeclear('casid', 'modelid', 'stb_type','stockinwardid')
@@ -157,6 +154,12 @@ this.getinvoicedet =await this.stb.getinvoice({hdid : this.AddStbForm.value['hdi
     for (let i of data) {
       this.AddStbForm.controls[i].setValue('');
     }
+  }
+
+
+async  getoperatortypef(){
+  this.operatortype= await this.stb.getoperatortype({ usertype : this.AddStbForm.value['usertype'] , hdid : this.AddStbForm.value['hdid']})
+  console.log("operator type ", this.operatortype)
   }
 
   setModelType() {
@@ -235,10 +238,11 @@ this.getinvoicedet =await this.stb.getinvoice({hdid : this.AddStbForm.value['hdi
       modelid: new FormControl('', Validators.required),
       stockinwardid: new FormControl('', Validators.required),
       stb_type: new FormControl(''),
-      // lco: new FormControl('',Validators.required),
-      // distributor: new FormControl('',Validators.required),
-      // operator_type: new FormControl('',Validators.required),
-      // subdis: new FormControl('', Validators.required),
+      hotelid:new FormControl(''),
+      lco: new FormControl(''),
+      distributor: new FormControl(''),
+      usertype: new FormControl('',Validators.required),
+      subdis: new FormControl(''),
       boxno: new FormControl(''),
       vcid: new FormControl(''),
       status: new FormControl(false),
