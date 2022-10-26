@@ -145,12 +145,10 @@ export class AddpackageComponent implements OnInit {
          });
         temp = []
       }
-       
-    
       this.nodes = temp1
       this.tree.treeModel.update();
       console.log('nodes-----------------',this.nodes);
-      
+
       const nodeselected : any = this.selectednodes();
       if (this.AddPackageForm.value['packtype'] != 3) {
 

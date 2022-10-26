@@ -24,7 +24,6 @@ export class AddbroadcasterComponent implements OnInit {
     private aRoute: ActivatedRoute,) { }
   async addbroadcaster() {
     this.submit = true;
-
     const invalid = [];
     const control = this.AddBroadcasterForm.controls
     for (const name in control) {

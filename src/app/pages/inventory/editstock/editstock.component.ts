@@ -30,8 +30,16 @@ export class EditstockComponent implements OnInit {
   }
   async addstockIn() {
     this.submit = true;
+    const invalid = [];
+    const control = this.editstockForm.controls
+    for (const name in control) {
+      if (control[name].invalid) {
+        invalid.push(name);
+      }
+    }
     if (this.editstockForm.invalid) {
-      this.toast.warning('Please fill mandatory fields')
+      console.log('Invalid value -----', invalid);
+      window.alert('Please fill mandatory fields');
       return;
     }
     this.editstockForm.value.id = this.id;
@@ -63,10 +71,12 @@ export class EditstockComponent implements OnInit {
   async ngOnInit() {
     this.id = this.aRoute.snapshot.queryParams.id
     if (this.id) {
+      this.clearValidation();
       console.log('iddddddddddddddddddddddd', this.id)
       this.editable = true
       this.editflag = true;
       await this.edit();
+     
       await this.getVendor();
       await this.getlocation();
       await this.gethsnlistg();
@@ -77,15 +87,12 @@ export class EditstockComponent implements OnInit {
 
   }
   async getVendor() {
-
     this.getvendorlist = await this.stock.getstockvendor({ hdid: this.editstockForm.value['hdid'] });
     console.log("get vendor ", this.getvendorlist)
   }
   async getHeadend($event = '') {
     this.listhead = await this.headend.getHeadend({})
     console.log('headend--', this.listhead);
-
-
   }
   async getModel() {
     this.getmodellist = await this.stock.getstockmodel({});
@@ -105,15 +112,20 @@ export class EditstockComponent implements OnInit {
     console.log('editfirst', this.editfirstarray)
     this.materialArray = this.editdata[1]
     this.createForm()
-
-
-
     for (let item of this.materialArray) {
       console.log("item/////////////////", item)
       let total = item.qty * item.price
       this.addMaterial(item.materialid, item.boxmodelid, item.qty, item.price, total)
     }
   }
+
+
+  clearValidation() {
+    console.log('clear validation*******************')
+    this.editstockForm.get('stockinid').clearValidators();
+    this.editstockForm.get('stockinid').updateValueAndValidity();
+  }
+
 
 
   get stockinid(): FormArray {
@@ -130,10 +142,10 @@ export class EditstockComponent implements OnInit {
 
   createMaterial(id = 0, box = '', qty = 0, price = 0, amt = 0): FormGroup {
     return this._fb.group({
-      materialid: [id || '', Validators.required],
-      boxmodelid: [box || '', Validators.required],
-      qty: [qty || '', Validators.required],
-      price: [price || '', Validators.required],
+      materialid: [id || ''],
+      boxmodelid: [box || ''],
+      qty: [qty || ''],
+      price: [price || ''],
       total: [{
         value: amt || '',
         disabled: true

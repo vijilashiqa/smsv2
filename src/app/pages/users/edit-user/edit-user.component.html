@@ -402,9 +402,9 @@
 
                             <div class="form-group row">
                                 <div class="col-sm-6">
-                                    <label>{{showtext}} Name<span style="color:red">*</span></label>
+                                    <label>{{edituser.value.usertype==444?'LCO':edituser.value.usertype==666?'Distributer':edituser.value.usertype==555?'Sub-Distributor':edituser.value.usertype==333?'Hotel':'Operator'}}&nbsp;Name<span style="color:red">*</span></label>
                                     <input type="text" class="form-control" name="business_name"
-                                        formControlName="business_name" placeholder="Enter Business Name"
+                                        formControlName="business_name" placeholder="Enter  Name"
                                         [ngClass]="{ 'is-invalid': submit && this.edituser.controls.business_name.errors }" />
                                     <small
                                         *ngIf="this.edituser.controls.business_name.errors &&(this.edituser.controls.business_name.errors.required)&& submit"

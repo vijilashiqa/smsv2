@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { CountryService, HeadendService } from '../../_services/index';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'ngx-add-cust',
   templateUrl: './add-cust.component.html',
@@ -40,8 +40,6 @@ export class AddCustComponent implements OnInit {
   const invalid = [];
   const control = this.ctrl
   for (const name in control) {
-
-    console.log('controls...........',control);
     if (control[name].invalid) {
       invalid.push(name);
     }
@@ -51,12 +49,10 @@ export class AddCustComponent implements OnInit {
     window.alert('Please fill mandatory fields');
     return;
   }
-  // this.val['countryid1'] = this.val['countryid'].id;
-  // this.val['stateid1'] = this.val['stateid'].id;
-  // this.val['districtid1'] = this.val['districtid'].id;
-  // this.val['cityid1'] = this.val['cityid'].id;
-  // this.val['areaid1'] = this.val['areaid'].id;
-  // console.log('add...', this.val);
+
+
+  let result1 = this.AddCustForm.value;
+   console.log("result +++++++++++++ ",result1)
   // let method = this.id ? 'editheadend' : 'addheadend'
   // console.log('updatelist', method);
   // if (this.id) this.AddCustForm.value['id'] = this.id
@@ -69,32 +65,20 @@ export class AddCustComponent implements OnInit {
   //   console.log('add...', this.val);
   // }
 }async getCountry($event = '') {
-  console.log('Country Event----', $event);
   this.count = await this.country.listcountry({ like: $event });
-  console.log('country', this.count);
-}
+ }
 
 async getstate($event = '') {
-  console.log('get state  calling-----', this.AddCustForm.value['countryid']);
-  this.getstates = await this.country.liststate({ country_fk: this.AddCustForm.value['countryid'], like: $event });
+   this.getstates = await this.country.liststate({ country_fk: this.AddCustForm.value['country'], like: $event });
 }
 async getdistrict($event = '') {
-  console.log('dist', $event);
-  console.log('get distric  calling-----', this.AddCustForm.value['stateid']);
-  this.dist = await this.country.listdistrict({ stateid: this.AddCustForm.value['stateid'], like: $event });
-  console.log('Get district data', this.dist);
-
+    this.dist = await this.country.listdistrict({ stateid: this.AddCustForm.value['state'], like: $event });
 }
 async getcity($event = '') {
-  console.log('city...........', $event);
-  console.log('get distric  calling-----', this.AddCustForm.value['districtid']);
-  this.citylist = await this.country.listcity({ district_id: this.AddCustForm.value['districtid'] });
+   this.citylist = await this.country.listcity({ district_id: this.AddCustForm.value['district'] });
 }
 async getarea($event = '') {
-
-  this.listarea = await this.country.listarea({ city_id:this.AddCustForm.value['cityid'] });
-  console.log('area', this.listarea)
- 
+  this.listarea = await this.country.listarea({ city_id:this.AddCustForm.value['city'] });
 }
 
 changeclear(...data) {
@@ -104,18 +88,18 @@ changeclear(...data) {
 }
 
 typeclearcountry(val = "1") {
-  this.changeclear('stateid','districtid', 'cityid', 'area');
+  this.changeclear('state','district', 'city', 'area');
 }
 
 
 typeclearstate(val = "1") {
-  this.changeclear('districtid', 'cityid', 'area');
+  this.changeclear('district', 'city', 'area');
 }
 
 
 
 typecleardist(val = "1") {
-  this.changeclear( 'cityid', 'area');
+  this.changeclear( 'city', 'area');
 }
 
 typeclearcity(val = "1") {
@@ -132,34 +116,34 @@ async getHeadend($event = '') {
   
   createForm() {
     this.AddCustForm = new FormGroup({
-      operatorid: new FormControl('', Validators.required),
-      username: new FormControl('', Validators.required),
-      Password: new FormControl('', Validators.required),
-      CPassword: new FormControl('', Validators.required),
+      operatorid: new FormControl(''),
+      userid: new FormControl('', Validators.required),
+      password: new FormControl('', Validators.required),
+     // CPassword: new FormControl('', Validators.required),
       stb_no: new FormControl(''),
       hdid: new FormControl('', Validators.required),
-      caf_number: new FormControl('', Validators.required),
-      First: new FormControl('', Validators.required),
-      Last: new FormControl('', Validators.required),
+      cafno: new FormControl('', Validators.required),
+      fullname: new FormControl('', Validators.required),
+    //  Last: new FormControl('', Validators.required),
       dob: new FormControl(''),
-      bulkopt: new FormControl(true),
-      gender: new FormControl('', Validators.required),
-      Mobile: new FormControl('', [Validators.required, Validators.pattern('^[0-9]{10}$')]),
-      Phone: new FormControl(''),
-      pincode: new FormControl('', Validators.required),
-      countryid: new FormControl('', Validators.required),
-      stateid: new FormControl('', Validators.required),
-      location: new FormControl('', Validators.required),
-      branch: new FormControl('', Validators.required),
-      districtid: new FormControl('', Validators.required),
-      cityid: new FormControl('', Validators.required),
+      bulkopt: new FormControl(''),
+   //   gender: new FormControl('', Validators.required),
+      mobile: new FormControl('', [Validators.required, Validators.pattern('^[0-9]{10}$')]),
+      phone: new FormControl(''),
+      pin_no: new FormControl('', Validators.required),
+      country: new FormControl('', Validators.required),
+      state: new FormControl('', Validators.required),
+    //  location: new FormControl('', Validators.required),
+      //branch: new FormControl('', Validators.required),
+      district: new FormControl('', Validators.required),
+      city: new FormControl('', Validators.required),
       area: new FormControl('', Validators.required),
-      Installation: new FormControl('', Validators.required),
-      Billing: new FormControl('', Validators.required),
-      checkaddr: new FormControl(false),
-      Proof: new FormControl('', Validators.required),
-      ProofID: new FormControl('', Validators.required),
-      Email: new FormControl('', [Validators.required, Validators.pattern("[0-9 A-Z a-z ,.`!@#$%^&*]*[@]{1}[a-z A-Z]*[.]{1}[a-z A-Z]{2,3}")]),
+      installation_addr: new FormControl('', Validators.required),
+      billing_addr: new FormControl('', Validators.required),
+      same_addr: new FormControl(true),
+      proof_type: new FormControl('', Validators.required),
+      proof_id: new FormControl('', Validators.required),
+      email: new FormControl('', [Validators.required, Validators.pattern("[0-9 A-Z a-z ,.`!@#$%^&*]*[@]{1}[a-z A-Z]*[.]{1}[a-z A-Z]{2,3}")]),
       descr: new FormControl(''),
       bulk: new FormControl('')
     });

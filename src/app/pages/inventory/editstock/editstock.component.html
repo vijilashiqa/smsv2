@@ -4,11 +4,7 @@
     <nb-card-header>Create Stock Details</nb-card-header>
     <!-- <toaster-container></toaster-container> -->
     <nb-card-body>
-      <form
-        [formGroup]="editstockForm"
-        class="form-horizontal"
-        (ngSubmit)="addstockIn()"
-      >
+      <form [formGroup]="editstockForm" class="form-horizontal" (ngSubmit)="addstockIn()">
         <div class="modal-body">
           <nb-tabset>
             <nb-tab tabTitle="Stock Details">
@@ -16,33 +12,21 @@
                 <div class="form-group row">
                   <div class="col-sm-6">
                     <label>Headend Name<span style="color: red">*</span></label>
-                    <auto-completen
-                      [addclass]="{
+                    <auto-completen [addclass]="{
                         error: submit && this.editstockForm.controls.hdid.errors
-                      }"
-                      addclass="form-control"
-                      optValues="hdname"
-                      (changed)="
+                      }" addclass="form-control" optValues="hdname" (changed)="
                         gethsnlistg();
                         getModel();
                         getVendor();
                         typeclearHeadend('1')
-                      "
-                      formControlName="hdid"
-                      (keyUp)="getHeadend($event)"
-                      placeholder="Select Headend"
-                      optId="hdid"
-                      [item]="listhead"
-                    >
+                      " formControlName="hdid" (keyUp)="getHeadend($event)" placeholder="Select Headend" optId="hdid"
+                      [item]="listhead">
                     </auto-completen>
-                    <div
-                      *ngIf="
+                    <div *ngIf="
                         this.editstockForm.controls.hdid.errors &&
                         this.editstockForm.controls.hdid.errors.required &&
                         submit
-                      "
-                      class="error-text"
-                    >
+                      " class="error-text">
                       Headend Name is required!
                     </div>
                   </div>
@@ -50,20 +34,12 @@
                 <div class="form-group row">
                   <div class="col-sm-6">
                     <label>Vendor </label>
-                    <auto-completen
-                      [addclass]="{
+                    <auto-completen [addclass]="{
                         error:
                           submit && this.editstockForm.controls.vendorid.errors
-                      }"
-                      addclass="form-control"
-                      optValues="vendor_name"
-                      (changed)="getlocation(); typeclearVendor()"
-                      formControlName="vendorid"
-                      (keyUp)="getVendor()"
-                      placeholder="Select Vendor"
-                      optId="vendorid"
-                      [item]="getvendorlist"
-                    >
+                      }" addclass="form-control" optValues="vendor_name" (changed)="getlocation(); typeclearVendor()"
+                      formControlName="vendorid" (keyUp)="getVendor()" placeholder="Select Vendor" optId="vendorid"
+                      [item]="getvendorlist">
                     </auto-completen>
                     <!-- <div *ngIf="this.editstockForm.controls.vendorid.errors && (this.editstockForm.controls.vendorid.errors.required) && submit" class="error-text">
                                       Vendor Name is required!
@@ -72,30 +48,19 @@
 
                   <div class="col-sm-6">
                     <label>Location</label>
-                    <auto-completen
-                      [addclass]="{
+                    <auto-completen [addclass]="{
                         error:
                           submit &&
                           this.editstockForm.controls.vendordetid.errors
-                      }"
-                      addclass="form-control"
-                      optValues="loc"
-                      formControlName="vendordetid"
-                      (keyUp)="getlocation()"
-                      placeholder="Select Loction"
-                      optId="vendordetid"
-                      [item]="locationlist"
-                    >
+                      }" addclass="form-control" optValues="loc" formControlName="vendordetid" (keyUp)="getlocation()"
+                      placeholder="Select Loction" optId="vendordetid" [item]="locationlist">
                     </auto-completen>
-                    <div
-                      *ngIf="
+                    <div *ngIf="
                         this.editstockForm.controls.vendordetid.errors &&
                         this.editstockForm.controls.vendordetid.errors
                           .required &&
                         submit
-                      "
-                      class="error-text"
-                    >
+                      " class="error-text">
                       Location Name is required!
                     </div>
                   </div>
@@ -104,56 +69,40 @@
                 <div class="form-group row">
                   <div class="col-sm-6">
                     <label>Stock Type</label>
-                    <select
-                      [ngClass]="{
+                    <select [ngClass]="{
                         'is-invalid':
                           submit && editstockForm.controls.stocktype.errors
-                      }"
-                      class="form-control"
-                      name="stocktype"
-                      formControlName="stocktype"
-                    >
+                      }" class="form-control" name="stocktype" formControlName="stocktype">
                       <option value="" selected>Select Stock Type</option>
                       <option value="1">New</option>
                       <option value="2">Refurbished</option>
                     </select>
-                    <div
-                      *ngIf="
+                    <div *ngIf="
                         this.editstockForm.controls.stocktype.errors &&
                         this.editstockForm.controls.stocktype.errors.required &&
                         submit
-                      "
-                      class="error-text"
-                    >
+                      " class="error-text">
                       Stock Type is required!
                     </div>
                   </div>
                   <div class="col-sm-6">
                     <label>Warranty Type</label>
-                    <select
-                      [ngClass]="{
+                    <select [ngClass]="{
                         'is-invalid':
                           submit && editstockForm.controls.warranty_type.errors
-                      }"
-                      class="form-control"
-                      name="warranty_type"
-                      formControlName="warranty_type"
-                    >
+                      }" class="form-control" name="warranty_type" formControlName="warranty_type">
                       <option value="" selected>
                         Select Required Warranty Type
                       </option>
                       <option value="1">Month</option>
                       <option value="2">Year</option>
                     </select>
-                    <div
-                      *ngIf="
+                    <div *ngIf="
                         this.editstockForm.controls.warranty_type.errors &&
                         this.editstockForm.controls.warranty_type.errors
                           .required &&
                         submit
-                      "
-                      class="error-text"
-                    >
+                      " class="error-text">
                       Warranty Type is required!
                     </div>
                   </div>
@@ -162,55 +111,35 @@
                 <div class="form-group row">
                   <div class="col-sm-6">
                     <label>HSN/SAC</label>
-                    <auto-completen
-                      [addclass]="{
+                    <auto-completen [addclass]="{
                         error:
                           submit && this.editstockForm.controls.hsnid.errors
-                      }"
-                      addclass="form-control"
-                      optValues="hsn_name"
-                      formControlName="hsnid"
-                      (keyUp)="gethsnlistg()"
-                      placeholder="Select hsn"
-                      optId="hsn_id"
-                      [item]="gethsn"
-                    >
+                      }" addclass="form-control" optValues="hsn_name" formControlName="hsnid" (keyUp)="gethsnlistg()"
+                      placeholder="Select hsn" optId="hsn_id" [item]="gethsn">
                     </auto-completen>
-                    <div
-                      *ngIf="
+                    <div *ngIf="
                         this.editstockForm.controls.hsnid.errors &&
                         this.editstockForm.controls.hsnid.errors.required &&
                         submit
-                      "
-                      class="error-text"
-                    >
+                      " class="error-text">
                       HSN/SAC is required!
                     </div>
                   </div>
 
                   <div class="col-sm-6">
                     <label>Warranty Period</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      name="warranty_period"
-                      formControlName="warranty_period"
-                      placeholder="Enter Warranty Period"
-                      [ngClass]="{
+                    <input type="text" class="form-control" name="warranty_period" formControlName="warranty_period"
+                      placeholder="Enter Warranty Period" [ngClass]="{
                         'is-invalid':
                           submit &&
                           editstockForm.controls.warranty_period.errors
-                      }"
-                    />
-                    <small
-                      *ngIf="
+                      }" />
+                    <small *ngIf="
                         editstockForm.controls.warranty_period.errors &&
                         editstockForm.controls.warranty_period.errors
                           .required &&
                         submit
-                      "
-                      class="invalid-feedback"
-                      >Warranty Period is required!
+                      " class="invalid-feedback">Warranty Period is required!
                     </small>
                   </div>
                 </div>
@@ -221,46 +150,29 @@
                 <div class="form-group row">
                   <div class="col-sm-6">
                     <label>Invoice <span style="color: red">*</span></label>
-                    <input
-                      type="date"
-                      class="form-control"
-                      formControlName="invoice_date"
-                      [ngClass]="{
+                    <input type="date" class="form-control" formControlName="invoice_date" [ngClass]="{
                         'is-invalid':
                           submit && editstockForm.controls.invoice_date.errors
-                      }"
-                    />
-                    <small
-                      *ngIf="
+                      }" />
+                    <small *ngIf="
                         editstockForm.controls.invoice_date.errors &&
                         editstockForm.controls.invoice_date.errors.required &&
                         submit
-                      "
-                      class="invalid-feedback"
-                      >Invoice is required!
+                      " class="invalid-feedback">Invoice is required!
                     </small>
                   </div>
                   <div class="col-sm-6">
                     <label>Invoice No <span style="color: red">*</span></label>
-                    <input
-                      type="text"
-                      name="invoiceno"
-                      formControlName="invoiceno"
-                      placeholder="Enter Invoice No"
-                      class="form-control"
-                      [ngClass]="{
+                    <input type="text" name="invoiceno" formControlName="invoiceno" placeholder="Enter Invoice No"
+                      class="form-control" [ngClass]="{
                         'is-invalid':
                           submit && editstockForm.controls.invoiceno.errors
-                      }"
-                    />
-                    <small
-                      *ngIf="
+                      }" />
+                    <small *ngIf="
                         editstockForm.controls.invoiceno.errors &&
                         editstockForm.controls.invoiceno.errors.required &&
                         submit
-                      "
-                      class="invalid-feedback"
-                      >Invoice is required!
+                      " class="invalid-feedback">Invoice is required!
                     </small>
                   </div>
                 </div>
@@ -270,97 +182,47 @@
               <div class="modal-body">
                 <div class="form-group row" formArrayName="stockinid">
                   <div class="col-sm-12">
-                    <div
-                      *ngFor="
+                    <div *ngFor="
                         let user of stockinid.controls;
                         index as idx;
                         let last = last
-                      "
-                    >
+                      ">
                       <div class="row" [formGroupName]="idx">
                         <!-- <div class="row"> -->
                         <div class="form-group" class="col-sm-3">
                           <label>Model*</label>
-                          <auto-completen
-                            addclass="form-control"
-                            optValues="modelname"
-                            formControlName="boxmodelid"
-                            (keyUp)="getModel()"
-                            placeholder="Select Model"
-                            optId="bmid"
-                            [item]="getmodellist"
-                          >
+                          <auto-completen addclass="form-control" optValues="modelname" formControlName="boxmodelid"
+                            (keyUp)="getModel()" placeholder="Select Model" optId="bmid" [item]="getmodellist">
                           </auto-completen>
                         </div>
                         <div class="form-group" class="col-sm-3">
                           <label>Quantity*</label>
-                          <input
-                            type="number"
-                            name="qty"
-                            formControlName="qty"
-                            placeholder="Enter Quantity"
-                            class="form-control"
-                            (keyup)="onkeyupQty($event, idx)"
-                          />
+                          <input type="number" name="qty" formControlName="qty" placeholder="Enter Quantity"
+                            class="form-control" (keyup)="onkeyupQty($event, idx)" />
                         </div>
                         <div class="form-group" class="col-sm-3">
                           <label>Price*</label>
-                          <input
-                            type="number"
-                            name="price"
-                            formControlName="price"
-                            placeholder="Enter Price"
-                            class="form-control"
-                            (keyup)="onkeyupQty($event, idx)"
-                          />
+                          <input type="number" name="price" formControlName="price" placeholder="Enter Price"
+                            class="form-control" (keyup)="onkeyupQty($event, idx)" />
                         </div>
                         <div class="form-group" class="col-sm-2">
                           <label>Total</label>
-                          <input
-                            type="number"
-                            name="total"
-                            formControlName="total"
-                            placeholder="Total"
-                            class="form-control"
-                            (keyup)="onkeyupQty($event, idx)"
-                          />
+                          <input type="number" name="total" formControlName="total" placeholder="Total"
+                            class="form-control" (keyup)="onkeyupQty($event, idx)" />
                         </div>
                         <!-- </div> -->
                         <!-- <div class="col-sm-1"> -->
-                        <div
-                          class="form-group"
-                          class="col-sm-1"
-                          *ngIf="last || idx != 0"
-                        >
+                        <div class="form-group" class="col-sm-1" *ngIf="last || idx != 0">
                           <div class="btn-group">
-                            <button
-                              type="button"
-                              style="margin-top: 31%"
-                              class="btn btn-md btn-success dropdown-toggle"
-                              data-bs-toggle="dropdown"
-                            >
+                            <button type="button" style="margin-top: 31%" class="btn btn-md btn-success dropdown-toggle"
+                              data-bs-toggle="dropdown">
                               Action
                             </button>
                             <div class="dropdown-menu">
-                              <a
-                                (click)="deleteMatField(idx)"
-                                class="dropdown-item"
-                                *ngIf="idx != 0"
-                                ><i
-                                  title="Edit Complaint"
-                                  class="ion-android-delete"
-                                ></i
-                                >&nbsp;Delete</a
-                              >
-                              <a
-                                (click)="addMaterial()"
-                                class="dropdown-item"
-                                *ngIf="last"
-                                ><i
-                                  title="Edit Complaint"
-                                  class="ion-ios-plus-outline"
-                                ></i
-                                >&nbsp;ADD
+                              <a (click)="deleteMatField(idx)" class="dropdown-item" *ngIf="idx != 0"><i
+                                  title="Edit Complaint" class="ion-android-delete"></i>&nbsp;Delete</a>
+                              <a (click)="addMaterial()" class="dropdown-item" *ngIf="last"><i title="Edit Complaint"
+                                  class="ion-ios-plus-outline"></i>&nbsp;ADD
                               </a>
                             </div>
                           </div>

@@ -25,7 +25,7 @@ export class StbparingComponent implements OnInit {
     await this.createForm();
     await this.getHeadend();
     await this.boxparing();
- this.vcparing();
+    this.vcparing();
   }
 
   async paring() {

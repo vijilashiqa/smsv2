@@ -166,8 +166,7 @@
             <td>{{item.cas_name}}</td>
             <td>{{item.modelname}}</td>
             <td>{{item.invoiceno}}</td>
-            <!-- <td><i>[ngStyle]="{ item.vcno ==item.vcno ?'item.vcno' :'-'}"</td></i> -->
-            <td>{{item.vcno }}</td>
+            <td>{{item.vcno ||'--'}}</td>
             <td>{{item.boxno}}</td>
             <!-- <td><i [ngStyle]="{'color': item.status==1? 'green':'red'}"
               [ngClass]="{'ion-close-round':item.status==0 ? true:false,'ion-checkmark-round':item.status!=0 ? true:false  }"

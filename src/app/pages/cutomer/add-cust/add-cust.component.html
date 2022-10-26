@@ -1,347 +1,358 @@
 <nb-card>
-    <!-- <toaster-container></toaster-container> -->
-    <nb-card-header>Create Subscriber</nb-card-header>
-    <nb-card-body>
-      <form [formGroup]="AddCustForm" class="form-horizontal" (ngSubmit)="addcustomer();">
-        <div class="modal-body">
-          <div class="form-group row">
-            <div class="col-sm-6">
-              <label>Headend Name<span style="color:red">*</span></label>
-              <auto-completen
-              [addclass]="{ 'error': submit && this.AddCustForm.controls.hdid.errors }"
-              addclass="form-control" optValues="hdname"
-              formControlName="hdid" (keyUp)="getHeadend($event)"
-              placeholder='Select Headend'  optId="hdid"
-              [item]="listhead">
-            </auto-completen>
-            <div *ngIf="this.AddCustForm.controls.hdid.errors && (this.AddCustForm.controls.hdid.errors.required) && submit" class="error-text">
-              Headend Name is required!
-             </div>
-     </div>
-            <div  class="col-sm-6">
-              <label>Operator *</label>
-              <select
-                (change)="loc=[];stbdet=[];AddCustForm['controls']['stb_no'].setValue('');AddCustForm['controls']['location'].setValue('');"
-                [ngClass]="{'form-control' : true,'form-control-danger':AddCustForm.controls.operatorid.invalid&&submit}"
-                formControlName="operatorid">
-                <option value="">Select Operators</option>
-                <option *ngFor="let item of opt" [ngValue]=item.id>{{item.username}}</option>
-              </select>
-              <small *ngIf="AddCustForm.hasError('required','operatorid')&&submit" class="form-text error">Select required
-                Operator Name! </small>
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-sm-6">
-              <label>Location</label>
-              <select (change)="branch=[];AddCustForm['controls']['branch'].setValue('');"
-                [ngClass]="{'form-control' : true,'form-control-danger':AddCustForm.controls.location.invalid&&submit}"
-                formControlName="location">
-                <option value="">Select Location</option>
-                <option *ngFor="let item of loc" [ngValue]=item.loc_pk>{{item.loc_name}}</option>
-              </select>
-              <small *ngIf="AddCustForm.hasError('required','location')&&submit" class="form-text error"> Select Required
-                Location! </small>
-            </div>
-            <div class="col-sm-6">
-              <label>Branch</label>
-              <select
-                [ngClass]="{'form-control' : true,'form-control-danger':AddCustForm.controls.branch.invalid&&submit}"
-                formControlName="branch">
-                <option value="">Select Branch</option>
-             </select>
-              <small *ngIf="AddCustForm.hasError('required','branch')&&submit" class="form-text error"> Select Required
-                Branch! </small>
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-sm-6">
-              <div class="custom-control custom-checkbox"  ng-model="bulkopt" >
-                <input id='bulkopt' class="custom-control-input"  type="checkbox">
-                <label class="custom-control-label" for="bulkopt">Bulk/Single</label>
-              </div>
-            </div>
-          </div>
-
-
-          <div class="form-group row" >
-            <div class="col-sm-6"   ng-show="bulkopt">
-              <input  type="file"
-              [ngClass]="{'form-control' : true,'form-control-danger':AddCustForm.controls.bulk.invalid&&submit}">
-              <small *ngIf="bulkdata.length==0&&submit" class="form-text error">File Is reqired! </small>
-              <small class="form-text error">Gender : 0 - Male, 1 - Female </small>
-              <small class="form-text error">Proof Type : 0 - Ration Card, 1 - Aadar Card </small>
-            </div>
-            <div class="col-sm-6"  ng-show="bulkopt">
-              <br>
-              <a href="/assets/public/custbulk.xlsx" target="_blank" download><b>Download Sample Here</b></a>
-            </div>
-          </div>
-          <div class="form-group row" [hidden]='bulkopt' >
-            <div class="col-sm-6">
-              <label>User Name *</label>
-              <input placeholder="Username"
-                [ngClass]="{'form-control' : true,'form-control-danger':AddCustForm.controls.username.invalid&&submit}"
-                formControlName="username">
-              <small *ngIf="AddCustForm.hasError('required','username')&&submit" class="form-text error">Username Is
-                reqired! </small>
-            </div>
-            <div class="col-sm-6">
-              <label>CAF Number</label>
-              <input type="text" name="caf_number" formControlName="caf_number" placeholder="CAF Number "
-                [ngClass]="{'form-control' : true,'form-control-danger':AddCustForm.controls.caf_number.invalid&&submit}" />
-              <small *ngIf="AddCustForm.hasError('required','caf_number')&&submit" class="form-text error"> CAF Number is
-                required! </small>
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-sm-6">
-              <label>First Name</label>
-              <input type="text" name="First" formControlName="First" placeholder="First Name "
-                [ngClass]="{'form-control' : true,'form-control-danger':AddCustForm.controls.First.invalid&&submit}" />
-              <small *ngIf="AddCustForm.hasError('required','First')&&submit" class="form-text error"> First Name is
-                required! </small>
-            </div>
-            <div class="col-sm-6">
-              <label>Last Name</label>
-              <input type="text" name="Last" formControlName="Last" placeholder="Last Name"
-                [ngClass]="{'form-control' : true,'form-control-danger':AddCustForm.controls.Last.invalid&&submit}" />
-              <small *ngIf="AddCustForm.hasError('required','Last')&&submit" class="form-text error"> Last Name is
-                required! </small>
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-sm-6">
-              <label>Date Of Birth</label>
-              <input type="text" name="dob" formControlName="dob"
-                placeholder="Select Date "
-                [ngClass]="{'form-control' : true,'form-control-danger':AddCustForm.controls.dob.invalid&&submit}" />  
-              <small *ngIf="AddCustForm.hasError('required','dob')&&submit" class="form-text error"> DOB is required!
-              </small>
-            </div>
-            <div class="col-sm-6">
-              <label>Gender</label>
-              <select name="gender" formControlName="gender"
-                [ngClass]="{'form-control' : true,'form-control-danger':AddCustForm.controls.gender.invalid&&submit}">
-                <option value="" selected> Select Gender</option>
-                <option value="0">Male</option>
-                <option value="1">Female</option>
-              </select>
-              <small *ngIf="AddCustForm.hasError('required','gender')&&submit" class="form-text error"> Select gender!
-              </small>
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-sm-6">
-              <label>Password</label>
-              <input type="password" name="Password" formControlName="Password" placeholder="Password"
-                [ngClass]="{'form-control' : true,'form-control-danger':AddCustForm.controls.Password.invalid&&submit}" />
-              <small *ngIf="AddCustForm.hasError('required','Password')&&submit" class="form-text error"> Password is
-                required! </small>
-            </div>
-            <div class="col-sm-6">
-              <label>Confirm Password</label>
-              <input type="password" name="CPassword" formControlName="CPassword" placeholder="Confirm Password"
-                [ngClass]="{'form-control' : true,'form-control-danger':AddCustForm.value['Password']!=AddCustForm.value['CPassword'] || AddCustForm.controls.CPassword.invalid&&submit}" />
-              <small *ngIf="AddCustForm.value['Password']!=AddCustForm.value['CPassword'] &&submit"
-                class="form-text error">Password not matched!</small>
-              <small *ngIf="AddCustForm.hasError('required','CPassword')&&submit" class="form-text error"> Password is
-                required! </small>
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-sm-6">
-              <label>Mobile No</label>
-              <input [ngClass]="{'form-control' : true,'form-control-danger':AddCustForm.controls.Mobile.invalid&&submit}"
-                formControlName="Mobile" name="Mobile" type="text" placeholder="Mobile No * " size="30" maxlength="60">
-              <small *ngIf="AddCustForm.hasError('required','Mobile')&&submit" class="form-text error"> Mobile No is
-                required! </small>
-            </div>
-            <div class="col-sm-6">
-              <label>Phone No</label>
-              <input class="form-control" formControlName="Phone" name="Phone" type="text" placeholder="Phone No * "
-                size="30" maxlength="60">
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-sm-6">
-              <label>Country<span style="color:red">*</span></label>
-              <auto-completen
-              [addclass]="{ 'error': submit && this.AddCustForm.controls.countryid.errors }"
-              addclass="form-control" optValues="name"
-              formControlName="countryid" (keyUp)="getCountry($event)"
-              (changed)="getstate();typeclearcountry('1')" placeholder='Select Country' id="id"
-              [item]="count">
-            </auto-completen>
-            <div *ngIf="this.AddCustForm.controls.countryid.errors && (this.AddCustForm.controls.countryid.errors.required) && submit" class="error-text">
-              Country Name is required!
-             </div>
-           </div>
-           <div class="col-sm-6">
-            <label>state<span style="color:red">*</span></label>
-            <auto-completen
-            [addclass]="{ 'error': submit && this.AddCustForm.controls.stateid.errors }"
-            addclass="form-control" optValues="name"
-            formControlName="stateid" (keyUp)="getstate($event)"
-            (changed)="getdistrict(); typeclearstate('1')"
-             placeholder='Select State' id="id"
-            [item]="getstates">
-          </auto-completen>
-          <div *ngIf="this.AddCustForm.controls.stateid.errors && (this.AddCustForm.controls.stateid.errors.required) && submit" class="error-text">
-            State Name is required!
-           </div>
-         </div>
-           </div>
-          
-
-          <div class="form-group row">
-            <div class="col-sm-6">
-              <label>District <span style="color:red">*</span></label>
-              <auto-completen
-              [addclass]="{ 'error': submit && this.AddCustForm.controls.districtid.errors }"
-              addclass="form-control" optValues="name"
-              formControlName="districtid" (keyUp)="getdistrict($event) "
-              (changed)="getcity();typecleardist()"
-               placeholder='Select District' id="id"
-              [item]="dist">
-            </auto-completen>
-            <div *ngIf="this.AddCustForm.controls.districtid.errors && (this.AddCustForm.controls.districtid.errors.required) && submit" class="error-text">
-              District Name is required!
-             </div>
-           </div>
-           <div class="col-sm-6">
-            <label>City<span style="color:red">*</span></label>
-              <auto-completen
-              [addclass]="{ 'error': submit && this.AddCustForm.controls.cityid.errors }"
-              addclass="form-control" optValues="name" (changed)="getarea();typeclearcity('1')"
-              formControlName="cityid" (keyUp)="getcity($event) "
-               placeholder='Select City' id="id"
-              [item]="citylist">
-            </auto-completen>
-            <div *ngIf="this.AddCustForm.controls.cityid.errors && (this.AddCustForm.controls.cityid.errors.required) && submit" class="error-text">
-              City Name is required!
-             </div>
-           
-         </div>
-
-         </div>
-
-         <div class="form-group row">
+  <!-- <toaster-container></toaster-container> -->
+  <nb-card-header>Create Subscriber</nb-card-header>
+  <nb-card-body>
+    <form [formGroup]="AddCustForm" class="form-horizontal" (ngSubmit)="addcustomer()">
+      <div class="modal-body">
+        <div class="form-group row">
           <div class="col-sm-6">
-            <label>Area<span style="color:red">*</span></label>
-              <auto-completen
-              [addclass]="{ 'error': submit && this.AddCustForm.controls.area.errors }"
-              addclass="form-control" optValues="name"
-              formControlName="area" (keyUp)="getarea($event) "
-               placeholder='Select Area' id="id"
-              [item]="listarea">
+            <label>Headend Name<span style="color: red">*</span></label>
+            <auto-completen [addclass]="{
+                error: submit && this.AddCustForm.controls.hdid.errors
+              }" addclass="form-control" optValues="hdname" formControlName="hdid" (keyUp)="getHeadend($event)"
+              placeholder="Select Headend" optId="hdid" [item]="listhead">
             </auto-completen>
-            <div *ngIf="this.AddCustForm.controls.area.errors && (this.AddCustForm.controls.area.errors.required) && submit" class="error-text">
-              Area Name is required!
-             </div>
-         </div>
-         <div class="col-sm-6">
-            <label>Pin Code <span style="color:red">*</span></label>
-            <input  name="pincode" placeholder="Enter Pincode" formControlName="pincode" type="text" class="form-control"
-            [ngClass]="{ 'is-invalid': submit && this.AddCustForm.controls.pincode.errors }"/>
-            <small *ngIf="this.AddCustForm.controls.pincode.errors &&(this.AddCustForm.controls.pincode.errors.required)&& submit"
-            class="invalid-feedback">pincode is required! </small>
-         </div>
+            <div *ngIf="
+                this.AddCustForm.controls.hdid.errors &&
+                this.AddCustForm.controls.hdid.errors.required &&
+                submit
+              " class="error-text">
+              Headend Name is required!
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <label>Operator *</label>
+            <select (change)="
+                loc = [];
+                stbdet = [];
+                AddCustForm['controls']['stb_no'].setValue('');
+                AddCustForm['controls']['location'].setValue('')
+              " [ngClass]="{
+                'form-control': true,
+                'form-control-danger':
+                  AddCustForm.controls.operatorid.invalid && submit
+              }" formControlName="operatorid">
+              <option value="">Select Operators</option>
+              <option *ngFor="let item of opt" [ngValue]="item.id">
+                {{ item.username }}
+              </option>
+            </select>
+            <small *ngIf="AddCustForm.hasError('required', 'operatorid') && submit" class="form-text error">Select
+              required Operator Name!
+            </small>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-6">
+            <div class="custom-control custom-checkbox">
+              <input formControlName="bulkopt" name="bulkopt" class="custom-control-input" type="checkbox"
+                id="bulkopt" />
+              <label class="custom-control-label" for="bulkopt">Bulk/Single</label>
+            </div>
+          </div>
+        </div>
 
+        <div class="form-group row" [hidden]="!AddCustForm.controls['bulkopt'].value">
+          <div class="col-sm-6">
+            <input type="file" [ngClass]="{
+                'form-control': true,
+                'form-control-danger':
+                  AddCustForm.controls.bulk.invalid && submit
+              }" />
+            <small *ngIf="bulkdata.length==0&&submit" class="form-text error">File Is reqired! </small>
+              <small class="invalid-feedback">Gender : 0 - Male, 1 - Female </small>
+              <small class="invalid-feedback">Proof Type : 0 - Ration Card, 1 - Aadar Card </small>
           </div>
-    
-          <div class="form-group row">
-            <div class="col-sm-6">
-              <label>Installation Address</label>
-              <textarea name="Installation" formControlName="Installation" placeholder="Installation Address "
-                [ngClass]="{'form-control' : true,'form-control-danger':AddCustForm.controls.Installation.invalid&&submit}"> </textarea>
-              <small *ngIf="AddCustForm.hasError('required','Installation')&&submit" class="form-text error">Installation
-                Address is required! </small>
-            </div>
-            <div class="col-sm-6">
-              <label>Billing Address</label>
-              <textarea
-                value="{{AddCustForm.value['checkaddr'] ? AddCustForm.controls['Billing'].setValue(AddCustForm.value['Installation']):''}}"
-                name="Billing" formControlName="Billing" placeholder="Billing Address"
-                [ngClass]="{'form-control' : true,'form-control-danger':AddCustForm.controls.Billing.invalid&&submit}"></textarea>
-              <small *ngIf="AddCustForm.hasError('required','Billing')&&submit" class="form-text error"> Billing Address
-                is required! </small>
+          <div class="col-sm-6">
+            <br />
+            <a href=".././../../../assets/data/custbulk.xlsx" target="_blank" download><b>Download Sample Here</b></a>
+          </div>
+        </div>
+        <div class="form-group row" [hidden]="AddCustForm.controls['bulkopt'].value">
+          <div class="col-sm-6">
+            <label>User Name *</label>
+            <input type="text" class="form-control" name="userid" formControlName="userid" placeholder="Enter User Name"
+              [ngClass]="{'is-invalid': submit && AddCustForm.controls.userid.errors}" />
+            <small *ngIf="AddCustForm.controls.userid.errors && AddCustForm.controls.userid.errors.required && submit"
+              class="invalid-feedback">userid is required!
+            </small>
+          </div>
+          <div class="col-sm-6">
+            <label>CAF Number</label>
+            <input type="text" class="form-control" name="cafno" formControlName="cafno" placeholder="Enter CAF Number"
+              [ngClass]="{'is-invalid': submit && AddCustForm.controls.cafno.errors}" />
+            <small *ngIf="AddCustForm.controls.cafno.errors && AddCustForm.controls.cafno.errors.required && submit"
+              class="invalid-feedback">CAF Number is required!
+            </small>
+          </div>
+        </div>
+        <div class="form-group row" [hidden]="AddCustForm.controls['bulkopt'].value">
+          <div class="col-sm-6">
+            <label>First Name</label>
+            <input type="text" class="form-control" name="fullname" formControlName="fullname"
+              placeholder="Enter Fullname Name"
+              [ngClass]="{'is-invalid': submit && AddCustForm.controls.fullname.errors}" />
+            <small
+              *ngIf="AddCustForm.controls.fullname.errors && AddCustForm.controls.fullname.errors.required && submit"
+              class="invalid-feedback">First Name is required!
+            </small>
+          </div>
+          <div class="col-sm-6">
+            <label>Date Of Birth</label>
+            <input type="date" class="form-control" name="dob" formControlName="dob"
+              [ngClass]="{'is-invalid': submit && AddCustForm.controls.dob.errors}" />
+            <small *ngIf="AddCustForm.controls.dob.errors && AddCustForm.controls.dob.errors.required && submit"
+              class="invalid-feedback">DOB Name is required!
+            </small>
+          </div>
+        </div>
+        <div class="form-group row" [hidden]="AddCustForm.controls['bulkopt'].value">
+          <div class="col-sm-6">
+            <label>Password</label>
+            <input type="password" class="form-control" name="password" formControlName="password"
+              placeholder="Enter password"
+              [ngClass]="{ 'is-invalid': submit && AddCustForm.controls.password.errors}" />
+            <small *ngIf="AddCustForm.controls.password.errors && AddCustForm.controls.password.errors.required && submit
+            " class="invalid-feedback">Password is required!
+            </small>
+          </div>
+          <!-- <div class="col-sm-6">
+            <label>Confirm Password</label>
+            <input type="password" name="CPassword" formControlName="CPassword" placeholder="Confirm Password"
+              [ngClass]="{ 'form-control': true,'form-control-danger':AddCustForm.value['Password'] != AddCustForm.value['CPassword'] ||
+                  (AddCustForm.controls.CPassword.invalid && submit) }" />
+            <small *ngIf="AddCustForm.value['Password'] != AddCustForm.value['CPassword'] && submit
+              " class="invalid-feedback">Password not matched!</small>
+            <small *ngIf="AddCustForm.controls.CPassword.errors && AddCustForm.controls.CPassword.errors.required && submit
+              " class="invalid-feedback">CPassword is required!
+            </small>
+          </div> -->
+
+
+          <div class="col-sm-6">
+            <label>Email</label>
+            <input type="text" class="form-control" name="email" formControlName="email" placeholder="Enter Email id"
+              [ngClass]="{ 'is-invalid': submit && AddCustForm.controls.email.errors}" />
+            <small *ngIf="AddCustForm.controls.email.errors && AddCustForm.controls.email.errors.required && submit
+            " class="invalid-feedback">email required!
+            </small>
+          </div>
+        </div>
+        <div class="form-group row" [hidden]="AddCustForm.controls['bulkopt'].value">
+          <div class="col-sm-6">
+            <label>Mobile No</label>
+            <input type="text" class="form-control" name="mobile" formControlName="mobile" placeholder="Enter Mobile NO"
+              [ngClass]="{ 'is-invalid': submit && AddCustForm.controls.mobile.errors}" />
+            <small *ngIf="AddCustForm.controls.mobile.errors && AddCustForm.controls.mobile.errors.required && submit
+            " class="invalid-feedback">Mobile NO required!
+            </small>
+          </div>
+          <div class="col-sm-6">
+            <label>Phone No</label>
+            <input type="text" class="form-control" name="phone" formControlName="phone"
+              placeholder="Enter Phone NO"
+              [ngClass]="{ 'is-invalid': submit && AddCustForm.controls.phone.errors}" />
+            <small *ngIf="AddCustForm.controls.phone.errors && AddCustForm.controls.phone.errors.required && submit
+              " class="invalid-feedback">Phone NO required!
+            </small>
+          </div>
+        </div>
+        <div class="form-group row" [hidden]="AddCustForm.controls['bulkopt'].value">
+          <div class="col-sm-6">
+            <label>Country<span style="color: red">*</span></label>
+            <auto-completen [addclass]="{
+                error: submit && this.AddCustForm.controls.country.errors
+              }" addclass="form-control" optValues="name" formControlName="country" (keyUp)="getCountry($event)"
+              (changed)="getstate(); typeclearcountry('1')" placeholder="Select Country" id="id" [item]="count">
+            </auto-completen>
+            <div *ngIf="
+                this.AddCustForm.controls.country.errors &&
+                this.AddCustForm.controls.country.errors.required &&
+                submit
+              " class="error-text">
+              Country Name is required!
             </div>
           </div>
-          <div class="form-group row">
-            <div class="col-sm-6">
-              <div class="custom-control custom-checkbox">
-                <input id='status' class="custom-control-input"  type="checkbox">
-                <label class="custom-control-label" for="status">Billing Address same as Installtion Address</label>
-              </div>
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-sm-6">
-              <label>Proof Type</label>
-              <select [ngClass]="{'form-control' : true,'form-control-danger':AddCustForm.controls.Proof.invalid&&submit}"
-                name="Proof" formControlName="Proof">
-                <option value="" selected>Select Proof Type</option>
-                <option value="0">Ration Card</option>
-                <option value="1">Aadar Card</option>
-              </select>
-              <small *ngIf="AddCustForm.hasError('required','Proof')&&submit" class="form-text error"> Proof is required!
-              </small>
-            </div>
-            <div class="col-sm-6">
-              <label>Email</label>
-              <input type="email" name="Email ID" formControlName="Email" placeholder="Email "
-                [ngClass]="{'form-control' : true,'form-control-danger':AddCustForm.controls.Email.invalid&&submit}" />
-              <small *ngIf="AddCustForm.hasError('required','Email')&&submit" class="form-text error"> Email ID is
-                required! </small>
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-sm-6" *ngIf='AddCustForm.value["Proof"]!=""'>
-              <label>Proof ID</label>
-              <input type="text" name="ProofID" formControlName="ProofID" placeholder="ProofID "
-                [ngClass]="{'form-control' : true,'form-control-danger':AddCustForm.controls.ProofID.invalid&&submit}" />
-              <small *ngIf="AddCustForm.hasError('required','ProofID')&&submit" class="form-text error">Proof ID is
-                required! </small>
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-sm-6">
-              <label>STB Number</label>
-              <select [ngClass]="{'form-control' : true,'form-control-danger':AddCustForm.controls.stb_no.invalid&&submit}" formControlName="stb_no">
-                <option value="">Select STB Number</option>
-                <option *ngFor="let item of stbdet" [ngValue]=item.stb_id>{{item.SNo}}</option>
-              </select>
-            
-            </div>
-            <div class="col-sm-6">
-              <label>Description</label>
-              <textarea name="descr" formControlName="descr" class="form-control" placeholder="Description"></textarea>
+          <div class="col-sm-6">
+            <label>state<span style="color: red">*</span></label>
+            <auto-completen [addclass]="{
+                error: submit && this.AddCustForm.controls.state.errors
+              }" addclass="form-control" optValues="name" formControlName="state" (keyUp)="getstate($event)"
+              (changed)="getdistrict(); typeclearstate('1')" placeholder="Select State" id="id" [item]="getstates">
+            </auto-completen>
+            <div *ngIf="
+                this.AddCustForm.controls.state.errors &&
+                this.AddCustForm.controls.state.errors.required &&
+                submit
+              " class="error-text">
+              State Name is required!
             </div>
           </div>
         </div>
-        <div class="modal-footer">
-          <button type="submit" autofocus class="btn btn-md btn-success">Create</button>
-          <button type="button" class="btn btn-md btn-danger " [routerLink]="['/pages/customer/cust-list']">Cancel</button>
+
+        <div class="form-group row" [hidden]="AddCustForm.controls['bulkopt'].value">
+          <div class="col-sm-6">
+            <label>District <span style="color: red">*</span></label>
+            <auto-completen [addclass]="{
+                error: submit && this.AddCustForm.controls.district.errors
+              }" addclass="form-control" optValues="name" formControlName="district" (keyUp)="getdistrict($event)"
+              (changed)="getcity(); typecleardist()" placeholder="Select District" id="id" [item]="dist">
+            </auto-completen>
+            <div *ngIf="
+                this.AddCustForm.controls.district.errors &&
+                this.AddCustForm.controls.district.errors.required &&
+                submit
+              " class="error-text">
+              District Name is required!
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <label>City<span style="color: red">*</span></label>
+            <auto-completen [addclass]="{
+                error: submit && this.AddCustForm.controls.city.errors
+              }" addclass="form-control" optValues="name" (changed)="getarea(); typeclearcity('1')"
+              formControlName="city" (keyUp)="getcity($event)" placeholder="Select City" id="id" [item]="citylist">
+            </auto-completen>
+            <div *ngIf="
+                this.AddCustForm.controls.city.errors &&
+                this.AddCustForm.controls.city.errors.required &&
+                submit
+              " class="error-text">
+              City Name is required!
+            </div>
+          </div>
         </div>
-      </form>
-    </nb-card-body>
-  </nb-card>
-  <nb-card *ngIf="failure.length!=0">
-    <nb-card-header>
-      <!-- Success : {{s}} Failure : {{f}} -->
-      <!-- <i (click)="Download();" class="green right fa fa-file-excel" aria-hidden="true"></i> -->
-    </nb-card-header>
-    <nb-card-body>
-      <table class="table table-bordered table-striped ">
-        <tr>
-          <th>User Name</th>
-          <th>Error Msg</th>
-        </tr>
-        <!-- <tr *ngFor="let item of failure">
+
+        <div class="form-group row" [hidden]="AddCustForm.controls['bulkopt'].value">
+          <div class="col-sm-6">
+            <label>Area<span style="color: red">*</span></label>
+            <auto-completen [addclass]="{
+                error: submit && this.AddCustForm.controls.area.errors
+              }" addclass="form-control" optValues="name" formControlName="area" (keyUp)="getarea($event)"
+              placeholder="Select Area" id="id" [item]="listarea">
+            </auto-completen>
+            <div *ngIf="
+                this.AddCustForm.controls.area.errors &&
+                this.AddCustForm.controls.area.errors.required &&
+                submit
+              " class="error-text">
+              Area Name is required!
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <label>Pin Code <span style="color: red">*</span></label>
+            <input type="text" class="form-control" name="pin_no" formControlName="pin_no"
+              placeholder="Enter Pincode"
+              [ngClass]="{ 'is-invalid': submit && AddCustForm.controls.pin_no.errors}" />
+            <small *ngIf="AddCustForm.controls.pin_no.errors && AddCustForm.controls.pin_no.errors.required && submit
+            " class="invalid-feedback">pincode required!
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group row" [hidden]="AddCustForm.controls['bulkopt'].value">
+          <div class="col-sm-6">
+            <label>Installation Address</label>
+            <textarea name="installation_addr" formControlName="installation_addr"
+              placeholder="Installtion Address "
+              class="form-control" 
+              [ngClass]="{ 'is-invalid': submit && this.AddCustForm.controls.installation_addr.errors }" >
+            </textarea>
+            <small *ngIf="AddCustForm.controls.installation_addr.errors && AddCustForm.controls.installation_addr.errors.required && submit
+            " class="invalid-feedback">Installation Address required!
+            </small>
+          </div>
+          <div class="col-sm-6">
+            <label>Billing Address</label>
+            <textarea
+              value="{{ AddCustForm.value['same_addr'] ? AddCustForm.controls['billing_addr'].setValue(AddCustForm.value['installation_addr']):''}}"
+              name="billing_addr" formControlName="billing_addr" placeholder="Billing Address"
+              class="form-control" 
+              [ngClass]="{ 'is-invalid': submit && this.AddCustForm.controls.billing_addr.errors }"
+              ></textarea>
+            <small *ngIf="AddCustForm.controls.billing_addr.errors && AddCustForm.controls.billing_addr.errors.required && submit
+              " class="invalid-feedback">billing_addr Address is required!
+            </small>
+          </div>
+        </div>
+        <div class="form-group row" [hidden]="AddCustForm.controls['bulkopt'].value">
+          <div class="col-sm-6">
+            <div class="custom-control custom-checkbox">
+              <input id="status" class="custom-control-input" formControlName="same_addr" type="checkbox" />
+              <label class="custom-control-label" for="status">Billing Address same as Installtion Address</label>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row" [hidden]="AddCustForm.controls['bulkopt'].value">
+          <div class="col-sm-6">
+            <label>Proof Type</label>
+            <select class="form-control"
+            [ngClass]="{'is-invalid': submit && this.AddCustForm.controls.proof_type.errors}"
+              name="proof_type" formControlName="proof_type">
+              <option value="" selected>Select Proof Type</option>
+              <option value="0">Ration Card</option>
+              <option value="1">Aadar Card</option>
+            </select>
+            <small *ngIf="AddCustForm.controls.proof_type.errors && AddCustForm.controls.proof_type.errors.required && submit
+            " class="invalid-feedback">Proof Type is required!
+          </small>
+          </div>
+          <div class="col-sm-6" *ngIf="AddCustForm.value['proof_type'] != ''">
+            <label>Proof ID</label>
+            <input type="text" name="proof_id" formControlName="proof_id" placeholder="Proof ID "
+              [ngClass]="{ 'is-invalid': submit && AddCustForm.controls.proof_id.errors}"  class="form-control" />
+              <small *ngIf="AddCustForm.controls.proof_id.errors && AddCustForm.controls.proof_id.errors.required && submit
+              " class="invalid-feedback">Proof id required!
+            </small>
+          </div>
+        </div>
+      
+        <div class="form-group row" [hidden]="AddCustForm.controls['bulkopt'].value">
+          <div class="col-sm-6">
+            <label>STB Number</label>
+            <select [ngClass]="{
+                'form-control': true,
+                'form-control-danger':
+                  AddCustForm.controls.stb_no.invalid && submit
+              }" formControlName="stb_no">
+              <option value="">Select STB Number</option>
+              <option *ngFor="let item of stbdet" [ngValue]="item.stb_id">
+                {{ item.SNo }}
+              </option>
+            </select>
+          </div>
+          <div class="col-sm-6">
+            <label>Description</label>
+            <textarea name="descr" formControlName="descr" class="form-control" placeholder="Description"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" autofocus class="btn btn-md btn-success">
+          Create
+        </button>
+        <button type="button" class="btn btn-md btn-danger" [routerLink]="['/pages/customer/cust-list']">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </nb-card-body>
+</nb-card>
+<nb-card *ngIf="failure.length != 0">
+  <nb-card-header>
+    <!-- Success : {{s}} Failure : {{f}} -->
+    <!-- <i (click)="Download();" class="green right fa fa-file-excel" aria-hidden="true"></i> -->
+  </nb-card-header>
+  <nb-card-body>
+    <table class="table table-bordered table-striped">
+      <tr>
+        <th>User Name</th>
+        <th>Error Msg</th>
+      </tr>
+      <!-- <tr *ngFor="let item of failure">
           <td>{{item['User Name']}}</td>
           <td>{{item.issue}}</td>
         </tr> -->
-      </table>
-    </nb-card-body>
-  </nb-card>
+    </table>
+  </nb-card-body>
+</nb-card>
