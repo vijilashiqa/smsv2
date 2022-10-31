@@ -8,9 +8,8 @@
         <div class="form-group row">
           <div class="col-sm-4">
             <label>Headend Name<span style="color: red">*</span></label>
-            <auto-completen [addclass]="{
-                error: submit && this.AddStbForm.controls.hdid.errors
-              }" addclass="form-control" optValues="hdname" (changed)="
+            <auto-completen [addclass]="{ error: submit && this.AddStbForm.controls.hdid.errors}" 
+                addclass="form-control" optValues="hdname" (changed)="
                 getcashead();
                 getModelcas();
                 getstbtype();
@@ -36,11 +35,7 @@
               formControlName="casid" (keyUp)="getcashead($event)" placeholder="Select Case Type" optId="hdcasid"
               [item]="listhdcas">
             </auto-completen>
-            <div *ngIf="
-                this.AddStbForm.controls.casid.errors &&
-                this.AddStbForm.controls.casid.errors.required &&
-                submit
-              " class="error-text">
+            <div *ngIf=" this.AddStbForm.controls.casid.errors && this.AddStbForm.controls.casid.errors.required && submit "class="error-text">
               Cas Name is required!
             </div>
           </div>
@@ -52,10 +47,7 @@
               (changed)="getInvoicefun(); setModelType(); getstbtype()" formControlName="modelid"
               (keyUp)="getModelcas()" placeholder="Select STB Model" optId="bmid" [item]="getmodel">
             </auto-completen>
-            <div *ngIf="
-                this.AddStbForm.controls.modelid.errors &&
-                this.AddStbForm.controls.modelid.errors.required &&
-                submit
+            <div *ngIf=" this.AddStbForm.controls.modelid.errors && this.AddStbForm.controls.modelid.errors.required && submit
               " class="error-text">
               STB Model is required!
             </div>
@@ -94,8 +86,7 @@
           <div class="col-sm-6">
             <label class="control-label">Operator Type<span style="color: red">*</span></label>
             <select class="form-control" (change)="getoperatortypef();typeClearopear('1')" name="usertype" formControlName="usertype"
-              [ngClass]="{
-                'is-invalid': submit && this.AddStbForm.controls.usertype.errors}">
+              [ngClass]="{'is-invalid': submit && this.AddStbForm.controls.usertype.errors}">
               <option value="">Select Operator Type</option>
               <option value="444">LCO</option>
               <option value="666">Distributor</option>
@@ -124,54 +115,6 @@
               LCO Name is required!
             </div>
           </div>
-
-          <!-- <div class="col-sm-6" *ngIf="AddStbForm.value.usertype == '666'">
-            <label>&nbsp;Distributor</label>
-            <auto-completen [addclass]="{
-                error: submit && this.AddStbForm.controls.distributor.errors 
-              }" addclass="form-control" optValues="business_name" formControlName="distributor"
-              (keyUp)="getoperatortype()" placeholder="Select Distributor Name" Id="id" [item]="operatortype">
-            </auto-completen>
-            <div *ngIf="
-                this.AddStbForm.controls.distributor.errors &&
-                this.AddStbForm.controls.distributor.errors.required &&
-                submit
-              " class="error-text">
-              Distributor Name is required!
-            </div>
-          </div>
-
-          <div class="col-sm-6" *ngIf="AddStbForm.value.usertype == '555'">
-            <label>&nbsp;Sub-Distributor</label>
-            <auto-completen [addclass]="{
-                error: submit && this.AddStbForm.controls.subdis.errors
-              }" addclass="form-control" optValues="business_name" formControlName="subdis" (keyUp)="getoperatortype()"
-              placeholder="Select Sub-Distributor Name" Id="id" [item]="operatortype">
-            </auto-completen>
-            <div *ngIf="
-                this.AddStbForm.controls.subdis.errors &&
-                this.AddStbForm.controls.subdis.errors.required &&
-                submit
-              " class="error-text">
-              Sub-Distributor Name is required!
-            </div>
-          </div>
-
-          <div class="col-sm-6" *ngIf="AddStbForm.value.usertype == '333'">
-            <label>&nbsp;Hotel</label>
-            <auto-completen [addclass]="{
-                error: submit && this.AddStbForm.controls.hotelid.errors
-              }" addclass="form-control" optValues="business_name" formControlName="hotelid"
-              (keyUp)="getoperatortype()" placeholder="Select Sub-Distributor Name" Id="id" [item]="operatortype">
-            </auto-completen>
-            <div *ngIf="
-                this.AddStbForm.controls.hotelid.errors &&
-                this.AddStbForm.controls.hotelid.errors.required &&
-                submit
-              " class="error-text">
-              Hotel Name is required!
-            </div>
-          </div> -->
         </div>
         <div class="form-group row">
           <div class="col-sm-6">

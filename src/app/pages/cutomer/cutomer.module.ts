@@ -1,5 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import {
+  NbActionsModule,
+  NbCheckboxModule,
+  NbDatepickerModule, NbIconModule,
+  NbInputModule,
+  NbRadioModule,
+  NbSelectModule,
+} from '@nebular/theme';
 
 import { CutomerRoutingModule } from './cutomer-routing.module';
 import { AddCustComponent } from './add-cust/add-cust.component';
@@ -11,10 +19,11 @@ import { NbAccordionModule, NbButtonModule, NbCardModule, NbListModule, NbRouteT
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { LayoutRoutingModule } from '../layout/layout-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { ThemeModule } from '../../@theme/theme.module';
 import { AutoCompleteNModule } from '../auto-complete-module/auto-completen-module';
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
-
+import { PagerService } from '../_services/index';
 @NgModule({
   declarations: [
     AddCustComponent,
@@ -29,6 +38,7 @@ import { AutocompleteLibModule } from 'angular-ng-autocomplete';
     UsersRoutingModule,
     NbCardModule,
     NbTabsetModule,
+    FormsModule,
     NbCardModule,
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
@@ -37,15 +47,22 @@ import { AutocompleteLibModule } from 'angular-ng-autocomplete';
     NbRouteTabsetModule,
     NbStepperModule,
     NbCardModule,
+    NbCheckboxModule,
     NbButtonModule,
     NbListModule,
     NbAccordionModule,
     NbUserModule,
-    LayoutRoutingModule,NbTreeGridModule,
+    LayoutRoutingModule, NbTreeGridModule,
     ReactiveFormsModule,
     ThemeModule,
     AutoCompleteNModule,
     AutocompleteLibModule
-  ]
+  ],
+
+
+  providers: [
+
+    PagerService,
+  ],
 })
 export class CutomerModule { }

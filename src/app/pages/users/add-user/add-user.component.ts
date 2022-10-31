@@ -31,7 +31,6 @@ export class AddUserComponent implements OnInit {
     private broadcast: BroadcasterService,
     private toast: ToastrService,
     private route: Router,
-
     private aRoute: ActivatedRoute,
     private fb: FormBuilder,
     private operator: OperatorService
@@ -287,7 +286,7 @@ export class AddUserComponent implements OnInit {
       area: new FormControl( '', Validators.required),
       installation_addr: new FormControl( '', Validators.required),
       billing_addr: new FormControl('', Validators.required),
-      addsflag: new FormControl(false),
+      addsflag: new FormControl(true),
       prooftype: new FormControl('', Validators.required),
       proofno: new FormControl( '', Validators.required),
       email: new FormControl( '', [Validators.required, Validators.pattern("[0-9 A-Z a-z ,.`!@#$%^&*]*[@]{1}[a-z A-Z]*[.]{1}[a-z A-Z]{2,3}")]),

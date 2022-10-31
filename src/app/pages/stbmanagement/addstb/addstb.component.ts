@@ -6,6 +6,7 @@ import { HeadendService, VendorService } from "../../_services";
 import { StbmanagementService } from "../../_services/stbmanagement.service";
 import * as JSXLSX from "xlsx";
 import { StockService } from "../../_services/stock.service";
+import { SubscriberService } from "../../_services/subscriber.service";
 const EXCEL_TYPE =
   "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8";
 const EXCEL_EXTENSION = ".xlsx";
@@ -36,7 +37,7 @@ export class AddstbComponent implements OnInit {
   invoice;
   opt: any = [];
   s = 0;
-  f = 0;
+  f = 0;getoperatorlist;
   file: any;
   operatortype;
   vc_status = false;
@@ -56,6 +57,7 @@ export class AddstbComponent implements OnInit {
     this.createForm();
     this.getHeadend();
     this.serialValidation();
+ //   this.getoperator();
     // this.getoperatortypef();
   }
 
@@ -190,12 +192,14 @@ export class AddstbComponent implements OnInit {
     // else this.changeclear('stb_type')
   }
 
-
   changeclear(...data) {
     for (let i of data) {
       this.AddStbForm.controls[i].setValue("");
     }
   }
+
+
+
 
   async getoperatortypef() {
     this.operatortype = await this.stb.getoperatortype({
