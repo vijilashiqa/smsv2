@@ -10,8 +10,7 @@
             <button  class="btn btn-xs btn-outline-primary"
                [routerLink]="['/pages/customer/servext']">Service Extension</button>&nbsp;&nbsp;
             <button  class="btn btn-xs btn-outline-primary"
-               [routerLink]="['/pages/customer/edit-cust']">Edit</button>&nbsp;&nbsp;
-
+            [routerLink]="['/pages/customer/edit-cust']"[queryParams]="{ id: cust_id.cust_id }">Edit</button>&nbsp;&nbsp;
          </div>
             <div class="modal-body">       
             <nb-tabset>
