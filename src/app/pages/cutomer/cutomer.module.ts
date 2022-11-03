@@ -24,12 +24,16 @@ import { ThemeModule } from '../../@theme/theme.module';
 import { AutoCompleteNModule } from '../auto-complete-module/auto-completen-module';
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 import { PagerService } from '../_services/index';
+import { EditCustComponent } from './edit-cust/edit-cust.component';
+import { ViewCustComponent } from './view-cust/view-cust.component';
 @NgModule({
   declarations: [
     AddCustComponent,
     CustListComponent,
     CustTransferComponent,
-    SurenderStbComponent
+    SurenderStbComponent,
+    EditCustComponent,
+    ViewCustComponent
   ],
   imports: [
     CommonModule,

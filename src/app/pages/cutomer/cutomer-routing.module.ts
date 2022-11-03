@@ -1,39 +1,46 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { AddCustComponent } from './add-cust/add-cust.component';
-import { CustListComponent } from './cust-list/cust-list.component';
-import { CustTransferComponent } from './cust-transfer/cust-transfer.component';
-import { SurenderStbComponent } from './surender-stb/surender-stb.component';
+import { NgModule } from "@angular/core";
+import { RouterModule, Routes } from "@angular/router";
+import { AddCustComponent } from "./add-cust/add-cust.component";
+import { CustListComponent } from "./cust-list/cust-list.component";
+import { CustTransferComponent } from "./cust-transfer/cust-transfer.component";
+import { EditCustComponent } from "./edit-cust/edit-cust.component";
+import { SurenderStbComponent } from "./surender-stb/surender-stb.component";
+import { ViewCustComponent } from "./view-cust/view-cust.component";
 
 const routes: Routes = [
-  
   {
-    path: 'cust-list',
+    path: "cust-list",
     component: CustListComponent,
-    
   },
-  
+
   {
-    path: 'add-cust',
+    path: "add-cust",
     component: AddCustComponent,
-    
   },
-  
+
   {
-    path: 'cust-transfer',
+    path: "cust-transfer",
     component: CustTransferComponent,
-    
   },
-  
+
   {
-    path: 'surender-stb',
+    path: "surender-stb",
     component: SurenderStbComponent,
-    
+  },
+
+  {
+    path :"edit-cust",
+    component :EditCustComponent,
+  },
+
+  {
+    path :"view-cust",
+    component :ViewCustComponent
   },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class CutomerRoutingModule { }
+export class CutomerRoutingModule {}

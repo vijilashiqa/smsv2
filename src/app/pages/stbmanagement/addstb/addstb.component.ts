@@ -110,7 +110,7 @@ export class AddstbComponent implements OnInit {
     }
     if (this.val["status"]) {
       this.AddStbForm.value["status"] =
-        this.AddStbForm.value["status"] == "false" ? 0 : 1;
+      this.AddStbForm.value["status"] == "false" ? 0 : 1;
       let result = await this.stb.addstb(this.val);
       console.log("add...", result);
       if (result && result[0].err_code == 0) {
@@ -134,7 +134,6 @@ export class AddstbComponent implements OnInit {
       }
       this.val["bulkstb"] = this.bulk;
       console.log("form", this.val);
-
       let resp = await this.stb.addstbbulk(this.val);
       console.log("bulkResult????????????????? ", resp);
       if (resp && resp[0].err_code == 0) {
@@ -221,7 +220,8 @@ export class AddstbComponent implements OnInit {
       }
       if (modeli["chiptype"] == 1 && !this.val["status"]) {
         this.vc_status = true;
-      } else this.vc_status = false;
+      } else
+        this.vc_status = false;
     }
     ctrl["vcid"].updateValueAndValidity();
   }

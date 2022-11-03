@@ -155,7 +155,9 @@
         <div class="row form-group" [hidden]="AddStbForm.controls['status'].value">
           <div class="col-sm-6">
             <label>Please Upload The excel File Format</label>
-            <input #myFile type="file" (change)="changeListener($event.target.files[0])" class="form-control"
+            <input #myFile type="file" 
+              (change)="changeListener($event.target.files[0])" 
+              class="form-control"
               accept=".xlsx" />
           </div>
           <div class="col-sm-4">

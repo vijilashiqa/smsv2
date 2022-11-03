@@ -5,6 +5,7 @@ import { PagerService } from '../../_services';
 import { StbmanagementService } from '../../_services/stbmanagement.service';
 import { NgForm } from '@angular/forms';
 import { SubscriberService } from '../../_services/subscriber.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'ngx-cust-list',
   templateUrl: './cust-list.component.html',
@@ -24,12 +25,14 @@ export class CustListComponent implements OnInit {
   from_date = ''; to_date = ''; head_opt = ''; address = '';
   pack: any = []; pack_type = ''; package = ''; from_cdate = '';
   cas:any=[];castype='';listsubscriberl
+ 
 
   constructor(
     public pageservice: PagerService,
     private stb: StbmanagementService,
     private modal: NgbModal,
-    private subscriber :SubscriberService
+    private subscriber :SubscriberService,
+    private router: Router,
 
   ) { }
 
@@ -47,6 +50,15 @@ export class CustListComponent implements OnInit {
     this.setPage();
 
   }
+
+
+
+  view(item) {
+   localStorage.setItem('cust_data', JSON.stringify(item));
+    console.log("daatahere", JSON.stringify(item))
+    this.router.navigate(["/pages/customer/view-cust"]) 
+  }
+
   getlist(page) {
     var total = Math.ceil(this.count / this.limit);
     let result = this.pageservice.pageValidator(this.page, page, total);
@@ -75,6 +87,11 @@ export class CustListComponent implements OnInit {
       exp_check: new FormControl(true),
       addr_check: new FormControl(true),
     });
+  }
+
+
+  Edit(item){
+
   }
   Download() {
     // this.cust.getcustList(

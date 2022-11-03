@@ -8,7 +8,7 @@
   </nb-card-header>
   <nb-card-body>
     <!-- <toaster-container></toaster-container> -->
-    <button class="btn btn-sm btn-success" [routerLink]="['/pages/customer/add-cust']">Add</button>
+    <button status="success" nbButton  [routerLink]="['/pages/customer/add-cust']">Add</button>
     <div class="row">
       <div class="col-md-12">
         <label class="left">
@@ -26,8 +26,8 @@
           <select 
             name="headend" class="form-control">
             <option value="">Select Headend</option> -->
-            <!-- <option *ngFor="let item of head" [value]=item.headend_pk>{{item.headend_name}}</option> -->
-          <!-- </select>
+    <!-- <option *ngFor="let item of head" [value]=item.headend_pk>{{item.headend_name}}</option> -->
+    <!-- </select>
         </div>
         <div class="col-sm-3">
           <label>Operator Type</label>
@@ -39,21 +39,21 @@
           </select>
         </div>
         <div> -->
-          <!-- <auto-complete (keyup)="getoperator($event.target.value)" name='operator_name'
+    <!-- <auto-complete (keyup)="getoperator($event.target.value)" name='operator_name'
               (item_id)='operator_name=$event;getlocation(); getBranch();' placeholder='Select Operator'
               label='Operator Name' [item]=opt></auto-complete> -->
-        <!-- </div> -->
-        <!-- <div [ngClass]="{'col-sm-3':role.getroleval()>699,'col-sm-4':role.getroleval()<699}">
+    <!-- </div> -->
+    <!-- <div [ngClass]="{'col-sm-3':role.getroleval()>699,'col-sm-4':role.getroleval()<699}">
             <auto-complete name='loc' (item_id)='loc=$event; getBranch();' placeholder='Select Location'
               label='Location Name' [item]=locitem></auto-complete>
           </div> -->
 
-      <!-- </div>
+    <!-- </div>
       <div class="form-group row">
         <div class="col-sm-3"> -->
-          <!-- <auto-complete name='branch' (item_id)='branch=$event' placeholder='Select Branch' label='Branch Name'
+    <!-- <auto-complete name='branch' (item_id)='branch=$event' placeholder='Select Branch' label='Branch Name'
               [item]=branchitem></auto-complete> -->
-        <!-- </div>
+    <!-- </div>
         <div class="col-sm-3">
           <label>Pack Type</label>
           <select  class="form-control" id="pack_type">
@@ -67,7 +67,7 @@
             <option value="">Select Package</option>
           </select>
         </div> -->
-        <!-- <div class="col-sm-3">
+    <!-- <div class="col-sm-3">
           <label>STB Model</label>
           <select (change)='vc="";stbopt="";' name="model_opt" class="form-control">
             <option value="" selected>Select STB Model</option>
@@ -75,27 +75,27 @@
         </div>
       </div> -->
 
-      <!-- <div class="form-group row">
+    <!-- <div class="form-group row">
 
         <div class="col-sm-3"> -->
-          <!-- <auto-complete label="VC Number" [item]="vcdet" name="vc" (keyup)="getVc($event.target.value)"
+    <!-- <auto-complete label="VC Number" [item]="vcdet" name="vc" (keyup)="getVc($event.target.value)"
               (value)="vc=$event;"></auto-complete> -->
-          <!--  <ng-select (keyup)='getVc($event.target.value);' [(ngModel)]='vc' name="vc" class="form-control">
+    <!--  <ng-select (keyup)='getVc($event.target.value);' [(ngModel)]='vc' name="vc" class="form-control">
                 <ng-option *ngFor="let item of vcdet" [value]=item.vc_no>{{item.vc_no}}</ng-option>
               </ng-select> -->
-        <!-- </div>
+    <!-- </div>
 
         <div class="col-sm-3"> -->
-          <!--  <input (keyup)='getSTB();' class="form-control" type="text" list='boxlist' name="stbopt" [(ngModel)]='stbopt'>
+    <!--  <input (keyup)='getSTB();' class="form-control" type="text" list='boxlist' name="stbopt" [(ngModel)]='stbopt'>
               <datalist id='boxlist'>
                 <option *ngFor='let item of stbdet'>{{item.SNo}}</option>
               </datalist> -->
-          <!-- <auto-complete label="STB Number" [item]="stbdet" name="stbopt" (keyup)="getSTB($event.target.value)"
+    <!-- <auto-complete label="STB Number" [item]="stbdet" name="stbopt" (keyup)="getSTB($event.target.value)"
               (value)="stbopt=$event;"></auto-complete> -->
-          <!--  <ng-select (keyup)='getSTB($event.target.value);' [(ngModel)]='stbopt' name="stbopt" class="form-control">
+    <!--  <ng-select (keyup)='getSTB($event.target.value);' [(ngModel)]='stbopt' name="stbopt" class="form-control">
                 <ng-option *ngFor="let item of stbdet" [value]=item.SNo>{{item.SNo}}</ng-option>
               </ng-select> -->
-        <!-- </div>
+    <!-- </div>
         <div class="col-sm-3">
           <label>From Created Date </label>
           <input type="text" [owlDateTime]="from_cdate_layout" [owlDateTimeTrigger]="from_cdate_layout"
@@ -110,7 +110,7 @@
         </div>
 
       </div> -->
-      <!-- <div class="form-group row">
+    <!-- <div class="form-group row">
         <div class="col-sm-3">
           <label>Status</label>
           <select name="status" class="form-control">
@@ -140,242 +140,194 @@
         </div>
 
       </div> -->
-      <button type="button" class="btn btn-md btn-success" (click)='page=1;'
-        style="margin: auto; display: block;">Search</button>
+    <!-- <button type="button" class="btn btn-md btn-success" (click)='page=1;'
+        style="margin: auto; display: block;">Search</button> -->
     <!-- </div> -->
     <!-- </form> -->
     <div [formGroup]="Custform">
-        <div class="row">
-        <div class="validation-checkboxes">
-            <div class="col-sm-2">
-              <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input " id="status_check" formControlName="status_check" />
-            <label class="custom-control-label" for="status_check">STB Status</label>
-          </div>
-          </div>
-          <div class="col-sm-2">
-            <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input " id="caf_check" formControlName="caf_check" />
-            <label class="custom-control-label" for="caf_check">CAF Number</label>
-          </div>
-        </div>
-          <div class="col-sm-2" >
-            <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input " id="custid_check" formControlName="custid_check" />
-            <label class="custom-control-label" for="custid_check">Subscriber ID</label>
-          </div>
-          </div>
-         
-          <div class="col-sm-2">
-            <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input " id="subname_check" formControlName="subname_check" />
-            <label class="custom-control-label" for="subname_check">Subscriber Name</label>
-          </div>
-          </div>
-        
-          <div class="col-sm-2">
-            <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input " id="addr_check" formControlName="addr_check" />
-            <label class="custom-control-label" for="addr_check">Address</label>
-          </div>
-          </div>
-        
-          <div class="col-sm-2">
-            <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input " id="cas_check" formControlName="cas_check" />
-            <label class="custom-control-label" for="cas_check">STB Model</label>
-          </div>
-          </div>
-        
-          <div class="col-sm-2">
-            <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input " id="stb_check" formControlName="stb_check" />
-            <label class="custom-control-label" for="stb_check">STB Number</label>
-          </div>
-        </div>
-        </div>
-      </div>
-           <div class="row">
-        <div class="validation-checkboxes">
-          <div class="col-sm-2">
-            <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input " id="vc_check" formControlName="vc_check" />
-            <label class="custom-control-label" for="vc_check">VC Number</label>
-          </div>
-          </div>
-          <div class="col-sm-2">
-            <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input " id="act_check" formControlName="act_check" />
-            <label class="custom-control-label" for="act_check">Activate Date</label>
-          </div>
-          </div>
-          <div class="col-sm-2">
-            <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input " id="exp_check" formControlName="exp_check" />
-            <label class="custom-control-label" for="exp_check">Expiry Date</label>
-          </div>
-          </div>
-          <div class="col-sm-2">
-            <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input " id="mob_check" formControlName="mob_check" />
-            <label class="custom-control-label" for="mob_check">Moblie Number</label>
-          </div>
-          </div>
-          <div class="col-sm-2">
-            <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input " id="optname_check" formControlName="optname_check" />
-            <label class="custom-control-label" for="optname_check">Operator Name</label>
-          </div>
-          </div>
-          <div class="col-sm-2">
-            <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input " id="loc_check" formControlName="loc_check" />
-            <label class="custom-control-label" for="loc_check">Location</label>
-          </div>
-        </div>
-        </div>
-      </div>
-     
-      </div>
-    <!-- <div [formGroup]="Custform">
       <div class="row">
         <div class="validation-checkboxes">
           <div class="col-sm-2">
-            <nb-checkbox status="success"    id="status_check">STB Status</nb-checkbox>
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input " id="status_check" formControlName="status_check" />
+              <label class="custom-control-label" for="status_check">STB Status</label>
+            </div>
           </div>
           <div class="col-sm-2">
-            <nb-checkbox status="success" id="caf_check">CAF Number</nb-checkbox>
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input " id="caf_check" formControlName="caf_check" />
+              <label class="custom-control-label" for="caf_check">CAF Number</label>
+            </div>
           </div>
           <div class="col-sm-2">
-            <nb-checkbox status="success" id="addr_check">Address</nb-checkbox>
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input " id="custid_check" formControlName="custid_check" />
+              <label class="custom-control-label" for="custid_check">Subscriber ID</label>
+            </div>
           </div>
+
           <div class="col-sm-2">
-            <nb-checkbox status="success" id="cas_check">STB Model</nb-checkbox>
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input " id="subname_check" formControlName="subname_check" />
+              <label class="custom-control-label" for="subname_check">Subscriber Name</label>
+            </div>
           </div>
+
           <div class="col-sm-2">
-            <nb-checkbox status="success" id="stb_check">STB Number</nb-checkbox>
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input " id="addr_check" formControlName="addr_check" />
+              <label class="custom-control-label" for="addr_check">Address</label>
+            </div>
           </div>
+
           <div class="col-sm-2">
-            <nb-checkbox status="success" id="exp_check">Expiry Date</nb-checkbox>
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input " id="cas_check" formControlName="cas_check" />
+              <label class="custom-control-label" for="cas_check">STB Model</label>
+            </div>
           </div>
+
           <div class="col-sm-2">
-            <nb-checkbox status="success" id="act_check">Activate Date</nb-checkbox>&nbsp;&nbsp;
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input " id="stb_check" formControlName="stb_check" />
+              <label class="custom-control-label" for="stb_check">STB Number</label>
+            </div>
           </div>
         </div>
       </div>
       <div class="row">
         <div class="validation-checkboxes">
           <div class="col-sm-2">
-            <nb-checkbox status="success" id="cas_check">Moblie Number</nb-checkbox>&nbsp;&nbsp;
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input " id="vc_check" formControlName="vc_check" />
+              <label class="custom-control-label" for="vc_check">VC Number</label>
+            </div>
           </div>
           <div class="col-sm-2">
-            <nb-checkbox status="success" id="optname_check">Operator Name</nb-checkbox>&nbsp;&nbsp;
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input " id="act_check" formControlName="act_check" />
+              <label class="custom-control-label" for="act_check">Activate Date</label>
+            </div>
           </div>
           <div class="col-sm-2">
-            <nb-checkbox status="success" id="custid_check">Subscriber ID</nb-checkbox>&nbsp;&nbsp;
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input " id="exp_check" formControlName="exp_check" />
+              <label class="custom-control-label" for="exp_check">Expiry Date</label>
+            </div>
           </div>
           <div class="col-sm-2">
-            <nb-checkbox status="success" id="subname_check">Subscriber Name</nb-checkbox>
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input " id="mob_check" formControlName="mob_check" />
+              <label class="custom-control-label" for="mob_check">Moblie Number</label>
+            </div>
           </div>
           <div class="col-sm-2">
-            <nb-checkbox status="success" id="loc_check">Location</nb-checkbox>
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input " id="optname_check" formControlName="optname_check" />
+              <label class="custom-control-label" for="optname_check">Operator Name</label>
+            </div>
           </div>
           <div class="col-sm-2">
-            <nb-checkbox status="success" id="vc_check">VC Number</nb-checkbox>
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input " id="loc_check" formControlName="loc_check" />
+              <label class="custom-control-label" for="loc_check">Location</label>
+            </div>
           </div>
         </div>
       </div>
-  -->
+    </div>
     <table class="table table-condensed table-hover">
       <tr>
-        <th >Action</th>
-        <th [hidden]='!Custform.value["status_check"]'>STB Status</th>
-        <th [hidden]='!Custform.value["caf_check"]'>Caf No</th>
-        <th [hidden]='!Custform.value["custid_check"]' >Subscriber ID</th>
+        <th>Action</th>
+        <!-- <th [hidden]='!Custform.value["status_check"]'>STB Status</th> -->
+        <th [hidden]='!Custform.value["caf_check"]'>CAF NO</th>
+        <!-- <th [hidden]='!Custform.value["custid_check"]' >Subscriber ID</th> -->
         <th [hidden]='!Custform.value["subname_check"]'>Subscriber Name</th>
         <th [hidden]='!Custform.value["addr_check"]'>Address</th>
-        <th [hidden]='!Custform.value["cas_check"]'>STB Model</th>
-        <th [hidden]='!Custform.value["stb_check"]'>Box Num</th>
-        <th [hidden]='!Custform.value["vc_check"]'>Vc Num</th>
-        <th>Pack Type</th>
+        <!-- <th [hidden]='!Custform.value["cas_check"]'>STB Model</th> -->
+        <th [hidden]='!Custform.value["stb_check"]'>Box Number</th>
+        <!-- <th [hidden]='!Custform.value["vc_check"]'>VC Number</th> -->
+        <!-- <th>Pack Type</th>
         <th>Pack Name</th>
         <th [hidden]='!Custform.value["act_check"]'>Activate Date</th>
-        <th [hidden]='!Custform.value["exp_check"]'>Expiry Date</th>
+        <th [hidden]='!Custform.value["exp_check"]'>Expiry Date</th> -->
         <th [hidden]='!Custform.value["mob_check"]'>Mobile Number</th>
-        <th [hidden]='!Custform.value["optname_check"]'>Operator Name</th>
-        <th [hidden]='!Custform.value["loc_check"]'>Location</th>
+        <!-- <th [hidden]='!Custform.value["optname_check"]'>Operator Name</th>
+        <th [hidden]='!Custform.value["loc_check"]'>Location</th> -->
 
       </tr>
-      <tr>
+      <tr *ngFor="let item of pagedItems">
         <!-- <td [hidden]='role.getrole(403)&&role.getrole(404)'>
-            <a [hidden]='role.getrole(403)' (click)="Edit(item.cust_id_pk)"><i class="nb-edit"></i></a>
-            <a *ngIf='!role.getrole(404)' (click)="view({cust_id:item.cust_id_pk,id:item.id,branch:item.branch_fk})"><i class="far fa-eye 2x"></i></a>
-          </td> -->
-<!-- 
-        <div class="form-group row">
+          <a  (click)="Edit(item.cust_id_pk)"><i class="nb-edit"></i></a>
+          <a *ngIf='!role.getrole(404)' (click)="view({cust_id:item.cust_id_pk,id:item.id,branch:item.branch_fk})"><i class="far fa-eye 2x"></i></a>
+        </td> -->
+        <td style="padding: 1px" class=" last" data-title="'Action'">
           <div class="dropdown ghost-dropdown" ngbDropdown>
-            <button style="width: 75px;font-size: 10px" class="btn btn-primary btn-icon" type="button"
-              ngbDropdownToggle>Action
-            </button> -->
-            <!-- <ul style="width: 75px;" class="dropdown-menu" ngbDropdownMenu>
-                  <li class="dropdown-item" *ngIf='!role.getrole(403)' title="Edit"
-                    (click)="Edit({cust_id:item.cust_id_pk})"><i style="font-size: 20px;" class="nb-edit"></i>&nbsp;Edit
-                  </li>
-                  <li class="dropdown-item" *ngIf='!role.getrole(404)' title="View"
-                    (click)="view({cust_id:item.cust_id_pk,id:item.id,branch:item.branch_fk,vc_no:item.vc_no,stb_no:item.SNo,purchase_flg:item.purchase_flg})">
-                    <i style="font-size: 20px;" class="far fa-eye "></i>&nbsp;View</li>
-                  <li class="dropdown-item" *ngIf='!role.getrole(4041)' title="Renew"
-                    (click)="renew({cust_id:item.cust_id_pk,id:item.id,branch:item.branch_fk,vc_no:item.vc_no})"><i
-                      style="font-size: 20px;" class="ion-reply "></i>&nbsp;Renewal</li>
-                </ul> -->
-          <!-- </div>
-        </div> -->
+            <button type="button" style="margin-left: -10%;" class="btn btn-sm btn-success dropdown-toggle"
+              data-bs-toggle="dropdown">Action </button>
+            <ul style="width: 75px;margin: 3px;z-index: 1" class="dropdown-menu" ngbDropdownMenu>
+              <li class="dropdown-item" title="Edit" [routerLink]="['/pages/customer/edit-cust']"[queryParams]="{ id: item.custid }">
+                <i style="font-size: 20px;" class="nb-edit"></i>&nbsp;Edit</li>
+              <li class="dropdown-item" title="View" (click)="view({cust_id:item.custid,
+                                 installation_addr:item.installation_addr,
+                                 vc_no:item.boxno,
+                                 mobile:item.mobile,
+                                 fullname:item.fullname,
+                                 cafno:item.cafno,
+                                 profileid:item.profileid})">
+                <i style="font-size: 20px;" class="far fa-eye "></i>&nbsp;View
+              </li>
+              <li class="dropdown-item" title="Renew" (click)="renew({cust_id:item.cust_id_pk,
+                                  id:item.id,
+                                  branch:item.branch_fk,
+                                  vc_no:item.vc_no})">
+                <i style="font-size: 20px;" class="ion-reply "></i>&nbsp;Renewal
+              </li>
+            </ul>
+          </div>
+        </td>
 
-    
-          <!-- <a (click)="activeStb(item,item.purchase_flg==0)"><i
-                [ngStyle]="{'color': item.purchase_flg==1? 'green':'red'}"
-                [ngClass]="{'ion-close-round':item.purchase_flg==0 ? true:false,'ion-checkmark-round':item.purchase_flg!=0 ? true:false  }"
-                [attr.title]="item.purchase_flg==1 ? 'Active' : 'Deactive'"></i></a> -->
-        
-        <!-- <td >
-            <span 
-              style="background-color:#42f456;font-weight:bold;border-radius: 3px; padding: 4px;">Active</span>
-            <span 
-              style="background-color:#f44b42;font-weight:bold;border-radius: 3px; padding: 4px;">Deactive</span>
-          </td> -->
-        <!-- <td [hidden]='!Custform.value["caf_check"]'>{{item.caf_no}}</td>
-          <td [hidden]='!Custform.value["custid_check"]' *ngIf='role.getroleval() > 669'>{{item.cust_id_pk}}</td>
-          <td [hidden]='!Custform.value["subname_check"]'>
-            {{item.first_name + " "}}{{item.last_name ? item.last_name : ''}}</td>
-          <td [hidden]='!Custform.value["addr_check"]'>
-            <i class="fas fa-home" nbPopover="{{item.billing_addr}}" nbPopoverPlacement="right"></i>
-          </td>
-          <td [hidden]='!Custform.value["cas_check"]'>{{item.model_name}}</td>
-          <td [hidden]='!Custform.value["stb_check"]'>{{item.SNo}}</td>
-          <td [hidden]='!Custform.value["vc_check"]'>{{item.vc_no}}</td>
-          <td>{{item.a_la_cart==0?'BasePack':item.a_la_cart==4? 'Boquet':N/A}}</td>
-          <td>{{item.pack_name}}</td>
-          <td [hidden]='!Custform.value["act_check"]'>{{item.active_date | date : 'd MMM y h:mm:ss a'}}</td>
-          <td [hidden]='!Custform.value["exp_check"]'>{{item.expiry_date | date : 'd MMM y h:mm:ss a'}}</td>
-          <td [hidden]='!Custform.value["mob_check"]'>{{item.mobile}}</td>
-          <td *ngIf='role.getroleval() > 443' [hidden]='!Custform.value["optname_check"]'>
-            {{item.ufirst + " " + item.ulast}}</td>
-          <td *ngIf='role.getroleval() > 443' [hidden]='!Custform.value["loc_check"]'>{{item.loc_name}}</td> -->
+        <!-- <td [hidden]='!Custform.value["status_check"]'>
+          <a (click)="activeStb(item,item.purchase_flg==0)"><i
+              [ngStyle]="{'color': item.purchase_flg==1? 'green':'red'}"
+              [ngClass]="{'ion-close-round':item.purchase_flg==0 ? true:false,'ion-checkmark-round':item.purchase_flg!=0 ? true:false  }"
+              [attr.title]="item.purchase_flg==1 ? 'Active' : 'Deactive'"></i></a>
+        </td> -->
+        <!-- <td [hidden]='!Custform.value["status_check"]'>
+          <span *ngIf="item.purchase_flg==1"
+            style="background-color:#42f456;font-weight:bold;border-radius: 3px; padding: 4px;">Active</span>
+          <span *ngIf="item.purchase_flg==0"
+            style="background-color:#f44b42;font-weight:bold;border-radius: 3px; padding: 4px;">Deactive</span>
+        </td> -->
+        <td [hidden]='!Custform.value["caf_check"]'>{{item.cafno}}</td>
+        <td [hidden]='!Custform.value["custid_check"]'>{{item.cust_id_pk}}</td>
+        <td [hidden]='!Custform.value["subname_check"]'> {{item.fullname}}</td>
+        <td [hidden]='!Custform.value["addr_check"]'> {{item.installation_addr}} </td>
+        <!-- <td [hidden]='!Custform.value["cas_check"]'>{{item.model_name}}</td> -->
+        <!-- <td [hidden]='!Custform.value["stb_check"]'>{{item.SNo}}</td> -->
+        <td [hidden]='!Custform.value["vc_check"]'>{{item.boxno}}</td>
+        <!-- <td>{{item.a_la_cart==0?'BasePack':item.a_la_cart==4? 'Boquet':N/A}}</td> -->
+        <!-- <td>{{item.pack_name}}</td> -->
+        <!-- <td [hidden]='!Custform.value["act_check"]'>{{item.active_date | date : 'd MMM y h:mm:ss a'}}</td>
+        <td [hidden]='!Custform.value["exp_check"]'>{{item.expiry_date | date : 'd MMM y h:mm:ss a'}}</td> -->
+        <td [hidden]='!Custform.value["mob_check"]'>{{item.mobile}}</td>
+        <!-- <td [hidden]='!Custform.value["optname_check"]'>{{item.ufirst + " " + item.ulast}}</td> -->
+        <!-- <td [hidden]='!Custform.value["loc_check"]'>{{item.loc_name}}</td> -->
       </tr>
       <tr>
-        <td colspan="13" style="text-align: center;">No Data Found</td>
+        <td [hidden]='pagedItems.length !=0' colspan="13" style="text-align: center;">No Data Found</td>
       </tr>
     </table>
     <div class="pagination">
       <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
-          <a [ngClass]="{disabled:pager.currentPage === 1}" (click)="page=1;getcustList();">First</a>
-          <a [ngClass]="{disabled:pager.currentPage === 1}" (click)="page=page-1;getcustList();">Previous</a>
-          <a *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}"
-            (click)="getcustList(page)">{{page}}</a>
-          <a [ngClass]="{disabled:pager.currentPage === pager.totalPages}" (click)="page=page+1;getcustList();">Next</a>
-          <a [ngClass]="{disabled:pager.currentPage === pager.totalPages}"
-            (click)="page=pager.totalPages;getcustList();">Last</a>
-        </ul>
+        <a [ngClass]="{disabled:pager.currentPage === 1}" (click)="page=1;getcustList();">First</a>
+        <a [ngClass]="{disabled:pager.currentPage === 1}" (click)="page=page-1;getcustList();">Previous</a>
+        <a *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}"
+          (click)="getcustList(page)">{{page}}</a>
+        <a [ngClass]="{disabled:pager.currentPage === pager.totalPages}" (click)="page=page+1;getcustList();">Next</a>
+        <a [ngClass]="{disabled:pager.currentPage === pager.totalPages}"
+          (click)="page=pager.totalPages;getcustList();">Last</a>
+      </ul>
     </div>
     <!-- <div class="pagination-limit">
            <select (change)='page=1;initiallist();' name="limit" [(ngModel)]='limit' class="form-control" >

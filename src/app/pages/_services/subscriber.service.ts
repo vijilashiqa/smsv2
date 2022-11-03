@@ -1,4 +1,5 @@
 import { HttpClient } from '@angular/common/http';
+import { partitionArray } from '@angular/compiler/src/util';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -33,10 +34,28 @@ async listsubscriber(params){
 }
 
 
-async addbulksubscriber(params){
+async bulkaddsubscriber(params){
 
 
-  return await this.http.post("/subscriber/addbulksubscriber",params).toPromise();
+  return await this.http.post("/subscriber/bulkaddsubscriber",params).toPromise();
 }
 
+
+async editsubscriber(params){
+
+  return await this.http.post("/subscriber/geteditsubscriber",params).toPromise();
+}
+
+
+async editsubcriberlist(params){
+
+  return await this.http.post("/subscriber/editsubscriber",params).toPromise();
+}
+
+
+async getboxedit(params){
+
+  return await this.http.post("/subscriber/getboxedit",params).toPromise();
+
+}
 }

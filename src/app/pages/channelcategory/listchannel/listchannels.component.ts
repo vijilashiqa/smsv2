@@ -19,11 +19,9 @@ export class listChannelsComponent implements OnInit {
   ) { }
 
    async ngOnInit() {
-  
     await this.getheadend();
     await this.listlang();
     await this.listgenre();
-    // await this.createForm();
     await this.initiallist();
   }
   async getheadend(){
@@ -64,21 +62,7 @@ export class listChannelsComponent implements OnInit {
     this.pager = this.pageservice.getPager(this.count, this.page, this.limit);
     this.pagedItems = this.data;
   }
-  // getbroadcaster(){
 
-  // }
-  // getgenre(){
-
-  // }
-  // getchannel(){
-    
-  // }
-  // createForm(){
-  //   this.channelForm = new FormGroup({
-  //     language: new FormControl('', Validators.required),
-  //     genre: new FormControl('', Validators.required),
-  //     headend: new FormControl('', Validators.required),
-  //   });
-  // }
+  
 
 }

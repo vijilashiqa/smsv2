@@ -16,119 +16,167 @@ export class AddCustComponent implements OnInit {
   submit: boolean; stbdet: any = []; file: any; failure: any = [];
   AddCustForm; opt: any = []; arrayBuffer: any;
   loc: any = []; branch: any = []; head: any = [];
-  state: any = []; district = []; city: any = []; id; listhead
-  pincode: any = []; area = []; any = []; liststate; listarea; 
-  editflag; getstates; dist; editdata; citylist; count
-  bulkopt = false; bulkdata = []; s = 0; f = 0; getoperatorlist; getboxlist;
+  state: any = []; district = []; city: any = []; id; listhead; bulk: any = [];
+  pincode: any = []; area = []; any = []; liststate; listarea; bulkmeta: any = [];
+  editflag; getstates; dist; editdata; citylist; count; disabled = false; editable: boolean = false;
+  bulkopt = false; bulkdata = []; s = 0; f = 0; getoperatorlist; getboxlist; getboxeditl
   constructor(private country: CountryService,
     private headend: HeadendService,
     private toast: ToastrService,
     private router: Router,
-    private subscriber: SubscriberService,
+    private subscribers: SubscriberService,
     private aRoute: ActivatedRoute,
     private fb: FormBuilder) {
     this.submit = false;
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+    this.id = this.aRoute.snapshot.queryParams.id;
     this.createForm();
     this.getCountry();
     this.getHeadend();
     this.getbox();
+    this.getboxedit();
+    if (this.id) {
+      console.log('id.................', this.id);
+      this.disabled = !this.disabled;
+      this.editable = true;
+      this.editflag = true;
+      await this.edit();
+      await this.createForm();
+      await this.getHeadend();
+      await this.getoperator();
+      this.getboxedit();
+      this.getCountry();
+      this.getstate();
+      this.getdistrict();
+      this.getcity();
+      this.getarea();
+
+    }
 
   }
-  // async addcustomer() {
-  //   this.submit = true;
-  //   // console.log('add...', this.val);
-  //   const invalid = [];
-  //   const control = this.ctrl
-  //   for (const name in control) {
-  //     if (control[name].invalid) {
-  //       invalid.push(name);
-  //     }
-  //   }
-  //   if (this.AddCustForm.invalid) {
-  //     console.log('Invalid value -----', invalid);
-  //     window.alert('Please fill mandatory fields');
-  //     return;
-  //   }
-  //   let result1 = this.AddCustForm.value;
-  //   console.log("result +++++++++++++ ", result1)
-  // } 
+  metavalue() {
+    this.bulkmeta = [
+      {
+        msg: "Please fill User Name",
+        label: "User Name * ",
+        assign_to: "profileid",
+        required: true,
+      },
+      {
+        msg: "Please fill CAF Number",
+        label: "CAF Number *",
+        assign_to: "cafno",
+        required: true,
+      },
+      {
+        msg: "Please fill First Name",
+        label: "First Name *",
+        assign_to: "fullname",
+        required: true,
+      },
 
- async addcustomer() {
-    this.submit = true;
-    let method;
-    if (this.AddCustForm.invalid) {
-      return;
-    }
-    const md5 = new Md5();
+      {
+        msg: "Please fill Password",
+        label: "Password *",
+        assign_to: "password",
+        required: true,
+      },
 
-    if (!this.bulkopt) {
-      method = 'addsubscriber';
+      {
+        msg: "Please fill Mobile Number",
+        label: "Mobile Number *",
+        assign_to: "mobile",
+        required: true,
+      },
+
+
+      {
+        msg: "Please fill Proof Type",
+        label: "Proof Type *",
+        assign_to: "proof_type",
+        required: true,
+      },
+
+
+      {
+        msg: "Please fill STB Number",
+        label: "STB Number *",
+        assign_to: "stb_no",
+        required: true,
+      },
+
+
+      {
+        msg: "Please fill Address",
+        label: "Address *",
+        assign_to: "installation_addr",
+        required: true,
+      },
+
+
+      {
+        msg: "Please fill Proof ID",
+        label: "Proof ID *",
+        assign_to: "proof_id",
+        required: true,
+      },
+
+      {
+        msg: "Please fill Email ID",
+        label: "Email *",
+        assign_to: "email",
+        required: true,
+      },
+    ];
+    return this.bulkmeta;
+  }
+  changeListener(file) {
+    this.file = file;
+    this.filereader(this.file, (result) => {
+      this.bulk = result;
+      console.log("result............", this.bulk);
+    });
+  }
+
+  filereader(file, callback) {
+    if (file) {
+      let fileReader = new FileReader(),
+        filedata;
+      fileReader.onload = (e) => {
+        this.arrayBuffer = fileReader.result;
+        var data = new Uint8Array(this.arrayBuffer);
+        var arr = new Array();
+        for (var i = 0; i != data.length; ++i)
+          arr[i] = String.fromCharCode(data[i]);
+        var bstr = arr.join("");
+        var workbook = JSXLSX.read(bstr, { type: "binary" });
+        var first_sheet_name = workbook.SheetNames[0];
+        var worksheet = workbook.Sheets[first_sheet_name];
+        callback(JSXLSX.utils.sheet_to_json(worksheet, { raw: true }));
+      };
+      fileReader.readAsArrayBuffer(file);
     } else {
-      if (this.bulkdata.length == 0) {
-        this.toast.success('No Data Found');
-        return
-      } else {
-        method = 'addbulksubscriber';
-        this.filereader(this.file, result => {
-          this.bulkdata = result;
-          let total = this.bulkdata.length,
-            bulkvald: boolean = false;
-          for (var i = 0; i < total; i++) {
-            if (!this.bulkdata[i].hasOwnProperty('User Name')) {
-              this.toast.warning('Please fill the User Name in Excel Sheet');
-              bulkvald = true;
-              break;
-            }
-            if (!this.bulkdata[i].hasOwnProperty('CAF Number')) {
-              this.toast.warning('Please fill the CAF Number in Excel Sheet');
-              bulkvald = true;
-              break;
-            }
-            if (!this.bulkdata[i].hasOwnProperty('First Name')) {
-              this.toast.warning('Please fill the First Name in Excel Sheet');
-              bulkvald = true;
-              break;
-            }
-            if (!this.bulkdata[i].hasOwnProperty('Password')) {
-              this.toast.warning('Please fill the Password in Excel Sheet');
-              bulkvald = true;
-              break;
-            } 
-            if (!this.bulkdata[i].hasOwnProperty('STB Number')) {
-              this.toast.warning('Please fill the STB Number in Excel Sheet');
-              bulkvald = true;
-              break;
-            }
-          };
-          for (var i = 0; i < total && !bulkvald; ++i) {
-            for (var j = i + 1; j < total; ++j) {
-              if (this.bulkdata[i]['User Name'] == this.bulkdata[j]['User Name'] ||
-                this.bulkdata[i]['STB Number'] == this.bulkdata[j]['STB Number'] ||
-                (this.bulkdata[i]['CAF Number'] + '') == (this.bulkdata[j]['CAF Number'] + '')
-              ) {
-                this.toast.warning('Duplication In Excel Pls Check Username Or STB Number Or CAF Number');
-                bulkvald = true;
-                break;
-              }
-            }
-          }
-          if (bulkvald) {
-            return;
-          }
-          this.AddCustForm.value['hdid'] = this.AddCustForm.value['hdid'];
-          this.AddCustForm.value['userid']=this.AddCustForm.value['userid'];
-          this.AddCustForm.value['bulkdata'] = this.bulkdata;
-        });
+      callback([]);
+    }
+  }
+  async addcustomer() {
+    this.submit = true;
+    const invalid = [];
+    const control = this.AddCustForm.controls;
+    for (const name in control) {
+      if (control[name].invalid) {
+        invalid.push(name);
       }
     }
-    this.s = 0; this.f = 0; this.failure = [];
-    let s = 0, total = this.bulkdata.length;
-    console.log("bulk data addaed ",this.bulkdata)
-    if (method == 'addsubscriber') {
-      let result = await this.subscriber.addsubscriber(this.AddCustForm.value);
+    if (this.AddCustForm.invalid) {
+      console.log("Invalid value -----", invalid);
+      return;
+    }
+    if (this.val["bulkopt"]) {
+      let result = await this.subscribers.addsubscriber(this.AddCustForm.value)
+      console.log("add...", result);
       if (result && result[0].err_code == 0) {
         this.toast.success(result[0]["msg"]);
         this.router.navigate(["/pages/customer/cust-list"]);
@@ -136,73 +184,37 @@ export class AddCustComponent implements OnInit {
         this.toast.warning(result[0]["msg"]);
       }
     }
-     else
-      {
-      this.bulkdata.forEach(item => {
-        this.AddCustForm.value['bulkdata'] = item;
-        this.subscriber[method](this.AddCustForm.value).subscribe(result => {
-          // console.log(result);
-          if (result['failure']) {
-            this.failure.push(result['failure']);
-            this.f++;
+    if (this.bulk.length && this.val["bulkopt"]) {
+      let result = this.metavalue();
+      for (let i = 0; i < this.bulk.length; i++) {
+        for (let meta of result) {
+          if (!this.bulk[i].hasOwnProperty(meta.label) && meta.required) {
+            this.toast.warning(meta.msg);
+            return;
           } else {
-            this.s++;
+            this.bulk[i][meta.assign_to] = this.bulk[i][meta.label];
           }
-          s++;
-          if (s == total) {
-            if (this.failure.length == 0) {
-            this.toast.success(result[0]["msg"]);
-            this.router.navigate(["/pages/customer/cust-list"]);
-          } else {
-            this.toast.warning(result[0]["msg"]);
-          }
-          }
-        });
-      })
-    }
-  }
-    
-
-
-  changeListener(file) {
-    this.file = file;
-    this.filereader(this.file, result => {
-      this.bulkdata = result;
-    });
-  }
-
-  filereader(file, callback) {
-    if (file) {
-      let fileReader = new FileReader(), filedata;
-      fileReader.onload = (e) => {
-        this.arrayBuffer = fileReader.result;
-        var data = new Uint8Array(this.arrayBuffer);
-        var arr = new Array();
-        for (var i = 0; i != data.length; ++i) arr[i] = String.fromCharCode(data[i]);
-        var bstr = arr.join("");
-        var workbook = JSXLSX.read(bstr, { type: "binary" });
-        var first_sheet_name = workbook.SheetNames[0];
-        var worksheet = workbook.Sheets[first_sheet_name];
-        // console.log(JSXLSX.utils.sheet_to_json(worksheet,{raw:true}));
-        callback(JSXLSX.utils.sheet_to_json(worksheet, { raw: true }));
+        }
       }
-      fileReader.readAsArrayBuffer(file);
-    } else {
-      callback([]);
+      this.val["bulkdata"] = this.bulk;
+      console.log("form", this.val);
+      let resp = await this.subscribers.bulkaddsubscriber(this.AddCustForm.value)
+      console.log("bulkResult????????????????? ", resp);
+      if (resp && resp[0].err_code == 0) {
+        this.toast.success(resp[0]["msg"]);
+        this.router.navigate(["/pages/customer/cust-list"]);
+      } else {
+        this.toast.warning(resp[0]["msg"]);
+      }
     }
   }
 
-  // toastalert(msg, status = 0) {
-  //   const toast: Toast = {
-  //     type: status == 1 ? 'success' : 'warning',
-  //     title: status == 1 ? 'Success' : 'Failure',
-  //     body: msg,
-  //     timeout: 5000,
-  //     showCloseButton: true,
-  //     bodyOutputType: BodyOutputType.TrustedHtml,
-  //   };
-  //   this.alert.popAsync(toast);
-  // }
+  async edit() {
+    console.log('edit herer')
+    this.editdata = await this.subscribers.editsubscriber({ custid: this.id });
+    console.log('editdata .....', this.editdata)
+  }
+
 
   bulkvalid() {
     let form = this.AddCustForm;
@@ -263,7 +275,7 @@ export class AddCustComponent implements OnInit {
 
 
 
-  
+
   async getCountry($event = '') {
     this.count = await this.country.listcountry({ like: $event });
   }
@@ -304,8 +316,8 @@ export class AddCustComponent implements OnInit {
     this.changeclear('area');
   }
 
-  typeclearopr(){
-    this.changeclear('userid' ,'stb_no')
+  typeclearopr() {
+    this.changeclear('userid', 'stb_no')
   }
 
   async getHeadend($event = '') {
@@ -314,43 +326,52 @@ export class AddCustComponent implements OnInit {
   }
 
   async getoperator() {
-    this.getoperatorlist = await this.subscriber.getoperator({ hdid: this.AddCustForm.value['hdid'] })
+    this.getoperatorlist = await this.subscribers.getoperator({ hdid: this.AddCustForm.value['hdid'] })
     console.log("operator list ", this.getoperatorlist)
 
   }
 
 
   async getbox() {
-    this.getboxlist = await this.subscriber.getbox({ hdid: this.AddCustForm.value['hdid'] })
+    this.getboxlist = await this.subscribers.getbox({ hdid: this.AddCustForm.value['hdid'] })
     console.log('getbox', this.getboxlist)
+  }
+
+
+
+  async getboxedit() {
+
+    this.getboxeditl = await this.subscribers.getboxedit({ hdid: this.AddCustForm.value['hdid'] })
+    console.log("getboxlistedir", this.getboxeditl)
   }
 
   createForm() {
     this.AddCustForm = new FormGroup({
-      userid: new FormControl('',Validators.required),
-      profileid: new FormControl('', Validators.required),
+      userid: new FormControl(this.editdata?.userid || '', Validators.required),
+      profileid: new FormControl(this.editdata?.profileid || '', Validators.required),
       password: new FormControl('', Validators.required),
-      stb_no: new FormControl(''),
-      hdid: new FormControl('', Validators.required),
-      cafno: new FormControl('', Validators.required),
-      fullname: new FormControl('', Validators.required),
-      dob: new FormControl(''),
-      mobile: new FormControl('', [Validators.required, Validators.pattern('^[0-9]{10}$')]),
-      phone: new FormControl(''),
-      pin_no: new FormControl('', Validators.required),
-      country: new FormControl('', Validators.required),
-      state: new FormControl('', Validators.required),
-      district: new FormControl('', Validators.required),
-      city: new FormControl('', Validators.required),
-      area: new FormControl('', Validators.required),
-      installation_addr: new FormControl('', Validators.required),
-      billing_addr: new FormControl('', Validators.required),
+      stb_no: new FormControl(this.editdata?.boxid || ''),
+      hdid: new FormControl(this.editdata?.hdid || '', Validators.required),
+      cafno: new FormControl(this.editdata?.cafno || '', Validators.required),
+      fullname: new FormControl(this.editdata?.fullname || '', Validators.required),
+      dob: new FormControl(this.editdata?.dob?.slice(0, 10) || ''),
+      mobile: new FormControl(this.editdata?.mobile || '', [Validators.required, Validators.pattern('^[0-9]{10}$')]),
+      phone: new FormControl(this.editdata?.phone || ''),
+      pin_no: new FormControl(this.editdata?.pin_no || '', Validators.required),
+      country: new FormControl(this.editdata?.country || '', Validators.required),
+      state: new FormControl(this.editdata?.state || '', Validators.required),
+      district: new FormControl(this.editdata?.district || '', Validators.required),
+      city: new FormControl(this.editdata?.city || '', Validators.required),
+      area: new FormControl(this.editdata?.area || '', Validators.required),
+      installation_addr: new FormControl(this.editdata?.installation_addr || '', Validators.required),
+      billing_addr: new FormControl(this.editdata?.billing_addr || '', Validators.required),
       same_addr: new FormControl(true),
-      proof_type: new FormControl('', Validators.required),
-      proof_id: new FormControl('', Validators.required),
-      email: new FormControl('', [Validators.required, Validators.pattern("[0-9 A-Z a-z ,.`!@#$%^&*]*[@]{1}[a-z A-Z]*[.]{1}[a-z A-Z]{2,3}")]),
-      descr: new FormControl(''),
-      bulk: new FormControl('')
+      proof_type: new FormControl(this.editdata?.proof_type || '', Validators.required),
+      proof_id: new FormControl(this.editdata?.proof_id || '', Validators.required),
+      email: new FormControl(this.editdata?.email || '', [Validators.required, Validators.pattern("[0-9 A-Z a-z ,.`!@#$%^&*]*[@]{1}[a-z A-Z]*[.]{1}[a-z A-Z]{2,3}")]),
+      descr: new FormControl(this.editdata?.descr || ''),
+      bulk: new FormControl(''),
+      bulkopt: new FormControl(false),
     });
 
 

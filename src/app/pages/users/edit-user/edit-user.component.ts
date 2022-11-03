@@ -23,10 +23,11 @@ export class EditUserComponent implements OnInit {
 
   submit: boolean
   loc: any = []; branch: any = []; head: any = []; profile: any = [];
-  state: any = []; district: any = []; city: any = []; id; disabled = false;showtextf
+  state: any = []; district: any = []; city: any = []; id; disabled = false;editable: boolean = false;
+  showtextf
   pincode: any = []; area: any = []; liststate; listarea; editflag; getstates; dist; citylist; operatortypelist; getlistlco; getlistcount;
   nodes = []; User; LocandBranch; keyword = 'name'; listcountry; count; listhead; listbroadaterr; result; subdistributortype;
-  editable: boolean = false; editdata: any;showtext : string = '';
+   editdata: any;showtext : string = '';
   distShareShow = false;subdistshare =false;
   constructor(private country: CountryService,
     private headService: HeadendService,

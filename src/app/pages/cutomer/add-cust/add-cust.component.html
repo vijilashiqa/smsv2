@@ -29,31 +29,34 @@
             </div>
           </div>
         </div>
-        <div class="form-group row">
+        <!-- <div class="form-group row">
           <div class="col-sm-6">
-            <!-- <div class="custom-control custom-checkbox">
-              <input formControlName="bulkopt" name="bulkopt" class="custom-control-input" type="checkbox"
-                id="bulkopt" (change)='bulkvalid();'/>
-              <label class="custom-control-label" for="bulkopt">Bulk/Single</label>
-            </div> -->
-
-
             <div class="custom-control custom-checkbox">
               <input (change)='bulkvalid();' id='bulkopt' class="custom-control-input" [(ngModel)]="bulkopt"
                 [ngModelOptions]="{standalone: true}" type="checkbox">
               <label class="custom-control-label" for="bulkopt">Bulk/Single</label>
             </div>
+          </div>
+        </div> -->
 
-
+        <div class="form-group row">
+          <div class="col-sm-6">
+            <div class="custom-control custom-checkbox">
+              <input (change)="bulkvalid(); bulk = []" formControlName="bulkopt" name="bulkopt"
+                class="custom-control-input" type="checkbox" id="bulkopt" 
+                [(ngModel)]="bulkopt"/>
+              <label class="custom-control-label" for="bulkopt">Create Bulk</label>
+            </div>
           </div>
         </div>
-
-        <div class="form-group row" [hidden]='!bulkopt'>
+        <div class="form-group row" [hidden]="!AddCustForm.controls['bulkopt'].value">
           <div class="col-sm-6">
-            <input type="file"  (change)='changeListener($event.target.files[0])' 
-             [ngClass]="{'form-control': true,'form-control-danger': AddCustForm.controls.bulk.invalid && submit}" />
-            <small *ngIf="bulkdata.length==0&&submit" class="error-text">File Is reqired! </small>
-            <small class="error-text">Gender : 0 - Male, 1 - Female </small>
+              <label>Please Upload The excel File Format</label>
+              <input #myFile type="file" 
+                (change)="changeListener($event.target.files[0])" 
+                class="form-control"
+                accept=".xlsx" />
+            <small *ngIf="bulk.length==0&&submit" class="error-text">File Is reqired! </small>
             <small class="error-text">Proof Type : 0 - Ration Card, 1 - Aadar Card </small>
           </div>
           <div class="col-sm-6">
@@ -129,8 +132,6 @@
               placeholder="Select stb box" optId="boxid" [item]="getboxlist">
             </auto-completen>
           </div>
-
-     
         </div>
         <div class="form-group row" [hidden]='bulkopt'>
           <div class="col-sm-6">
@@ -168,9 +169,9 @@
           </div>
           <div class="col-sm-6">
             <label>state<span style="color: red">*</span></label>
-            <auto-completen [addclass]="{
-                error: submit && this.AddCustForm.controls.state.errors
-              }" addclass="form-control" optValues="name" formControlName="state" (keyUp)="getstate($event)"
+            <auto-completen 
+            [addclass]="{error: submit && this.AddCustForm.controls.state.errors}"
+               addclass="form-control" optValues="name" formControlName="state" (keyUp)="getstate($event)"
               (changed)="getdistrict(); typeclearstate('1')" placeholder="Select State" id="id" [item]="getstates">
             </auto-completen>
             <div *ngIf="
@@ -279,8 +280,8 @@
               [ngClass]="{'is-invalid': submit && this.AddCustForm.controls.proof_type.errors}" name="proof_type"
               formControlName="proof_type">
               <option value="" selected>Select Proof Type</option>
-              <option value="0">Ration Card</option>
-              <option value="1">Aadar Card</option>
+              <option value="1">Ration Card</option>
+              <option value="2">Aadar Card</option>
             </select>
             <small *ngIf="AddCustForm.controls.proof_type.errors && AddCustForm.controls.proof_type.errors.required && submit
             " class="invalid-feedback">Proof Type is required!

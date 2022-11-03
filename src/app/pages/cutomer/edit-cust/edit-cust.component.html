@@ -1,0 +1,341 @@
+<nb-card>
+    <!-- <toaster-container></toaster-container> -->
+    <nb-card-header>Create Subscriber</nb-card-header>
+    <nb-card-body>
+      <form [formGroup]="editcust" class="form-horizontal" (ngSubmit)="addcustomer()">
+        <div class="modal-body">
+          <div class="form-group row">
+            <div class="col-sm-6">
+              <label>Headend Name<span style="color: red">*</span></label>
+              <auto-completen 
+                [addclass]="{error: submit && this.editcust.controls.hdid.errors}"
+                (changed)="getoperator();getbox();typeclearopr()" addclass="form-control" optValues="hdname" formControlName="hdid"
+                (keyUp)="getHeadend($event)" placeholder="Select Headend" optId="hdid" [item]="listhead">
+              </auto-completen>
+              <div *ngIf="this.editcust.controls.hdid.errors && this.editcust.controls.hdid.errors.required && submit  "class="error-text">
+                Headend Name is required!
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <label>Operator *</label>
+              <auto-completen 
+                [addclass]="{error: submit && this.editcust.controls.userid.errors}"
+                addclass="form-control" optValues="profileid" formControlName="userid" (keyUp)="getoperator()"
+                placeholder="Select Operator" Id="id" [item]="getoperatorlist">
+              </auto-completen>
+              <div 
+                *ngIf="this.editcust.controls.userid.errors && this.editcust.controls.userid.errors.required && submit  "class="error-text">
+                 Operator type is required!
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-6">
+              <!-- <div class="custom-control custom-checkbox">
+                <input formControlName="bulkopt" name="bulkopt" class="custom-control-input" type="checkbox"
+                  id="bulkopt" (change)='bulkvalid();'/>
+                <label class="custom-control-label" for="bulkopt">Bulk/Single</label>
+              </div> -->
+  
+  
+              <!-- <div class="custom-control custom-checkbox">
+                <input (change)='bulkvalid();' id='bulkopt' class="custom-control-input" [(ngModel)]="bulkopt"
+                  [ngModelOptions]="{standalone: true}" type="checkbox">
+                <label class="custom-control-label" for="bulkopt">Bulk/Single</label>
+              </div> -->
+  
+  
+            </div>
+          </div>
+  
+          <!-- <div class="form-group row" [hidden]='!bulkopt'>
+            <div class="col-sm-6">
+              <input type="file"  (change)='changeListener($event.target.files[0])' 
+               [ngClass]="{'form-control': true,'form-control-danger': editcust.controls.bulk.invalid && submit}" />
+              <small *ngIf="bulkdata.length==0&&submit" class="error-text">File Is reqired! </small>
+              <small class="error-text">Gender : 0 - Male, 1 - Female </small>
+              <small class="error-text">Proof Type : 0 - Ration Card, 1 - Aadar Card </small>
+            </div>
+            <div class="col-sm-6">
+              <br />
+              <a href=".././../../../assets/data/custbulk.xlsx" target="_blank" download><b>Download Sample Here</b></a>
+            </div>
+          </div> -->
+          <div class="form-group row" >
+            <div class="col-sm-6">
+              <label>User Name *</label>
+              <input type="text" class="form-control" name="profileid" formControlName="profileid" placeholder="Enter User Name"
+                [ngClass]="{'is-invalid': submit && editcust.controls.profileid.errors}" />
+              <small *ngIf="editcust.controls.profileid.errors && editcust.controls.profileid.errors.required && submit"
+                class="invalid-feedback">userid is required!
+              </small>
+            </div>
+            <div class="col-sm-6">
+              <label>CAF Number</label>
+              <input type="text" class="form-control" name="cafno" formControlName="cafno" placeholder="Enter CAF Number"
+                [ngClass]="{'is-invalid': submit && editcust.controls.cafno.errors}" />
+              <small *ngIf="editcust.controls.cafno.errors && editcust.controls.cafno.errors.required && submit"
+                class="invalid-feedback">CAF Number is required!
+              </small>
+            </div>
+          </div>
+          <div class="form-group row" >
+            <div class="col-sm-6">
+              <label>Full Name</label>
+              <input type="text" class="form-control" name="fullname" formControlName="fullname"
+                placeholder="Enter Fullname Name"
+                [ngClass]="{'is-invalid': submit && editcust.controls.fullname.errors}" />
+              <small
+                *ngIf="editcust.controls.fullname.errors && editcust.controls.fullname.errors.required && submit"
+                class="invalid-feedback">First Name is required!
+              </small>
+            </div>
+            <div class="col-sm-6">
+              <label>Date Of Birth</label>
+              <input type="date" class="form-control" name="dob" formControlName="dob"
+                [ngClass]="{'is-invalid': submit && editcust.controls.dob.errors}" />
+              <small *ngIf="editcust.controls.dob.errors && editcust.controls.dob.errors.required && submit"
+                class="invalid-feedback">DOB Name is required!
+              </small>
+            </div>
+          </div>
+          <!-- <div class="form-group row" >
+            <div class="col-sm-6">
+              <label>Password</label>
+              <input type="password" class="form-control" name="password" formControlName="password"
+                placeholder="Enter password"
+                [ngClass]="{ 'is-invalid': submit && editcust.controls.password.errors}" />
+              <small *ngIf="editcust.controls.password.errors && editcust.controls.password.errors.required && submit
+              " class="invalid-feedback">Password is required!
+              </small>
+            </div> -->
+            <!-- <div class="col-sm-6">
+              <label>Confirm Password</label>
+              <input type="password" name="CPassword" formControlName="CPassword" placeholder="Confirm Password"
+                [ngClass]="{ 'form-control': true,'form-control-danger':editcust.value['Password'] != editcust.value['CPassword'] ||
+                    (editcust.controls.CPassword.invalid && submit) }" />
+              <small *ngIf="editcust.value['Password'] != editcust.value['CPassword'] && submit
+                " class="invalid-feedback">Password not matched!</small>
+              <small *ngIf="editcust.controls.CPassword.errors && editcust.controls.CPassword.errors.required && submit
+                " class="invalid-feedback">CPassword is required!
+              </small>
+            </div> -->
+<!--   
+  
+            <div class="col-sm-6">
+              <label>STB Number</label>
+              <auto-completen [addclass]="{error: submit && this.editcust.controls.stb_no.errors}"
+                addclass="form-control" optValues="boxno" formControlName="stb_no"  (keyUp)="getbox()"
+                placeholder="Select stb box" optId="boxid" [item]="getboxeditl">
+              </auto-completen>
+            </div>
+   -->
+       
+          <!-- </div> -->
+          <div class="form-group row" >
+            <div class="col-sm-6">
+              <label>Mobile No</label>
+              <input type="text" class="form-control" name="mobile" formControlName="mobile" placeholder="Enter Mobile NO"
+                [ngClass]="{ 'is-invalid': submit && editcust.controls.mobile.errors}" />
+              <small *ngIf="editcust.controls.mobile.errors && editcust.controls.mobile.errors.required && submit
+              " class="invalid-feedback">Mobile NO required!
+              </small>
+            </div>
+            <div class="col-sm-6">
+              <label>Phone No</label>
+              <input type="text" class="form-control" name="phone" formControlName="phone" placeholder="Enter Phone NO"
+                [ngClass]="{ 'is-invalid': submit && editcust.controls.phone.errors}" />
+              <small *ngIf="editcust.controls.phone.errors && editcust.controls.phone.errors.required && submit
+                " class="invalid-feedback">Phone NO required!
+              </small>
+            </div>
+          </div>
+          <div class="form-group row" >
+            <div class="col-sm-6">
+              <label>Country<span style="color: red">*</span></label>
+              <auto-completen [addclass]="{
+                  error: submit && this.editcust.controls.country.errors
+                }" addclass="form-control" optValues="name" formControlName="country" (keyUp)="getCountry($event)"
+                (changed)="getstate(); typeclearcountry('1')" placeholder="Select Country" id="id" [item]="count">
+              </auto-completen>
+              <div *ngIf="
+                  this.editcust.controls.country.errors &&
+                  this.editcust.controls.country.errors.required &&
+                  submit
+                " class="error-text">
+                Country Name is required!
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <label>state<span style="color: red">*</span></label>
+              <auto-completen 
+              [addclass]="{error: submit && this.editcust.controls.state.errors}"
+                 addclass="form-control" optValues="name" formControlName="state" (keyUp)="getstate($event)"
+                (changed)="getdistrict(); typeclearstate('1')" placeholder="Select State" id="id" [item]="getstates">
+              </auto-completen>
+              <div *ngIf="
+                  this.editcust.controls.state.errors &&
+                  this.editcust.controls.state.errors.required &&
+                  submit
+                " class="error-text">
+                State Name is required!
+              </div>
+            </div>
+          </div>
+  
+          <div class="form-group row" >
+            <div class="col-sm-6">
+              <label>District <span style="color: red">*</span></label>
+              <auto-completen [addclass]="{error: submit && this.editcust.controls.district.errors}"
+                addclass="form-control" optValues="name" formControlName="district" (keyUp)="getdistrict($event)"
+                (changed)="getcity(); typecleardist()" placeholder="Select District" id="id" [item]="dist">
+              </auto-completen>
+              <div *ngIf="
+                  this.editcust.controls.district.errors &&
+                  this.editcust.controls.district.errors.required &&
+                  submit
+                " class="error-text">
+                District Name is required!
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <label>City<span style="color: red">*</span></label>
+              <auto-completen [addclass]="{
+                  error: submit && this.editcust.controls.city.errors
+                }" addclass="form-control" optValues="name" (changed)="getarea(); typeclearcity('1')"
+                formControlName="city" (keyUp)="getcity($event)" placeholder="Select City" id="id" [item]="citylist">
+              </auto-completen>
+              <div *ngIf="
+                  this.editcust.controls.city.errors &&
+                  this.editcust.controls.city.errors.required &&
+                  submit
+                " class="error-text">
+                City Name is required!
+              </div>
+            </div>
+          </div>
+  
+          <div class="form-group row" >
+            <div class="col-sm-6">
+              <label>Area<span style="color: red">*</span></label>
+              <auto-completen [addclass]="{
+                  error: submit && this.editcust.controls.area.errors
+                }" addclass="form-control" optValues="name" formControlName="area" (keyUp)="getarea($event)"
+                placeholder="Select Area" id="id" [item]="listarea">
+              </auto-completen>
+              <div *ngIf="
+                  this.editcust.controls.area.errors &&
+                  this.editcust.controls.area.errors.required &&
+                  submit
+                " class="error-text">
+                Area Name is required!
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <label>Pin Code <span style="color: red">*</span></label>
+              <input type="text" class="form-control" name="pin_no" formControlName="pin_no" placeholder="Enter Pincode"
+                [ngClass]="{ 'is-invalid': submit && editcust.controls.pin_no.errors}" />
+              <small *ngIf="editcust.controls.pin_no.errors && editcust.controls.pin_no.errors.required && submit
+              " class="invalid-feedback">pincode required!
+              </small>
+            </div>
+          </div>
+  
+          <div class="form-group row" >
+            <div class="col-sm-6">
+              <label>Installation Address</label>
+              <textarea name="installation_addr" formControlName="installation_addr" placeholder="Installtion Address "
+                class="form-control"
+                [ngClass]="{ 'is-invalid': submit && this.editcust.controls.installation_addr.errors }">
+              </textarea>
+              <small *ngIf="editcust.controls.installation_addr.errors && editcust.controls.installation_addr.errors.required && submit
+              " class="invalid-feedback">Installation Address required!
+              </small>
+            </div>
+            <div class="col-sm-6">
+              <label>Billing Address</label>
+              <textarea
+                value="{{ editcust.value['same_addr'] ? editcust.controls['billing_addr'].setValue(editcust.value['installation_addr']):''}}"
+                name="billing_addr" formControlName="billing_addr" placeholder="Billing Address" class="form-control"
+                [ngClass]="{ 'is-invalid': submit && this.editcust.controls.billing_addr.errors }"></textarea>
+              <small *ngIf="editcust.controls.billing_addr.errors && editcust.controls.billing_addr.errors.required && submit
+                " class="invalid-feedback">billing_addr Address is required!
+              </small>
+            </div>
+          </div>
+          <div class="form-group row" >
+            <div class="col-sm-6">
+              <div class="custom-control custom-checkbox">
+                <input id="status" class="custom-control-input" formControlName="same_addr" type="checkbox" />
+                <label class="custom-control-label" for="status">Billing Address same as Installtion Address</label>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row" >
+            <div class="col-sm-6">
+              <label>Proof Type</label>
+              <select class="form-control"
+                [ngClass]="{'is-invalid': submit && this.editcust.controls.proof_type.errors}" name="proof_type"
+                formControlName="proof_type">
+                <option value="" selected>Select Proof Type</option>
+                <option value="1">Ration Card</option>
+                <option value="2">Aadar Card</option>
+              </select>
+              <small *ngIf="editcust.controls.proof_type.errors && editcust.controls.proof_type.errors.required && submit
+              " class="invalid-feedback">Proof Type is required!
+              </small>
+            </div>
+            <div class="col-sm-6" *ngIf="editcust.value['proof_type'] != ''">
+              <label>Proof ID</label>
+              <input type="text" name="proof_id" formControlName="proof_id" placeholder="Proof ID "
+                [ngClass]="{ 'is-invalid': submit && editcust.controls.proof_id.errors}" class="form-control" />
+              <small *ngIf="editcust.controls.proof_id.errors && editcust.controls.proof_id.errors.required && submit
+                " class="invalid-feedback">Proof id required!
+              </small>
+            </div>
+          </div>
+  
+          <div class="form-group row" >
+            <div class="col-sm-6">
+              <label>Email</label>
+              <input type="text" class="form-control" name="email" formControlName="email" placeholder="Enter Email id"
+                [ngClass]="{ 'is-invalid': submit && editcust.controls.email.errors}" />
+              <small *ngIf="editcust.controls.email.errors && editcust.controls.email.errors.required && submit
+              " class="invalid-feedback">email required!
+              </small>
+            </div>
+            <div class="col-sm-6">
+              <label>Description</label>
+              <textarea name="descr" formControlName="descr" class="form-control" placeholder="Description"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" autofocus class="btn btn-md btn-success">
+            Create
+          </button>
+          <button type="button" class="btn btn-md btn-danger" [routerLink]="['/pages/customer/cust-list']">
+            Cancel
+          </button>
+        </div>
+      </form>
+    </nb-card-body>
+  </nb-card>
+  <nb-card *ngIf="failure.length != 0">
+    <nb-card-header>
+      <!-- Success : {{s}} Failure : {{f}} -->
+      <!-- <i (click)="Download();" class="green right fa fa-file-excel" aria-hidden="true"></i> -->
+    </nb-card-header>
+    <nb-card-body>
+      <table class="table table-bordered table-striped">
+        <tr>
+          <th>User Name</th>
+          <th>Error Msg</th>
+        </tr>
+        <!-- <tr *ngFor="let item of failure">
+            <td>{{item['User Name']}}</td>
+            <td>{{item.issue}}</td>
+          </tr> -->
+      </table>
+    </nb-card-body>
+  </nb-card>
