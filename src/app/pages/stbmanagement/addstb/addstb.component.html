@@ -102,9 +102,8 @@
           </div>
           <div class="col-sm-6">
             <label>{{AddStbForm.value.usertype==444?'LCO':AddStbForm.value.usertype==666?'Distributer':AddStbForm.value.usertype==555?'Sub-Distributor':AddStbForm.value.usertype==333?'Hotel':'Operator'}}&nbsp;Name</label>
-            <auto-completen [addclass]="{
-                error: submit && this.AddStbForm.controls.lcoid.errors 
-              }" addclass="form-control" optValues="business_name" formControlName="lcoid" placeholder="Select LCO Name"
+            <auto-completen [addclass]="{error: submit && this.AddStbForm.controls.lcoid.errors}"
+             addclass="form-control" optValues="business_name" formControlName="lcoid" placeholder="Select LCO Name"
               Id="id" [item]="operatortype">
             </auto-completen>
             <div *ngIf="

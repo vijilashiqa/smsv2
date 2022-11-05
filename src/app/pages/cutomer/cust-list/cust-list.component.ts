@@ -75,7 +75,7 @@ export class CustListComponent implements OnInit {
     this.Custform = new FormGroup({
       subname_check: new FormControl(true),
       optname_check: new FormControl(),
-      custid_check: new FormControl(),
+      custid_check: new FormControl(true),
       caf_check: new FormControl(true),
       status_check: new FormControl(true),
       cas_check: new FormControl(true),

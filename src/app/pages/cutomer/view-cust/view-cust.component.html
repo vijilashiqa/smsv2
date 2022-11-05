@@ -1,16 +1,14 @@
 <div class="col-md-12">
-
    <nb-card>
       <nb-card-header>View Subscriber</nb-card-header>
       <nb-card-body>
-      
          <div style="padding: 2px;">
             <button  class="btn btn-xs btn-outline-primary"
                [routerLink]="['/pages/customer/renew_cust']">Renewal</button>&nbsp;&nbsp;
             <button  class="btn btn-xs btn-outline-primary"
                [routerLink]="['/pages/customer/servext']">Service Extension</button>&nbsp;&nbsp;
             <button  class="btn btn-xs btn-outline-primary"
-            [routerLink]="['/pages/customer/edit-cust']"[queryParams]="{ id: cust_id.cust_id }">Edit</button>&nbsp;&nbsp;
+               [routerLink]="['/pages/customer/edit-cust']"[queryParams]="{ id: cust_id.cust_id }">Edit</button>&nbsp;&nbsp;
          </div>
             <div class="modal-body">       
             <nb-tabset>
@@ -20,7 +18,7 @@
                      <div class="col-sm-6">
                         <nb-card>
                            <nb-card-header>Subscriber Info</nb-card-header>
-                           <nb-card-body>
+                           <nb-card-body >
                               <table border="0" class="table table-condensed table-hover">
                                  <!-- <div  *ngFor="let cust_id of cust_id"> -->
                                  <tr>

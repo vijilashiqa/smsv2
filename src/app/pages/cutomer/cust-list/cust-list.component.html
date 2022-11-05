@@ -241,7 +241,7 @@
         <th>Action</th>
         <!-- <th [hidden]='!Custform.value["status_check"]'>STB Status</th> -->
         <th [hidden]='!Custform.value["caf_check"]'>CAF NO</th>
-        <!-- <th [hidden]='!Custform.value["custid_check"]' >Subscriber ID</th> -->
+        <th [hidden]='!Custform.value["custid_check"]' >Subscriber ID</th>
         <th [hidden]='!Custform.value["subname_check"]'>Subscriber Name</th>
         <th [hidden]='!Custform.value["addr_check"]'>Address</th>
         <!-- <th [hidden]='!Custform.value["cas_check"]'>STB Model</th> -->
@@ -300,7 +300,7 @@
             style="background-color:#f44b42;font-weight:bold;border-radius: 3px; padding: 4px;">Deactive</span>
         </td> -->
         <td [hidden]='!Custform.value["caf_check"]'>{{item.cafno}}</td>
-        <td [hidden]='!Custform.value["custid_check"]'>{{item.cust_id_pk}}</td>
+        <td [hidden]='!Custform.value["custid_check"]'>{{item.profileid}}</td>
         <td [hidden]='!Custform.value["subname_check"]'> {{item.fullname}}</td>
         <td [hidden]='!Custform.value["addr_check"]'> {{item.installation_addr}} </td>
         <!-- <td [hidden]='!Custform.value["cas_check"]'>{{item.model_name}}</td> -->

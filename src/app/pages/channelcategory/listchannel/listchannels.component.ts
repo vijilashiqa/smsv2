@@ -61,8 +61,6 @@ export class listChannelsComponent implements OnInit {
   setPage() {
     this.pager = this.pageservice.getPager(this.count, this.page, this.limit);
     this.pagedItems = this.data;
-  }
-
-  
+  }  
 
 }

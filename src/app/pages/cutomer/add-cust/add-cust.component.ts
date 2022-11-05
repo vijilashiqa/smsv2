@@ -174,7 +174,7 @@ export class AddCustComponent implements OnInit {
       console.log("Invalid value -----", invalid);
       return;
     }
-    if (this.val["bulkopt"]) {
+    if (!this.val["bulkopt"]) {
       let result = await this.subscribers.addsubscriber(this.AddCustForm.value)
       console.log("add...", result);
       if (result && result[0].err_code == 0) {
@@ -184,7 +184,7 @@ export class AddCustComponent implements OnInit {
         this.toast.warning(result[0]["msg"]);
       }
     }
-    if (this.bulk.length && this.val["bulkopt"]) {
+    if (this.bulk.length &&this.val["bulkopt"]) {
       let result = this.metavalue();
       for (let i = 0; i < this.bulk.length; i++) {
         for (let meta of result) {
