@@ -40,7 +40,7 @@
                         addclass="form-control" optValues="fullname"
                         formControlName="bcid" (keyUp)="Getbroadcasteredit()"
                         placeholder='Select BroadCaster ' id="id"
-                        [item]="cou">
+                        [item]="result">
                       </auto-completen>
                       <div *ngIf="this.channelForm.controls.bcid.errors && (this.channelForm.controls.bcid.errors.required) && submit" class="error-text">
                        BroadCaster Name is required!

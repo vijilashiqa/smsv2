@@ -13,7 +13,7 @@ import { ChannelService } from '../../_services/channel.service';
 })
 export class AddchannelsComponent implements OnInit {
   channelForm; submit: boolean; count; id; lang; genres; headend;broadcasters;
-  cou;editable: boolean = false; editdata = {}; editflag = false;
+  cou;editable: boolean = false; editdata = {}; editflag = false;result
   constructor(
     private headService: HeadendService,
     private channelService: ChannelService,
@@ -54,8 +54,8 @@ export class AddchannelsComponent implements OnInit {
 
  async Getbroadcasteredit($event='') {
   console.log('gname---', this.channelForm.value['hdid']);
-   let result = await this.broadcasterService.getbroadcaster({hdid: this.val['hdid']});
-   this.cou =result
+    this.result = await this.broadcasterService.getbroadcaster({hdid: this.val['hdid']});
+   console.log('result ********',this.result)
   }
 
   async listgenre($event='') {  

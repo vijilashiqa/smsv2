@@ -2,144 +2,193 @@
    <nb-card>
       <nb-card-header>View Subscriber</nb-card-header>
       <nb-card-body>
-         <div style="padding: 2px;">
-            <button  class="btn btn-xs btn-outline-primary"
-               [routerLink]="['/pages/customer/renew_cust']">Renewal</button>&nbsp;&nbsp;
-            <button  class="btn btn-xs btn-outline-primary"
-               [routerLink]="['/pages/customer/servext']">Service Extension</button>&nbsp;&nbsp;
-            <button  class="btn btn-xs btn-outline-primary"
-               [routerLink]="['/pages/customer/edit-cust']"[queryParams]="{ id: cust_id.cust_id }">Edit</button>&nbsp;&nbsp;
+         <div style="padding: 2px">
+            <button class="btn btn-xs btn-outline-primary" [routerLink]="['/pages/customer/renew_cust']">
+               Renewal</button>&nbsp;&nbsp;
+            <button class="btn btn-xs btn-outline-primary" [routerLink]="['/pages/customer/servext']">
+               Service Extension</button>&nbsp;&nbsp;
+            <button class="btn btn-xs btn-outline-primary" [routerLink]="['/pages/customer/edit-cust']"
+               [queryParams]="{ id: cust_id.cust_id }">
+               Edit</button>&nbsp;&nbsp;
          </div>
-            <div class="modal-body">       
+         <div class="modal-body">
             <nb-tabset>
-            <nb-tab  tabTitle="Customer Info">
-      <!-- <hr style="border: 0px;"> -->
+               <nb-tab tabTitle="Customer Info">
+                  <!-- <hr style="border: 0px;"> -->
                   <div class="row">
                      <div class="col-sm-6">
                         <nb-card>
                            <nb-card-header>Subscriber Info</nb-card-header>
-                           <nb-card-body >
+                           <nb-card-body>
                               <table border="0" class="table table-condensed table-hover">
                                  <!-- <div  *ngFor="let cust_id of cust_id"> -->
                                  <tr>
                                     <td>First Name</td>
-                                    <th>{{cust_id.fullname || '-'}}</th>
+                                    <th>{{ cust_id.fullname || "-" }}</th>
                                  </tr>
                                  <tr>
                                     <td>Last Name</td>
-                                    <th>{{cust_id.last_name || '-'}}</th>
+                                    <th>{{ cust_id.last_name || "-" }}</th>
                                  </tr>
                                  <tr>
                                     <td>CAF No</td>
-                                    <th>{{cust_id.cafno || '-'}}</th>
+                                    <th>{{ cust_id.cafno || "-" }}</th>
                                  </tr>
                                  <tr>
-                                    <td>CAF No -<b>{{cust_id.cafno || '-'}}</b></td>
-                                    <td>Customer ID -<b>{{cust_id.cust_id || '-'}}</b></td>
-
+                                    <td>
+                                       CAF No -<b>{{ cust_id.cafno || "-" }}</b>
+                                    </td>
+                                    <td>
+                                       Customer ID -<b>{{ cust_id.cust_id || "-" }}</b>
+                                    </td>
                                  </tr>
                                  <tr>
                                     <td>Mobile No</td>
-                                    <th>{{cust_id.mobile || '-'}}</th>
+                                    <th>{{ cust_id.mobile || "-" }}</th>
                                  </tr>
                                  <tr>
                                     <td>Phone No</td>
-                                    <th>{{cust_id.phone || '-'}}</th>
+                                    <th>{{ cust_id.phone || "-" }}</th>
                                  </tr>
                                  <tr>
                                     <td>Email</td>
-                                    <th>{{cust_id.email || '-'}}</th>
+                                    <th>{{ cust_id.email || "-" }}</th>
                                  </tr>
                                  <tr>
                                     <td>Address</td>
-                                    <th>{{cust_id.installation_addr || '-'}}</th>
+                                    <th>{{ cust_id.installation_addr || "-" }}</th>
                                  </tr>
                                  <tr>
                                     <td>Operator Name</td>
-                                    <th>{{(cust_id.ufirst_name || '-')  + " " +( cust_id.ulast_name || '-' )}}</th>
+                                    <th>
+                                       {{
+                                       (cust_id.ufirst_name || "-") +
+                                       " " +
+                                       (cust_id.ulast_name || "-")
+                                       }}
+                                    </th>
                                  </tr>
                                  <tr>
                                     <td>STB Number</td>
-                                    <th>{{cust_id.SNo||'-'}}</th>
+                                    <th>{{ cust_id.SNo || "-" }}</th>
                                  </tr>
                                  <tr>
                                     <td>VC Number</td>
-                                    <th>{{cust_id.vc_no||'-'}}</th>
+                                    <th>{{ cust_id.vc_no || "-" }}</th>
                                  </tr>
-                                 <tr *ngIf='cust_id.cas_id=="4"'>
+                                 <tr *ngIf="cust_id.cas_id == '4'">
                                     <td>Activate Terminal</td>
-                                     <th>
-                                       <a (click)="uploadcard(Action=1)"><i
-                                             [ngStyle]="{'color': cust_id.a_ter==1? 'green':'red'}"
-                                             [ngClass]="{'ion-close-round':cust_id.a_ter==0 ? true:false,'ion-checkmark-round':cust_id.a_ter!=0 ? true:false  }"
-                                             [attr.title]="cust_id.a_ter==1 ? 'Active' : 'Deactive'">{{cust_id.a_ter==1?'Active':'Deactive'}}</i></a>
+                                    <th>
+                                       <a (click)="uploadcard((Action = 1))"><i [ngStyle]="{
+                                color: cust_id.a_ter == 1 ? 'green' : 'red'
+                              }" [ngClass]="{
+                                'ion-close-round':
+                                  cust_id.a_ter == 0 ? true : false,
+                                'ion-checkmark-round':
+                                  cust_id.a_ter != 0 ? true : false
+                              }" [attr.title]="
+                                cust_id.a_ter == 1 ? 'Active' : 'Deactive'
+                              ">{{
+                                             cust_id.a_ter == 1 ? "Active" : "Deactive"
+                                             }}</i></a>
                                     </th>
                                  </tr>
-                                 <tr *ngIf='cust_id.cas_id=="4"'>
+                                 <tr *ngIf="cust_id.cas_id == '4'">
                                     <td>Initialze Terminal</td>
-                                     <th>
-                                       <a (click)="uploadcard(Action=2)"><i
-                                             [ngStyle]="{'color': cust_id.i_ter==1? 'green':'red'}"
-                                             [ngClass]="{'ion-close-round':cust_id.i_ter==0 ? true:false,'ion-checkmark-round':cust_id.i_ter!=0 ? true:false  }"
-                                             [attr.title]="cust_id.i_ter==1 ? 'Active' : 'Deactive'">{{cust_id.i_ter==1?'Active':'Deactive'}}</i></a>
+                                    <th>
+                                       <a (click)="uploadcard((Action = 2))"><i [ngStyle]="{
+                                color: cust_id.i_ter == 1 ? 'green' : 'red'
+                              }" [ngClass]="{
+                                'ion-close-round':
+                                  cust_id.i_ter == 0 ? true : false,
+                                'ion-checkmark-round':
+                                  cust_id.i_ter != 0 ? true : false
+                              }" [attr.title]="
+                                cust_id.i_ter == 1 ? 'Active' : 'Deactive'
+                              ">{{
+                                             cust_id.i_ter == 1 ? "Active" : "Deactive"
+                                             }}</i></a>
                                     </th>
                                  </tr>
-                                 <tr *ngIf='cust_id.cas_id=="4"'>
+                                 <tr *ngIf="cust_id.cas_id == '4'">
                                     <td>Terminal Status</td>
-                                     <th>
-                                       <a (click)="uploadcard(Action=3)"><i
-                                             [ngStyle]="{'color': cust_id.s_ter==1? 'green':'red'}"
-                                             [ngClass]="{'ion-close-round':cust_id.s_ter==0 ? true:false,'ion-checkmark-round':cust_id.s_ter!=0 ? true:false  }"
-                                             [attr.title]="cust_id.s_ter==1 ? 'Active' : 'Deactive'">{{cust_id.s_ter==1?'Active':'Deactive'}}</i></a>
+                                    <th>
+                                       <a (click)="uploadcard((Action = 3))"><i [ngStyle]="{
+                                color: cust_id.s_ter == 1 ? 'green' : 'red'
+                              }" [ngClass]="{
+                                'ion-close-round':
+                                  cust_id.s_ter == 0 ? true : false,
+                                'ion-checkmark-round':
+                                  cust_id.s_ter != 0 ? true : false
+                              }" [attr.title]="
+                                cust_id.s_ter == 1 ? 'Active' : 'Deactive'
+                              ">{{
+                                             cust_id.s_ter == 1 ? "Active" : "Deactive"
+                                             }}</i></a>
                                     </th>
                                  </tr>
                                  <tr>
                                     <td>Package Assigned</td>
-                                    <th>{{cust_id.pack_name||'-'}}</th>
+                                    <th>{{ cust_id.pack_name || "-" }}</th>
                                  </tr>
                                  <tr>
                                     <td>Expiry Date</td>
-                                    <th>{{cust_id.expiry_date | date : 'd MMM y h:mm:ss a' ||'-'}}</th>
+                                    <th>
+                                       {{
+                                       cust_id.expiry_date
+                                       | date: "d MMM y h:mm:ss a" || "-"
+                                       }}
+                                    </th>
                                  </tr>
-                              <!-- </div> -->
+                                 <!-- </div> -->
                               </table>
-                              
                            </nb-card-body>
                         </nb-card>
-                    </div>
+                     </div>
                      <div class="col-sm-6">
                         <nb-card>
                            <nb-card-header>Active Packages Info</nb-card-header>
                            <nb-card-body>
-
                               <table border="0" class="table table-condensed table-hover">
                                  <tr>
                                     <th>Product Name</th>
                                     <th>Product Type</th>
                                     <th>Expiry Date</th>
                                  </tr>
-                                 <tr *ngFor='let item of invoice_list'>
-
-                                    <td>{{item.pack_name}}</td>
+                                 <tr *ngFor="let item of invoice_list">
+                                    <td>{{ item.pack_name }}</td>
                                     <td>
-                                       {{item.pack_type==0?'Base Pack':item.pack_type==1?'Alacarte':item.pack_type==2?'Boquet':item.pack_type==4?'Bundle':'--'}}
+                                       {{
+                                       item.pack_type == 0
+                                       ? "Base Pack"
+                                       : item.pack_type == 1
+                                       ? "Alacarte"
+                                       : item.pack_type == 2
+                                       ? "Boquet"
+                                       : item.pack_type == 4
+                                       ? "Bundle"
+                                       : "--"
+                                       }}
                                     </td>
-                                    <td>{{item.expiry_date | date : 'd MMM y h:mm:ss a'}}</td>
+                                    <td>
+                                       {{ item.expiry_date | date: "d MMM y h:mm:ss a" }}
+                                    </td>
                                  </tr>
                                  <tr>
-                                    <td [hidden]='invoice_list.length !=0' colspan="13" style="text-align: center;">No
-                                       Active Packages Found</td>
+                                    <td [hidden]="invoice_list.length != 0" colspan="13" style="text-align: center">
+                                       No Active Packages Found
+                                    </td>
                                  </tr>
                               </table>
                            </nb-card-body>
                         </nb-card>
                      </div>
                   </div>
-               <!-- </div> -->
-            </nb-tab>
-          
-            <nb-tab  tabTitle="Active Invoice">
-               <!-- <ng-template ngbTabContent> -->
+                  <!-- </div> -->
+               </nb-tab>
+
+               <nb-tab tabTitle="Active Invoice">
+                  <!-- <ng-template ngbTabContent> -->
                   <table class="table table-condensed table-hover table-striped">
                      <tr>
                         <th>Action</th>
@@ -153,65 +202,88 @@
                         <th>Deducted Amount</th>
                         <th>Invoice Type</th>
                         <th>Renewal By</th>
-
-
                      </tr>
-                     <tr *ngFor='let item of pagedItems'>
-                        <td style="width: 80px" class=" last" data-tabTitle="'Action'">
+                     <tr *ngFor="let item of pagedItems">
+                        <td style="width: 80px" class="last" data-tabTitle="'Action'">
                            <div class="form-group row">
                               <div class="dropdown ghost-dropdown" ngbDropdown>
-                                 <button style="width: 75px;font-size: 10px;margin: 3px;border-color: #8a7fff; " class="btn btn-primary btn-icon"
-                                    type="button" ngbDropdownToggle>Action
+                                 <button style="
+                          width: 75px;
+                          font-size: 10px;
+                          margin: 3px;
+                          border-color: #8a7fff;
+                        " class="btn btn-primary btn-icon" type="button" ngbDropdownToggle>
+                                    Action
                                  </button>
-                                 <ul style="width: 100px;" class="dropdown-menu" ngbDropdownMenu>
-                                    <li class="dropdown-item" (click)='Invoice(item)'><i
-                                          class="fa fa-print"></i>&nbsp;Print</li>
-                                    <li class="dropdown-item" [hidden]='role.getrole(4053)' tabTitle="Cancel Invoice"
-                                       (click)='cancelinvoice(item)'><i style="font-size: 20px;"
-                                          class="ion-close-round"></i>&nbsp;Cancel</li>
+                                 <ul style="width: 100px" class="dropdown-menu" ngbDropdownMenu>
+                                    <li class="dropdown-item" (click)="Invoice(item)">
+                                       <i class="fa fa-print"></i>&nbsp;Print
+                                    </li>
+                                    <li class="dropdown-item" [hidden]="role.getrole(4053)" tabTitle="Cancel Invoice"
+                                       (click)="cancelinvoice(item)">
+                                       <i style="font-size: 20px" class="ion-close-round"></i>&nbsp;Cancel
+                                    </li>
                                  </ul>
                               </div>
                            </div>
                         </td>
                         <td>
-                           <a (click)="custrenewal(item,item.status==0)"><i
-                                 [ngStyle]="{'color': item.status==1? 'green':'red'}"
-                                 [ngClass]="{'ion-close-round':item.status==0 ? true:false,'ion-checkmark-round':item.status!=0 ? true:false  }"
-                                 [attr.title]="item.status==1 ? 'Active' : 'Deactive'"></i></a>
+                           <a (click)="custrenewal(item, item.status == 0)"><i
+                                 [ngStyle]="{ color: item.status == 1 ? 'green' : 'red' }"
+                                 [ngClass]="{
+                        'ion-close-round': item.status == 0 ? true : false,
+                        'ion-checkmark-round': item.status != 0 ? true : false
+                      }" [attr.title]="item.status == 1 ? 'Active' : 'Deactive'"></i></a>
                         </td>
 
-                        <td>{{item.renewal_date | date : 'd MMM y h:mm:ss a'}}</td>
-                        <td>{{item.expiry_date | date : 'd MMM y h:mm:ss a'}}</td>
-                        <td>{{item.pack_name}}</td>
-                        <td>{{item.cust_price |number : '1.2-2'}}</td>
-                        <td>{{(item.cust_price*0.18 |number : '1.2-2')}}</td>
-                        <td>{{item.cust_price + (item.cust_price*0.18) |number : '1.2-2'}}</td>
-                        <td [hidden]='role.getroleval()<699'>{{item.detect_amt}}</td>
-                        <td>{{item.inv_type==0?'Renewal':item.inv_type==1?'Service Extension':'N/A'}}</td>
-                        <td>{{item.renewalby || '-'}}</td>
+                        <td>{{ item.renewal_date | date: "d MMM y h:mm:ss a" }}</td>
+                        <td>{{ item.expiry_date | date: "d MMM y h:mm:ss a" }}</td>
+                        <td>{{ item.pack_name }}</td>
+                        <td>{{ item.cust_price | number: "1.2-2" }}</td>
+                        <td>{{ item.cust_price * 0.18 | number: "1.2-2" }}</td>
+                        <td>
+                           {{
+                           item.cust_price + item.cust_price * 0.18 | number: "1.2-2"
+                           }}
+                        </td>
+                        <td [hidden]="role.getroleval() < 699">
+                           {{ item.detect_amt }}
+                        </td>
+                        <td>
+                           {{
+                           item.inv_type == 0
+                           ? "Renewal"
+                           : item.inv_type == 1
+                           ? "Service Extension"
+                           : "N/A"
+                           }}
+                        </td>
+                        <td>{{ item.renewalby || "-" }}</td>
                      </tr>
                   </table>
                   <div class="pagination">
                      <ul *ngIf="pagers.pages && pagers.pages.length" class="pagination">
-                        <a [ngClass]="{disabled:pagers.currentPage === 1}"
-                           (click)="page=1;activeinvoicelist();">First</a>
-                        <a [ngClass]="{disabled:pagers.currentPage === 1}"
-                           (click)="page=page-1;activeinvoicelist();">Previous</a>
-                        <a *ngFor="let page of pagers.pages" [ngClass]="{active:pagers.currentPage === page}"
-                           (click)="activeinvoicelist(page)">{{page}}</a>
-                        <a [ngClass]="{disabled:pagers.currentPage === pagers.totalPages}"
-                           (click)="page=page+1;activeinvoicelist();">Next</a>
-                        <a [ngClass]="{disabled:pagers.currentPage === pagers.totalPages}"
-                           (click)="page=pagers.totalPages;activeinvoicelist();">Last</a>
+                        <a [ngClass]="{ disabled: pagers.currentPage === 1 }"
+                           (click)="page = 1; activeinvoicelist()">First</a>
+                        <a [ngClass]="{ disabled: pagers.currentPage === 1 }"
+                           (click)="page = page - 1; activeinvoicelist()">Previous</a>
+                        <a *ngFor="let page of pagers.pages" [ngClass]="{ active: pagers.currentPage === page }"
+                           (click)="activeinvoicelist(page)">{{ page }}</a>
+                        <a [ngClass]="{
+                    disabled: pagers.currentPage === pagers.totalPages
+                  }" (click)="page = page + 1; activeinvoicelist()">Next</a>
+                        <a [ngClass]="{
+                    disabled: pagers.currentPage === pagers.totalPages
+                  }" (click)="page = pagers.totalPages; activeinvoicelist()">Last</a>
                      </ul>
                   </div>
                   <!-- <label class="left" *ngIf='getInvoiceTotal()>0'>
                      <h5>Total Amount : {{getInvoiceTotal()  |number : '1.2-2'}}</h5>
                   </label> -->
-               <!-- </ng-template> -->
-            </nb-tab>
-            <nb-tab  tabTitle="Deactive Invoice">
-               <!-- <ng-template ngbTabContent> -->
+                  <!-- </ng-template> -->
+               </nb-tab>
+               <nb-tab tabTitle="Deactive Invoice">
+                  <!-- <ng-template ngbTabContent> -->
                   <table class="table table-condensed table-hover table-striped">
                      <tr>
                         <th>Action</th>
@@ -225,106 +297,129 @@
                         <th>Invoice Type</th>
                         <th>Renewal By</th>
                      </tr>
-                     <tr *ngFor='let item of oldinvoicepagedItems '>
-                        <td><a (click)='Invoice(item)'><i class="fa fa-print"></i></a></td>
-                        <td>{{item.invoice_id}}</td>
-                        <td>{{item.pack_name}}</td>
-                        <td>{{item.day}}</td>
-                        <td>{{item.c_date | date : 'd MMM y h:mm:ss a'}}</td>
-                        <td>{{item.expirydate | date : 'd MMM y h:mm:ss a'}}</td>
-                        <td>{{item.cust_price}}</td>
-                        <td>{{item.tax_amt || '-'}}</td>
-                        <td>{{item.inv_type==0?'Renewal':item.inv_type==1?'Service Extension':'N/A'}}</td>
-                        <td>{{item.renewalby || '-'}}</td>
+                     <tr *ngFor="let item of oldinvoicepagedItems">
+                        <td>
+                           <a (click)="Invoice(item)"><i class="fa fa-print"></i></a>
+                        </td>
+                        <td>{{ item.invoice_id }}</td>
+                        <td>{{ item.pack_name }}</td>
+                        <td>{{ item.day }}</td>
+                        <td>{{ item.c_date | date: "d MMM y h:mm:ss a" }}</td>
+                        <td>{{ item.expirydate | date: "d MMM y h:mm:ss a" }}</td>
+                        <td>{{ item.cust_price }}</td>
+                        <td>{{ item.tax_amt || "-" }}</td>
+                        <td>
+                           {{
+                           item.inv_type == 0
+                           ? "Renewal"
+                           : item.inv_type == 1
+                           ? "Service Extension"
+                           : "N/A"
+                           }}
+                        </td>
+                        <td>{{ item.renewalby || "-" }}</td>
                      </tr>
                   </table>
                   <div class="pagination">
                      <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
-                        <a [ngClass]="{disabled:pager.currentPage === 1}" (click)="page=1;oldinvoicelist();">First</a>
-                        <a [ngClass]="{disabled:pager.currentPage === 1}"
-                           (click)="page=page-1;oldinvoicelist();">Previous</a>
-                        <a *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}"
-                           (click)="oldinvoicelist(page)">{{page}}</a>
-                        <a [ngClass]="{disabled:pager.currentPage === pager.totalPages}"
-                           (click)="page=page+1;oldinvoicelist();">Next</a>
-                        <a [ngClass]="{disabled:pager.currentPage === pager.totalPages}"
-                           (click)="page=pager.totalPages;oldinvoicelist();">Last</a>
+                        <a [ngClass]="{ disabled: pager.currentPage === 1 }"
+                           (click)="page = 1; oldinvoicelist()">First</a>
+                        <a [ngClass]="{ disabled: pager.currentPage === 1 }"
+                           (click)="page = page - 1; oldinvoicelist()">Previous</a>
+                        <a *ngFor="let page of pager.pages" [ngClass]="{ active: pager.currentPage === page }"
+                           (click)="oldinvoicelist(page)">{{ page }}</a>
+                        <a [ngClass]="{
+                    disabled: pager.currentPage === pager.totalPages
+                  }" (click)="page = page + 1; oldinvoicelist()">Next</a>
+                        <a [ngClass]="{
+                    disabled: pager.currentPage === pager.totalPages
+                  }" (click)="page = pager.totalPages; oldinvoicelist()">Last</a>
                      </ul>
                   </div>
                   <!-- <label *ngIf='getoldinvoiceTotal()>0' class="left">
                      <h5>Total Amount : {{getoldinvoiceTotal()  |number : '1.2-2'}}</h5>
                   </label> -->
-               <!-- </ng-template> -->
-            </nb-tab>
-            <nb-tab tabTitle="Extended Invoice" >
-               <!-- <ng-template ngbTabContent> -->
+                  <!-- </ng-template> -->
+               </nb-tab>
+               <nb-tab tabTitle="Extended Invoice">
+                  <!-- <ng-template ngbTabContent> -->
                   <table class="table table-condensed table-hover table-striped">
                      <tr>
                         <th>Action</th>
                         <th>Invoice ID</th>
                         <th>Package Name</th>
                         <th>No Of Days</th>
-                         <th>Renewal Date</th>
+                        <th>Renewal Date</th>
                         <th>Expiry Date</th>
                         <th>Price</th>
                         <th>Tax Amount</th>
                         <th>Renewal By</th>
                      </tr>
-                     <tr *ngFor='let item of extendedpagedItems '>
-                        <td style="width: 80px" class=" last" data-tabTitle="'Action'">
+                     <tr *ngFor="let item of extendedpagedItems">
+                        <td style="width: 80px" class="last" data-tabTitle="'Action'">
                            <div class="form-group row">
                               <div class="dropdown ghost-dropdown" ngbDropdown>
-                                 <button style="width: 75px;font-size: 10px;margin: 3px;border-color: #8a7fff; " class="btn btn-primary btn-icon"
-                                    type="button" ngbDropdownToggle>Action
+                                 <button style="
+                          width: 75px;
+                          font-size: 10px;
+                          margin: 3px;
+                          border-color: #8a7fff;
+                        " class="btn btn-primary btn-icon" type="button" ngbDropdownToggle>
+                                    Action
                                  </button>
-                                 <ul style="width: 100px;" class="dropdown-menu" ngbDropdownMenu>
-                                    <li class="dropdown-item" (click)='Invoice(item)'><i
-                                          class="fa fa-print"></i>&nbsp;Print</li>
-                                    <li class="dropdown-item" [hidden]='role.getrole(4053)' tabTitle="Cancel Invoice"
-                                       (click)='cancelinvoice(item)'><i style="font-size: 20px;"
-                                          class="far fa-eye "></i>&nbsp;Cancel</li>
+                                 <ul style="width: 100px" class="dropdown-menu" ngbDropdownMenu>
+                                    <li class="dropdown-item" (click)="Invoice(item)">
+                                       <i class="fa fa-print"></i>&nbsp;Print
+                                    </li>
+                                    <li class="dropdown-item" [hidden]="role.getrole(4053)" tabTitle="Cancel Invoice"
+                                       (click)="cancelinvoice(item)">
+                                       <i style="font-size: 20px" class="far fa-eye"></i>&nbsp;Cancel
+                                    </li>
                                  </ul>
                               </div>
                            </div>
                         </td>
-                        <td>{{item.invoice_id}}</td>
-                        <td>{{item.pack_name}}</td>
-                        <td>{{item.day}}</td>
-                        <td>{{item.c_date | date : 'd MMM y h:mm:ss a'}}</td>
-                        <td>{{item.expirydate | date : 'd MMM y h:mm:ss a'}}</td>
-                        <td>{{item.cust_price}}</td>
-                        <td>{{item.tax_amt || '-'}}</td>
-                        <td>{{item.renewalby || '-'}}</td>
+                        <td>{{ item.invoice_id }}</td>
+                        <td>{{ item.pack_name }}</td>
+                        <td>{{ item.day }}</td>
+                        <td>{{ item.c_date | date: "d MMM y h:mm:ss a" }}</td>
+                        <td>{{ item.expirydate | date: "d MMM y h:mm:ss a" }}</td>
+                        <td>{{ item.cust_price }}</td>
+                        <td>{{ item.tax_amt || "-" }}</td>
+                        <td>{{ item.renewalby || "-" }}</td>
                      </tr>
                   </table>
                   <div class="pagination">
                      <ul *ngIf="pagerss.pages && pagerss.pages.length" class="pagination">
-                        <a [ngClass]="{disabled:pagerss.currentPage === 1}"
-                           (click)="page=1;extendedinvoicelist();">First</a>
-                        <a [ngClass]="{disabled:pagerss.currentPage === 1}"
-                           (click)="page=page-1;extendedinvoicelist();">Previous</a>
-                        <a *ngFor="let page of pagerss.pages" [ngClass]="{active:pagerss.currentPage === page}"
-                           (click)="extendedinvoicelist(page)">{{page}}</a>
-                        <a [ngClass]="{disabled:pagerss.currentPage === pagerss.totalPages}"
-                           (click)="page=page+1;extendedinvoicelist();">Next</a>
-                        <a [ngClass]="{disabled:pagerss.currentPage === pagerss.totalPages}"
-                           (click)="page=pagerss.totalPages;extendedinvoicelist();">Last</a>
+                        <a [ngClass]="{ disabled: pagerss.currentPage === 1 }"
+                           (click)="page = 1; extendedinvoicelist()">First</a>
+                        <a [ngClass]="{ disabled: pagerss.currentPage === 1 }"
+                           (click)="page = page - 1; extendedinvoicelist()">Previous</a>
+                        <a *ngFor="let page of pagerss.pages" [ngClass]="{ active: pagerss.currentPage === page }"
+                           (click)="extendedinvoicelist(page)">{{ page }}</a>
+                        <a [ngClass]="{
+                    disabled: pagerss.currentPage === pagerss.totalPages
+                  }" (click)="page = page + 1; extendedinvoicelist()">Next</a>
+                        <a [ngClass]="{
+                    disabled: pagerss.currentPage === pagerss.totalPages
+                  }" (click)="page = pagerss.totalPages; extendedinvoicelist()">Last</a>
                      </ul>
                   </div>
-               <!-- </ng-template> -->
-            </nb-tab>
-            <nb-tab  tabTitle="Replace STB"> 
-                <!-- <ng-template ngbTabContent> -->
-                  <form [formGroup]="TransferForm" class="form-horizontal" (ngSubmit)="transfer();">
+                  <!-- </ng-template> -->
+               </nb-tab>
+               <nb-tab tabTitle="Replace STB">
+                  <!-- <ng-template ngbTabContent> -->
+                  <form [formGroup]="TransferForm" class="form-horizontal" (ngSubmit)="transfer()">
                      <div class="modal-body">
                         <div class="form-group row">
                            <div class="col-sm-6">
                               <div class="form-group row">
                                  <div class="col-sm-12">
                                     <label>Reason</label>
-                                    <select 
-                                       [ngClass]="{'form-control' : true,'form-control-danger':TransferForm.controls.reason.invalid&&transfer_submit}"
-                                       name="reason" formControlName="reason">
+                                    <select (changed)="upgrade(); hold(); hds(); swap()" class="form-control" [ngClass]="{
+                            'is-invalid':
+                              submit && this.TransferForm.controls.reason.errors
+                          }" name="reason" formControlName="reason">
                                        <option value="" selected>Select Reason</option>
                                        <option value="6">Upgrade</option>
                                        <option value="2">Fault</option>
@@ -332,45 +427,67 @@
                                        <option value="4">Suspend</option>
                                        <option value="5">Surrender</option>
                                        <option value="7">STB Swap</option>
-
-
                                     </select>
-                                    <small *ngIf="TransferForm.hasError('required','reason')&&transfer_submit"
-                                       class="form-text error">Select required Reason! </small>
+                                    <small *ngIf="
+                            this.TransferForm.controls.reason.errors &&
+                            this.TransferForm.controls.reason.errors.required &&
+                            transfer_submit
+                          " class="invalid-feedback">Select Reason required!
+                                    </small>
                                  </div>
                               </div>
-                              <div class="form-group row" *ngIf="TransferForm.value['reason']=='3'">
+                              <div class="form-group row" *ngIf="TransferForm.value['reason'] == '3'">
                                  <div class="col-sm-12">
                                     <label>Hold Period</label>
-                                    <select
-                                       [ngClass]="{'form-control' : true,'form-control-danger':TransferForm.controls.hold_period.invalid&&transfer_submit}"
-                                       name="hold_period" formControlName="hold_period">
+                                    <select [ngClass]="{
+                            'form-control': true,
+                            'form-control-danger':
+                              this.TransferForm.controls.hold_period.invalid &&
+                              transfer_submit
+                          }" name="hold_period" formControlName="hold_period">
                                        <option value="" selected>Hold Period</option>
                                        <option value="1">1 Month</option>
                                        <option value="2">2 Months</option>
                                        <option value="3">3 Months</option>
                                     </select>
-                                    <small *ngIf="TransferForm.hasError('required','hold_period')&&transfer_submit"
-                                       class="form-text error">Select required Hold Period! </small>
+                                    <small *ngIf="
+                            this.TransferForm.hasError(
+                              'required',
+                              'hold_period'
+                            ) && transfer_submit
+                          " class="form-text error">Select required Hold Period!
+                                    </small>
                                  </div>
                               </div>
-                              <div class="form-group row"
-                                 *ngIf="TransferForm.value['reason']!='3' && TransferForm.value['reason']!='4' && TransferForm.value['reason']!='5' ">
+                              <div class="form-group row" *ngIf="
+                        TransferForm.value['reason'] != '3' &&
+                        TransferForm.value['reason'] != '4' &&
+                        TransferForm.value['reason'] != '5'
+                      ">
                                  <div class="col-sm-12">
                                     <label>Charges</label>
-                                    <input type="number"
-                                       [ngClass]="{'form-control' : true,'form-control-danger':TransferForm.controls.amount.invalid&&transfer_submit}"
-                                       id="amount" formControlName="amount" placeholder="Amount">
-                                    <small *ngIf="TransferForm.hasError('required','amount')&&transfer_submit"
-                                       class="form-text error">Remarks is required! </small>
+                                    <input type="text" name="amount" formControlName="amount" placeholder="Proof ID "
+                                       [ngClass]="{
+                            'is-invalid':
+                              submit && TransferForm.controls.amount.errors
+                          }" class="form-control" />
+                                    <small *ngIf="
+                            TransferForm.controls.amount.errors &&
+                            TransferForm.controls.amount.errors.required &&
+                            submit
+                          " class="invalid-feedback">Amountr is required!
+                                    </small>
                                  </div>
                               </div>
                               <div class="form-group row">
                                  <div class="col-sm-12">
                                     <label>Remarks </label>
-                                    <select
-                                       [ngClass]="{'form-control' : true,'form-control-danger':TransferForm.controls.remarks.invalid&&transfer_submit}"
-                                       id="remarks" formControlName="remarks">
+                                    <select [ngClass]="{
+                            'form-control': true,
+                            'form-control-danger':
+                              TransferForm.controls.remarks.invalid &&
+                              transfer_submit
+                          }" id="remarks" formControlName="remarks">
                                        <option value="">Select Required remarks</option>
                                        <option value="1">Chip Fault</option>
                                        <option value="2">Defective</option>
@@ -378,35 +495,54 @@
                                        <option value="4">Manifacture Change</option>
                                        <option value="5">Others</option>
                                     </select>
-                                    <small *ngIf="TransferForm.hasError('required','remarks')&&transfer_submit"
-                                       class="form-text error">Remarks is required! </small>
+                                    <small *ngIf="
+                            TransferForm.hasError('required', 'remarks') &&
+                            transfer_submit
+                          " class="form-text error">Remarks is required!
+                                    </small>
                                  </div>
                               </div>
                               <div class="form-group row">
                                  <div class="col-sm-12">
                                     <label>Notes </label>
-                                    <input type="text"
-                                       [ngClass]="{'form-control' : true,'form-control-danger':TransferForm.controls.remarks.invalid&&transfer_submit}"
-                                       id="note" formControlName="note" placeholder="note">
-                                    <small *ngIf="TransferForm.hasError('required','note')&&transfer_submit"
-                                       class="form-text error">note is required! </small>
+                                    <input type="text" [ngClass]="{
+                            'form-control': true,
+                            'form-control-danger':
+                              TransferForm.controls.remarks.invalid &&
+                              transfer_submit
+                          }" id="note" formControlName="note" placeholder="note" />
+                                    <small *ngIf="
+                            TransferForm.hasError('required', 'note') &&
+                            transfer_submit
+                          " class="form-text error">note is required!
+                                    </small>
                                  </div>
                               </div>
                            </div>
-                           <div class="col-sm-6"
-                              *ngIf="TransferForm.value['reason']!='3' && TransferForm.value['reason']!='4' && TransferForm.value['reason']!='5'">
+                           <div class="col-sm-6" *ngIf="
+                      TransferForm.value['reason'] != '3' &&
+                      TransferForm.value['reason'] != '4' &&
+                      TransferForm.value['reason'] != '5'
+                    ">
                               <div class="form-group row">
                                  <div class="col-sm-12">
                                     <label>New STB Model</label>
-                                    <select (change)="getSTB_Type();getSTB();getswapSTB();"
-                                       [ngClass]="{'form-control' : true,'form-control-danger':TransferForm.controls.model.invalid&&transfer_submit}"
-                                       name="model" formControlName="model">
+                                    <select (changed)="getSTB_Type(); getSTB(); getswapSTB()" [ngClass]="{
+                            'form-control': true,
+                            'form-control-danger':
+                              TransferForm.controls.model.invalid &&
+                              transfer_submit
+                          }" name="model" formControlName="model">
                                        <option value="" selected>Select Model</option>
-                                       <option *ngFor="let item of model" [ngValue]="item.model_id">{{item.model_name}}
+                                       <option *ngFor="let item of model" [ngValue]="item.model_id">
+                                          {{ item.model_name }}
                                        </option>
                                     </select>
-                                    <small *ngIf="TransferForm.hasError('required','model')&&transfer_submit"
-                                       class="form-text error">Select required STB Model! </small>
+                                    <small *ngIf="
+                            TransferForm.hasError('required', 'model') &&
+                            transfer_submit
+                          " class="form-text error">Select required STB Model!
+                                    </small>
                                  </div>
                               </div>
                               <div class="form-group row">
@@ -414,104 +550,126 @@
                                     <label>STB Type</label>
                                     <select name="stbtype" formControlName="stbtype" class="form-control">
                                        <option value="">STB Type</option>
-                                       <option *ngFor='let item of stb_type' [ngValue]=item.stb_type_pk>
-                                          {{item.stb_type_name}}</option>
+                                       <option *ngFor="let item of stb_type" [ngValue]="item.stb_type_pk">
+                                          {{ item.stb_type_name }}
+                                       </option>
                                     </select>
                                  </div>
                               </div>
-                              <div class="form-group row"
-                                 *ngIf="TransferForm.value['model']=='6' && cust_id.model_id=='6'">
+                              <div class="form-group row" *ngIf="
+                        TransferForm.value['model'] == '6' &&
+                        cust_id.model_id == '6'
+                      ">
                                  <div class="col-sm-12">
                                     <label>Replace Of</label>
-                                    <select
-                                       [ngClass]="{'form-control' : true,'form-control-danger':TransferForm.controls.rep_of.invalid&&transfer_submit}"
-                                       name="rep_of" formControlName="rep_of">
-                                       <option value="" selected>Select Replacement Of</option>
+                                    <select [ngClass]="{
+                            'form-control': true,
+                            'form-control-danger':
+                              TransferForm.controls.rep_of.invalid &&
+                              transfer_submit
+                          }" name="rep_of" formControlName="rep_of">
+                                       <option value="" selected>
+                                          Select Replacement Of
+                                       </option>
                                        <option value="1">STB</option>
                                        <option value="2">VC</option>
                                        <option value="3">Both</option>
                                     </select>
-                                    <small *ngIf="TransferForm.hasError('required','rep_of')&&transfer_submit"
-                                       class="form-text error">Select required STB Model! </small>
+                                    <small *ngIf="
+                            TransferForm.hasError('required', 'rep_of') &&
+                            transfer_submit
+                          " class="form-text error">Select required STB Model!
+                                    </small>
                                  </div>
                               </div>
 
-                              <div class="form-group row"
-                                 *ngIf="TransferForm.value['model'] && TransferForm.value['rep_of']!=2 && TransferForm.value['reason']!=7">
+                              <div class="form-group row" *ngIf="
+                        TransferForm.value['model'] &&
+                        TransferForm.value['rep_of'] != 2 &&
+                        TransferForm.value['reason'] != 7
+                      ">
                                  <div class="col-sm-12">
                                     <label>New STB Number</label>
                                     <auto-complete [item]="stbdet" name="new_stb" (keyup)="getSTB($event.target.value)"
-                                       (item_id)="TransferForm.controls.new_stb.setValue($event);"></auto-complete>
-                                    <small *ngIf="TransferForm.hasError('required','new_stb')&&transfer_submit"
-                                       class="form-text error">Select required STB !</small>
+                                       (item_id)="
+                            TransferForm.controls.new_stb.setValue($event)
+                          "></auto-complete>
+                                    <small *ngIf="
+                            TransferForm.hasError('required', 'new_stb') &&
+                            transfer_submit
+                          " class="form-text error">Select required STB !</small>
                                  </div>
                               </div>
-                              <div class="form-group row"
-                                 *ngIf="TransferForm.value['model'] && TransferForm.value['reason']==7">
+                              <div class="form-group row" *ngIf="
+                        TransferForm.value['model'] &&
+                        TransferForm.value['reason'] == 7
+                      ">
                                  <div class="col-sm-12">
                                     <label> STB Number</label>
                                     <auto-complete [item]="stbdetails" name="swap_stb"
-                                       (keyup)="getswapSTB($event.target.value)"
-                                       (item_id)="TransferForm.controls.swap_stb.setValue($event);"></auto-complete>
-                                    <small *ngIf="TransferForm.hasError('required','swap_stb')&&transfer_submit"
-                                       class="form-text error">Select required STB !</small>
+                                       (keyup)="getswapSTB($event.target.value)" (item_id)="
+                            TransferForm.controls.swap_stb.setValue($event)
+                          "></auto-complete>
+                                    <small *ngIf="
+                            TransferForm.hasError('required', 'swap_stb') &&
+                            transfer_submit
+                          " class="form-text error">Select required STB !</small>
                                  </div>
                               </div>
-                               <div class="form-group row" *ngIf="TransferForm.value['model']==1">
-                              <div class="col-sm-12">
-                              
-                              <label>VC Card</label>
-                              <select [ngClass]="{'form-control' : true,'form-control-danger':TransferForm.controls.vccard.invalid&&transfer_submit}" name="vccard" formControlName="vccard">
-                                 <option value="" selected>Select</option>
-                                 <option value="1">Same Card</option>
-                                 <option value="2">New Card</option>
-                              </select>
-                              <small *ngIf="TransferForm.hasError('required','vccard')&&transfer_submit" class="form-text error">Select required Server Type! </small>
+                              <div class="form-group row" *ngIf="TransferForm.value['model'] == 1">
+                                 <div class="col-sm-12">
+                                    <label>VC Card</label>
+                                    <select [ngClass]="{
+                            'form-control': true,
+                            'form-control-danger':
+                              TransferForm.controls.vccard.invalid &&
+                              transfer_submit
+                          }" name="vccard" formControlName="vccard">
+                                       <option value="" selected>Select</option>
+                                       <option value="1">Same Card</option>
+                                       <option value="2">New Card</option>
+                                    </select>
+                                    <small *ngIf="
+                            TransferForm.hasError('required', 'vccard') &&
+                            transfer_submit
+                          " class="form-text error">Select required Server Type!
+                                    </small>
+                                 </div>
                               </div>
-                              </div> 
-                              <!-- <label>VC Card</label> -->
-                              <!--    <div class="form-group row">
-                              <div class="demo-radio col-sm-6">
-                                 <label class="custom-control custom-radio">
-                                 <input type="radio" value="1"class="custom-control-input form-control " formControlName="vccard" checked>
-                                 <span class="custom-control-indicator"></span>
-                                 <span class="custom-control-description">Same VC Number</span>
-                                 </label>
-                              </div>
-                              <div class="demo-radio col-sm-6">
-                                 <label class="custom-control custom-radio">
-                                 <input type="radio" value="2" class="custom-control-input form-control" formControlName="vccard">
-                                 <span class="custom-control-indicator"></span>
-                                 <span class="custom-control-description">New VC Number </span>
-                                 </label>
-                              </div>
-                           </div>
-
-                           <!-- ==================================================== -->
-                              <div class="form-group row"
-                                 *ngIf="TransferForm.value['model'] && TransferForm.value['rep_of']==2">
+                              <div class="form-group row" *ngIf="
+                        TransferForm.value['model'] &&
+                        TransferForm.value['rep_of'] == 2
+                      ">
                                  <div class="col-sm-12">
                                     <label>New VC Number</label>
                                     <auto-complete [item]="stbdet" name="new_stb" (keyup)="getSTB($event.target.value)"
-                                       (item_id)="TransferForm.controls.new_stb.setValue($event);"></auto-complete>
-                                    <small *ngIf="TransferForm.hasError('required','new_stb')&&transfer_submit"
-                                       class="form-text error">Select required VC !</small>
+                                       (item_id)="
+                            TransferForm.controls.new_stb.setValue($event)
+                          "></auto-complete>
+                                    <small *ngIf="
+                            TransferForm.hasError('required', 'new_stb') &&
+                            transfer_submit
+                          " class="form-text error">Select required VC !</small>
                                  </div>
                               </div>
                            </div>
                         </div>
                      </div>
                      <div class="modal-footer">
-                        <button type="submit" class="btn btn-md btn-success">Submit</button>
-                        <button type="button" class="btn btn-md btn-danger "
-                           (click)='createForm();transfer_submit=false;'>Reset </button>
+                        <button type="submit" class="btn btn-md btn-success">
+                           Submit
+                        </button>
+                        <button type="button" class="btn btn-md btn-danger"
+                           (click)="createForm(); transfer_submit = false">
+                           Reset
+                        </button>
                      </div>
                   </form>
-               <!-- </ng-template> -->
-            </nb-tab> 
-<!-- ============================================== -->
+                  <!-- </ng-template> -->
+               </nb-tab>
+               <!-- ============================================== -->
 
-            <!-- <nb-tab  tabTitle="Blacklist STB">
+               <!-- <nb-tab  tabTitle="Blacklist STB">
                <ng-template ngbTabContent>
                   <form [formGroup]="BlacklistForm" class="form-horizontal" (ngSubmit)='blacklist()'>
                      <div class="modal-body">
@@ -557,35 +715,43 @@
                </ng-template>
             </nb-tab> -->
 
-
-
-              <nb-tab tabTitle="FingerPrint">
-               <!-- <ng-template ngbTabContent> -->
-                  <form [formGroup]="fingerprint" class="form-horizontal" (ngSubmit)="sendfingerprint();">
+               <nb-tab tabTitle="FingerPrint">
+                  <!-- <ng-template ngbTabContent> -->
+                  <form [formGroup]="fingerprint" class="form-horizontal" (ngSubmit)="sendfingerprint()">
                      <div class="modal-body">
                         <div class="form-group row">
                            <div class="col-sm-4">
                               <label>FP Type</label>
-                              <select
-                                 [ngClass]="{'form-control' : true,'form-control-danger':fingerprint.controls.fp_type.invalid&&submit}"
-                                 name="fp_type" formControlName="fp_type">
+                              <select [ngClass]="{
+                        'form-control': true,
+                        'form-control-danger':
+                          fingerprint.controls.fp_type.invalid && submit
+                      }" name="fp_type" formControlName="fp_type">
                                  <option value="1">Fixed</option>
                                  <option value="2">Random</option>
                               </select>
-                              <small *ngIf="fingerprint.hasError('required','fp_type')&&submit"
-                                 class="form-text error">Select required Server Type! </small>
+                              <small *ngIf="
+                        fingerprint.hasError('required', 'fp_type') && submit
+                      " class="form-text error">Select required Server Type!
+                              </small>
                            </div>
                         </div>
-                        <br>
+                        <br />
                         <div class="form-group row">
                            <div class="col-sm-6">
-                              <div class="form-group row" *ngIf="fingerprint.value['fp_type']==1">
+                              <div class="form-group row" *ngIf="fingerprint.value['fp_type'] == 1">
                                  <div class="col-sm-12">
                                     <label>X-Cord*</label>
                                     <input type="text" name="xcord" formControlName="xcord" placeholder="X-Cord"
-                                       [ngClass]="{'form-control' : true,'form-control-danger':fingerprint.controls.xcord.invalid&&submit}" />
-                                    <small *ngIf="fingerprint.hasError('required','xcord')&&submit"
-                                       class="form-text error">X-Cord* is required! </small>
+                                       [ngClass]="{
+                            'form-control': true,
+                            'form-control-danger':
+                              fingerprint.controls.xcord.invalid && submit
+                          }" />
+                                    <small *ngIf="
+                            fingerprint.hasError('required', 'xcord') && submit
+                          " class="form-text error">X-Cord* is required!
+                                    </small>
                                  </div>
                               </div>
                               <div class="form-group row">
@@ -594,7 +760,7 @@
                                     <select formControlName="fp_text_size" class="form-control" id="fp_text_size">
                                        <option value="" selected>Select Text Size</option>
                                        <option *ngFor="let item of font" [ngValue]="item.id">
-                                          {{item.name}}
+                                          {{ item.name }}
                                        </option>
                                     </select>
                                  </div>
@@ -605,7 +771,7 @@
                                     <select formControlName="fp_bg_color" class="form-control" id="fp_bg_color">
                                        <option value="" selected>Select BG COLOR</option>
                                        <option *ngFor="let item of BGColor" [ngValue]="item.id">
-                                          {{item.name}}
+                                          {{ item.name }}
                                        </option>
                                     </select>
                                  </div>
@@ -616,7 +782,7 @@
                                     <select formControlName="fp_text_color" class="form-control" id="fp_text_color">
                                        <option value="" selected>Select TEXT COLOR</option>
                                        <option *ngFor="let item of TextColor" [ngValue]="item.id">
-                                          {{item.name}}
+                                          {{ item.name }}
                                        </option>
                                     </select>
                                  </div>
@@ -624,208 +790,288 @@
                               <div class="form-group row">
                                  <div class="col-sm-12">
                                     <label>Display Time</label>
-                                    <select  name="Time" formControlName="Time"
-                                       [ngClass]="{'form-control' : true,'form-control-danger':fingerprint.controls.Time.invalid&&submit}">
+                                    <select name="Time" formControlName="Time" [ngClass]="{
+                            'form-control': true,
+                            'form-control-danger':
+                              fingerprint.controls.Time.invalid && submit
+                          }">
                                        <option value="" selected>Select Display Time</option>
                                        <option value="0">Immediate</option>
                                        <option value="1">Schedule</option>
                                     </select>
-                                    <small *ngIf="fingerprint.hasError('required','Time')&&submit"
-                                       class="form-text error">Select required Time! </small>
+                                    <small *ngIf="
+                            fingerprint.hasError('required', 'Time') && submit
+                          " class="form-text error">Select required Time!
+                                    </small>
                                  </div>
                               </div>
-                              <div class="form-group row" *ngIf="fingerprint.value['Time']==2">
+                              <div class="form-group row" *ngIf="fingerprint.value['Time'] == 2">
                                  <div class="col-sm-12">
                                     <label>Schedule </label>
-                                    <input type="datetime-local"
-                                       [ngClass]="{'form-control' : true,'form-control-danger':fingerprint.controls.Schedule.invalid&&submit}"
-                                       id="Schedule" formControlName="Schedule" placeholder="Time ON">
-                                    <small *ngIf="fingerprint.hasError('required','Schedule')&&submit"
-                                       class="form-text error">Schedule time is required! </small>
+                                    <input type="datetime-local" [ngClass]="{
+                            'form-control': true,
+                            'form-control-danger':
+                              fingerprint.controls.Schedule.invalid && submit
+                          }" id="Schedule" formControlName="Schedule" placeholder="Time ON" />
+                                    <small *ngIf="
+                            fingerprint.hasError('required', 'Schedule') &&
+                            submit
+                          " class="form-text error">Schedule time is required!
+                                    </small>
                                  </div>
                               </div>
                            </div>
                            <div class="col-sm-6">
-                              <div class="form-group row" *ngIf="fingerprint.value['fp_type']==1">
+                              <div class="form-group row" *ngIf="fingerprint.value['fp_type'] == 1">
                                  <div class="col-sm-12">
                                     <label>Y-Cord*</label>
                                     <input type="text" name="ycord" formControlName="ycord" placeholder="Y-Cord"
-                                       [ngClass]="{'form-control' : true,'form-control-danger':fingerprint.controls.ycord.invalid&&submit}" />
-                                    <small *ngIf="fingerprint.hasError('required','ycord')&&submit"
-                                       class="form-text error">Y-Cord is required! </small>
+                                       [ngClass]="{
+                            'form-control': true,
+                            'form-control-danger':
+                              fingerprint.controls.ycord.invalid && submit
+                          }" />
+                                    <small *ngIf="
+                            fingerprint.hasError('required', 'ycord') && submit
+                          " class="form-text error">Y-Cord is required!
+                                    </small>
                                  </div>
                               </div>
                               <div class="form-group row">
                                  <div class="col-sm-12">
                                     <label>Duration </label>
-                                    <input type="text"
-                                       [ngClass]="{'form-control' : true,'form-control-danger':fingerprint.controls.duration.invalid&&submit}"
-                                       id="duration" formControlName="duration" placeholder="Duration">
-                                    <small *ngIf="fingerprint.hasError('required','duration')&&submit"
-                                       class="form-text error">Duration is required! </small>
-                                    <small *ngIf="fingerprint.controls.duration.errors?.max "
-                                       class="form-text error">Max interval period is exceeded! </small>
+                                    <input type="text" [ngClass]="{
+                            'form-control': true,
+                            'form-control-danger':
+                              fingerprint.controls.duration.invalid && submit
+                          }" id="duration" formControlName="duration" placeholder="Duration" />
+                                    <small *ngIf="
+                            fingerprint.hasError('required', 'duration') &&
+                            submit
+                          " class="form-text error">Duration is required!
+                                    </small>
+                                    <small *ngIf="fingerprint.controls.duration.errors?.max" class="form-text error">Max
+                                       interval period is exceeded!
+                                    </small>
                                  </div>
                               </div>
                               <div class="form-group row">
                                  <div class="col-sm-12">
                                     <label>Repetation</label>
-                                    <input type="text"
-                                       [ngClass]="{'form-control' : true,'form-control-danger':fingerprint.controls.repetition.invalid&&submit}"
-                                       id="repetition" formControlName="repetition" placeholder="Repetition">
-                                    <small *ngIf="fingerprint.hasError('required','repetition')&&submit"
-                                       class="form-text error">Interval is required! </small>
-                                    <small *ngIf="fingerprint.controls.repetition.errors?.max "
-                                       class="form-text error">Max interval period is exceeded! </small>
+                                    <input type="text" [ngClass]="{
+                            'form-control': true,
+                            'form-control-danger':
+                              fingerprint.controls.repetition.invalid && submit
+                          }" id="repetition" formControlName="repetition" placeholder="Repetition" />
+                                    <small *ngIf="
+                            fingerprint.hasError('required', 'repetition') &&
+                            submit
+                          " class="form-text error">Interval is required!
+                                    </small>
+                                    <small *ngIf="fingerprint.controls.repetition.errors?.max"
+                                       class="form-text error">Max interval period is exceeded!
+                                    </small>
                                  </div>
                               </div>
                               <div class="form-group row">
                                  <div class="col-sm-12">
                                     <label>Repeat Intervals </label>
-                                    <input type="text"
-                                       [ngClass]="{'form-control' : true,'form-control-danger':fingerprint.controls.intervals.invalid&&submit}"
-                                       id="intervals" formControlName="intervals" placeholder="Repeat Intervals">
-                                    <small *ngIf="fingerprint.hasError('required','intervals')&&submit"
-                                       class="form-text error">Interval is required! </small>
-                                    <small *ngIf="fingerprint.controls.intervals.errors?.max "
-                                       class="form-text error">Max interval period is exceeded! </small>
+                                    <input type="text" [ngClass]="{
+                            'form-control': true,
+                            'form-control-danger':
+                              fingerprint.controls.intervals.invalid && submit
+                          }" id="intervals" formControlName="intervals" placeholder="Repeat Intervals" />
+                                    <small *ngIf="
+                            fingerprint.hasError('required', 'intervals') &&
+                            submit
+                          " class="form-text error">Interval is required!
+                                    </small>
+                                    <small *ngIf="fingerprint.controls.intervals.errors?.max"
+                                       class="form-text error">Max interval period is exceeded!
+                                    </small>
                                  </div>
                               </div>
                               <div class="form-group row">
                                  <div class="col-sm-12">
                                     <label>Overt/Covert</label>
-                                    <select
-                                       [ngClass]="{'form-control' : true,'form-control-danger':fingerprint.controls.fp_overt.invalid&&submit}"
-                                       name="fp_overt" formControlName="fp_overt">
+                                    <select [ngClass]="{
+                            'form-control': true,
+                            'form-control-danger':
+                              fingerprint.controls.fp_overt.invalid && submit
+                          }" name="fp_overt" formControlName="fp_overt">
                                        <option value="" selected>Select Overt/Covert</option>
                                        <option value="1" selected>Overt</option>
                                        <option value="2">Covert</option>
                                     </select>
-                                    <small *ngIf="fingerprint.hasError('required','fp_overt')&&submit"
-                                       class="form-text error">Select Overt/Covert!</small>
+                                    <small *ngIf="
+                            fingerprint.hasError('required', 'fp_overt') &&
+                            submit
+                          " class="form-text error">Select Overt/Covert!</small>
                                  </div>
                               </div>
                            </div>
                         </div>
                      </div>
                      <div class="modal-footer">
-                        <button type="submit" class="btn btn-md btn-success">Send</button>
-                        <button type="button" class="btn btn-md btn-danger " (click)='createForm();submit=false;'>Reset
+                        <button type="submit" class="btn btn-md btn-success">
+                           Send
+                        </button>
+                        <button type="button" class="btn btn-md btn-danger" (click)="createForm(); submit = false">
+                           Reset
                         </button>
                      </div>
                   </form>
-               <!-- </ng-template> -->
-            </nb-tab>
-            <nb-tab  tabTitle="STB Message">
-               <!-- <ng-template ngbTabContent> -->
-                  <form [formGroup]="stbmsg" class="form-horizontal" (ngSubmit)="sendmsg();">
+                  <!-- </ng-template> -->
+               </nb-tab>
+               <nb-tab tabTitle="STB Message">
+                  <!-- <ng-template ngbTabContent> -->
+                  <form [formGroup]="stbmsg" class="form-horizontal" (ngSubmit)="sendmsg()">
                      <div class="modal-body">
                         <div class="form-group row">
                            <div class="col-sm-4">
                               <label>Message type</label>
-                              <select 
-                                 [ngClass]="{'form-control' : true,'form-control-danger':stbmsg.controls.msg_type.invalid&&msg_submit}"
-                                 name="msg_type" formControlName="msg_type">
+                              <select [ngClass]="{
+                        'form-control': true,
+                        'form-control-danger':
+                          stbmsg.controls.msg_type.invalid && msg_submit
+                      }" name="msg_type" formControlName="msg_type">
                                  <option value="1">OSD</option>
                                  <option value="2">Bmail</option>
                               </select>
-                              <small *ngIf="stbmsg.hasError('required','msg_type')&&msg_submit"
-                                 class="form-text error">Select required Message Type! </small>
+                              <small *ngIf="
+                        stbmsg.hasError('required', 'msg_type') && msg_submit
+                      " class="form-text error">Select required Message Type!
+                              </small>
                            </div>
-
                         </div>
-                        <br>
+                        <br />
                         <div class="form-group row">
                            <div class="col-sm-6">
-                              <div class="form-group row" *ngIf="stbmsg.value['msg_type']==2">
+                              <div class="form-group row" *ngIf="stbmsg.value['msg_type'] == 2">
                                  <div class="col-sm-12">
                                     <label>Message Title</label>
-                                    <input type="text"
-                                       [ngClass]="{'form-control' : true,'form-control-danger':stbmsg.controls.msg_title.invalid&&msg_submit}"
-                                       id="msg_title" formControlName="msg_title" placeholder="Title">
-                                    <small *ngIf="stbmsg.hasError('required','msg_title')&&msg_submit"
-                                       class="form-text error">Message Title is Required! </small>
-                                    <small *ngIf="stbmsg.controls.msg_title.errors?.maxLength "
-                                       class="form-text error">Message Title exceeded! </small>
+                                    <input type="text" [ngClass]="{
+                            'form-control': true,
+                            'form-control-danger':
+                              stbmsg.controls.msg_title.invalid && msg_submit
+                          }" id="msg_title" formControlName="msg_title" placeholder="Title" />
+                                    <small *ngIf="
+                            stbmsg.hasError('required', 'msg_title') &&
+                            msg_submit
+                          " class="form-text error">Message Title is Required!
+                                    </small>
+                                    <small *ngIf="stbmsg.controls.msg_title.errors?.maxLength"
+                                       class="form-text error">Message Title exceeded!
+                                    </small>
                                  </div>
                               </div>
                               <div class="form-group row">
                                  <div class="col-sm-12">
                                     <label>Message </label>
-                                    <textarea
-                                       [ngClass]="{'form-control' : true,'form-control-danger':stbmsg.controls.msg.invalid&&msg_submit}"
-                                       id="msg" formControlName="msg"></textarea>
-                                    <small *ngIf="stbmsg.hasError('required','msg')&&msg_submit"
-                                       class="form-text error">Message is Required! </small>
-                                    <small *ngIf="stbmsg.controls.msg.errors?.maxLength "
-                                       class="form-text error">Message length exceeded! </small>
+                                    <textarea [ngClass]="{
+                            'form-control': true,
+                            'form-control-danger':
+                              stbmsg.controls.msg.invalid && msg_submit
+                          }" id="msg" formControlName="msg"></textarea>
+                                    <small *ngIf="
+                            stbmsg.hasError('required', 'msg') && msg_submit
+                          " class="form-text error">Message is Required!
+                                    </small>
+                                    <small *ngIf="stbmsg.controls.msg.errors?.maxLength" class="form-text error">Message
+                                       length exceeded!
+                                    </small>
                                  </div>
                               </div>
                               <div class="form-group row">
                                  <div class="col-sm-12">
                                     <label>Display Time</label>
-                                    <select  name="Time" formControlName="Time"
-                                       [ngClass]="{'form-control' : true,'form-control-danger':stbmsg.controls.Time.invalid&&msg_submit}">
+                                    <select name="Time" formControlName="Time" [ngClass]="{
+                            'form-control': true,
+                            'form-control-danger':
+                              stbmsg.controls.Time.invalid && msg_submit
+                          }">
                                        <option value="" selected>Select Display Time</option>
                                        <option value="0">Immediate</option>
                                        <option value="1">Schedule</option>
                                     </select>
-                                    <small *ngIf="stbmsg.hasError('required','Time')&&msg_submit"
-                                       class="form-text error">Select required Time! </small>
+                                    <small *ngIf="
+                            stbmsg.hasError('required', 'Time') && msg_submit
+                          " class="form-text error">Select required Time!
+                                    </small>
                                  </div>
                               </div>
-                              <div class="form-group row" *ngIf="stbmsg.value['Time']==2">
+                              <div class="form-group row" *ngIf="stbmsg.value['Time'] == 2">
                                  <div class="col-sm-12">
                                     <label>Schedule </label>
-                                    <input type="datetime-local"
-                                       [ngClass]="{'form-control' : true,'form-control-danger':stbmsg.controls.Schedule.invalid&&msg_submit}"
-                                       id="Schedule" formControlName="Schedule" placeholder="Time ON">
+                                    <input type="datetime-local" [ngClass]="{
+                            'form-control': true,
+                            'form-control-danger':
+                              stbmsg.controls.Schedule.invalid && msg_submit
+                          }" id="Schedule" formControlName="Schedule" placeholder="Time ON" />
                                  </div>
-                                 <small *ngIf="stbmsg.hasError('required','Schedule')&&msg_submit"
-                                    class="form-text error">Select Time to schedule! </small>
+                                 <small *ngIf="
+                          stbmsg.hasError('required', 'Schedule') && msg_submit
+                        " class="form-text error">Select Time to schedule!
+                                 </small>
                               </div>
-                              <div class="form-group row" *ngIf="stbmsg.value['msg_type']==1">
+                              <div class="form-group row" *ngIf="stbmsg.value['msg_type'] == 1">
                                  <div class="col-sm-12">
                                     <label>Duration</label>
-                                    <input type="text"
-                                       [ngClass]="{'form-control' : true,'form-control-danger':stbmsg.controls.duration.invalid&&msg_submit}"
-                                       id="duration" formControlName="duration" placeholder="seconds">
-                                    <small *ngIf="stbmsg.hasError('required','duration')&&msg_submit"
-                                       class="form-text error">Duration is required! </small>
-                                    <small *ngIf="stbmsg.controls.duration.errors?.max " class="form-text error">Max
-                                       Duration is exceeded! </small>
+                                    <input type="text" [ngClass]="{
+                            'form-control': true,
+                            'form-control-danger':
+                              stbmsg.controls.duration.invalid && msg_submit
+                          }" id="duration" formControlName="duration" placeholder="seconds" />
+                                    <small *ngIf="
+                            stbmsg.hasError('required', 'duration') &&
+                            msg_submit
+                          " class="form-text error">Duration is required!
+                                    </small>
+                                    <small *ngIf="stbmsg.controls.duration.errors?.max" class="form-text error">Max
+                                       Duration is exceeded!
+                                    </small>
                                  </div>
                               </div>
 
-                              <div class="form-group row" *ngIf="stbmsg.value['msg_type']==1">
+                              <div class="form-group row" *ngIf="stbmsg.value['msg_type'] == 1">
                                  <div class="col-sm-12">
                                     <label>Repetation</label>
-                                    <input type="text"
-                                       [ngClass]="{'form-control' : true,'form-control-danger':stbmsg.controls.repetition.invalid&&msg_submit}"
-                                       id="repetition" formControlName="repetition" placeholder="seconds">
-                                    <small *ngIf="stbmsg.hasError('required','repetition')&&msg_submit"
-                                       class="form-text error">Repetation is required! </small>
-                                    <small *ngIf="stbmsg.controls.repetition.errors?.max " class="form-text error">Max
-                                       repetation is exceeded! </small>
+                                    <input type="text" [ngClass]="{
+                            'form-control': true,
+                            'form-control-danger':
+                              stbmsg.controls.repetition.invalid && msg_submit
+                          }" id="repetition" formControlName="repetition" placeholder="seconds" />
+                                    <small *ngIf="
+                            stbmsg.hasError('required', 'repetition') &&
+                            msg_submit
+                          " class="form-text error">Repetation is required!
+                                    </small>
+                                    <small *ngIf="stbmsg.controls.repetition.errors?.max" class="form-text error">Max
+                                       repetation is exceeded!
+                                    </small>
                                  </div>
                               </div>
-                              <div class="form-group row" *ngIf="stbmsg.value['msg_type']==1">
+                              <div class="form-group row" *ngIf="stbmsg.value['msg_type'] == 1">
                                  <div class="col-sm-12">
                                     <label>Repeat Intervals </label>
-                                    <input type="text"
-                                       [ngClass]="{'form-control' : true,'form-control-danger':stbmsg.controls.intervals.invalid&&msg_submit}"
-                                       id="intervals" formControlName="intervals" placeholder="seconds">
-                                    <small *ngIf="stbmsg.hasError('required','intervals')&&msg_submit"
-                                       class="form-text error">Interval is required! </small>
-                                    <small *ngIf="stbmsg.controls.intervals.errors?.max " class="form-text error">Max
-                                       interval period is exceeded! </small>
+                                    <input type="text" [ngClass]="{
+                            'form-control': true,
+                            'form-control-danger':
+                              stbmsg.controls.intervals.invalid && msg_submit
+                          }" id="intervals" formControlName="intervals" placeholder="seconds" />
+                                    <small *ngIf="
+                            stbmsg.hasError('required', 'intervals') &&
+                            msg_submit
+                          " class="form-text error">Interval is required!
+                                    </small>
+                                    <small *ngIf="stbmsg.controls.intervals.errors?.max" class="form-text error">Max
+                                       interval period is exceeded!
+                                    </small>
                                  </div>
                               </div>
                            </div>
                            <div class="col-sm-6">
-
-
-                              <div class="form-group row" *ngIf="stbmsg.value['msg_type']==1">
+                              <div class="form-group row" *ngIf="stbmsg.value['msg_type'] == 1">
                                  <div class="col-sm-12">
                                     <label>OSD Type</label>
                                     <select class="form-control" name="osd_type" formControlName="osd_type">
@@ -835,49 +1081,61 @@
                                     </select>
                                  </div>
                               </div>
-                              <div class="form-group row" *ngIf="stbmsg.value['msg_type']==1">
+                              <div class="form-group row" *ngIf="stbmsg.value['msg_type'] == 1">
                                  <div class="col-sm-12">
                                     <label>Scrool Type</label>
                                     <select class="form-control" name="scrool_type" formControlName="scrool_type">
                                        <option value="" selected>Select Scroll Type</option>
-                                       <option value="1">scroll right to left at the top of the screen</option>
-                                       <option value="2">scroll right to left at the bottom of the screen</option>
-                                       <option value="3">scroll right to left at the middle of the screen</option>
-                                       <option value="4">scroll left to right at the middle of the screen</option>
-                                       <option value="5">scroll left to right at the top of the screen</option>
-                                       <option value="0">scroll left to right at the bottom of the screen</option>
+                                       <option value="1">
+                                          scroll right to left at the top of the screen
+                                       </option>
+                                       <option value="2">
+                                          scroll right to left at the bottom of the screen
+                                       </option>
+                                       <option value="3">
+                                          scroll right to left at the middle of the screen
+                                       </option>
+                                       <option value="4">
+                                          scroll left to right at the middle of the screen
+                                       </option>
+                                       <option value="5">
+                                          scroll left to right at the top of the screen
+                                       </option>
+                                       <option value="0">
+                                          scroll left to right at the bottom of the screen
+                                       </option>
                                     </select>
                                  </div>
                               </div>
-                              <div class="form-group row" *ngIf="stbmsg.value['msg_type']==1">
+                              <div class="form-group row" *ngIf="stbmsg.value['msg_type'] == 1">
                                  <div class="col-sm-12">
                                     <label>FP Text Size</label>
                                     <select formControlName="fp_text_size" class="form-control" id="fp_text_size">
                                        <option value="" selected>Select Text Size</option>
                                        <option *ngFor="let item of font" [ngValue]="item.id">
-                                          {{item.name}}
+                                          {{ item.name }}
                                        </option>
                                     </select>
                                  </div>
                               </div>
-                              <div class="form-group row" *ngIf="stbmsg.value['msg_type']==1">
+                              <div class="form-group row" *ngIf="stbmsg.value['msg_type'] == 1">
                                  <div class="col-sm-12">
                                     <label>FP BG COLOR </label>
                                     <select formControlName="fp_bg_color" class="form-control" id="fp_bg_color">
                                        <option value="" selected>Select BG COLOR</option>
                                        <option *ngFor="let item of BGColor" [ngValue]="item.id">
-                                          {{item.name}}
+                                          {{ item.name }}
                                        </option>
                                     </select>
                                  </div>
                               </div>
-                              <div class="form-group row" *ngIf="stbmsg.value['msg_type']==1">
+                              <div class="form-group row" *ngIf="stbmsg.value['msg_type'] == 1">
                                  <div class="col-sm-12">
                                     <label>FP TEXT COLOR </label>
                                     <select formControlName="fp_text_color" class="form-control" id="fp_text_color">
                                        <option value="" selected>Select TEXT COLOR</option>
                                        <option *ngFor="let item of TextColor" [ngValue]="item.id">
-                                          {{item.name}}
+                                          {{ item.name }}
                                        </option>
                                     </select>
                                  </div>
@@ -886,20 +1144,21 @@
                         </div>
                      </div>
                      <div class="modal-footer">
-                        <button type="submit" class="btn btn-md btn-success">Send</button>
-                        <button type="button" class="btn btn-md btn-danger "
-                           (click)='createForm();msg_submit=false;'>Reset </button>
+                        <button type="submit" class="btn btn-md btn-success">
+                           Send
+                        </button>
+                        <button type="button" class="btn btn-md btn-danger" (click)="createForm(); msg_submit = false">
+                           Reset
+                        </button>
                      </div>
                   </form>
-             
-            </nb-tab>
-            
-         </nb-tabset>
-         <!--  <div class="modal-footer">
+               </nb-tab>
+            </nb-tabset>
+            <!--  <div class="modal-footer">
                <button type="button" class="btn btn-md btn-danger " [routerLink]="['/pages/customer/custList']">Back</button>
             
             </div> -->
-            </div>
+         </div>
       </nb-card-body>
    </nb-card>
 </div>

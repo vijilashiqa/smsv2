@@ -129,6 +129,25 @@ export class AddCustComponent implements OnInit {
         assign_to: "email",
         required: true,
       },
+
+      {
+        msg: "Please fill City",
+        label: "City *",
+        assign_to: "city",
+        required: true,
+      },
+      {
+        msg: "Please fill Area",
+        label: "Area *",
+        assign_to: "area",
+        required: true,
+      },
+      {
+        msg: "Please fill Pincode ",
+        label: "Pincode *",
+        assign_to: "pin_no",
+        required: true,
+      },
     ];
     return this.bulkmeta;
   }
@@ -272,14 +291,9 @@ export class AddCustComponent implements OnInit {
     form.get('proof_id').updateValueAndValidity();
     form.get('email').updateValueAndValidity();
   }
-
-
-
-
   async getCountry($event = '') {
     this.count = await this.country.listcountry({ like: $event });
   }
-
   async getstate($event = '') {
     this.getstates = await this.country.liststate({ country_fk: this.AddCustForm.value['country'], like: $event });
   }
@@ -330,17 +344,11 @@ export class AddCustComponent implements OnInit {
     console.log("operator list ", this.getoperatorlist)
 
   }
-
-
   async getbox() {
     this.getboxlist = await this.subscribers.getbox({ hdid: this.AddCustForm.value['hdid'] })
     console.log('getbox', this.getboxlist)
   }
-
-
-
   async getboxedit() {
-
     this.getboxeditl = await this.subscribers.getboxedit({ hdid: this.AddCustForm.value['hdid'] })
     console.log("getboxlistedir", this.getboxeditl)
   }

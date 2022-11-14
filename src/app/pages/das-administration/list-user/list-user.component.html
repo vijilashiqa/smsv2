@@ -5,24 +5,24 @@
       <button [hidden]='' class="btn btn-sm btn-success"
         [routerLink]="['/pages/das-administration/create-user']">Create</button>
       <hr style="border: 0px;">
-      <div class="row">
+      <!-- <div class="row">
         <div class="col-md-12">
           <label class="left">
             <h5>User Count : {{count}}</h5>
           </label>
           <i (click)="Download();" class="green right fa fa-file-excel" aria-hidden="true"></i>
         </div>
-      </div>
+      </div> -->
       <hr style="border: 0px;">
       <div class="form-group row">
-        <div class="col-sm-3" >
+        <!-- <div class="col-sm-3" >
           <label>Headend</label>
-          <select (change)="getoperator();opt=[];operator_name='';" name="head_opt" 
+          <select opt=[];operator_name='';" name="head_opt" 
             class="form-control">
             <option value="">Select Headend</option>
             <option *ngFor="let item of head" [value]=item.headend_pk>{{item.headend_name}}</option>
           </select>
-        </div>
+        </div> -->
         <div class="col-sm-3" >
           <label>User Type</label>
           <select name="opt_type"  class="form-control">
@@ -41,14 +41,14 @@
           <!-- <auto-complete (keyup)="getoperator($event.target.value)" name='operator_name' (item_id)='operator_name=$event;'
             placeholder='Select User' [item]=opt></auto-complete> -->
         </div>
-        <div class="col-sm-3" >
+        <!-- <div class="col-sm-3" >
           <label>Status</label>
           <select name="status"  class="form-control">
             <option value="">Select Status</option>
             <option value="1">Active</option>
             <option value="2">InActive</option>
           </select>
-        </div>
+        </div> -->
       </div>
       <button type="button" class="btn btn-md btn-success" (click)='page=1;initiallist();'
         style="margin: auto; display: block;">Search</button>
@@ -66,7 +66,7 @@
           <th>Status</th>
         </tr>
         <tr *ngFor="let item of pagedItems">
-          <td [hidden]='role.getrole(2013)'><a><i class="nb-edit"></i></a></td>
+          <td ><a><i class="nb-edit"></i></a></td>
           <td>{{item.id}}</td>
           <td>{{item.first_name +' '+item.last_name}}</td>
           <td>{{item.username}}</td>

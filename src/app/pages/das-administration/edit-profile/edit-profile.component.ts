@@ -1,4 +1,3 @@
-
 import { NbSortDirection, NbSortRequest, NbTreeGridDataSource, NbTreeGridDataSourceBuilder } from '@nebular/theme';
 import { TreeViewComponent } from '@syncfusion/ej2-angular-navigations';
 import { TreeNode } from 'angular-tree-component';
@@ -6,20 +5,19 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ToasterService, Toast, BodyOutputType } from 'angular2-toaster';
 import 'style-loader!angular2-toaster/toaster.css';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ITreeOptions } from 'angular-tree-component';
 import { toJS } from "mobx";
 import {  RoleusersevicesService } from '../../_services/roleusersevices.service';
 import { ToastrService } from 'ngx-toastr';
-
 @Component({
-  selector: 'ngx-create-profile',
-  templateUrl: './create-profile.component.html',
-  styleUrls: ['./create-profile.component.scss']
+  selector: 'ngx-edit-profile',
+  templateUrl: './edit-profile.component.html',
+  styleUrls: ['./edit-profile.component.scss']
 })
-export class CreateProfileComponent implements OnInit {
+export class EditProfileComponent implements OnInit {
   @ViewChild('tree') public tree;
-  AddProfileForm; edit;
+  EditProfileForm; edit;id;editrolel;
   submit: boolean;
   nodes = [
     {
@@ -420,58 +418,58 @@ export class CreateProfileComponent implements OnInit {
   options: ITreeOptions = {
     useCheckbox: true
   };
+  menurole: any;
  
-
+0
   constructor(
     private toast: ToastrService,
     private router: Router,
+    private aRoute: ActivatedRoute,
     private role :RoleusersevicesService,
   ) {
     this.edit = JSON.parse(localStorage.getItem('profile_e'));
+    
   }
   ngOnInit() {
+  //  this.id = this.aRoute.snapshot.queryParams.id;
+   //console.log("id********",this.id)
     this.createForm();
     if (this.edit)
-      this.getprofile();
+    console.log('edit**********',this.edit)
+      this.editRole();
   }
 
-  getprofile() {
+async  editRole() {
+  
+ this.editrolel = await this.role.getRole({id : this.edit['id'] })
+ console.log("get edit role..........",this.editrolel)
+ this.selectnodes(this.editrolel[0]['menurole']) ;
+//  console.log("nodessss////////",nodess)
+// }
 
-
-    
   }
 
 async  AddProfile() {
-    if (this.AddProfileForm.invalid) {
+    if (this.EditProfileForm.invalid) {
       this.submit = true;
       return;
     }
-    //var  val = this.AddProfileForm.value;  
-    this.AddProfileForm.value['menurole'] = this.selectednodes();
-     console.log('value item',this.AddProfileForm.value)
-      let result = await this.role.addrole(this.AddProfileForm.value);
-      if (result && result[0].err_code == 0) {
-        this.toast.success(result[0]['msg']);
-        this.router.navigate(['/pages/das-administration/list-profile'])
-      } else {
-        this.toast.warning(result[0]['msg'])
-        console.log('add...', this.AddProfileForm.value);
+    var  val = this.EditProfileForm.value,issue = false; 
+    val['menurole'].forEach(item => {
+      if ((item + '').includes('404')) {
+        issue = true
       }
-    // val['menu_id'].forEach(item => {
-    //   if ((item + '').includes('404')) {
-    //     issue = true
-    //   }
-    // });
-    // issue ? val['menu_id'].push(404) : '';
-    // if (val['menu_id'].length == 0) {
-    //   this.toastalert('Pls Select Profile Role')
-    //   return;
-    // }
+    });
+    issue ? val['menurole'].push(404) : '';
+    if (val['menurole'].length == 0) {
+      this.toast.warning('Pls Select Profile Role')
+      return;
+    }
     // method = this.edit ? 'editProfile' : 'addProfile'
 
-    // if (this.edit) {
-    //   val['profile_id'] = this.edit['profile_id'];
-    // }
+    if (this.edit) {
+      val['id'] = this.edit['id'];
+    }
 
     // this.admin[method](val).subscribe(result => {
     //   this.toastalert(result['msg'], result['status']);
@@ -491,6 +489,7 @@ async  AddProfile() {
     return (selectedNodes);
   }
   selectnodes(item) {
+    console.log('itemselectnod****************',item)
     let data = JSON.parse(item);
     let index: number = data.indexOf(404);
     if (index !== -1) {
@@ -504,7 +503,7 @@ async  AddProfile() {
   }
 
   createForm() {
-    this.AddProfileForm = new FormGroup({
+    this.EditProfileForm = new FormGroup({
       rolename: new FormControl(this.edit ? this.edit['rolename'] : '', Validators.required),
       descr: new FormControl(this.edit ? this.edit['desc'] : '')
     });

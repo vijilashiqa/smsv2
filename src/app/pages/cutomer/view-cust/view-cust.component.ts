@@ -68,15 +68,86 @@ export class ViewCustComponent implements OnInit {
     
   }
 
-  transfer(){}
-  
+  transfer(){
 
+    this.transfer_submit = true;
+    if (this.TransferForm.invalid) {
+      return;
+    }
+    this.loading = true;
+  }
+  
+  scheduletime() {
+    this.fingerprint.value["Time"] == 2 ? this.fingerprint.get('Schedule').setValidators([Validators.required]) : this.fingerprint.get('Schedule').clearValidators()
+    this.fingerprint.get('Schedule').updateValueAndValidity();
+  }
+  schedulemsg() {
+    this.stbmsg.value["Time"] == 2 ? this.stbmsg.get('Schedule').setValidators([Validators.required]) : this.stbmsg.get('Schedule').clearValidators()
+    this.stbmsg.get('Schedule').updateValueAndValidity();
+  }
+
+  msg() {
+    this.stbmsg.value["msg_type"] == 2 ? this.stbmsg.get('msg_title').setValidators([Validators.required]) : this.stbmsg.get('msg_title').clearValidators()
+    this.stbmsg.get('msg_title').updateValueAndValidity();
+  }
+  scrool() {
+    this.stbmsg.value["msg_type"] == 1 ? this.stbmsg.get('scrool_type').setValidators([Validators.required]) : this.stbmsg.get('scrool_type').clearValidators()
+    this.stbmsg.get('scrool_type').updateValueAndValidity();
+  }
+  osd() {
+    this.stbmsg.value["msg_type"] == 1 ? this.stbmsg.get('osd_type').setValidators([Validators.required]) : this.stbmsg.get('osd_type').clearValidators()
+    this.stbmsg.get('osd_type').updateValueAndValidity();
+  }
+  cord() {
+    this.fingerprint.value["fp_type"] == 1 ? this.fingerprint.get('xcord').setValidators([Validators.required]) : this.fingerprint.get('xcord').clearValidators()
+    this.fingerprint.get('xcord').updateValueAndValidity();
+    this.fingerprint.value["fp_type"] == 1 ? this.fingerprint.get('ycord').setValidators([Validators.required]) : this.fingerprint.get('ycord').clearValidators()
+    this.fingerprint.get('ycord').updateValueAndValidity();
+  }
+  duration() {
+    this.fingerprint.value["msg_type"] == 1 ? this.fingerprint.get('duration').setValidators([Validators.required]) : this.fingerprint.get('duration').clearValidators()
+    this.fingerprint.get('duration').updateValueAndValidity();
+  }
   sendfingerprint(){
+    this.transfer_submit = true;
+    if (this.fingerprint.invalid) {
+      return;
+    }
+    this.loading = true;
 
   }
 
   sendmsg(){
     
+  }
+
+  upgrade() {
+    // console.log( this.TransferForm.value["reason"])
+    this.TransferForm.value["reason"] == 6 || this.TransferForm.value["reason"] == 2 ? this.TransferForm.get('amount').setValidators([Validators.required]) : this.TransferForm.get('amount').clearValidators()
+    this.TransferForm.get('amount').updateValueAndValidity();
+    this.TransferForm.value["reason"] == 6 || this.TransferForm.value["reason"] == 2 ? this.TransferForm.get('model').setValidators([Validators.required]) : this.TransferForm.get('model').clearValidators()
+    this.TransferForm.get('model').updateValueAndValidity();
+    this.TransferForm.value["reason"] == 6 || this.TransferForm.value["reason"] == 2 ? this.TransferForm.get('new_stb').setValidators([Validators.required]) : this.TransferForm.get('new_stb').clearValidators()
+    this.TransferForm.get('new_stb').updateValueAndValidity();
+  }
+
+  hold() {
+    this.TransferForm.value["reason"] == 3 ? this.TransferForm.get('hold_period').setValidators([Validators.required]) : this.TransferForm.get('hold_period').clearValidators()
+    this.TransferForm.get('hold_period').updateValueAndValidity();
+  }
+  swap() {
+    this.TransferForm.value["reason"] == 7 ? this.TransferForm.get('swap_stb').setValidators([Validators.required]) : this.TransferForm.get('swap_stb').clearValidators()
+    this.TransferForm.get('swap_stb').updateValueAndValidity();
+  }
+  hds() {
+    if (this.TransferForm.value['model'] == '6' && this.cust_det['model_id'] == '6') {
+      this.TransferForm.get('rep_of').setValidators([Validators.required])
+    }
+    else {
+      this.TransferForm.get('rep_of').clearValidators()
+    }
+    this.TransferForm.get('rep_of').updateValueAndValidity();
+
   }
 
   createForm() {
@@ -112,7 +183,7 @@ export class ViewCustComponent implements OnInit {
     });
     this.TransferForm = new FormGroup({
       reason: new FormControl('', Validators.required),
-      amount: new FormControl(''),
+      amount: new FormControl('',Validators.required),
       model: new FormControl(''),
       new_stb: new FormControl(''),
       remarks: new FormControl('', Validators.required),

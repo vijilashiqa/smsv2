@@ -170,7 +170,7 @@
           <div class="col-sm-6">
             <label>state<span style="color: red">*</span></label>
             <auto-completen 
-            [addclass]="{error: submit && this.AddCustForm.controls.state.errors}"
+               [addclass]="{error: submit && this.AddCustForm.controls.state.errors}"
                addclass="form-control" optValues="name" formControlName="state" (keyUp)="getstate($event)"
               (changed)="getdistrict(); typeclearstate('1')" placeholder="Select State" id="id" [item]="getstates">
             </auto-completen>
@@ -187,10 +187,13 @@
         <div class="form-group row" [hidden]='bulkopt'>
           <div class="col-sm-6">
             <label>District <span style="color: red">*</span></label>
-            <auto-completen [addclass]="{
-                error: submit && this.AddCustForm.controls.district.errors
-              }" addclass="form-control" optValues="name" formControlName="district" (keyUp)="getdistrict($event)"
-              (changed)="getcity(); typecleardist()" placeholder="Select District" id="id" [item]="dist">
+            <auto-completen 
+            [addclass]="{error: submit && this.AddCustForm.controls.district.errors}"
+               addclass="form-control" 
+               optValues="name"
+               formControlName="district"
+               (keyUp)="getdistrict($event)"
+               (changed)="getcity(); typecleardist()" placeholder="Select District" id="id" [item]="dist">
             </auto-completen>
             <div *ngIf="
                 this.AddCustForm.controls.district.errors &&
@@ -261,8 +264,7 @@
               name="billing_addr" formControlName="billing_addr" placeholder="Billing Address" class="form-control"
               [ngClass]="{ 'is-invalid': submit && this.AddCustForm.controls.billing_addr.errors }"></textarea>
             <small *ngIf="AddCustForm.controls.billing_addr.errors && AddCustForm.controls.billing_addr.errors.required && submit
-              " class="invalid-feedback">billing_addr Address is required!
-            </small>
+              " class="invalid-feedback">Billing Address is required! </small>
           </div>
         </div>
         <div class="form-group row" [hidden]='bulkopt'>
@@ -325,8 +327,8 @@
 </nb-card>
 <nb-card *ngIf="failure.length != 0">
   <nb-card-header>
-    <!-- Success : {{s}} Failure : {{f}} -->
-    <!-- <i (click)="Download();" class="green right fa fa-file-excel" aria-hidden="true"></i> -->
+    Success : {{s}} Failure : {{f}}
+    <i (click)="Download();" class="green right fa fa-file-excel" aria-hidden="true"></i>
   </nb-card-header>
   <nb-card-body>
     <table class="table table-bordered table-striped">

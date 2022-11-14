@@ -24,6 +24,8 @@ import { SmsAddcreditsComponent } from './sms-addcredits/sms-addcredits.componen
 import { SmsCreditslistComponent } from './sms-creditslist/sms-creditslist.component';
 import { SmsGateComponent } from './sms-gate/sms-gate.component';
 import { SmsGatelistComponent } from './sms-gatelist/sms-gatelist.component';
+import { EditUserComponent } from '../users/edit-user/edit-user.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 // import { OperatorSettingComponent } from './operator-setting/operator-setting.component';
 
 const routes: Routes = [
@@ -153,6 +155,12 @@ const routes: Routes = [
     path: 'sms-gate',
     component: SmsGateComponent,
     
+  },
+
+  {
+
+    path :'edit-profile',
+    component :EditProfileComponent,
   }
 
 

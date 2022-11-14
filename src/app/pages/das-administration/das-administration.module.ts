@@ -10,7 +10,6 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule, OWL_DATE_TIME_FORMATS } fro
 import { ProfileComponent } from './profile/profile.component';
 import { ListProfileComponent } from './list-profile/list-profile.component';
 import { CreateProfileComponent } from './create-profile/create-profile.component';
-// import { OperatorSettingComponent } from './operator-setting/operator-setting.component';
 import { OperatorSettingListComponent } from './operator-setting-list/operator-setting-list.component';
 import { AddoperatorSettingComponent } from './addoperator-setting/addoperator-setting.component';
 import { LayoutRoutingModule } from '../layout/layout-routing.module';
@@ -45,9 +44,11 @@ import { SmsGateComponent } from './sms-gate/sms-gate.component';
 import { AutoCompleteNModule } from '../auto-complete-module/auto-completen-module';
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 import { PagerService } from '../_services/index';
+import { TreeModule } from 'angular-tree-component';
 import { TreeViewModule } from '@syncfusion/ej2-angular-navigations';
 import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
-import { AddcasComponent } from './addcas/addcas.component';  
+import { AddcasComponent } from './addcas/addcas.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';  
 export const MY_NATIVE_FORMATS = {
   fullPickerInput: { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric' },
   datePickerInput: { year: 'numeric', month: 'numeric', day: 'numeric' },};
@@ -61,7 +62,6 @@ export const MY_NATIVE_FORMATS = {
     ProfileComponent,
     ListProfileComponent,
     CreateProfileComponent,
-    // OperatorSettingComponent,
     OperatorSettingListComponent,
     AddoperatorSettingComponent,
     CaslistComponent,
@@ -93,6 +93,7 @@ export const MY_NATIVE_FORMATS = {
     SmsGatelistComponent,
     SmsGateComponent,
     AddcasComponent,
+    EditProfileComponent,
 
    ],
   imports: [
@@ -110,6 +111,7 @@ export const MY_NATIVE_FORMATS = {
     NbCardModule,
     NbButtonModule,
     NbListModule,
+    TreeModule.forRoot(),
     NbAccordionModule,
     NbUserModule,
     TreeViewModule,

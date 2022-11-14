@@ -1,5 +1,3 @@
-<p>create-profile works!</p>
-
 <div class="col-md-12">
   <nb-card>
     <nb-card-header>{{edit ? 'Update': 'Create' }} Profile</nb-card-header>
@@ -9,14 +7,14 @@
           <nb-tab tabTitle="Profile Details">
             <div class="modal-body">
               <div class="form-group row">
-                <!-- <div class="col-sm-6">
+                <div class="col-sm-6">
                   <label>Profile Name</label>
                   <input type="text"
-                    [ngClass]="{'form-control' : true,'form-control-danger':AddProfileForm.controls.profile_name.invalid&&submit}"
-                    name="profile_name" formControlName="profile_name" />
-                  <small *ngIf="AddProfileForm.hasError('required','profile_name')&&submit" class="form-text error">
+                    [ngClass]="{'form-control' : true,'form-control-danger':AddProfileForm.controls.rolename.invalid&&submit}"
+                    name="rolename" formControlName="rolename" />
+                  <small *ngIf="AddProfileForm.hasError('required','rolename')&&submit" class="form-text error">
                     Select required Admin Type! </small>
-                </div> -->
+                </div>
               </div>
               <!-- <div class="form-group row">
               <div class="col-sm-6">
@@ -57,14 +55,14 @@
           <nb-tab tabTitle="Profile Role">
             <div class="modal-body">
               <div style="padding-left: 5%;">
-              <!-- <tree-root #tree [nodes]="nodes" [options]="options"></tree-root> -->
+              <tree-root #tree [nodes]="nodes" [options]="options"></tree-root>
             </div>
             </div>
           </nb-tab>
         </nb-tabset>
         <div class="modal-footer">
           <button type="submit" class="btn btn-md btn-success">{{edit? 'Update': 'Create' }}</button>
-          <button type="button" class="btn btn-md btn-danger "
+          <button type="button" class="btn btn-md btn-danger"
             [routerLink]="['/pages/Administration/profilelist']">back</button>
         </div>
       </form>

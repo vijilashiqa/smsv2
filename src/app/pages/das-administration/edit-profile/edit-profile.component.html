@@ -1,0 +1,71 @@
+<div class="col-md-12">
+    <nb-card>
+      <nb-card-header>{{edit ? 'Update': 'Create' }} Profile</nb-card-header>
+      <nb-card-body>
+        <form [formGroup]="EditProfileForm" class="form-horizontal" (ngSubmit)="AddProfile();">
+          <nb-tabset>
+            <nb-tab tabTitle="Profile Details">
+              <div class="modal-body">
+                <div class="form-group row">
+                  <div class="col-sm-6">
+                    <label>Profile Name</label>
+                    <input type="text"
+                      [ngClass]="{'form-control' : true,'form-control-danger':EditProfileForm.controls.rolename.invalid&&submit}"
+                      name="rolename" formControlName="rolename" />
+                    <small *ngIf="EditProfileForm.hasError('required','rolename')&&submit" class="form-text error">
+                      Select required Admin Type! </small>
+                  </div>
+                </div>
+                <!-- <div class="form-group row">
+                <div class="col-sm-6">
+                  <div class="form-group row">
+                    <div class="demo-radio col-sm-4">
+                      <label class="custom-control custom-radio">
+                      <input type="radio" value="1"class="custom-control-input form-control " formControlName="profile_type" checked>
+                      <span class="custom-control-indicator"></span>
+                      <span class="custom-control-description">Admin</span>
+                      </label>
+                    </div>
+                    <div class="demo-radio col-sm-4">
+                      <label class="custom-control custom-radio">
+                      <input type="radio" value="2" class="custom-control-input form-control" formControlName="profile_type">
+                      <span class="custom-control-indicator"></span>
+                      <span class="custom-control-description">Operator</span>
+                      </label>
+                    </div>
+                    <div class="demo-radio col-sm-4">
+                      <label class="custom-control custom-radio">
+                      <input type="radio" value="3" class="custom-control-input form-control" formControlName="profile_type">
+                      <span class="custom-control-indicator"></span>
+                      <span class="custom-control-description">Subscriber</span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div> -->
+                <div class="form-group row">
+                  <div class="col-sm-6">
+                    <label>Description</label>
+                    <textarea name="descr" formControlName="descr" type="text" class="form-control"
+                      placeholder="Description" maxlength="200"></textarea>
+                  </div>
+                </div>
+              </div>
+            </nb-tab>
+            <nb-tab tabTitle="Profile Role">
+              <div class="modal-body">
+                <div style="padding-left: 5%;">
+                <tree-root #tree [nodes]="nodes" [options]="options"></tree-root>
+              </div>
+              </div>
+            </nb-tab>
+          </nb-tabset>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-md btn-success">{{edit? 'Update': 'Create' }}</button>
+            <button type="button" class="btn btn-md btn-danger"
+              [routerLink]="['/pages/Administration/profilelist']">back</button>
+          </div>
+        </form>
+      </nb-card-body>
+    </nb-card>
+  </div>
