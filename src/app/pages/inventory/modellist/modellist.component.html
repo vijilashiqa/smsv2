@@ -8,7 +8,19 @@
           <button  status="success" nbButton  (click)='Addmodel()'>Create</button>
         </div>
       </div>
-    
+      <div class="form-group row">
+        <div class="col-sm-3" >
+              <label>Headend</label>
+              <select channel_name="" name="headend"
+                [(ngModel)]='head_opt' class="form-control">
+                <option value="">Select Headend</option>
+                <option *ngFor="let item of listhead" [value]=item.hdid>{{item.hdname}}</option>
+              </select>
+            </div>
+        </div>
+
+        <button type="button" class="btn btn-md btn-success" (click)='page=1;initiallist();'
+        style="margin: auto; display: block;">Search</button>
       <table class="table">
         <tr>
           <th >Action</th>

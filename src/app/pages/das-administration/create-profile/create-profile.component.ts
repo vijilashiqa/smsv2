@@ -1,9 +1,5 @@
 
-import { NbSortDirection, NbSortRequest, NbTreeGridDataSource, NbTreeGridDataSourceBuilder } from '@nebular/theme';
-import { TreeViewComponent } from '@syncfusion/ej2-angular-navigations';
-import { TreeNode } from 'angular-tree-component';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ToasterService, Toast, BodyOutputType } from 'angular2-toaster';
 import 'style-loader!angular2-toaster/toaster.css';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -23,20 +19,6 @@ export class CreateProfileComponent implements OnInit {
   submit: boolean;
  
   nodes = [
-    // {
-    //   name: 'Dashboard',
-    //   children: [
-    //     { id: 91, name: 'Balance' },
-    //     { id: 92, name: 'STB' },
-    //     { id: 93, name: 'ExpiryDetails' },
-    //     { id: 94, name: 'ScheduleList' },
-    //     { id: 95, name: 'Summary' },
-    //     { id: 96, name: 'Search' },
-    //     { id: 97, name: 'STB/VC Details' }
-
-
-    //   ]
-    // },
     {
       name: 'DAS Operations',
       children: [

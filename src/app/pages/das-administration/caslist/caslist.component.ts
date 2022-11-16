@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CountryService, HeadendService, PagerService } from '../../_services';
-import { GeoAddstateComponent } from '../geo-addstate/geo-addstate.component';
-import { NgbModal, ModalDismissReasons, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
+import { HeadendService, PagerService } from '../../_services';
+import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { AddcasComponent } from '../addcas/addcas.component';
 @Component({
   selector: 'ngx-caslist',

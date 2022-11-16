@@ -22,7 +22,7 @@ export class RoleservicesService {
 	}
 	
 	getroleid() {
-		return (localStorage.getItem('userinfo') ? JSON.parse(JSON.parse(localStorage.getItem('userinfo'))['role']) : 0);
+		return (localStorage.getItem('userinfo') ? JSON.parse(JSON.parse(localStorage.getItem('userinfo'))['menurole']) : 0);
 	}
 	
 	getuserFname() {

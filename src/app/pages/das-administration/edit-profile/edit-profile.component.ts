@@ -20,20 +20,6 @@ export class EditProfileComponent implements OnInit {
   EditProfileForm; edit;id;editrolel;
   submit: boolean;
   nodes = [
-    // {
-    //   name: 'Dashboard',
-    //   children: [
-    //     { id: 91, name: 'Balance' },
-    //     { id: 92, name: 'STB' },
-    //     { id: 93, name: 'ExpiryDetails' },
-    //     { id: 94, name: 'ScheduleList' },
-    //     { id: 95, name: 'Summary' },
-    //     { id: 96, name: 'Search' },
-    //     { id: 97, name: 'STB/VC Details' }
-
-
-    //   ]
-    // },
     {
       name: 'DAS Operations',
       children: [
@@ -89,7 +75,6 @@ export class EditProfileComponent implements OnInit {
             { id: 2051, name: 'List Headend' },
             { id: 2052, name: 'Create Headend ' },
             { id: 2053, name: 'Edit Headend ' },
-            // { id: 2054, name: 'View Headend ' },
           ]
         },
         {

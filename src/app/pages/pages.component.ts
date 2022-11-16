@@ -16,21 +16,23 @@ import { NbMenuItem } from '@nebular/theme';
 export class PagesComponent {
   role = [];
 	constructor() {
-		this.role = JSON.parse(JSON.parse(localStorage.getItem('userinfo'))['role']);
+		this.role = JSON.parse(JSON.parse(localStorage.getItem('userinfo'))['menurole']);
+    console.log('role item',this.role)
  this.menu = [
+    // {
+    //   title: 'E-commerce',
+    //   icon: 'shopping-cart-outline',
+    //   link: '/pages/dashboard',
+    //   home: true,
+    // },
     {
-      title: 'E-commerce',
-      icon: 'shopping-cart-outline',
-      link: '/pages/dashboard',
-      home: true,
-    },
-    {
-      title: 'IOT Dashboard',
+      title: 'Dashboard',
       icon: 'home-outline',
       link: '/pages/iot-dashboard',
     },
     {
       title: 'DAS Operations',
+      hidden: !(this.role.find(x => x == 101) || this.role.find(x => x == 102)),
       icon: 'home-outline',
       children: [
         {
@@ -501,9 +503,7 @@ export class PagesComponent {
             title: 'Deposit Pivot List',
             link: '/pages/accounts/pivotlist',
           },
-  
-  
-  
+
         ],
       },
     
@@ -720,11 +720,7 @@ export class PagesComponent {
           title: '404',
           link: '/pages/miscellaneous/404',
         },
-  
-  
       ],
-  
-  
     },
   
   
@@ -732,7 +728,6 @@ export class PagesComponent {
       title: 'login',
       icon: 'shuffle-2-outline',
       children: [
-  
         {
           title: 'login',
           link: '/pages/login/loginc'

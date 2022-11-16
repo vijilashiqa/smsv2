@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
-import { CountryService, PagerService, VendorService } from '../../_services';
+import { CountryService, HeadendService, PagerService, VendorService } from '../../_services';
 import { BoxmodelService } from '../../_services/boxmodel.service';
 import { AddmodelComponent } from '../addmodel/addmodel.component';
 
@@ -14,21 +14,22 @@ import { AddmodelComponent } from '../addmodel/addmodel.component';
 export class ModellistComponent implements OnInit {
   
   pager: any = {}; page: number = 1; pagedItems: any = []; limit = 25;listmodel;data;count;
-  modalRef: BsModalRef;
+  modalRef: BsModalRef;listhead;ModelList; submit: boolean;head_opt ='';
   
   constructor(private modal: NgbModal,
     private boxmodel :BoxmodelService,
     public pageservice: PagerService,
-    private vendorservices : VendorService) { }
+    private headend : HeadendService) { }
   ngOnInit() {
 
     this.initiallist();
+    this.getHeadend();
   }
 
 
 
   async initiallist() {
-    this.listmodel = await this.boxmodel.listboxmodel({index:(this.page - 1) * this.limit,limit:this.limit});
+    this.listmodel = await this.boxmodel.listboxmodel({index:(this.page - 1) * this.limit,limit:this.limit , hdid : this.head_opt});
     console.log('list model', this.listmodel)
     this.data = this.listmodel[0];
     this.count = this.listmodel[1].count;
@@ -49,7 +50,11 @@ export class ModellistComponent implements OnInit {
     this.pagedItems = this.data;
   }
   
-  
+  async getHeadend($event = '') {
+
+    this.listhead = await this.headend.getHeadend({ like: $event })
+    console.log(this.listhead)
+  }
 
   Addmodel() {
     const modalRef = this.modal.open(AddmodelComponent, {  size: 'lg', container: 'nb-layout', backdrop: false });

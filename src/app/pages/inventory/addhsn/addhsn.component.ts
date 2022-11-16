@@ -1,11 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { NbDialogRef } from '@nebular/theme';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
-import { ShowcaseDialogComponent } from '../../modal-overlays/dialog/showcase-dialog/showcase-dialog.component';
-import { CountryService, HeadendService, VendorService } from '../../_services';
+ import { HeadendService, VendorService } from '../../_services';
 import { HsnService } from '../../_services/hsn.service';
 @Component({
   selector: 'ngx-addhsn',
@@ -23,7 +21,6 @@ export class AddhsnComponent implements OnInit {
   keyword = 'name'
   constructor(private activemodel: NgbActiveModal,
     private headend: HeadendService,
-    private vendorservices: VendorService,
     private hsn :HsnService,
     private route: Router,
     private toast: ToastrService,) { }
@@ -31,11 +28,6 @@ export class AddhsnComponent implements OnInit {
   ngOnInit(): void {
     this.createForm();
     this.getHeadend();
-    // if(this.item){
-    //    console.log("item*********",this.item)
-    //   this.getHeadend();
-
-    // }
 
   }
 

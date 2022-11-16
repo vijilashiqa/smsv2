@@ -11,7 +11,7 @@
                   <label>Profile Name</label>
                   <input type="text"
                     [ngClass]="{'form-control' : true,'form-control-danger':AddProfileForm.controls.rolename.invalid&&submit}"
-                    name="rolename" formControlName="rolename" />
+                    name="rolename" formControlName="rolename" placeholder='Enter Profile Name' />
                   <small *ngIf="AddProfileForm.hasError('required','rolename')&&submit" class="form-text error">
                     Select required Admin Type! </small>
                 </div>

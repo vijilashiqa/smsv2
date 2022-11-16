@@ -14,7 +14,7 @@ import { FaultstbComponent } from './faultstb/faultstb.component';
 import { NbAccordionModule, NbButtonModule, NbCardModule, NbListModule, NbRouteTabsetModule, NbStepperModule, NbTabsetModule, NbTreeGridModule, NbUserModule } from '@nebular/theme';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { LayoutRoutingModule } from '../layout/layout-routing.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ThemeModule } from '../../@theme/theme.module';
 import { AddvendorComponent } from './addvendor/Addvendor.component';
 import { PagerService } from '../_services/index';
@@ -57,6 +57,7 @@ import { EditstockComponent } from './editstock/editstock.component';
     NbCardModule,
     NbButtonModule,
     NbListModule,
+    FormsModule,      
     NbAccordionModule,
     NbUserModule,
     LayoutRoutingModule,NbTreeGridModule,

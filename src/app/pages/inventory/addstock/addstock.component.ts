@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { HeadendService, VendorService } from '../../_services';
 import { ToastrService } from 'ngx-toastr';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { StockService } from '../../_services/stock.service';
-import { BoxtypeService } from '../../_services/boxtype.service';
 import { HsnService } from '../../_services/hsn.service';
 @Component({
   selector: 'ngx-addstock',

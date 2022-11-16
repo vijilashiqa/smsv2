@@ -1,11 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { NbDialogRef } from '@nebular/theme';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
-import { ShowcaseDialogComponent } from '../../modal-overlays/dialog/showcase-dialog/showcase-dialog.component';
-import { CountryService, HeadendService, VendorService } from '../../_services';
+import { HeadendService, VendorService } from '../../_services';
 import { BoxmodelService } from '../../_services/boxmodel.service';
 import { BoxtypeService } from '../../_services/boxtype.service';
 @Component({
