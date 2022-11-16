@@ -65,7 +65,7 @@
           <th>Email ID</th>
           <th>Status</th>
         </tr>
-        <tr *ngFor="let item of pagedItems">
+        <!-- <tr *ngFor="let item of pagedItems">
           <td ><a><i class="nb-edit"></i></a></td>
           <td>{{item.id}}</td>
           <td>{{item.first_name +' '+item.last_name}}</td>
@@ -74,7 +74,7 @@
           <td>{{item.mobie_no}}</td>
           <td>{{item.email1}}</td>
           <td>{{item.status==1?'Active':'Deactive'}}</td>
-        </tr>
+        </tr> -->
       </table>
       <div class="pagination">
         <ul *ngIf="pager.pages && pager.pages.length" class="pagination">

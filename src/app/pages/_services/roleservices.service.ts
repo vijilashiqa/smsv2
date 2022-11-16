@@ -29,7 +29,7 @@ export class RoleservicesService {
 		return (localStorage.getItem('userinfo') ? JSON.parse(localStorage.getItem('userinfo'))['fname'] : 0);
 	}
 	getroleval() {
-		return (localStorage.getItem('userinfo') ? JSON.parse(localStorage.getItem('userinfo'))['menu_role'] : 0);
+		return (localStorage.getItem('userinfo') ? JSON.parse(localStorage.getItem('userinfo'))['menurole'] : 0);
 	}
 	getprofileid() {
 		return (localStorage.getItem('userinfo') ? JSON.parse(localStorage.getItem('userinfo'))['profile_id'] : 0);

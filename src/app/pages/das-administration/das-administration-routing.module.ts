@@ -50,11 +50,6 @@ const routes: Routes = [
     component: CreateProfileComponent,
     
   },
-  // {
-  //   path: 'operator-setting',
-  //   component: OperatorSettingComponent,
-    
-  // },
   {
     path: 'operator-setting-list',
     component: OperatorSettingListComponent,

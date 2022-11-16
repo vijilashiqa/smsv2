@@ -21,21 +21,22 @@ export class CreateProfileComponent implements OnInit {
   @ViewChild('tree') public tree;
   AddProfileForm; edit;
   submit: boolean;
+ 
   nodes = [
-    {
-      name: 'Dashboard',
-      children: [
-        { id: 91, name: 'Balance' },
-        { id: 92, name: 'STB' },
-        { id: 93, name: 'ExpiryDetails' },
-        { id: 94, name: 'ScheduleList' },
-        { id: 95, name: 'Summary' },
-        { id: 96, name: 'Search' },
-        { id: 97, name: 'STB/VC Details' }
+    // {
+    //   name: 'Dashboard',
+    //   children: [
+    //     { id: 91, name: 'Balance' },
+    //     { id: 92, name: 'STB' },
+    //     { id: 93, name: 'ExpiryDetails' },
+    //     { id: 94, name: 'ScheduleList' },
+    //     { id: 95, name: 'Summary' },
+    //     { id: 96, name: 'Search' },
+    //     { id: 97, name: 'STB/VC Details' }
 
 
-      ]
-    },
+    //   ]
+    // },
     {
       name: 'DAS Operations',
       children: [
@@ -80,9 +81,9 @@ export class CreateProfileComponent implements OnInit {
             { id: 2041, name: 'List CAS' },
             { id: 2042, name: 'Add CAS' },
             { id: 2043, name: 'Edit CAS' },
-            { id: 2044, name: 'List CAS Mapping' },
-            { id: 2045, name: 'Add CAS Mapping ' },
-            { id: 2045, name: 'Edit CAS Mapping ' },
+            { id: 2044, name: 'List HD CAS' },
+            { id: 2045, name: 'Add HD CAS ' },
+            { id: 2045, name: 'Edit HD CAS ' },
           ]
         },
         {
@@ -91,7 +92,7 @@ export class CreateProfileComponent implements OnInit {
             { id: 2051, name: 'List Headend' },
             { id: 2052, name: 'Create Headend ' },
             { id: 2053, name: 'Edit Headend ' },
-            { id: 2054, name: 'View Headend ' },
+            // { id: 2054, name: 'View Headend ' },
           ]
         },
         {
@@ -132,9 +133,9 @@ export class CreateProfileComponent implements OnInit {
             {
               name: 'District',
               children: [
-                { id: 20051, name: 'List State' },
-                { id: 20052, name: 'Create State ' },
-                { id: 20053, name: 'Edit State ' },
+                { id: 20051, name: 'List District' },
+                { id: 20052, name: 'Create District ' },
+                { id: 20053, name: 'Edit District ' },
               ]
             },
             {
@@ -176,6 +177,9 @@ export class CreateProfileComponent implements OnInit {
         },
       ]
     },
+
+
+
     {
       name: 'Operator',
       children: [
@@ -192,31 +196,26 @@ export class CreateProfileComponent implements OnInit {
         { id: 403, name: 'Edit Subscriber' },
         { id: 406, name: " Surrendered STB Subscriber's Lis" },
         { id: 407, name: 'Service Extension List ' },
-        {
-          id: 404, name: 'View Subscriber',
-          children: [
-            { id: 4041, name: 'Renewal' },
-            { id: 4042, name: 'Customer Info' },
-            { id: 4043, name: 'Fingerprint' },
-            { id: 4044, name: 'STB Message' },
-            { id: 4045, name: 'Invoice' },
-            { id: 4046, name: 'Replace STB ' },
-            { id: 4047, name: 'Blacklist STB ' },
-            { id: 4048, name: 'change Password ' },
-            { id: 4049, name: 'Service Extension ' },
-            { id: 4053, name: 'cancelinvoice ' },
-
-
-
-
-          ],
-        },
+        // {
+        //   id: 404, name: 'View Subscriber',
+        //   children: [
+        //     { id: 4041, name: 'Renewal' },
+        //     { id: 4042, name: 'Customer Info' },
+        //     { id: 4043, name: 'Fingerprint' },
+        //     { id: 4044, name: 'STB Message' },
+        //     { id: 4045, name: 'Invoice' },
+        //     { id: 4046, name: 'Replace STB ' },
+        //     { id: 4047, name: 'Blacklist STB ' },
+        //     { id: 4048, name: 'change Password ' },
+        //     { id: 4049, name: 'Service Extension ' },
+        //     { id: 4053, name: 'cancelinvoice ' }, ],
+        // },
         { id: 4050, name: 'STB Status ' },
         { id: 405, name: 'Transfer Subscriber' }
       ]
     },
     {
-      name: 'Channel Operations',
+      name: 'Channel ',
       children: [
         {
           name: 'Channel Managment',
@@ -284,11 +283,11 @@ export class CreateProfileComponent implements OnInit {
       name: 'Inventory',
       children: [
         {
-          name: 'Make',
+          name: 'Vendor',
           children: [
-            { id: 6011, name: 'List Make' },
-            { id: 6012, name: 'Add Make' },
-            { id: 6013, name: 'Edit Make' },
+            { id: 6011, name: 'List Vendor' },
+            { id: 6012, name: 'Add Vendor' },
+            { id: 6013, name: 'Edit Vendor' },
           ]
         },
         {
@@ -308,14 +307,11 @@ export class CreateProfileComponent implements OnInit {
           ]
         },
         {
-          name: 'Business',
+          name: 'Vendor Details',
           children: [
-            { id: 6041, name: 'List Business' },
-            { id: 6042, name: 'Add Business' },
-            { id: 6043, name: 'Edit Business' },
-            { id: 6044, name: 'List Business Details' },
-            { id: 6045, name: 'Add Business Details' },
-            { id: 6046, name: 'Edit Business Details' },
+            { id: 6041, name: 'List Vendor' },
+            { id: 6042, name: 'Add Vendor' },
+            { id: 6043, name: 'Edit Vendor' },
           ]
         },
         {
@@ -358,16 +354,7 @@ export class CreateProfileComponent implements OnInit {
 
       ]
     },
-    {
-      name: 'AIO',
-      children: [
-        { id: 1111, name: 'Bulk Renewal' },
-        { id: 1112, name: 'Bulk Deactivate' },
-        { id: 1113, name: 'Bulk Deactivate' },
-        { id: 1028, name: 'Monitor Deactive Logs' },
 
-      ]
-    },
     {
       name: 'Accounts',
       children: [
@@ -383,38 +370,38 @@ export class CreateProfileComponent implements OnInit {
 
       ]
     },
-    {
-      name: 'Accounts Report',
-      children: [
-        { id: 901, name: 'Renewal Report' },
-        { id: 902, name: 'Deposit Report' },
-        { id: 903, name: 'Online Deposit Reports ' },
-      ]
-    },
-    {
-      name: 'DAS Report',
-      children: [
-        { id: 1011, name: 'STB Info' },
-        { id: 1012, name: 'STB Transfer Logs ' },
-        { id: 1013, name: 'STB Modify Logs ' },
-        { id: 1026, name: 'VC Modify Logs ' },
-        { id: 1027, name: 'VC Transfer Logs ' },
-        { id: 1014, name: 'Blacklist STB Logs ' },
-        { id: 1015, name: 'Temporary Suspended Logs ' },
-        { id: 1016, name: 'STB Count Report ' },
-        { id: 1017, name: 'Creation & Modification Logs ' },
-        { id: 1018, name: 'Package Composition Logs ' },
-        { id: 1019, name: 'Package Aging Report ' },
-        { id: 1020, name: 'Aging Of Service ' },
-        { id: 1021, name: 'Activity Logs ' },
-        { id: 1022, name: 'Subscriber Info ' },
-        { id: 1023, name: 'TRAI Reports ' },
-        { id: 1024, name: 'STB AOD Package Report ' },
-        { id: 1025, name: 'BC Weekly Report ' },
-        { id: 1029, name: 'STB Swap Logs ' }
+    // {
+    //   name: 'Accounts Report',
+    //   children: [
+    //     { id: 901, name: 'Renewal Report' },
+    //     { id: 902, name: 'Deposit Report' },
+    //     { id: 903, name: 'Online Deposit Reports ' },
+    //   ]
+    // },
+    // {
+    //   name: 'DAS Report',
+    //   children: [
+    //     { id: 1011, name: 'STB Info' },
+    //     { id: 1012, name: 'STB Transfer Logs ' },
+    //     { id: 1013, name: 'STB Modify Logs ' },
+    //     { id: 1026, name: 'VC Modify Logs ' },
+    //     { id: 1027, name: 'VC Transfer Logs ' },
+    //     { id: 1014, name: 'Blacklist STB Logs ' },
+    //     { id: 1015, name: 'Temporary Suspended Logs ' },
+    //     { id: 1016, name: 'STB Count Report ' },
+    //     { id: 1017, name: 'Creation & Modification Logs ' },
+    //     { id: 1018, name: 'Package Composition Logs ' },
+    //     { id: 1019, name: 'Package Aging Report ' },
+    //     { id: 1020, name: 'Aging Of Service ' },
+    //     { id: 1021, name: 'Activity Logs ' },
+    //     { id: 1022, name: 'Subscriber Info ' },
+    //     { id: 1023, name: 'TRAI Reports ' },
+    //     { id: 1024, name: 'STB AOD Package Report ' },
+    //     { id: 1025, name: 'BC Weekly Report ' },
+    //     { id: 1029, name: 'STB Swap Logs ' }
 
-      ]
-    }
+    //   ]
+    // }
 
   ];
   options: ITreeOptions = {
@@ -427,26 +414,16 @@ export class CreateProfileComponent implements OnInit {
     private router: Router,
     private role :RoleusersevicesService,
   ) {
-    this.edit = JSON.parse(localStorage.getItem('profile_e'));
+    // this.edit = JSON.parse(localStorage.getItem('profile_e'));
   }
   ngOnInit() {
     this.createForm();
-    if (this.edit)
-      this.getprofile();
   }
-
-  getprofile() {
-
-
-    
-  }
-
 async  AddProfile() {
     if (this.AddProfileForm.invalid) {
       this.submit = true;
       return;
     }
-    //var  val = this.AddProfileForm.value;  
     this.AddProfileForm.value['menurole'] = this.selectednodes();
      console.log('value item',this.AddProfileForm.value)
       let result = await this.role.addrole(this.AddProfileForm.value);
@@ -457,29 +434,6 @@ async  AddProfile() {
         this.toast.warning(result[0]['msg'])
         console.log('add...', this.AddProfileForm.value);
       }
-    // val['menu_id'].forEach(item => {
-    //   if ((item + '').includes('404')) {
-    //     issue = true
-    //   }
-    // });
-    // issue ? val['menu_id'].push(404) : '';
-    // if (val['menu_id'].length == 0) {
-    //   this.toastalert('Pls Select Profile Role')
-    //   return;
-    // }
-    // method = this.edit ? 'editProfile' : 'addProfile'
-
-    // if (this.edit) {
-    //   val['profile_id'] = this.edit['profile_id'];
-    // }
-
-    // this.admin[method](val).subscribe(result => {
-    //   this.toastalert(result['msg'], result['status']);
-    //   if (result['status'] == 1) {
-    //     this.router.navigate(['/pages/Administration/profilelist'])
-    //   }
-    // });
-
   }
   selectednodes() {
     const selectedNodes = [];

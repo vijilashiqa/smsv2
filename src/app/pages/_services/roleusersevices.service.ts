@@ -15,4 +15,15 @@ export class RoleusersevicesService {
 async getRole(params){
   return await this.http.post("/role/getRole",params).toPromise();
 }
+
+
+async editrole(params){
+return await this.http.post("/role/editrole",params).toPromise();
+}
+
+
+async getprolife(params){
+
+  return await this.http.post("role/getprofile",params).toPromise();
+}
 }
