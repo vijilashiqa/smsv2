@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HeadendService, PagerService } from '../../_services';
 import { ChannelService } from '../../_services/channel.service';
 

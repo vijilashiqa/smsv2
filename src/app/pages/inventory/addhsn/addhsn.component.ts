@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
  import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
- import { HeadendService, VendorService } from '../../_services';
+ import { HeadendService } from '../../_services';
 import { HsnService } from '../../_services/hsn.service';
 @Component({
   selector: 'ngx-addhsn',

@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AddlangComponent } from '../addlang/addlang.component';
-import { AddchannelsComponent } from '../addchannels/addchannels.component';
-import { HeadendService, PagerService } from '../../_services';
+import { PagerService } from '../../_services';
 import { ChannelService } from '../../_services/channel.service';
 
 @Component({

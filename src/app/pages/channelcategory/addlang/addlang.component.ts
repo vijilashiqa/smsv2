@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { ENETUNREACH } from 'constants';
 import { ToastrService } from 'ngx-toastr';
 import { HeadendService } from '../../_services';
 import { ChannelService } from '../../_services/channel.service';

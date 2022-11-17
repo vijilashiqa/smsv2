@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CountryService, PagerService, VendorService } from '../../_services';
-import { NgbModal, ModalDismissReasons, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AddstbtypeComponent } from '../addstbtype/addstbtype.component';
 import { BoxtypeService } from '../../_services/boxtype.service';
 @Component({

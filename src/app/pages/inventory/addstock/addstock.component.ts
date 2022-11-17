@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { HeadendService, VendorService } from '../../_services';
+import { HeadendService } from '../../_services';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { StockService } from '../../_services/stock.service';

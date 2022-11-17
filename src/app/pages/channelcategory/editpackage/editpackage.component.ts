@@ -1,15 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl,Validators } from '@angular/forms';
 import { HeadendService, BroadcasterService, ChannelService, PackageService } from '../../_services';
-// import { ITreeOptions } from 'angular-tree-component';
 import { toJS } from "mobx";
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Console } from 'console';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router } from '@angular/router';
-// import { ToasterService, Toast, BodyOutputType } from 'angular2-toaster';
 import { ITreeOptions } from '@circlon/angular-tree-component';
 import { PackagechannelComponent } from '../packagechannel/packagechannel.component';
 @Component({

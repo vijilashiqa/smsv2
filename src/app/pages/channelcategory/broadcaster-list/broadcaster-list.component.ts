@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HeadendService, PagerService } from '../../_services';
+import { PagerService } from '../../_services';
 import { BroadcasterService } from '../../_services/broadcaster.service';
-import { ChannelService } from '../../_services/channel.service';
 @Component({
   selector: 'ngx-broadcaster-list',
   templateUrl: './broadcaster-list.component.html',

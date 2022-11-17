@@ -1,8 +1,4 @@
-import { NbSortDirection, NbSortRequest, NbTreeGridDataSource, NbTreeGridDataSourceBuilder } from '@nebular/theme';
-import { TreeViewComponent } from '@syncfusion/ej2-angular-navigations';
-import { TreeNode } from 'angular-tree-component';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ToasterService, Toast, BodyOutputType } from 'angular2-toaster';
 import 'style-loader!angular2-toaster/toaster.css';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -178,20 +174,6 @@ export class EditProfileComponent implements OnInit {
         { id: 403, name: 'Edit Subscriber' },
         { id: 406, name: " Surrendered STB Subscriber's Lis" },
         { id: 407, name: 'Service Extension List ' },
-        // {
-        //   id: 404, name: 'View Subscriber',
-        //   children: [
-        //     { id: 4041, name: 'Renewal' },
-        //     { id: 4042, name: 'Customer Info' },
-        //     { id: 4043, name: 'Fingerprint' },
-        //     { id: 4044, name: 'STB Message' },
-        //     { id: 4045, name: 'Invoice' },
-        //     { id: 4046, name: 'Replace STB ' },
-        //     { id: 4047, name: 'Blacklist STB ' },
-        //     { id: 4048, name: 'change Password ' },
-        //     { id: 4049, name: 'Service Extension ' },
-        //     { id: 4053, name: 'cancelinvoice ' }, ],
-        // },
         { id: 4050, name: 'STB Status ' },
         { id: 405, name: 'Transfer Subscriber' }
       ]
@@ -254,8 +236,6 @@ export class EditProfileComponent implements OnInit {
             { id: 5038, name: 'Discount Edit' },
             { id: 5039, name: 'List Package Product' },
             { id: 5040, name: 'Add Pack Product' },
-
-
           ]
         },
       ]
@@ -351,47 +331,11 @@ export class EditProfileComponent implements OnInit {
         { id: 808, name: 'Update Share' },
 
       ]
-    },
-    // {
-    //   name: 'Accounts Report',
-    //   children: [
-    //     { id: 901, name: 'Renewal Report' },
-    //     { id: 902, name: 'Deposit Report' },
-    //     { id: 903, name: 'Online Deposit Reports ' },
-    //   ]
-    // },
-    // {
-    //   name: 'DAS Report',
-    //   children: [
-    //     { id: 1011, name: 'STB Info' },
-    //     { id: 1012, name: 'STB Transfer Logs ' },
-    //     { id: 1013, name: 'STB Modify Logs ' },
-    //     { id: 1026, name: 'VC Modify Logs ' },
-    //     { id: 1027, name: 'VC Transfer Logs ' },
-    //     { id: 1014, name: 'Blacklist STB Logs ' },
-    //     { id: 1015, name: 'Temporary Suspended Logs ' },
-    //     { id: 1016, name: 'STB Count Report ' },
-    //     { id: 1017, name: 'Creation & Modification Logs ' },
-    //     { id: 1018, name: 'Package Composition Logs ' },
-    //     { id: 1019, name: 'Package Aging Report ' },
-    //     { id: 1020, name: 'Aging Of Service ' },
-    //     { id: 1021, name: 'Activity Logs ' },
-    //     { id: 1022, name: 'Subscriber Info ' },
-    //     { id: 1023, name: 'TRAI Reports ' },
-    //     { id: 1024, name: 'STB AOD Package Report ' },
-    //     { id: 1025, name: 'BC Weekly Report ' },
-    //     { id: 1029, name: 'STB Swap Logs ' }
-
-    //   ]
-    // }
-
+    }
   ];
   options: ITreeOptions = {
     useCheckbox: true
   };
-  menurole: any;
- 
-0
   constructor(
     private toast: ToastrService,
     private router: Router,
@@ -402,8 +346,6 @@ export class EditProfileComponent implements OnInit {
     
   }
   ngOnInit() {
-  //  this.id = this.aRoute.snapshot.queryParams.id;
-   //console.log("id********",this.id)
     this.createForm();
     if (this.edit)
     console.log('edit**********',this.edit)
@@ -415,9 +357,6 @@ async  editRole() {
  this.editrolel = await this.role.getRole({id : this.edit['id'] })
  console.log("get edit role..........",this.editrolel)
  this.selectnodes(this.editrolel[0]['menurole']) ;
-//  console.log("nodessss////////",nodess)
-// }
-
   }
 
 async  AddProfile() {

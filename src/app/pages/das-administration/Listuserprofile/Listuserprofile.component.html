@@ -1,1 +1,18 @@
-<p>userprofile works!</p>
+<nb-card>
+    <nb-card-header>List Profile</nb-card-header>
+    <nb-card-body>
+      <button [hidden]  status="success" nbButton [routerLink]="['/pages/das-administration/create-profile']">Create</button>
+      <table class="table">
+        <tr>
+          <th [hidden]>Action</th>
+          <th>Profile ID</th>
+          <th>Profile Name</th>
+        </tr>
+        <tr *ngFor="let item of pagedItems">
+          <td ><a (click)='edit(item);'><i class="nb-edit"></i></a></td>
+          <td>{{item.id}}</td>
+            <td>{{item.rolename}}</td>
+        </tr>
+      </table>
+    </nb-card-body>
+  </nb-card>

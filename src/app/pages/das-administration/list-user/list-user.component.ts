@@ -22,15 +22,8 @@ export class ListUserComponent implements OnInit {
   page: number = 1; pagedItems: any = []; limit = 25;getcitylist;count;
 
   constructor(
-    //  private alert: ToasterService,
      private role: RoleusersevicesService,
-     private pageservice: PagerService,
-    //  public role: RoleService,
-   
-    ) 
-     {
-    
-   }
+     private pageservice: PagerService, ) {}
 
    ngOnInit(): void {
     this.initiallist();

@@ -52,9 +52,6 @@ export class EditstockComponent implements OnInit {
       this.toast.warning(result[0]['msg'])
     }
   }
-
-
-
   changeclear(...data) {
     for (let i of data) {
       this.editstockForm.controls[i].setValue("");

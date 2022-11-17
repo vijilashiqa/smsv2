@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
-import { HeadendService, PagerService } from '../../_services';
+import { PagerService } from '../../_services';
 import { ChannelService } from '../../_services/channel.service';
 import { AddgenreComponent } from '../addgenre/addgenre.component';
 

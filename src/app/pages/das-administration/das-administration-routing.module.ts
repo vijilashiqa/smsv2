@@ -24,148 +24,153 @@ import { SmsAddcreditsComponent } from './sms-addcredits/sms-addcredits.componen
 import { SmsCreditslistComponent } from './sms-creditslist/sms-creditslist.component';
 import { SmsGateComponent } from './sms-gate/sms-gate.component';
 import { SmsGatelistComponent } from './sms-gatelist/sms-gatelist.component';
-import { EditUserComponent } from '../users/edit-user/edit-user.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
-// import { OperatorSettingComponent } from './operator-setting/operator-setting.component';
+import { EdituserprofileComponent } from './edituserprofile/edituserprofile.component';
+import { ListuserprofileComponent } from './Listuserprofile/Listuserprofile.component';
 
 const routes: Routes = [
- 
+
   {
     path: 'create-user',
     component: CreateuserComponent,
-    
+
   },
   {
     path: 'list-user',
     component: ListUserComponent,
-    
+
   },
   {
     path: 'list-profile',
     component: ListProfileComponent,
-    
+
   },
   {
     path: 'create-profile',
     component: CreateProfileComponent,
-    
+
   },
   {
     path: 'operator-setting-list',
     component: OperatorSettingListComponent,
-    
+
   },
- 
+
   {
     path: 'addoperator-setting',
     component: AddoperatorSettingComponent,
-    
+
   },
   {
     path: 'caslist',
     component: CaslistComponent,
-    
+
   },
   {
     path: 'hdcaslist',
     component: HdcaslistComponent,
-    
+
   },
   {
     path: 'addhdcas',
     component: AddhdcasComponent,
-    
+
   },
   {
     path: 'headendlist',
     component: HeadendlistComponent,
-    
+
   },
   {
     path: 'headendadd',
     component: HeadendaddComponent,
-    
+
   },
   {
     path: 'geo-listlocation',
     component: GeoListlocationComponent,
-    
+
   },
   {
     path: 'geo-branchlist',
     component: GeoBranchlistComponent,
-    
+
   },
   {
     path: 'geo-countylist',
     component: GeoCountrylistComponent,
-    
+
   },
   {
     path: 'geo-statelist',
     component: GeoStatelistComponent,
-    
+
   },
   {
     path: 'geo-districtlist',
     component: GeoDistrictlistComponent,
-    
+
   },
   {
     path: 'geo-citylist',
     component: GeoCitylistComponent,
-    
+
   },
   {
     path: 'geo-pincodelist',
     component: GeoPincodelistComponent,
-    
+
   },
   {
     path: 'geo-arealist',
     component: GeoArealistComponent,
-    
+
   },
   {
     path: 'msorevenueshare',
     component: MsorevenueshareComponent,
-    
+
   },
   {
     path: 'sms-creditslist',
     component: SmsCreditslistComponent,
-    
+
   },
   {
     path: 'sms-addcredits',
     component: SmsAddcreditsComponent,
-    
+
   },
   {
     path: 'sms-gatelist',
     component: SmsGatelistComponent,
-    
+
   },
   {
     path: 'sms-gate',
     component: SmsGateComponent,
-    
+
   },
 
   {
 
-    path :'edit-profile',
-    component :EditProfileComponent,
+    path: 'edit-profile',
+    component: EditProfileComponent,
+  },
+  {
+
+    path: 'editusre-profile',
+    component: EdituserprofileComponent
+
+  },
+
+  {
+
+    path: 'listuser-profile',
+    component: ListuserprofileComponent
   }
 
-
-
-
-
 ];
-
-
-
 
 
 @NgModule({
