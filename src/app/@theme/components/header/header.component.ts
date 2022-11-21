@@ -5,6 +5,9 @@ import { UserData } from '../../../@core/data/users';
 import { LayoutService } from '../../../@core/utils';
 import { map, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { ChangepasswordComponent } from '../changepassword/changepassword.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { RoleservicesService } from '../../../pages/_services';
 
 @Component({
   selector: 'ngx-header',
@@ -15,8 +18,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   private destroy$: Subject<void> = new Subject<void>();
   userPictureOnly: boolean = false;
-  user: any;
 
+  user: any = { name: this.role.getuserFname() }
   themes = [
     {
       value: 'default',
@@ -38,37 +41,27 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   currentTheme = 'default';
 
-  userMenu = [ { title: 'Profile' }, { title: 'Log out',link:'auth/logout' } ];
+  userMenu = [{ title: 'Change Password', data: { id: 'Change Password' } } ,{ title: 'Log out',link:'auth/logout' } ];
+  title: string;
 
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService,
+              private modal: NgbModal,
+              private role: RoleservicesService,
               private themeService: NbThemeService,
               private userService: UserData,
               private layoutService: LayoutService,
               private breakpointService: NbMediaBreakpointsService) {
   }
 
-  ngOnInit() {
-    this.currentTheme = this.themeService.currentTheme;
-
-    this.userService.getUsers()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((users: any) => this.user = users.nick);
-
-    const { xl } = this.breakpointService.getBreakpointsMap();
-    this.themeService.onMediaQueryChange()
-      .pipe(
-        map(([, currentBreakpoint]) => currentBreakpoint.width < xl),
-        takeUntil(this.destroy$),
-      )
-      .subscribe((isLessThanXl: boolean) => this.userPictureOnly = isLessThanXl);
-
-    this.themeService.onThemeChange()
-      .pipe(
-        map(({ name }) => name),
-        takeUntil(this.destroy$),
-      )
-      .subscribe(themeName => this.currentTheme = themeName);
+  ngOnInit() { 
+      this.menuService.onItemClick().subscribe((event) => {
+        if (event.item.title === 'Change Password') {
+          const modalRef = this.modal.open(ChangepasswordComponent, {  size: 'sm' ,container: 'nb-layout', backdrop: false });
+          modalRef.componentInstance.title = 'Change Password';
+         
+        }
+      });
   }
 
   ngOnDestroy() {

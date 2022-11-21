@@ -15,12 +15,14 @@ export class AddbroadcasterComponent implements OnInit {
   AddBroadcasterForm; citylist; listarea; id; count; getstates; dist; editflag = false;
   disabled = false;
 
-  constructor(private headend: HeadendService,
+  constructor(
+    private headend: HeadendService,
     private country: CountryService,
     private broadcast: BroadcasterService,
     private route: Router,
     private toast: ToastrService,
-    private aRoute: ActivatedRoute,) { }
+    private aRoute: ActivatedRoute
+    ) { }
   async addbroadcaster() {
     this.submit = true;
     const invalid = [];
@@ -125,18 +127,12 @@ export class AddbroadcasterComponent implements OnInit {
   typeclearcountry(val = "1") {
     this.changeclear('stateid','districtid', 'cityid', 'area');
   }
-
-
   typeclearstate(val = "1") {
     this.changeclear('districtid', 'cityid', 'area');
-  }
-
-
-  
+  }  
   typecleardist(val = "1") {
     this.changeclear( 'cityid', 'area');
   }
-
   typeclearcity(val = "1") {
     this.changeclear(  'area');
   }

@@ -8,6 +8,7 @@ import {
 
 
 import { LoginComponent } from './loginc/loginc.component';
+import { ChangepaaswordComponent } from './pages/users/changepaasword/changepaasword.component';
 
 
 export const routes: Routes = [
@@ -26,10 +27,11 @@ export const routes: Routes = [
         path: 'login',
         component: LoginComponent,
       },
-      // {
-      //   path: 'login',
-      //   component: NbLoginComponent,
-      // }, 
+      {
+        path: 'change password',
+        component: ChangepaaswordComponent,
+
+      }, 
       // {
       //   path: 'register',
       //   component: NbRegisterComponent,

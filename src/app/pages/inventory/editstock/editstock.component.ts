@@ -73,7 +73,6 @@ export class EditstockComponent implements OnInit {
       this.editable = true
       this.editflag = true;
       await this.edit();
-     
       await this.getVendor();
       await this.getlocation();
       await this.gethsnlistg();

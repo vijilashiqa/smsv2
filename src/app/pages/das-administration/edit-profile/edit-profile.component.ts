@@ -388,6 +388,7 @@ async  AddProfile() {
     });
     return (selectedNodes);
   }
+  
   selectnodes(item) {
     console.log('itemselectnod****************',item)
     let data = JSON.parse(item);
