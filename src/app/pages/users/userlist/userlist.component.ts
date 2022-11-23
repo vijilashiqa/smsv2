@@ -11,19 +11,29 @@ import { UserhdcasComponent } from '../userhdcas/userhdcas.component';
 })
 export class UserlistComponent implements OnInit {
   broadcaster = ''; broadlist: any = [];genre='';genres;lang;channelForm; pager: any = {}; page: number = 1; 
-  pagedItems: any = []; limit = 25;getcitylist;data;count;listchannel;listoperator
-  constructor(
+  pagedItems: any = []; limit = 25;getcitylist;data;count;listchannel;listoperator;loc ='';branch ='';headend ='';
+  status='';busname='';listhead;operatortypelist;op_type ='';operator_name='' ;search: boolean = false;
+   constructor(
     private modal: NgbModal,
     private pageservice :PagerService,
-    private oprator :OperatorService
+    private operator :OperatorService,
+    private headends  :HeadendService
   ) { }
 
   async ngOnInit() {
     await this.initiallist();
+    this.getHeadend();
+    this.getoperator();
   }
   async initiallist() {
 
-    this.listoperator = await this.oprator.listoperator({index:(this.page - 1) * this.limit,limit:this.limit});
+    this.listoperator = await this.operator.listoperator({index:(this.page - 1) * this.limit,
+      limit:this.limit,
+
+      hdid: this.headend,
+      status: this.status,
+      usertype: this.op_type,
+      busname:this.busname});
     console.log('list stb=====', this.listoperator)
     this.data = this.listoperator[0];
     this.count = this.listoperator[1].count;
@@ -47,6 +57,30 @@ export class UserlistComponent implements OnInit {
     if (result['result']) {
       this.initiallist();
     };
+  }
+
+
+  async getoperator(){
+
+    this.operatortypelist = await this.operator.listoperatortype({ usertype: this.op_type, hdid: this.headend })
+    console.log('list operator', this.operatortypelist)
+  }
+
+  getlocation(){
+
+  }
+
+
+  getBranch(){
+
+
+  }
+
+
+  async getHeadend($event = '') {
+    console.log('event',event)
+    this.listhead = await this.headends.getHeadend({ })
+    console.log(this.listhead)
   }
   setPage() {
     this.pager = this.pageservice.getPager(this.count, this.page, this.limit);

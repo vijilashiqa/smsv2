@@ -34,4 +34,10 @@ export class PackageService {
   async bulkpackage(params) {
     return await this.http.post("/package/bulkpackage", params).toPromise();
   }
+
+
+  async searchpack(params){
+
+    return await this.http.post("/package/searchpack",params).toPromise();
+  }
 }

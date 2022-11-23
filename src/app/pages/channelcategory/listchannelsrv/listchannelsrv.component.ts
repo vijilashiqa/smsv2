@@ -14,9 +14,7 @@ export class ListchannelsrvComponent implements OnInit {
     private pageservice :PagerService) { }
 
   async ngOnInit() {
-    await this.initiallist(
-
-    );
+    await this.initiallist();
       }
     
       async initiallist() {

@@ -55,4 +55,9 @@ async assignusercas(params){
   return await this.http.post("/operator/assignusercas" ,params).toPromise();
 }
 
+
+async resetpassword(params){
+
+  return await this.http.post("/operator/resetpassword",params).toPromise();
+} 
 }

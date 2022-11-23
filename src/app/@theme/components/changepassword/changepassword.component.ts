@@ -1,12 +1,11 @@
 import 'style-loader!angular2-toaster/toaster.css';
 import { Component, Input, OnInit } from '@angular/core';
-import { ToasterService, Toast, BodyOutputType } from 'angular2-toaster';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormControl, FormGroup, Validators ,FormsModule} from '@angular/forms';
 import { Router } from '@angular/router';
 import { Md5 } from 'ts-md5/dist/md5';
-import { RoleservicesService } from '../../../pages/_services';
-import { RoleusersevicesService } from '../../../pages/_services/roleusersevices.service';
+import { OperatorService } from '../../../pages/_services/operator.service';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'ngx-changepassword',
   templateUrl: './changepassword.component.html',
@@ -19,8 +18,9 @@ export class ChangepasswordComponent implements OnInit {
   constructor(
 
     public activeModal: NgbActiveModal,
-    private alert: ToasterService,
-    private role :RoleusersevicesService,
+    private toast: ToastrService,
+    private router: Router,
+    private operator :OperatorService,
     ) {
       this.item = JSON.parse(localStorage.getItem('userinfo'));
       
@@ -44,44 +44,14 @@ export class ChangepasswordComponent implements OnInit {
     const md5 = new Md5;
     this.changePassword.value['password_en'] = md5.appendStr(this.changePassword.value['Password']).end();
     console.log("changepaswd",this.changePassword.value)
-
-    // if (this.role.getroleid() != 111) {
-    //   let result = await this.ser.changeadminpwd(this.changePassword.value)
-    //   this.datas = result;
-    //   // console.log(result);
-    //   const toast: Toast = {
-    //     type: result['status'] == 1 ? 'success' : 'warning',
-    //     title: result['status'] == 1 ? 'Success' : 'Failure',
-    //     body: result['msg'],
-    //     timeout: 5000,
-    //     showCloseButton: true,
-    //     bodyOutputType: BodyOutputType.TrustedHtml,
-    //   };
-    //   this.alert.popAsync(toast);
-    //   if (result['status'] == 1) {
-    //     this.activeModal.close();
-    //     setTimeout(() => this.router.navigateByUrl('/auth/login'), 2500);
-    //   }
-    // }
-    // if (this.role.getroleid() == 111) {
-    //   let result = await this.custser.changeprofilepwd(this.changePassword.value)
-    //   this.datas = result;
-    //   // console.log(result);
-    //   const toast: Toast = {
-    //     type: result['status'] == 1 ? 'success' : 'warning',
-    //     title: result['status'] == 1 ? 'Success' : 'Failure',
-    //     body: result['msg'],
-    //     timeout: 5000,
-    //     showCloseButton: true,
-    //     bodyOutputType: BodyOutputType.TrustedHtml,
-    //   };
-    //   this.alert.popAsync(toast);
-    //   if (result['status'] == 1) {
-    //     this.activeModal.close();
-    //     setTimeout(() => this.router.navigateByUrl('/auth/login'), 2500);
-    //   }
-    // }
-
+      let result = await this.operator.resetpassword(this.changePassword.value)
+      console.log('reset passwird ******',result)
+      if (result && result[0].err_code == 0) {
+        this.toast.success(result[0]["msg"]);
+        this.router.navigate(["/auth/logout"]);
+      } else {
+        this.toast.warning(result[0]["msg"]);
+      }
   }
 
   createForm() {

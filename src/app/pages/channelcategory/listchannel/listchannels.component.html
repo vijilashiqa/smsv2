@@ -4,75 +4,78 @@
     <nb-card-body>
       <button  status="success" nbButton 
         [routerLink]="['/pages/channelcategory/addchannels']">Create</button>
-      <hr style="border: 0px;">
-      <!-- <div class="form-group row">
-        <div class="col-sm-3" >
-          <label>Headend</label>
-          <auto-completen
-                            [addclass]="{'form-control':true,'form-control-danger':channelForm.controls.headend.invalid&&submit}"
-                            addclass="form-control" optValues="hdname"
-                            formControlName="headend" (keyUp)="getbroadcaster()"
-                            placeholder='Select headend_name' id="id"
-                            [item]="count">
-                          </auto-completen>
+        <div class="form-group row">
+          <div class="col-sm-3" (change)="listlang();listgenre();Getbroadcasteredit()">
+            <label>Headend</label>
+            <select name="headend" class="form-control" [(ngModel)]="headend">
+              <option value="">Select Headend</option>
+              <option *ngFor="let item of headendl" [ngValue]="item.hdid">
+                {{ item.hdname }}
+              </option>
+            </select>
+          </div>
+          <div class="col-sm-3">
+            <label>LCN Number</label>
+            <input type="Number" name="lcn_num" class="form-control" [(ngModel)]='lcn_num'>
+          </div>
+          <div class="col-sm-3" (change)="listgenre()">
+            <label>Language</label>
+                    <select name="language" class="form-control" [(ngModel)]="language">
+                      <option value="">Select Language</option>
+                      <option *ngFor="let item of lang" [ngValue]="item.langid">
+                        {{ item.langname }}
+                      </option>
+                    </select>
+          </div>
+          <div class="col-sm-3">
+            <label>Genre</label>
+            <select name="genre" [(ngModel)]='genre' class="form-control">
+              <option value="">Select Genre</option>
+              <option *ngFor="let item of genres" [value]=item.genreid>{{item.genrename}}</option>
+            </select>
+          </div>
         </div>
-        <div class="col-sm-3">
-          <label>LCN Number</label>
-          <input type="Number" name="lcn_num" class="form-control" >
+        <div class="form-group row">
+          <div class="col-sm-3">
+            <label>Channel Type</label>
+            <select name="channel_type" [(ngModel)]='channel_type' class="form-control">
+              <option value="">Select Channel Type</option>
+              <option value="1">PAY</option>
+              <option value="2">FTA</option>
+              <option value="3">Local</option>
+            </select>
+          </div>
+          <div class="col-sm-3">
+            <label>Channel</label>
+            <!-- <auto-complete (keyup)="getchannel($event.target.value)" name='channel_name' (value)='channel_name=$event;'
+              placeholder='Select Channel' [item]=channellist></auto-complete> -->
+          </div>
+          <div class="col-sm-3" >
+            <label>Broadcaster</label>
+            <select name="broadcaster" [(ngModel)]='broadcaster' class="form-control">
+              <option value="">Select Broadcaster</option>
+              <option *ngFor="let item of broadcast" [value]=item.id>{{item.fullname}}</option>
+            </select>
+
+            <!-- <auto-completen
+                        [addclass]="{ 'error': submit && this.channelForm.controls.bcid.errors }"
+                        addclass="form-control" optValues="fullname"
+                        formControlName="bcid" (keyUp)="Getbroadcasteredit()"
+                        placeholder='Select BroadCaster ' id="id"
+                        [item]="broadcast">
+                      </auto-completen> -->
+          </div>
+          <div class="col-sm-3">
+            <label>Channel Mode</label>
+            <select name="channel_mode" [(ngModel)]='channel_mode' class="form-control">
+              <option value="">Select Channel Type</option>
+              <option value="0">SD</option>
+              <option value="1">HD</option>
+            </select>
+          </div>
         </div>
-        <div class="col-sm-3">
-          <label>Language</label>
-               <auto-completen
-                      [addclass]="{'form-control':true,'form-control-danger':channelForm.controls.language.invalid&&submit}"
-                      addclass="form-control" optValues="langname"
-                      formControlName="language" (keyUp)="listlang()"
-                      placeholder='Select language' id="id"
-                      [item]="lang">
-                    </auto-completen>
-        </div>
-        <div class="col-sm-3">
-          <label>Genre</label>
-          <auto-completen
-          [addclass]="{'form-control':true,'form-control-danger':channelForm.controls.genre.invalid&&submit}"
-          addclass="form-control" optValues="genrename"
-          formControlName="genre" (keyUp)="listgenre()"
-          placeholder='Select genre' optId="genreid"
-          [item]="genres">
-        </auto-completen>
-        </div>
-      </div>
-      <div class="form-group row">
-        <div class="col-sm-3">
-          <label>Channel Type</label>
-          <select name="channel_type" class="form-control">
-            <option value="">Select Channel Type</option>
-            <option value="1">PAY</option>
-            <option value="2">FTA</option>
-            <option value="3">Local</option>
-          </select>
-        </div>
-        <div class="col-sm-3">
-          <label>Channel</label>
-            <input type="text" name="channel_name" class="form-control" >
-        </div>
-        <div class="col-sm-3">
-          <label>Broadcaster</label>
-          <select name="broadcaster" class="form-control">
-            <option value="">Select Broadcaster</option>
-          </select>
-        </div>
-        <div class="col-sm-3">
-          <label>Channel Mode</label>
-          <select name="channel_mode" class="form-control">
-            <option value="">Select Channel Type</option>
-            <option value="0">SD</option>
-            <option value="1">HD</option>
-          </select>
-        </div>
-  
-      </div> -->
-      <!-- <button type="button" class="btn btn-md btn-success" (click)='initiallist();'
-        style="margin: auto; display: block;">Search</button> -->
+        <button type="button" class="btn btn-md btn-success" (click)='page=1;initiallist();'
+          style="margin: auto; display: block;">Search</button>
   
       <table class="table">
         <tr>
@@ -94,8 +97,8 @@
           <td>{{item.langname}}</td>
           <!-- <td>{{item.channel_type==1?'Pay':item.channel_type==2? 'FTA':'Local Channel'}}</td> -->
           <td><i [ngStyle]="{'color': item.status==1? 'green':'red'}"
-              [ngClass]="{'ion-close-round':item.status==0 ? true:false,'ion-checkmark-round':item.status!=0 ? true:false  }"
-              [attr.title]="item.status==1 ? 'Active' : 'Deactive'"></i></td>
+                 [ngClass]="{'ion-close-round':item.status==0 ? true:false,'ion-checkmark-round':item.status!=0 ? true:false  }"
+                 [attr.title]="item.status==1 ? 'Active' : 'Deactive'"></i></td>
         </tr>
       </table>
       <div class="pagination">

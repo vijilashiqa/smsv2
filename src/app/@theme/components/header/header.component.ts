@@ -49,9 +49,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
               private modal: NgbModal,
               private role: RoleservicesService,
               private themeService: NbThemeService,
-              private userService: UserData,
-              private layoutService: LayoutService,
-              private breakpointService: NbMediaBreakpointsService) {
+              private layoutService: LayoutService,) {
   }
 
   ngOnInit() { 

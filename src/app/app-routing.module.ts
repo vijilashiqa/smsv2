@@ -32,22 +32,10 @@ export const routes: Routes = [
         component: ChangepaaswordComponent,
 
       }, 
-      // {
-      //   path: 'register',
-      //   component: NbRegisterComponent,
-      // },
       {
         path: 'logout',
         component: LoginComponent,
       },
-      // {
-      //   path: 'request-password',
-      //   component: NbRequestPasswordComponent,
-      // },
-      // {
-      //   path: 'reset-password',
-      //   component: NbResetPasswordComponent,
-      // },
     ],
   },
   { path: '', redirectTo: 'auth/login', pathMatch: 'full' },
