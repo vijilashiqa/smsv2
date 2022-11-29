@@ -117,4 +117,11 @@ async selectchannel(params){
 
   return this.http.post("/srv/selectchannel",params).toPromise();
 }
+
+
+async selectchanname(params){
+
+  return this.http.post("/channel/selectchanname",params).toPromise();
+  
+}
 }

@@ -8,8 +8,8 @@ import { ChannelService } from '../../_services/channel.service';
   styleUrls: ['./listchannels.component.scss']
 })
 export class listChannelsComponent implements OnInit {
- broadcaster = ''; broadlist: any = [];genre='';genres;lang;channelForm; pager: any = {}; page: number = 1; 
- pagedItems: any = []; limit = 25;getcitylist;data;count;listchannel;listhead;headendl
+ broadcaster = ''; broadlist: any = [];genre='';listgener;lang;channelForm; pager: any = {}; page: number = 1; 
+ pagedItems: any = []; limit = 25;getcitylist;data;count;listchannel;listhead;headendl;selectchannel
   channel_name = '';submit: boolean; headend = ''; lcn_num = ''; language = '';broadcast
    channel_type = ''; 
   head: any = []; opt: any = [];
@@ -24,10 +24,12 @@ export class listChannelsComponent implements OnInit {
   ) { }
 
    async ngOnInit() {
+    await this.initiallist();
     await this.getheadend();
     await this.listlang();
     await this.listgenre();
-    await this.initiallist();
+    await this.selectchanname()
+   
   }
   async getheadend(){
     console.log('name', );
@@ -41,35 +43,31 @@ export class listChannelsComponent implements OnInit {
     console.log('langugae------',this.lang);
   }
   
-
-  getchannel(){
-
-
-  }
-
- 
-  getgenre(){
-
-  }
-  async listgenre(){
+ async listgenre(){
     console.log('name', );
-    this.genres = await this.channelService.listgenre({  hdid : this.headend , langid : this.language });
-    this.genres =this.genres[0]
-    console.log('geneerrrr',this.genres);
+    this.listgener = await this.channelService.selectgenere({  hdid : this.headend , langid : this.language });
+    console.log('geneerrrr',this.listgener);
+
+  }
+
+
+  async selectchanname (){
+     this.selectchannel =await this.channelService.selectchanname({ hdid : this.headend })
+     console.log("select channel",this.selectchannel)
 
   }
   async initiallist() {
     this.listchannel = await this.channelService.listchannel({index:(this.page - 1) * this.limit,
       limit:this.limit,
-      id: 1,
-      head: this.headend,
-      bc: this.broadcaster,
-      lcn: this.lcn_num,
+    //  id: 1,
+      hdid: this.headend,
+      bcid: this.broadcaster,
+      chanlcm: this.lcn_num,
       langid: this.language,
-      genre: this.genre,
-      chan_type: this.channel_type,
-      channel_mode: this.channel_mode,
-      channel: this.channel_name,});
+      genreid: this.genre,
+      chantype: this.channel_type,
+      chanmode: this.channel_mode,
+      channame: this.channel_name,});
     console.log('dfgvdg=====', this.listchannel)
     this.data = this.listchannel[0];
     this.count = this.listchannel[1].count;
@@ -83,24 +81,14 @@ export class listChannelsComponent implements OnInit {
       this.initiallist();
     };
   }
-
-
-
   async Getbroadcasteredit($event='') {
-   // console.log('gname---', this.channelForm.value['hdid']);
       this.broadcast = await this.broadcasterService.getbroadcaster({hdid : this.headend});
      console.log('result ********',this.broadcast)
-    }
-
-    
-
+  }
   setPage() {
     this.pager = this.pageservice.getPager(this.count, this.page, this.limit);
     this.pagedItems = this.data;
   }  
 
-  getbroadcaster(){
-
-  }
 
 }

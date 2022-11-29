@@ -37,7 +37,7 @@
                <br>
                <div class="form-group row"  >
                   <div class="col-sm-12" >
-                           <div class="row" >
+                           <div class="row">
                               <div class="col-sm-3"  *ngIf="channeservlForm.value['modetype']=='1' || channeservlForm.value['modetype']=='0' ">
                                  <label>Cas Type  *</label>
                                     <auto-completen
@@ -65,15 +65,14 @@
                                  Channel Name is required!
                                 </div>  
                            </div>
-                           <div class="col-sm-4"   *ngIf="channeservlForm.value['modetype']=='1'"  >
-                              <label>Service ID*</label>
+                       <div class="col-sm-4"   *ngIf="channeservlForm.value['modetype']=='1'">
+                       <label>Service ID*</label>
                         <input type="text" class="form-control" name="casserviceid" formControlName="casserviceid" placeholder="Enter Service ID"
                         [ngClass]="{ 'is-invalid': submit && channeservlForm.controls.casserviceid.errors }"/>
                         <small *ngIf="channeservlForm.controls.casserviceid.errors &&(channeservlForm.controls.casserviceid.errors.required )&& submit"
                         class="invalid-feedback">Genre name  is required! </small>
-                           </div>
-                     
-                           
+                        </div>
+
                      </div>
                   
                </div>

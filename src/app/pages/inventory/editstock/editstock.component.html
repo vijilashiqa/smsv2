@@ -34,16 +34,11 @@
                 <div class="form-group row">
                   <div class="col-sm-6">
                     <label>Vendor </label>
-                    <auto-completen [addclass]="{
-                        error:
-                          submit && this.editstockForm.controls.vendorid.errors
-                      }" addclass="form-control" optValues="vendor_name" (changed)="getlocation(); typeclearVendor()"
+                    <auto-completen [addclass]="{error: submit && this.editstockForm.controls.vendorid.errors}"
+                      addclass="form-control" optValues="vendor_name" (changed)="getlocation(); typeclearVendor()"
                       formControlName="vendorid" (keyUp)="getVendor()" placeholder="Select Vendor" optId="vendorid"
                       [item]="getvendorlist">
                     </auto-completen>
-                    <!-- <div *ngIf="this.editstockForm.controls.vendorid.errors && (this.editstockForm.controls.vendorid.errors.required) && submit" class="error-text">
-                                      Vendor Name is required!
-                                     </div> -->
                   </div>
 
                   <div class="col-sm-6">

@@ -18,7 +18,7 @@ import { NbAccordionModule, NbButtonModule, NbCardModule, NbListModule, NbRouteT
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { LayoutRoutingModule } from '../layout/layout-routing.module';
 import { ThemeModule } from '../../@theme/theme.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PagerService } from '../_services/index';
 import { AutoCompleteNModule } from '../auto-complete-module/auto-completen-module';
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
@@ -60,6 +60,7 @@ import { StbparingComponent } from './stbparing/stbparing.component';
     LayoutRoutingModule,NbTreeGridModule,
     ReactiveFormsModule,
     ThemeModule,
+    FormsModule,
     AutoCompleteNModule,
     AutocompleteLibModule,
   ],

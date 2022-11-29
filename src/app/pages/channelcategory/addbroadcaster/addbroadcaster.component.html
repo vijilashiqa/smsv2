@@ -133,10 +133,9 @@
             <div class="col-sm-6">
               <label>Country<span style="color: red">*</span></label>
               <auto-completen [addclass]="{
-                  error:
-                    submit && this.AddBroadcasterForm.controls.countryid.errors
-                }" addclass="form-control" optValues="name" formControlName="countryid" (keyUp)="getCountry($event)"
-                (changed)="getstate(); typeclearcountry('1')" placeholder="Select Country" id="id" [item]="count">
+                  error: submit && this.AddBroadcasterForm.controls.countryid.errors}"
+                  addclass="form-control" optValues="name" formControlName="countryid" (keyUp)="getCountry($event)"
+                  (changed)="getstate(); typeclearcountry('1')" placeholder="Select Country" id="id" [item]="count">
               </auto-completen>
               <div *ngIf="
                   this.AddBroadcasterForm.controls.countryid.errors &&
@@ -230,17 +229,12 @@
               </small>
             </div>
           </div>
-
-          <!-- </div> -->
           <div class="form-group row">
             <div class="col-sm-6">
               <label>Installation Address<span style="color: red">*</span></label>
               <textarea name="installation_addr" formControlName="installation_addr"
-                placeholder="installation_addr Address " class="form-control" [ngClass]="{
-                  'is-invalid':
-                    submit &&
-                    this.AddBroadcasterForm.controls.installation_addr.errors
-                }">
+                placeholder="installation_addr Address " class="form-control" 
+                [ngClass]="{'is-invalid':submit &&this.AddBroadcasterForm.controls.installation_addr.errors}">
               </textarea>
               <small *ngIf="
                   this.AddBroadcasterForm.controls.installation_addr.errors &&
@@ -250,13 +244,13 @@
                 " class="invalid-feedback">Installation Address is required!
               </small>
             </div>
+
             <div class="col-sm-6">
               <label>Description</label>
               <textarea name="descr" formControlName="descr" placeholder="descr Address " class="form-control"
                 [ngClass]="{
                   'is-invalid':
-                    submit && this.AddBroadcasterForm.controls.descr.errors
-                }">
+                    submit && this.AddBroadcasterForm.controls.descr.errors }">
               </textarea>
               <small *ngIf="
                   this.AddBroadcasterForm.controls.descr.errors &&
@@ -266,18 +260,6 @@
               </small>
             </div>
           </div>
-          <!-- 
-            <div class="form-group row">
-        
-              
-           </div>  -->
-          <!-- <div class="form-group row">
-              <div class="col-sm-12">
-                <label>Description</label>
-                <input name="descr" formControlName="descr" type="text" class="form-control" placeholder="Description"
-                  maxlength="200">
-              </div>
-            </div> -->
           <div class="form-group row">
             <div class="col-md-6">
               <div class="custom-control custom-checkbox">

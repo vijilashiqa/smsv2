@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PagerService } from '../../_services';
+import { OperatorService } from '../../_services/operator.service';
 import { RoleusersevicesService } from '../../_services/roleusersevices.service';
 @Component({
   selector: 'ngx-userprofile',
@@ -14,9 +15,9 @@ export class ListuserprofileComponent implements OnInit {
   page: number = 1; pagedItems: any = []; limit = 25;getcitylist;count;
 
   constructor(
-     private role: RoleusersevicesService,
      private pageservice: PagerService,  
      private router: Router,
+     private operator :OperatorService
     ) 
      { }
 
@@ -24,8 +25,8 @@ export class ListuserprofileComponent implements OnInit {
     this.initiallist();
   }
   async initiallist() {
-    this.getuser = await this.role.listrole({index:(this.page - 1) * this.limit,limit:this.limit});
-    console.log('gestuser*****', this.getuser)
+    this.getuser = await this.operator.listuser({index:(this.page - 1) * this.limit,limit:this.limit});
+    console.log('list user*****', this.getuser)
     this.data = this.getuser[0];
     this.count = this.getuser[1].count;
     this.setPage();
@@ -48,6 +49,6 @@ export class ListuserprofileComponent implements OnInit {
 
   edit(item) {
     localStorage.setItem('profile_e', JSON.stringify(item));
-    this.router.navigate(['/pages/das-administration/edit-profile']);
+    this.router.navigate(['/pages/das-administration/edit-user']);
   }
 }

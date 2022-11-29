@@ -50,7 +50,8 @@ import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
 import { AddcasComponent } from './addcas/addcas.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { ListuserprofileComponent } from './Listuserprofile/Listuserprofile.component';
-import { EdituserprofileComponent } from './edituserprofile/edituserprofile.component';  
+import { EdituserprofileComponent } from './edituserprofile/edituserprofile.component';
+import { EditUserComponent } from './edit-user/edit-user.component';  
 export const MY_NATIVE_FORMATS = {
   fullPickerInput: { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric' },
   datePickerInput: { year: 'numeric', month: 'numeric', day: 'numeric' },};
@@ -98,6 +99,7 @@ export const MY_NATIVE_FORMATS = {
     EditProfileComponent,
     ListuserprofileComponent,
     EdituserprofileComponent,
+    EditUserComponent,
 
    ],
   imports: [

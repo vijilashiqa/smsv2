@@ -26,7 +26,7 @@ export class PagesComponent {
       },
       {
         title: 'DAS Operations',
-      // hidden: !(this.role.find(x => x == 101) || this.role.find(x => x == 102)),
+        hidden: !(this.role.find(x => x == 101) || this.role.find(x => x == 102)),
         icon: 'home-outline',
         children: [
           {
@@ -60,6 +60,7 @@ export class PagesComponent {
               },
               {
                 title: 'Create user',
+                hidden: !this.role.find(x => x == 2012),
                 link: '/pages/das-administration/create-user',
               }
             ]
@@ -76,6 +77,7 @@ export class PagesComponent {
               },
               {
                 title: 'Create Profile',
+                hidden: !this.role.find(x => x == 2022),
                 link: '/pages/das-administration/create-profile',
 
               },
@@ -155,16 +157,16 @@ export class PagesComponent {
             title: 'Geo Panel',
             // link: '/pages/das-administration/das-administration',
             children: [
-              {
-                title: 'Location',
-                link: '/pages/das-administration/geo-listlocation',
+              // {
+              //   title: 'Location',
+              //   link: '/pages/das-administration/geo-listlocation',
 
-              },
-              {
-                title: 'Branch',
-                link: '/pages/das-administration/geo-branchlist',
+              // },
+              // {
+              //   title: 'Branch',
+              //   link: '/pages/das-administration/geo-branchlist',
 
-              },
+              // },
               {
                 title: 'Country',
                 link: '/pages/das-administration/geo-countylist',

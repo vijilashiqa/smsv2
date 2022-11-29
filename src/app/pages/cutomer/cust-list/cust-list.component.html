@@ -61,9 +61,8 @@
         <div class="form-group row">
           <div class="col-sm-3">
             <label>Package</label>
-            <select class="form-control" id="package" [(ngModel)]="package"
-            >
-              <option value=" " selected>Select Package</option>
+            <select class="form-control" id="package" [(ngModel)]="package">
+              <option value="" selected>Select Package</option>
               <option *ngFor="let item of getpackagelist" [ngValue]="item.packid">
                 {{ item.packname }}
               </option>
@@ -71,34 +70,31 @@
           </div>
           <div class="col-sm-3">
             <label>STB Model</label>
-            <auto-completen addclass="form-control" optValues="modelname" formControlName="boxmodelid"
-              (keyUp)="getModel()" placeholder="Select Model" optId="bmid" [item]="getmodellist">
-            </auto-completen>
+            <select class="form-control" id="model_opt" [(ngModel)]="model_opt">
+              <option value="" selected>Select Model</option>
+              <option *ngFor="let item of getmodellist" [ngValue]="item.bmid">
+                {{ item.modelname }}
+              </option>
+            </select>
           </div>
 
       
           <div class="col-sm-3" >
             <label>STB  Number</label>
-            <!-- <input class="form-control" type="text" list="boxlist" name="stbopt">       -->
-            <auto-completen [(ngModel)]="stbopt" (changed)="vcparing()" id="stbopt"
-            addclass="form-control" optValues="boxno"   name ="stbopt"
-            formControlName="stbopt" placeholder='Select STB Number'  optId="boxid"
-            [item]="listboxpair">
-          </auto-completen>
-
-
+          <select class="form-control" id="stbopt" [(ngModel)]="stbopt">
+            <option value="" selected>Select Model</option>
+            <option *ngFor="let item of listboxpair" [ngValue]="item.boxid">{{item.boxno}}
+            </option>
+          </select>
           </div>
 
               
           <div class="col-sm-3">
             <label>VC Number</label>
-            <!-- <input  class="form-control" type="text" list="boxlist" name="vc">             -->
-            <select 
-            name="vc" formControlName="vc" class="form-control"   [(ngModel)]="vc"
-            placeholder='Select VC Number ' >
-           <option *ngFor='let item of listvc' [ngValue]=item.vcid>{{item.vcno}}</option>
+            <select  name="vc"  class="form-control"  [(ngModel)]="vc" >
+            <option value="" selected>Select VC Number</option>
+           <option *ngFor='let item of listboxpair' [ngValue]=item.vcid>{{item.vcno}}</option>
            </select>
-
           </div>
         </div>
         <div class="form-group row">
@@ -124,7 +120,7 @@
             <label>CAS Name<span style="color:red">*</span></label>
             <auto-completen
            optValues="casname" name="castype" [(ngModel)]="castype"
-            formControlName="castype" (keyUp)="GetCas($event)"
+            (keyUp)="GetCas($event)"
           placeholder='Select CAS Name'  optId="casid"
             [item]="getcas">
           </auto-completen>
@@ -133,8 +129,8 @@
         <button type="button" class="btn btn-md btn-success" (click)='page=1;initiallist();'
         style="margin: auto; display: block;">Search</button>
       </div>
-    <div [formGroup]="Custform" class="col-sm-12">
-      <div class="form-group row">
+    <div [formGroup]="Custform" >
+      <div class="row">
         <div class="validation-checkboxes">
           <div class="col-sm-2">
             <div class="custom-control custom-checkbox">
@@ -176,12 +172,7 @@
             </div>
           </div>
 
-          <div class="col-sm-2">
-            <div class="custom-control custom-checkbox">
-              <input type="checkbox" class="custom-control-input" id="stb_check" formControlName="stb_check" />
-              <label class="custom-control-label" for="stb_check">STB Number</label>
-            </div>
-          </div>
+          
         </div>
       </div>
       <div class="row">
@@ -210,18 +201,25 @@
               <label class="custom-control-label" for="mob_check">Moblie Number</label>
             </div>
           </div>
-          <div class="col-sm-2">
+          <!-- <div class="col-sm-2">
             <div class="custom-control custom-checkbox">
               <input type="checkbox" class="custom-control-input" id="optname_check" formControlName="optname_check" />
               <label class="custom-control-label" for="optname_check">Operator Name</label>
             </div>
-          </div>
+          </div> -->
+
           <div class="col-sm-2">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="stb_check" formControlName="stb_check" />
+              <label class="custom-control-label" for="stb_check">STB Number</label>
+            </div>
+          </div>
+          <!-- <div class="col-sm-2">
             <div class="custom-control custom-checkbox">
               <input type="checkbox" class="custom-control-input" id="loc_check" formControlName="loc_check" />
               <label class="custom-control-label" for="loc_check">Location</label>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -308,7 +306,7 @@
         </td>
         <!-- <td [hidden]='!Custform.value["cas_check"]'>{{item.model_name}}</td> -->
         <!-- <td [hidden]='!Custform.value["stb_check"]'>{{item.SNo}}</td> -->
-        <td [hidden]="!Custform.value['vc_check']">{{ item.boxno }}</td>
+        <td [hidden]="!Custform.value['stb_check']">{{ item.boxno }}</td>
         <!-- <td>{{item.a_la_cart==0?'BasePack':item.a_la_cart==4? 'Boquet':N/A}}</td> -->
         <!-- <td>{{item.pack_name}}</td> -->
         <!-- <td [hidden]='!Custform.value["act_check"]'>{{item.active_date | date : 'd MMM y h:mm:ss a'}}</td>

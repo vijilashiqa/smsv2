@@ -52,6 +52,7 @@ export class AddstockComponent implements OnInit {
     this.createForm();
     this.gethsnlistg();
     this.getHeadend();
+    this.getModel();
   }
   async getVendor() {
     this.getvendorlist = await this.stock.getstockvendor({ hdid: this.StockInForm.value['hdid'] });

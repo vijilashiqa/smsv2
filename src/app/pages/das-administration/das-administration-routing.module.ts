@@ -27,6 +27,7 @@ import { SmsGatelistComponent } from './sms-gatelist/sms-gatelist.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { EdituserprofileComponent } from './edituserprofile/edituserprofile.component';
 import { ListuserprofileComponent } from './Listuserprofile/Listuserprofile.component';
+import { EditUserComponent } from './edit-user/edit-user.component';
 
 const routes: Routes = [
 
@@ -163,7 +164,11 @@ const routes: Routes = [
     component: EdituserprofileComponent
 
   },
-
+{
+    path :'edit-user',
+    component :EditUserComponent
+  }
+,
   {
 
     path: 'listuser-profile',

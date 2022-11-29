@@ -55,7 +55,6 @@ export class AddbroadcasterComponent implements OnInit {
     await this.createForm();
     await this.getCountry();
     await this.getHeadend();
-//   await this.getarea();
     this.id = this.aRoute.snapshot.queryParams.id;
     if (this.id) {
       console.log('id.................', this.id);

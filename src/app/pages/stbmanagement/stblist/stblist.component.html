@@ -1,72 +1,112 @@
 <nb-card>
     <nb-card-header>List STB <a class="right" (click)="search=!search">Advanced Search</a></nb-card-header>
     <nb-card-body>
-      <!-- <toaster-container></toaster-container> -->
      <button status="success" nbButton  [routerLink]="['/pages/stbmanagement/addstb']">ADD STB</button> &nbsp;
      <button status="success" nbButton (click)="addpair()">Pair/unpair</button>
-
-     <!-- <button status="success" nbButton  [routerLink]="['/pages/stbmanagement/stbparing']">Pair/Unparing</button> -->
-
-     
-     <!--   <button  class="btn btn-sm btn-success" (click)='paring()'>Pair/Unpair</button>
       <label class="right">
-        <h5>STB Count </h5>
+        <h5>STB Count : {{count}}</h5> 
       </label>
-      <hr style="border: 0px;">
+      <!-- <hr style="border: 0px;"> -->
       <form [hidden]='!search' class="form-horizontal">
         <div class="modal-body">
           <div class="form-group row">
-            <div class="col-sm-3">
+            <div class="col-sm-3" (change)="getoperator();getModel();boxparing()">
               <label>Headend</label>
-              <select (change)='opt=[];getoperator();' name="headend" class="form-control">
+              <select name="headend" class="form-control" [(ngModel)]="headend">
                 <option value="">Select Headend</option>
+                <option *ngFor="let item of listhead" [ngValue]="item.hdid">
+                  {{ item.hdname }}
+                </option>
+              </select>
+            </div>
+            <div class="col-sm-3" (change)="getoperator()">
+              <label>Operator Type</label>
+              <select class="form-control" name="op_type" [(ngModel)]="op_type">
+                <option value="" selected>Select Operator Type</option>
+                <option value="444">LCO</option>
+                <option value="666">Distributor</option>
+                <option value="555">Sub-Distributor</option>
+                <option value="333">Hotel</option>
               </select>
             </div>
             <div class="col-sm-3">
+              <label>Operator Name</label>
+              <auto-completen
+                addclass="form-control"
+                optValues="profileid"
+                name="operator_name"
+                placeholder="Select Operator"
+                Id="id"
+                [(ngModel)]="profileid"
+                [item]="operatortypelist">
+              </auto-completen>
             </div>
-            <div class="col-sm-3">
-            </div>
-            <div class="col-sm-3">
-              
-            </div>
-          </div>
-          <div class="form-group row">
+
             <div class="col-sm-3">
               <label>STB Status</label>
-              <select name="status" class="form-control">
+              <select name="status" class="form-control"   [(ngModel)]="status" >
                 <option value="" selected>Select Status</option>
                 <option value="1">Active</option>
-                <option value="0">Inactive</option>
+                <option value="2">Inactive</option>
               </select>
             </div>
-            <div class="col-sm-3">
-              <label>STB Model</label>
-              <select (change)='vc="";stbopt="";getSTB();getVc();' name="model_opt" 
-                class="form-control">
-                <option value="" selected>Select STB Model</option>
-              </select>
-            </div>
-  
-            <div class="col-sm-3">
 
-            
-            </div>
-            <div class="col-sm-3">
-             
-            </div>
           </div>
           <div class="form-group row">
-            <div class="col-sm-3">
-              <label>Pair/Unpair</label>
-              <select  name="pair" class="form-control">
-                <option value="" selected>Select </option>
-                <option value="1">Paired</option>
-                <option value="0">Unpaired</option>
-              </select>
-            </div>
+           <div class="col-sm-3">
+            <label>STB Model</label>
+            <select name="model_opt" class="form-control" [(ngModel)]="modelname">
+              <option value="">Select Model</option>
+              <option *ngFor="let item of getmodellist" [ngValue]="item.bmid">
+                {{ item.modelname }}
+              </option>
+            </select>
+          </div>
+          <div class="col-sm-3" >
+            <label>STB  Number</label>
+            <!-- <auto-completen [(ngModel)]="stbopt" (changed)="vcparing()" id="stbopt"
+            addclass="form-control" optValues="boxno"   name ="stbopt"
+            placeholder='Select STB Number'  optId="boxid"
+            [item]="listboxpair">
+          </auto-completen> -->
+          <select name="stbopt" class="form-control" [(ngModel)]="stbopt">
+            <option value=""> Select STB  Number</option>
+            <option *ngFor="let item of listboxpair" [ngValue]="item.boxid">
+              {{ item.boxno }}
+            </option>
+          </select>
+          </div>
+
+              
+          <div class="col-sm-3">
+            <label>VC Number</label>
+            <!-- <select 
+            name="vc"  class="form-control"   [(ngModel)]="vc"
+            placeholder='Select VC Number ' >
+           <option *ngFor='let item of listvc' [ngValue]=item.vcid>{{item.vcno}}</option>
+           </select> -->
+           <select name="vc" class="form-control" [(ngModel)]="vc">
+            <option value="">Select VC Numberr</option>
+            <option *ngFor="let item of listboxpair" [ngValue]="item.boxid">
+              {{ item.vcno }}
+            </option>
+          </select>
+          </div>
+
+          <div class="col-sm-3">
+            <label>Pair/Unpair</label>
+            <select  name="pair" class="form-control" [(ngModel)]="pair">
+              <option value="" selected>Select </option>
+              <option value="1">Paired</option>
+              <option value="0">Unpaired</option>
+            </select>
+          </div>
+          </div>
+          <div class="form-group row">
+           
             <div class="col-sm-3">
               <label>Assigned/Unassigned</label>
-              <select name="assign" class="form-control">
+              <select name="assign" class="form-control"  [(ngModel)]="assign" >
                 <option value="" selected>Select </option>
                 <option value="1">Assigned</option>
                 <option value="0">Unassigned</option>
@@ -75,80 +115,26 @@
   
             <div class="col-sm-3">
               <label>From Created Date</label>
-              <input type="text" [owlDateTime]="from_date_layout"
-                [owlDateTimeTrigger]="from_date_layout" name="from_date" placeholder="Select Date "
+              <input type="date"  [(ngModel)]="from_date" name="from_date" placeholder="Select Date "
                 class="form-control" />
-              <owl-date-time [pickerType]="'calendar'" #from_date_layout></owl-date-time>
             </div>
             <div class="col-sm-3">
               <label>To Created Date</label>
-              <input type="text"  [owlDateTime]="to_date_layout"
-                [owlDateTimeTrigger]="to_date_layout" name="to_date" placeholder="Select Date " class="form-control" />
-              <owl-date-time [pickerType]="'calendar'" #to_date_layout></owl-date-time>
+              <input type="date"  [(ngModel)]="to_date"  name="to_date" placeholder="Select Date " class="form-control" />
             </div>
           </div>
   
           <button type="button" class="btn btn-md btn-success" (click)='initiallist();'
             style="margin: auto; display: block;">Search</button>
-          <div class="col-sm-12">
-            <div class="form-group row">
-              <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input " name="status_check" id="status_check"
-                  />
-                <label class="custom-control-label" for="status_check">STB Status</label>
-              </div>
-              <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input " name="cas_check" id="cas_check"
-                  />
-                <label class="custom-control-label" for="cas_check">STB Model</label>
-              </div>
-              <div class="custom-control custom-checkbox" >
-                <input type="checkbox" class="custom-control-input " name="id_check" id="id_check"
-                  />
-                <label class="custom-control-label" for="id_check">STB ID</label>
-              </div>
-              <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input " name="stb_check" id="stb_check"
-                 />
-                <label class="custom-control-label" for="stb_check">STB Number</label>
-              </div>
-              <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input " name="vc_check" id="vc_check"
-                 />
-                <label class="custom-control-label" for="vc_check">VC Number</label>
-              </div>
-               </div> -->
-              <!-- <div class="form-group row"> -->
-              <!-- <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input " name="act_check" id="act_check"
-                  />
-                <label class="custom-control-label" for="act_check">Start Date</label>
-              </div>
-              <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input " name="exp_check" id="exp_check"
-                 />
-                <label class="custom-control-label" for="exp_check">End Date</label>
-              </div>
-              <div  class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input " name="optname_check" id="optname_check"
-                  />
-                <label class="custom-control-label" for="optname_check">Operator Name</label>
-              </div>
-              <div>
-                <input type="checkbox" class="custom-control-input " name="lco_check" id="lco_check"
-                 />
-                <label class="custom-control-label" for="lco_check">Location</label>
-              </div>
-            </div>
-          </div>
+   
         </div>
       </form>
-       -->
-      <!-- <div class="row">
-        <div class="col-md-12">
+       
+      <div class="row">
+        <!-- <div class="col-md-12">
           <i (click)="Download();" class="green right fa fa-file-excel" ></i>
-        </div>
-      </div> -->
+        </div> -->
+      </div>
       <table class="table table-condensed table-hover">
         <tr>
           <!-- <th>Action</th> -->

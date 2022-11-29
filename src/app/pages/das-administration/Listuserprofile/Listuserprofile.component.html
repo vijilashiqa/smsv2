@@ -5,13 +5,20 @@
       <table class="table">
         <tr>
           <th [hidden]>Action</th>
-          <th>Profile ID</th>
+          <th>ID</th>
           <th>Profile Name</th>
+          <th>Role Name</th>
+          <th>Business Name</th>
+          <th></th>
         </tr>
         <tr *ngFor="let item of pagedItems">
           <td ><a (click)='edit(item);'><i class="nb-edit"></i></a></td>
           <td>{{item.id}}</td>
-            <td>{{item.rolename}}</td>
+            <td>{{item.profileid}}</td>
+            <td>{{item.rolename | uppercase}}</td>
+            <td>{{item.fullname}}</td>
+         
+
         </tr>
       </table>
     </nb-card-body>

@@ -1,12 +1,12 @@
 <nb-card>
   <nb-card-body>
-    <nb-card-header>List Operator 
+    <nb-card-header>List Operator
       <a style="text-align: right; float: right" (click)="search = !search">Advanced Search</a>
     </nb-card-header>
     <button status="success" nbButton [routerLink]="['/pages/users/add-user']">
       Create
     </button>
- 
+
     <div class="row">
       <!-- <div class="col-md-6">
         <i class="green right fa fa-file-excel" aria-hidden="true"></i>
@@ -17,9 +17,9 @@
         </label>
 
       </div>
-    </div>  
+    </div>
     <!-- <form autocomplete="off" [hidden]="!search" class="form-horizontal"> -->
-      <div class="modal-body" autocomplete="off" [hidden]="!search">
+    <div class="modal-body" autocomplete="off" [hidden]="!search">
       <div class="form-group row">
         <div class="col-sm-3" (change)="getoperator()">
           <label>Headend</label>
@@ -42,37 +42,23 @@
         </div>
         <div class="col-sm-3">
           <label>Operator Name</label>
-          <auto-completen
-            addclass="form-control"
-            optValues="business_name"
-            name="operator_name"
-            (changed)="listoperator()"
-            placeholder="Select Operator"
-            Id="id"
-            [item]="operatortypelist"
-          >
+          <auto-completen addclass="form-control"  [(ngModel)]="profileid" optValues="profileid" name="operator_name" (changed)="listoperator()"
+            placeholder="Select Operator" Id="id" [item]="operatortypelist">
           </auto-completen>
         </div>
         <div class="col-sm-3">
           <label>Status</label>
-          <select name="status" class="form-control">
+          <select name="status" [(ngModel)]="status" class="form-control">
             <option value="" selected="true">Select Status</option>
             <option value="1">Active</option>
             <option value="0">Inactive</option>
           </select>
         </div>
       </div>
+      
+      <button type="button" class="btn btn-md btn-success" (click)='page=1;initiallist();'
+      style="margin: auto; display: block;">Search</button>
     </div>
-  
-    <button
-      type="button"
-      class="btn btn-md btn-success"
-      style="margin: auto; display: block"
-    >
-      Search
-    </button>
-  <!-- </form> -->
- 
     <table class="table">
       <tr>
         <th>Action</th>
@@ -85,81 +71,24 @@
         <th>Mobile Number</th>
         <th>Email</th>
       </tr>
-
       <tr *ngFor="let item of pagedItems">
         <div class="form-group">
           <div class="btn-group">
-            <button
-              type="button"
-              class="btn btn-sm btn-success dropdown-toggle"
-              data-bs-toggle="dropdown"
-            >
+            <button type="button" class="btn btn-sm btn-success dropdown-toggle" data-bs-toggle="dropdown">
               Action
             </button>
             <div class="dropdown-menu" style="min-width: 0rem">
-              <a
-                class="dropdown-item"
-                style="cursor: pointer"
-                [routerLink]="['/pages/users/edit-user']"
-                [queryParams]="{ id: item.id }"
-              >
+              <a class="dropdown-item" style="cursor: pointer" [routerLink]="['/pages/users/edit-user']"
+                [queryParams]="{ id: item.id }">
                 <i title="Edit Complaint" class="far fa-edit"></i>&nbsp;Edit
               </a>
-              <a
-                class="dropdown-item"
-                style="cursor: pointer"
-                (click)="update(item)"
-              >
+              <a class="dropdown-item" style="cursor: pointer" (click)="update(item)">
                 <i class="far fa-edit" title="Edit Complaint"></i>&nbsp;HD CAS
               </a>
             </div>
           </div>
-          <!-- </div> -->
         </div>
-
-        <!-- 
-        <div mdbDropdown class="dropdown">
-          <button
-            class="btn btn-primary dropdown-toggle"
-            type="button"
-            id="dropdownMenu2"
-            mdbDropdownToggle
-            aria-expanded="false"
-          >
-            Dropdown
-          </button>
-          <ul mdbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownMenu2">
-            <li><button class="dropdown-item" type="button">Action</button></li>
-            <li><button class="dropdown-item" type="button">Another action</button></li>
-            <li>
-              <button class="dropdown-item" type="button">Something else here</button>
-            </li>
-          </ul>
-        </div>
-
-
- -->
-        <!-- <div ngbDropdown class="d-inline-block">
-  <button type="button" class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Toggle dropdown</button>
-  <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-    <button ngbDropdownItem>Action - 1</button>
-    <button ngbDropdownItem>Another Action</button>
-    <button ngbDropdownItem>Something else is here</button>
-  </div>
-</div> -->
-
-        <!-- <tr *ngFor="let item of pagedItems"> -->
-        <!-- <td><i class="nb-edit"></i></td> -->
         <td>{{ item.id }}</td>
-        <!-- <td>
-          <i [ngStyle]="{ color: item.status == 1 ? 'green' : 'red' }" [ngClass]="{
-              'ion-close-round': item.status == 0 ? true : false,
-              'ion-checkmark-round': item.status != 0 ? true : false
-            }" [attr.title]="item.status == 1 ? 'Active' : 'Deactive'"></i>
-        </td> -->
-        <!-- <td>
-            {{item.user_type == 0 ? 'Admin':item.user_type == 1 ? 'LCO':item.user_type == 2 ? 'Distributer':item.user_type == 3 ? 'SubDistributor': 'Broadcaster'}}
-          </td> -->
         <td>{{ item.hdname }}</td>
         <td>{{ item.rolename }}</td>
         <td>{{ item.profileid }}</td>
@@ -171,32 +100,14 @@
     </table>
     <div class="pagination">
       <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
-        <a
-          [ngClass]="{ disabled: pager.currentPage === 1 }"
-          (click)="page = 1; getUserList()"
-          >First</a
-        >
-        <a
-          [ngClass]="{ disabled: pager.currentPage === 1 }"
-          (click)="page = page - 1; getUserList()"
-          >Previous</a
-        >
-        <a
-          *ngFor="let page of pager.pages"
-          [ngClass]="{ active: pager.currentPage === page }"
-          (click)="getUserList(page)"
-          >{{ page }}</a
-        >
-        <a
-          [ngClass]="{ disabled: pager.currentPage === pager.totalPages }"
-          (click)="page = page + 1; getUserList()"
-          >Next</a
-        >
-        <a
-          [ngClass]="{ disabled: pager.currentPage === pager.totalPages }"
-          (click)="page = pager.totalPages; getUserList()"
-          >Last</a
-        >
+        <a [ngClass]="{ disabled: pager.currentPage === 1 }" (click)="page = 1; getUserList()">First</a>
+        <a [ngClass]="{ disabled: pager.currentPage === 1 }" (click)="page = page - 1; getUserList()">Previous</a>
+        <a *ngFor="let page of pager.pages" [ngClass]="{ active: pager.currentPage === page }"
+          (click)="getUserList(page)">{{ page }}</a>
+        <a [ngClass]="{ disabled: pager.currentPage === pager.totalPages }"
+          (click)="page = page + 1; getUserList()">Next</a>
+        <a [ngClass]="{ disabled: pager.currentPage === pager.totalPages }"
+          (click)="page = pager.totalPages; getUserList()">Last</a>
       </ul>
     </div>
   </nb-card-body>

@@ -60,4 +60,28 @@ async resetpassword(params){
 
   return await this.http.post("/operator/resetpassword",params).toPromise();
 } 
+
+
+async listuser(params){
+
+  return await this.http.post("/operator/profilelistrole",params).toPromise();
+}
+
+
+async getprofilerole(params){
+
+  return await this.http.post("/operator/getprofilerole",params).toPromise();
+}
+
+async profileeditrole(params){
+
+  return await this.http.post("/operator/profileeditrole",params).toPromise();
+}
+
+
+async searchoperator (params){
+
+  return await this.http.post("/operator/searchoperator",params).toPromise();
+}
+
 }

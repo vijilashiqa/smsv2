@@ -4,100 +4,74 @@
   <nb-card-body>
     <!-- <toaster-container></toaster-container> -->
     <button
-    status="success" nbButton
+      status="success"
+      nbButton
       [routerLink]="['/pages/channelcategory/addpackage']"
     >
       Add
     </button>
-    <hr style="border: 0px" />
     <div class="form-group row">
-      <div class="col-sm-4">
+      <div class="col-sm-3">
         <label>Headend</label>
-        <select
-          (change)="
-            opt = [];
-            getoperator();
-            operator_name = '';
-            getpack();
-            package = '';
-            cas = [];
-            getcas();
-            cas_type = '';
-            getbroadcaster();
-            broadlist = [];
-            broadcaster = ''
-          "
-          name="headend"
-          class="form-control"
-        >
+        <select name="headend" class="form-control" (change)="Getbroadcasteredit();getpackage()"  [(ngModel)]="headend" >
           <option value="">Select Headend</option>
-          <!-- <option *ngFor="let item of head" [value]=item.headend_pk>{{item.headend_name}}</option> -->
+          <option *ngFor="let item of listhead" [value]="item.hdid">
+            {{ item.hdname }}
+          </option>
         </select>
       </div>
-      <div class="col-sm-4">
+      <div class="col-sm-3" (change)='getpackage();'>
         <label>Pack Type</label>
-        <select
-          (change)="package = ''; pack = []; getpack()"
-          class="form-control"
-          id="pack_type"
-        >
-          <option value="">All</option>
-          <option value="0">Base Pack</option>
+        <select  class="form-control" id="pack_type" 
+          [(ngModel)]="pack_type">
+          <option value="" selected>Select Pack Type</option>
+          <option value="0">Base Package</option>
           <option value="1">A-La-Carte</option>
           <option value="2">Add-On Package</option>
-          <option value="4">Bundle Pack</option>
+          <option value="3">Bundle Package</option>
         </select>
       </div>
-      <div class="col-sm-4">
+      <div class="col-sm-3">
         <label>Package</label>
-        <!-- <select class="form-control" id="package" [(ngModel)]="package">
-            <option value="">Select Package</option>
-            <option style="text-transform: uppercase;" *ngFor='let item of pack' [ngValue]='item.packid'>
-              {{item.pack_name}}</option>
-          </select> -->
+        <select class="form-control" id="package" [(ngModel)]="package">
+          <option value="" selected>Select Package</option>
+          <option *ngFor="let item of getpackagelist" [ngValue]="item.packid">
+            {{ item.packname }}
+          </option>
+        </select>
       </div>
-      <!--  <div class="col-sm-4" *ngIf='role.getroleval()>699'>
-                              <label>Operator Type</label>
-                                <select (change)='opt=[];getoperator();' name="op_type" [(ngModel)]="op_type" class="form-control" >
-                                  <option value="" selected>Select Operator Type</option>
-                                  <option value="1">LCO</option>
-                                  <option value="2">Distributor</option>
-                                  <option value="3">SubDistributor</option>
-                                </select>
-                             </div>
-            <div class="col-sm-4" *ngIf='role.getroleval()>443'>
+      <div class="col-sm-3">
+        <label>Broadcaster</label>
+        <select name="broadcaster" class="form-control"  [(ngModel)]="broadcaster" >
+          <option value="">Select Broadcaster</option>
+          <option *ngFor="let item of broadcast" [ngValue]=item.bcid>{{item.fullname}}</option>
+        </select>
+      </div>
+    </div>
+    <!-- <div class="form-group row"> -->
+    
+      <!-- </div> -->
+      <!-- <div class="col-sm-4">
+        <label>Operator Type</label>
+        <select
+          (change)="opt = []; getoperator()"
+          name="op_type"
+          [(ngModel)]="op_type"
+          class="form-control"
+        >
+          <option value="" selected>Select Operator Type</option>
+          <option value="1">LCO</option>
+          <option value="2">Distributor</option>
+          <option value="3">SubDistributor</option>
+        </select>
+      </div> -->
+      <!-- <div class="col-sm-4" >
               <auto-complete (keyup)="getoperator($event.target.value)"  name='operator_name' (item_id)='operator_name=$event; pack=[];getpack();' placeholder='Select Operator' label='Operator Name' [item]=opt ></auto-complete>
             </div> -->
-    </div>
-    <!--  <div  class="form-group row">
-                 
-           <div class="col-sm-4">
-                              <label>Pack Type</label>
-                              <select (change)='package="";pack=[];getpack();' class="form-control" id = "pack_type" [(ngModel)] = "pack_type">
-                                  <option value="">All</option>
-                                  <option value="0" >Base Pack</option>
-                                  <option value="1" >A-La-Carte</option>
-                                  <option value="2" >Add-On Package</option>
-                                  <option value="4" >Bundle Pack</option>
-                              </select>
-                            </div>
-                            <div class="col-sm-4">
-                              <label>Package</label>
-                              <select  class="form-control" id = "package" [(ngModel)] = "package">
-                                  <option value="">Select Package</option>
-                                  <option *ngFor='let item of pack' [ngValue]='item.packid'>{{item.pack_name}}</option>
-                              </select>
-                            </div>
-                            <div class="col-sm-4">
-                              <label>CAS Type</label>
-                              <select class="form-control" id = "cas_type" [(ngModel)] = "cas_type">
-                                  <option value="">All</option>
-                                 <option *ngFor="let item of cas" [value]=item.cas_id_pk>{{item.cas_name}}</option>
-                              </select>
-                            </div>
-                          </div> -->
+
+
     <div class="form-group row">
-      <div class="col-sm-4">
+      <!-- <div class="col-sm-4">
         <label>Prod ID</label>
         <input
           type="text"
@@ -105,14 +79,8 @@
           placeholder="Prod ID"
           class="form-control"
         />
-      </div>
-      <div class="col-sm-4">
-        <label>Broadcaster</label>
-        <select name="broadcaster" class="form-control">
-          <option value="">Select Broadcaster</option>
-          <!-- <option *ngFor="let item of broadlist" [value]=item.brodcaster_pk>{{item.broadcaster_name}}</option> -->
-        </select>
-      </div>
+      </div> -->
+   
     </div>
     <button
       type="button"
@@ -122,11 +90,13 @@
     >
       Search
     </button>
+
+    &nbsp;&nbsp;&nbsp;
     <hr style="border: 0px" />
     <div class="row">
       <div class="col-md-12">
         <label class="left">
-          <!-- <h5>Package Count : {{data[1]['count']}}</h5> -->
+          <h5>Package Count : {{count}}</h5>
         </label>
         <i
           (click)="Download()"

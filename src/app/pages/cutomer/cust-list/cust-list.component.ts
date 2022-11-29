@@ -49,7 +49,7 @@ export class CustListComponent implements OnInit {
     this.getModel();
     this.GetCas();
     this.boxparing();
-    this.vcparing();
+    // this.vcparing();
     this.getpackage();
   }
   async initiallist() {
@@ -83,7 +83,6 @@ export class CustListComponent implements OnInit {
   }
 
 async getpackage(){
-
  this.getpackagelist = await this.packageser.searchpack({  hdid: this.headend  , packtype :this.pack_type})
  console.log("get package ",this.getpackagelist)
 }
@@ -93,29 +92,29 @@ async getpackage(){
     console.log('listboxpair', this.listboxpair)
   }
 
-  async vcparing() {
-    let boxno = this.stbopt;
-    console.log('listboxpair in funxction', this.listboxpair)
-    const boxvc_data = this.listboxpair?.filter(x => x.boxid == boxno)
-    console.log('stbno in aarray', boxno)
-    console.log('vcid', boxvc_data);
-    this.pair_status = boxvc_data.pairflg;
-    this.listvc = [];
-    if (boxvc_data.vcid) {
-      console.log("boxdata@@@@@@@@", boxvc_data.vcid)
-      this.listvc = [{ vcid: boxvc_data.vcid, vcno: boxvc_data.vcno }]
-      console.log('listvc**********', this.listvc)
-    } else {
-      const data = []
-      let vclist = this.listboxpair.filter(x => x.vcno !== 0 && x.vcno !== null).reduce((a, v) => {
-        const value = { vcid: v.vcid, vcno: v.vcno }
-        data.push(value)
-        return data
-      }, [])
-      this.listvc = vclist
-      console.log('vclist', vclist);
-    }
-  }
+  // async vcparing() {
+  //   let boxno = this.stbopt;
+  //   console.log('listboxpair in funxction', this.listboxpair)
+  //   const boxvc_data = this.listboxpair?.filter(x => x.boxid == boxno)
+  //   console.log('stbno in aarray', boxno)
+  //   console.log('vcid', boxvc_data);
+  //   this.pair_status = boxvc_data.pairflg;
+  //   this.listvc = [];
+  //   if (boxvc_data.vcid) {
+  //     console.log("boxdata@@@@@@@@", boxvc_data.vcid)
+  //     this.listvc = [{ vcid: boxvc_data.vcid, vcno: boxvc_data.vcno }]
+  //     console.log('listvc**********', this.listvc)
+  //   } else {
+  //     const data = []
+  //     let vclist = this.listboxpair.filter(x => x.vcno !== 0 && x.vcno !== null).reduce((a, v) => {
+  //       const value = { vcid: v.vcid, vcno: v.vcno }
+  //       data.push(value)
+  //       return data
+  //     }, [])
+  //     this.listvc = vclist
+  //     console.log('vclist', vclist);
+  //   }
+  // }
 
 
   async GetCas($event = '') {

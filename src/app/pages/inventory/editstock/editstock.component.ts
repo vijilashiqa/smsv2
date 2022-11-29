@@ -26,7 +26,9 @@ export class EditstockComponent implements OnInit {
     private stock: StockService
   ) {
     this.getHeadend();
-    this.createForm()
+    this.createForm();
+    this.getModel();
+   // this.gethsnlistg();
   }
   async addstockIn() {
     this.submit = true;
@@ -76,7 +78,7 @@ export class EditstockComponent implements OnInit {
       await this.getVendor();
       await this.getlocation();
       await this.gethsnlistg();
-      this.getModel();
+     // this.getModel();
 
     }
 
