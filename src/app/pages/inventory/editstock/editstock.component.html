@@ -94,11 +94,8 @@
                     </select>
                     <div *ngIf="
                         this.editstockForm.controls.warranty_type.errors &&
-                        this.editstockForm.controls.warranty_type.errors
-                          .required &&
-                        submit
-                      " class="error-text">
-                      Warranty Type is required!
+                        this.editstockForm.controls.warranty_type.errors.required &&
+                        submit" class="error-text"> Warranty Type is required!
                     </div>
                   </div>
                 </div>

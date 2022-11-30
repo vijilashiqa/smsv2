@@ -49,7 +49,7 @@
             <label>Channel</label>
               <select name="broadcaster" [(ngModel)]='channel_name' class="form-control">
                 <option value="">Select Channel</option>
-                <option *ngFor="let item of selectchannel" [value]=item.chanid>{{item.channame}}</option>
+                <option *ngFor="let item of selectchannel" [ngValue]=item.chanid>{{item.channame}}</option>
               </select>
           </div>
           <div class="col-sm-3" >
@@ -73,10 +73,11 @@
   
       <table class="table">
         <tr>
-          <th >Action</th>
+          <th>Action</th>
           <th>Headend Name</th>
           <th>Broadcaster Name</th>
           <th>Channel Name</th>
+          <th>LCN Number</th>
           <th>Genre Name</th>
           <th>Language Name</th>
           <th>Status</th>
@@ -87,6 +88,7 @@
           <td>{{item.hdname}}</td>
           <td>{{item.fullname}}</td>
           <td>{{item.channame}}</td>
+          <td>{{item.chanlcm}}</td>
           <td>{{item.genrename}}</td>
           <td>{{item.langname}}</td>
           <!-- <td>{{item.channel_type==1?'Pay':item.channel_type==2? 'FTA':'Local Channel'}}</td> -->

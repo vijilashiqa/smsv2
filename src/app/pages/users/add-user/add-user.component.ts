@@ -110,11 +110,11 @@ export class AddUserComponent implements OnInit {
     this.createForm();
   }
   async listoperator() {
-    this.operatortypelist = await this.operator.listoperatortype({ usertype: 666, hdid: this.AddUserForm.value['hdid'] })
+    this.operatortypelist = await this.operator.searchoperator({ usertype: 666, hdid: this.AddUserForm.value['hdid'] })
     console.log('list operator', this.operatortypelist)
   }
   async subdistributor() {
-    this.subdistributortype = await this.operator.listoperatortype({ usertype: 555, hdid: this.AddUserForm.value['hdid'], distid: this.AddUserForm.value['distid'] })
+    this.subdistributortype = await this.operator.searchoperator({ usertype: 555, hdid: this.AddUserForm.value['hdid'], distid: this.AddUserForm.value['distid'] })
     console.log('list operator', this.subdistributortype)
   }
   taxpayby() {

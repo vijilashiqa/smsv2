@@ -332,7 +332,7 @@
                                     <label> Select Distributer Name<span style="color:red">*</span></label>
                                     <auto-completen
                                         [addclass]="{ 'error': submit && this.AddUserForm.controls.distid.errors }"
-                                        addclass="form-control" optValues="business_name" formControlName="distid"
+                                        addclass="form-control" optValues="profileid" formControlName="distid"
                                         (changed)="listoperator();subdistributor()"
                                         placeholder='Select Distributer Name' Id="id" [item]="operatortypelist">
                                     </auto-completen>
