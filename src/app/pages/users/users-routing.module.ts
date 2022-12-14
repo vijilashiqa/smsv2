@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AddUserComponent } from './add-user/add-user.component';
 import { CancelshareComponent } from './cancelshare/cancelshare.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
+import { RoleeditUserComponent } from './roleedit-user/roleedit-user.component';
 import { UserhdcasComponent } from './userhdcas/userhdcas.component';
 import { UserlistComponent } from './userlist/userlist.component';
 
@@ -29,10 +30,13 @@ const routes: Routes = [
 {
   path : 'userhdcas',
   component : UserhdcasComponent
-
-
 }
+,
 
+{
+path : 'role-user',
+component :RoleeditUserComponent
+}
 
 ];
 

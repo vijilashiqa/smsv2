@@ -105,7 +105,6 @@ export class AddbroadcasterComponent implements OnInit {
     this.citylist = await this.country.listcity({ district_id: this.AddBroadcasterForm.value['districtid'] });
   }
   async getarea($event = '') {
-  
     this.listarea = await this.country.listarea({ city_id:this.AddBroadcasterForm.value['cityid'] });
     console.log('area', this.listarea)
    

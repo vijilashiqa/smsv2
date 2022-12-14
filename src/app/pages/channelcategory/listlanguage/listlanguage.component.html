@@ -21,7 +21,7 @@
           <td><a (click)="Edit(item);" title="Update"><i class="nb-edit"></i></a></td> 
           <td>{{item.hdname}}</td>
           <td>{{item.langname}}</td>
-          <td><i [ngStyle]="{'color': item.status==1? 'green':'red'}"
+          <td><i [ngStyle]="{'color': item.status==1? 'red':'green'}"
               [ngClass]="{'ion-close-round':item.status==0 ? true:false,'ion-checkmark-round':item.status!=0 ? true:false  }"
               [attr.title]="item.status==1 ? 'Active' : 'Deactive'"></i></td>
         </tr>

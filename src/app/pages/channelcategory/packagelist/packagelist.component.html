@@ -3,27 +3,19 @@
   <nb-card-header>List Package</nb-card-header>
   <nb-card-body>
     <!-- <toaster-container></toaster-container> -->
-    <button
-      status="success"
-      nbButton
-      [routerLink]="['/pages/channelcategory/addpackage']"
-    >
+    <button status="success" nbButton [routerLink]="['/pages/channelcategory/addpackage']">
       Add
     </button>
     <div class="form-group row">
       <div class="col-sm-3">
         <label>Headend</label>
-        <select name="headend" class="form-control" (change)="Getbroadcasteredit();getpackage()"  [(ngModel)]="headend" >
-          <option value="">Select Headend</option>
-          <option *ngFor="let item of listhead" [value]="item.hdid">
-            {{ item.hdname }}
-          </option>
-        </select>
+        <auto-completen addclass="form-control" optValues="hdname" [(ngModel)]="headend" name="headend"
+          (changed)="Getbroadcasteredit()" placeholder="Select Headend" optId="hdid" [item]="listhead">
+        </auto-completen>
       </div>
-      <div class="col-sm-3" (change)='getpackage();'>
+      <div class="col-sm-3" (change)="getpackage()">
         <label>Pack Type</label>
-        <select  class="form-control" id="pack_type" 
-          [(ngModel)]="pack_type">
+        <select class="form-control" id="pack_type" [(ngModel)]="pack_type">
           <option value="" selected>Select Pack Type</option>
           <option value="0">Base Package</option>
           <option value="1">A-La-Carte</option>
@@ -33,61 +25,19 @@
       </div>
       <div class="col-sm-3">
         <label>Package</label>
-        <select class="form-control" id="package" [(ngModel)]="package">
-          <option value="" selected>Select Package</option>
-          <option *ngFor="let item of getpackagelist" [ngValue]="item.packid">
-            {{ item.packname }}
-          </option>
-        </select>
+        <auto-completen addclass="form-control" optValues="packname" [(ngModel)]="package" name="package"
+          placeholder="Select Package" optId="packid" [item]="getpackagelist">
+        </auto-completen>
       </div>
       <div class="col-sm-3">
         <label>Broadcaster</label>
-        <select name="broadcaster" class="form-control"  [(ngModel)]="broadcaster" >
-          <option value="">Select Broadcaster</option>
-          <option *ngFor="let item of broadcast" [ngValue]=item.bcid>{{item.fullname}}</option>
-        </select>
+        <auto-completen addclass="form-control" optValues="fullname" [(ngModel)]="bcid" name="bcid" id="bcid"
+          placeholder="Select Broadcaster" optId="id" [item]="broadcast">
+        </auto-completen>
       </div>
     </div>
-    <!-- <div class="form-group row"> -->
-    
-      <!-- </div> -->
-      <!-- <div class="col-sm-4">
-        <label>Operator Type</label>
-        <select
-          (change)="opt = []; getoperator()"
-          name="op_type"
-          [(ngModel)]="op_type"
-          class="form-control"
-        >
-          <option value="" selected>Select Operator Type</option>
-          <option value="1">LCO</option>
-          <option value="2">Distributor</option>
-          <option value="3">SubDistributor</option>
-        </select>
-      </div> -->
-      <!-- <div class="col-sm-4" >
-              <auto-complete (keyup)="getoperator($event.target.value)"  name='operator_name' (item_id)='operator_name=$event; pack=[];getpack();' placeholder='Select Operator' label='Operator Name' [item]=opt ></auto-complete>
-            </div> -->
-
-
-    <div class="form-group row">
-      <!-- <div class="col-sm-4">
-        <label>Prod ID</label>
-        <input
-          type="text"
-          name="prod_id"
-          placeholder="Prod ID"
-          class="form-control"
-        />
-      </div> -->
-   
-    </div>
-    <button
-      type="button"
-      class="btn btn-md btn-success"
-      (click)="initiallist()"
-      style="margin: auto; display: block"
-    >
+    <div class="form-group row"></div>
+    <button type="button" class="btn btn-md btn-success" (click)="initiallist()" style="margin: auto; display: block">
       Search
     </button>
 
@@ -96,13 +46,9 @@
     <div class="row">
       <div class="col-md-12">
         <label class="left">
-          <h5>Package Count : {{count}}</h5>
+          <h5>Package Count : {{ count }}</h5>
         </label>
-        <i
-          (click)="Download()"
-          class="green right fa fa-file-excel"
-          aria-hidden="true"
-        ></i>
+        <i (click)="Download()" class="green right fa fa-file-excel" aria-hidden="true"></i>
       </div>
     </div>
     <div style="overflow: scroll">
@@ -110,9 +56,10 @@
         <thead>
           <tr>
             <th>Action</th>
+            <th>Headend Name</th>
             <th>Package ID</th>
             <th>Package Type</th>
-            <th>Package Name</th>
+            <th>Broadcaster Name</th>
             <th>View Channels</th>
             <th>Service Type</th>
             <th>CAS Product Name</th>
@@ -123,41 +70,25 @@
         <tbody>
           <ng-container *ngFor="let item of pagedItems; let i = index">
             <div style="display: table-row">
-              <td
-                style="cursor: pointer"
-                [routerLink]="['/pages/channelcategory/editpackage']"
-                [queryParams]="{ id: item.packid }"
-              >
+              <td style="cursor: pointer" [routerLink]="['/pages/channelcategory/editpackage']"
+                [queryParams]="{ id: item.packid }">
                 <i class="nb-edit"></i>
               </td>
-              <!-- <td ><a (click)="Edit(item.packid);"><i class="nb-edit"></i></a></td> -->
+              <td>{{ item.hdname }}</td>
               <td>{{ item.packid }}</td>
+              <td>{{ item.fullname }}</td>
               <td>
                 {{
-                  item.packtype == 0
-                    ? "BasePackage"
-                    : item.packtype == 1
-                    ? "ALaCarte"
-                    : item.packtype == 2
-                    ? "AddOn Pack"
-                    : item.packtype == 3
-                    ? "Bundle Pack"
-                    : N / A
+                item.packtype == 0 ? "BasePackage" : item.packtype == 1 ? "ALaCarte": item.packtype == 2 ? "AddOn Pack": item.packtype == 3 ? "Bundle Pack": N / A
                 }}
               </td>
               <td style="cursor: pointer" (click)="packshare(i)">
-                <i
-                  [ngClass]="{
+                <i [ngClass]="{
                     'fa-caret-down': index != i,
                     fas: true,
                     'fa-caret-up': index == i
-                  }"
-                ></i
-                ><b> {{ item.packname }}</b>
+                  }"></i><b> {{ item.packname }}</b>
               </td>
-              <!-- <td>
-                  <i class="fas fa-tv" nbPopover="{{item.channelid}}" nbPopoverPlacement="top"></i>
-                </td>  -->
               <td *ngIf="item.packtype != 3">
                 <p (click)="channels(item)">
                   <i class="fas fa-tv" nbPopoverPlacement="top"></i>
@@ -167,14 +98,10 @@
               <td>{{ item.srvtype == 0 ? "Prepaid" : "Postpaid" }}</td>
               <td>{{ item.channame }}</td>
               <td>
-                <i
-                  [ngStyle]="{ color: item.enable_tax == 1 ? 'green' : 'red' }"
-                  [ngClass]="{
+                <i [ngStyle]="{ color: item.enable_tax == 1 ? 'green' : 'red' }" [ngClass]="{
                     'ion-close-round': item.enable_tax == 0 ? true : false,
                     'ion-checkmark-round': item.enable_tax != 0 ? true : false
-                  }"
-                  [attr.title]="item.enable_tax == 1 ? 'Active' : 'Deactive'"
-                ></i>
+                  }" [attr.title]="item.enable_tax == 1 ? 'Active' : 'Deactive'"></i>
               </td>
               <td>{{ item.tax_type == 0 ? "Include" : "Exclude" }}</td>
             </div>
@@ -182,6 +109,8 @@
               <tr *ngIf="share.length != 0">
                 <th>Operator Name</th>
                 <th>Broadcaster Share</th>
+                <th>Broadcaster Name</th>
+                <th></th>
                 <th>MSO Share</th>
                 <th>Distributer Share</th>
                 <th>Sub-Distributor Share</th>
@@ -189,24 +118,8 @@
                 <th>MSO Price</th>
                 <th>Customer Price</th>
               </tr>
-              <!-- <tr *ngFor='let item of share;'>
-  
-                  <td>{{item.fname+''+item.lname}}</td>
-                  <td>{{item.broadcaster_share}}</td>
-                  <td>{{item.mso_share}}</td>
-                  <td>{{item.dist_share}}</td>
-                  <td>{{item.sub_dist_share}}</td>
-                  <td>{{item.lco_share}}</td>
-                  <td>{{item.mso_price}}</td>
-                  <td>{{item.cust_price}}</td>
-  
-                </tr> -->
               <tr>
-                <td
-                  *ngIf="share.length == 0"
-                  colspan="7"
-                  style="text-align: center"
-                >
+                <td *ngIf="share.length == 0" colspan="7" style="text-align: center">
                   <h5><b>No Data Found</b></h5>
                 </td>
               </tr>

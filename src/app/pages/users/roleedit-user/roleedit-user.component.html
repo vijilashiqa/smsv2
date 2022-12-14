@@ -1,0 +1,23 @@
+<div class="col-md-12">
+    <nb-card>
+      <nb-card-header>{{edit ? 'Update': 'Create' }} Profile</nb-card-header>
+      <nb-card-body>
+        <form [formGroup]="roledituser" class="form-horizontal" (ngSubmit)="AddProfile();">
+          <nb-tabset>
+            <nb-tab tabTitle="Profile Role">
+              <div class="modal-body">
+                <div style="padding-left: 5%;">
+                <tree-root #tree [nodes]="nodes" [options]="options"></tree-root>
+              </div>
+              </div>
+            </nb-tab>
+          </nb-tabset>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-md btn-success">{{edit? 'Update': 'Create' }}</button>
+            <button type="button" class="btn btn-md btn-danger"
+              [routerLink]="['/pages/Administration/profilelist']">back</button>
+          </div>
+        </form>
+      </nb-card-body>
+    </nb-card>
+  </div>

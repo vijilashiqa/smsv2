@@ -9,17 +9,17 @@ import { PackagechannelComponent } from '../packagechannel/packagechannel.compon
   styleUrls: ['./packagelist.component.scss']
 })
 export class PackagelistComponent implements OnInit {
-  pager: any = {}; page: number = 1; pagedItems: any = []; limit = 25;listpackage;data;count;
-  headend = ''; op_type = ''; opt: any = [];listhead;broadcast
-   share: any = []; operator_name = '';
-  pack_type = ''; pack: any = []; package = '';getpackagelist
+  pager: any = {}; page: number = 1; pagedItems: any = []; limit = 25; listpackage; data; count;
+  headend = ''; op_type = ''; opt: any = []; listhead; broadcast
+  share: any = []; operator_name = '';
+  pack_type = ''; pack: any = []; package = ''; getpackagelist
   index = -1; cas: any = []; cas_type = ''; prod_id = '';
-  broadlist: any = []; broadcaster = '';  modalRef: BsModalRef;
-  constructor(private packageser :PackageService, 
-    private pageservice :PagerService,   
+  broadlist: any = []; bcid = ''; modalRef: BsModalRef;
+  constructor(private packageser: PackageService,
+    private pageservice: PagerService,
     private modal: NgbModal,
-    private broadcasterService :BroadcasterService,
-    private headends : HeadendService) { }
+    private broadcasterService: BroadcasterService,
+    private headends: HeadendService) { }
 
   ngOnInit() {
     this.initiallist();
@@ -28,26 +28,25 @@ export class PackagelistComponent implements OnInit {
     this.Getbroadcasteredit()
     this.getpackage();
   }
-  
-  async Getbroadcasteredit($event='') {
-       this.broadcast = await this.broadcasterService.getbroadcaster({hdid : this.headend});
-      console.log('result ********',this.broadcast)
-     }
 
+  async Getbroadcasteredit($event = '') {
+    this.broadcast = await this.broadcasterService.getbroadcaster({ hdid: this.headend });
+    console.log('result ********', this.broadcast)
+  }
 
-     
   async initiallist() {
-    this.listpackage = await this.packageser.listpackage({index:(this.page - 1) * this.limit,
-      limit:this.limit,
+    this.listpackage = await this.packageser.listpackage({
+      index: (this.page - 1) * this.limit,
+      limit: this.limit,
       hdid: this.headend,
       packtype: this.pack_type,
-      packname: this.package,
-      bcid: this.broadcaster,
-     // prod_id: this.prod_id
+      packid: this.package,
+      bcid: this.bcid,
     });
     console.log('list channel services', this.listpackage)
     this.data = this.listpackage[0];
-    this.count = this.listpackage[1].count;
+    this.count = this.listpackage[1].cnt;
+    console.log('count************',this.count)
     this.setPage();
 
   }
@@ -64,57 +63,51 @@ export class PackagelistComponent implements OnInit {
     this.pager = this.pageservice.getPager(this.count, this.page, this.limit);
     this.pagedItems = this.data;
   }
-  Edit(item)
-{
 
 
-} 
 
+  async getpackage() {
+    this.getpackagelist = await this.packageser.searchpack({ hdid: this.headend, packtype: this.pack_type })
+    console.log("get package ", this.getpackagelist)
+  }
 
-async getpackage(){
-  this.getpackagelist = await this.packageser.searchpack({  hdid: this.headend  , packtype :this.pack_type})
-  console.log("get package ",this.getpackagelist)
- }
+  channels(item) {
 
-channels(item) {
-    
-  console.log('dsvdvxd213123123vxv',item)
-  const modalRef = this.modal.open(PackagechannelComponent, {size:'sm', container: 'nb-layout', backdrop: false });
-  modalRef.componentInstance.modalHeader = 'Channel List';
-  modalRef.componentInstance.item = item;
-  modalRef.result.then((data) => { ;
-  
-  })
+    console.log('dsvdvxd213123123vxv', item)
+    const modalRef = this.modal.open(PackagechannelComponent, { size: 'sm', container: 'nb-layout', backdrop: false });
+    modalRef.componentInstance.modalHeader = 'Channel List';
+    modalRef.componentInstance.item = item;
+    modalRef.result.then((data) => {
+      ;
 
-}
-async getHeadend() {
-  console.log('event', event)
-  this.listhead = await this.headends.getHeadend({})
-  console.log(this.listhead)
-}
+    })
+
+  }
+  async getHeadend() {
+    console.log('event', event)
+    this.listhead = await this.headends.getHeadend({})
+    console.log(this.listhead)
+  }
 
   getoperator($event = "") {
     // console.log($event)
-    
+
   }
- async getpack() {
+  async getpack() {
     // let user = this.operator_name;
-    
-// let getpackagelist =await this.packageser.listpackage({});
-// console.log('zdfvxcbcvb',getpackagelist);
+
+    // let getpackagelist =await this.packageser.listpackage({});
+    // console.log('zdfvxcbcvb',getpackagelist);
 
   }
 
   getcas() {
-    
+
 
   }
-  getbroadcaster() {
 
-    
-  }
   Download() {
-    
+
   }
 
 }

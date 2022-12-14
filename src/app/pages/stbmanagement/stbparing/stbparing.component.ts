@@ -12,7 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class StbparingComponent implements OnInit {
 
-  submit: boolean = false; pairForm; listhead; listvc; checkpair
+  submit: boolean = false; pairForm; listhead; listvc; checkpair;
   @Input() title: string; listboxpair; result; getvc; pair_status
   constructor(
     private activemodel: NgbActiveModal,
@@ -25,7 +25,7 @@ export class StbparingComponent implements OnInit {
     await this.createForm();
     await this.getHeadend();
     await this.boxparing();
-    this.vcparing();
+   await this.vcparing();
   }
 
   async paring() {
@@ -58,23 +58,26 @@ export class StbparingComponent implements OnInit {
   }
 
   async vcparing() {
-    const [boxvc_data] = this.listboxpair?.filter(x => x.boxid == this.value['boxno'])
-  //console.log('vcid', boxvc_data.vcid, boxvc_data.pairflg);
-    this.pair_status = boxvc_data.pairflg;
+    console.log('listboxpair in funxction', this.value['boxno'])
+    const boxvc_data = this.listboxpair?.filter(x => x.boxid == this.value['boxno'])
+    console.log('stbno in aarray', this.value['boxno'])
+    console.log('vcid here', boxvc_data[0]);
+    this.pair_status = boxvc_data[0].pairflg;
+    console.log("pair status @@@@@",this.pair_status)
     this.listvc = [];
-    if (boxvc_data.vcid) {
-    //  console.log("boxdata@@@@@@@@", boxvc_data.vcid)
-      this.listvc = [{ vcid: boxvc_data.vcid, vcno: boxvc_data.vcno }]
-      //console.log('listvc**********', this.listvc)
+    if (boxvc_data[0].vcid) {
+      console.log("boxdata@@@@@@@@", boxvc_data[0].vcid)
+      this.listvc = [{ vcid: boxvc_data[0].vcid, vcno: boxvc_data[0].vcno }]
+      console.log('listvc**********', this.listvc)
     } else {
       const data = []
       let vclist = this.listboxpair.filter(x => x.vcno !== 0 && x.vcno !== null).reduce((a, v) => {
         const value = { vcid: v.vcid, vcno: v.vcno }
         data.push(value)
-        return data
-      }, [])
+        return data}, [])
+      console.log("data",data)
       this.listvc = vclist
-     // console.log('vclist', vclist);
+      console.log('vclist', vclist);
     }
   }
 

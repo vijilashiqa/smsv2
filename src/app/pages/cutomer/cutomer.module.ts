@@ -24,8 +24,10 @@ import { ThemeModule } from '../../@theme/theme.module';
 import { AutoCompleteNModule } from '../auto-complete-module/auto-completen-module';
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 import { PagerService } from '../_services/index';
+import { filterModule } from '../filter/filter-module';
 import { EditCustComponent } from './edit-cust/edit-cust.component';
 import { ViewCustComponent } from './view-cust/view-cust.component';
+import { RenewCustComponent } from './renew-cust/renew-cust.component';
 @NgModule({
   declarations: [
     AddCustComponent,
@@ -33,7 +35,8 @@ import { ViewCustComponent } from './view-cust/view-cust.component';
     CustTransferComponent,
     SurenderStbComponent,
     EditCustComponent,
-    ViewCustComponent
+    ViewCustComponent,
+    RenewCustComponent
   ],
   imports: [
     CommonModule,
@@ -60,7 +63,8 @@ import { ViewCustComponent } from './view-cust/view-cust.component';
     ReactiveFormsModule,
     ThemeModule,
     AutoCompleteNModule,
-    AutocompleteLibModule
+    AutocompleteLibModule,
+    filterModule
   ],
 
 

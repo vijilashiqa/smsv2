@@ -18,118 +18,113 @@
         <i (click)="Download()" class="green right fa fa-file-excel" aria-hidden="true"></i>
       </div>
     </div>
-      <div class="modal-body" autocomplete="off" [hidden]="!search">
-        <div class="form-group row">
-          <div class="col-sm-3" (change)="getoperator();boxparing();getpackage()">
-            <label>Headend</label>
-            <select name="headend" class="form-control" [(ngModel)]="headend">
-              <option value="">Select Headend</option>
-              <option *ngFor="let item of listhead" [value]="item.hdid">
-                {{ item.hdname }}
-              </option>
-            </select>
-          </div>
-          <div class="col-sm-3" (change)="getoperator()">
-            <label> Operator Type</label>
-            <select class="form-control" name="op_type" [(ngModel)]="op_type">
-              <option value="" selected>Select Operator Type</option>
-              <option value="444">LCO</option>
-              <option value="666">Distributor</option>
-              <option value="555">Sub-Distributor</option>
-              <option value="333">Hotel</option>
-            </select>
-          </div>
-
-          <div class="col-sm-3">
-            <label>Operator Name</label>
-            <auto-completen addclass="form-control" optValues="business_name" name="operator_name"
-              placeholder="Select Operator" Id="id" [item]="operatortypelist">
-            </auto-completen>
-          </div>
-          <div class="col-sm-3" (change)='getpackage();'>
-            <label>Pack Type</label>
-            <select  class="form-control" id="pack_type" 
-              [(ngModel)]="pack_type">
-              <option value="" selected>Select Pack Type</option>
-              <option value="0">Base Package</option>
-              <option value="1">A-La-Carte</option>
-              <option value="2">Add-On Package</option>
-              <option value="3">Bundle Package</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-group row">
-          <div class="col-sm-3">
-            <label>Package</label>
-            <select class="form-control" id="package" [(ngModel)]="package">
-              <option value="" selected>Select Package</option>
-              <option *ngFor="let item of getpackagelist" [ngValue]="item.packid">
-                {{ item.packname }}
-              </option>
-            </select>
-          </div>
-          <div class="col-sm-3">
-            <label>STB Model</label>
-            <select class="form-control" id="model_opt" [(ngModel)]="model_opt">
-              <option value="" selected>Select Model</option>
-              <option *ngFor="let item of getmodellist" [ngValue]="item.bmid">
-                {{ item.modelname }}
-              </option>
-            </select>
-          </div>
-
-      
-          <div class="col-sm-3" >
-            <label>STB  Number</label>
-          <select class="form-control" id="stbopt" [(ngModel)]="stbopt">
-            <option value="" selected>Select Model</option>
-            <option *ngFor="let item of listboxpair" [ngValue]="item.boxid">{{item.boxno}}
-            </option>
-          </select>
-          </div>
-
-              
-          <div class="col-sm-3">
-            <label>VC Number</label>
-            <select  name="vc"  class="form-control"  [(ngModel)]="vc" >
-            <option value="" selected>Select VC Number</option>
-           <option *ngFor='let item of listboxpair' [ngValue]=item.vcid>{{item.vcno}}</option>
-           </select>
-          </div>
-        </div>
-        <div class="form-group row">
-          <div class="col-sm-3">
-            <label>From Created Date </label>
-            <input type="date" [(ngModel)]='from_date'
-              name="from_date" placeholder="Select Date " class="form-control" >
-          </div>
-          <div class="col-sm-3">
-            <label>To Created Date</label>
-            <input type="date" [(ngModel)]='to_date' name="to_date"
-              placeholder="Select Date " class="form-control" >
-          </div>
-            <div class="col-sm-3">
-            <label>Status</label>
-            <select name="status"  [(ngModel)]='status' class="form-control">
-              <option value="" selected>Select Status</option>
-              <option value="1">Active</option>
-              <option value="0">Deactive</option>
-            </select>
-          </div>
-          <div class="col-sm-3">
-            <label>CAS Name<span style="color:red">*</span></label>
-            <auto-completen
-           optValues="casname" name="castype" [(ngModel)]="castype"
-            (keyUp)="GetCas($event)"
-          placeholder='Select CAS Name'  optId="casid"
-            [item]="getcas">
+    <div class="modal-body" autocomplete="off" [hidden]="!search">
+      <div class="form-group row">
+        <div class="col-sm-3">
+          <label>Headend</label>
+          <auto-completen addclass="form-control" optValues="hdname" [(ngModel)]="headend" name="headend"
+            (changed)="getoperator(); boxparing(); getpackage()" placeholder="Select Headend" optId="hdid"
+            [item]="listhead">
           </auto-completen>
-          </div>
         </div>
-        <button type="button" class="btn btn-md btn-success" (click)='page=1;initiallist();'
-        style="margin: auto; display: block;">Search</button>
+        <div class="col-sm-3" (change)="getoperator()">
+          <label> Operator Type</label>
+          <select class="form-control" name="op_type" [(ngModel)]="op_type">
+            <option value="" selected>Select Operator Type</option>
+            <option value="444">LCO</option>
+            <option value="666">Distributor</option>
+            <option value="555">Sub-Distributor</option>
+            <option value="333">Hotel</option>
+          </select>
+        </div>
+
+        <div class="col-sm-3">
+          <label>Operator Name</label>
+          <auto-completen addclass="form-control" optValues="profileid" [(ngModel)]="profileid" name="operator_name"
+            placeholder="Select Operator" Id="id" [item]="operatortypelist">
+          </auto-completen>
+        </div>
+        <div class="col-sm-3" (change)="getpackage()">
+          <label>Pack Type</label>
+          <select class="form-control" id="pack_type" [(ngModel)]="pack_type">
+            <option value="" selected>Select Pack Type</option>
+            <option value="0">Base Package</option>
+            <option value="1">A-La-Carte</option>
+            <option value="2">Add-On Package</option>
+            <option value="3">Bundle Package</option>
+          </select>
+        </div>
       </div>
-    <div [formGroup]="Custform" >
+      <div class="form-group row">
+        <div class="col-sm-3">
+          <label>Package</label>
+          <auto-completen addclass="form-control" optValues="packname" [(ngModel)]="package" name="package"
+           placeholder="Select Package" optId="packid"
+           [item]="getpackagelist">
+           </auto-completen>
+        </div>
+        <div class="col-sm-3">
+          <label>STB Model</label>
+          <auto-completen addclass="form-control" optValues="modelname" [(ngModel)]="model_opt" name="model_opt"
+           placeholder="Select Model" optId="bmid"
+          [item]="getmodellist">
+        </auto-completen>
+        </div>
+
+        <div class="col-sm-3" >
+          <label>STB Number</label>
+         <auto-completen (changed)="vcparing();"
+         addclass="form-control" optValues="boxno" [(ngModel)]="stbopt" name="stbopt"
+         optId="boxid" placeholder='Select STB Number' 
+         [item]="listboxpair">
+       </auto-completen>
+        </div>
+
+        <div class="col-sm-3">
+          <label>VC Number</label>
+           <select  name="vc"  class="form-control" [(ngModel)]="vc" name="vc"
+           placeholder='Select VC Number ' >
+          <option *ngFor='let item of listvc' [ngValue]=item.vcid>{{item.vcno}}</option>
+          </select>
+        </div>
+<!-- 
+        <div class="col-sm-3">
+          <label>CAS Name<span style="color: red">*</span></label>
+          <auto-completen optValues="casname" name="castype" [(ngModel)]="castype" (keyUp)="GetCas($event)"
+            placeholder="Select CAS Name" optId="casid" [item]="getcas">
+          </auto-completen>
+        </div> -->
+      </div>
+      <div class="form-group row">
+        <div class="col-sm-3">
+          <label>From Created Date </label>
+          <input type="date" [(ngModel)]="from_date" name="from_date" placeholder="Select Date " class="form-control" />
+        </div>
+        <div class="col-sm-3">
+          <label>To Created Date</label>
+          <input type="date" [(ngModel)]="to_date" name="to_date" placeholder="Select Date " class="form-control" />
+        </div>
+        <div class="col-sm-3">
+          <label>Status</label>
+          <select name="status" [(ngModel)]="status" class="form-control">
+            <option value="" selected>Select Status</option>
+            <option value="1">Active</option>
+            <option value="0">Deactive</option>
+          </select>
+        </div>
+        <div class="col-sm-3">
+          <label>CAS Name<span style="color: red">*</span></label>
+          <auto-completen optValues="casname" name="castype" [(ngModel)]="castype" (keyUp)="GetCas($event)"
+            placeholder="Select CAS Name" optId="casid" [item]="getcas">
+          </auto-completen>
+        </div>
+      </div>
+      <button type="button" class="btn btn-md btn-success" (click)="page = 1; initiallist()"
+        style="margin: auto; display: block">
+        Search
+      </button>
+    </div>
+    <div [formGroup]="Custform">
       <div class="row">
         <div class="validation-checkboxes">
           <div class="col-sm-2">
@@ -171,8 +166,6 @@
               <label class="custom-control-label" for="cas_check">STB Model</label>
             </div>
           </div>
-
-          
         </div>
       </div>
       <div class="row">
@@ -201,12 +194,12 @@
               <label class="custom-control-label" for="mob_check">Moblie Number</label>
             </div>
           </div>
-          <!-- <div class="col-sm-2">
+          <div class="col-sm-2">
             <div class="custom-control custom-checkbox">
-              <input type="checkbox" class="custom-control-input" id="optname_check" formControlName="optname_check" />
-              <label class="custom-control-label" for="optname_check">Operator Name</label>
+              <input type="checkbox" class="custom-control-input" id="headend" formControlName="headend" />
+              <label class="custom-control-label" for="headend">Headend Name</label>
             </div>
-          </div> -->
+          </div>
 
           <div class="col-sm-2">
             <div class="custom-control custom-checkbox">
@@ -214,39 +207,21 @@
               <label class="custom-control-label" for="stb_check">STB Number</label>
             </div>
           </div>
-          <!-- <div class="col-sm-2">
-            <div class="custom-control custom-checkbox">
-              <input type="checkbox" class="custom-control-input" id="loc_check" formControlName="loc_check" />
-              <label class="custom-control-label" for="loc_check">Location</label>
-            </div>
-          </div> -->
         </div>
       </div>
     </div>
     <table class="table table-condensed table-hover">
       <tr>
         <th>Action</th>
-        <!-- <th [hidden]='!Custform.value["status_check"]'>STB Status</th> -->
+        <th [hidden]="!Custform.value['headend']">Headend Name</th>
         <th [hidden]="!Custform.value['caf_check']">CAF NO</th>
         <th [hidden]="!Custform.value['custid_check']">Subscriber ID</th>
         <th [hidden]="!Custform.value['subname_check']">Subscriber Name</th>
         <th [hidden]="!Custform.value['addr_check']">Address</th>
-        <!-- <th [hidden]='!Custform.value["cas_check"]'>STB Model</th> -->
         <th [hidden]="!Custform.value['stb_check']">Box Number</th>
-        <!-- <th [hidden]='!Custform.value["vc_check"]'>VC Number</th> -->
-        <!-- <th>Pack Type</th>
-        <th>Pack Name</th>
-        <th [hidden]='!Custform.value["act_check"]'>Activate Date</th>
-        <th [hidden]='!Custform.value["exp_check"]'>Expiry Date</th> -->
         <th [hidden]="!Custform.value['mob_check']">Mobile Number</th>
-        <!-- <th [hidden]='!Custform.value["optname_check"]'>Operator Name</th>
-        <th [hidden]='!Custform.value["loc_check"]'>Location</th> -->
       </tr>
       <tr *ngFor="let item of pagedItems">
-        <!-- <td [hidden]='role.getrole(403)&&role.getrole(404)'>
-          <a  (click)="Edit(item.cust_id_pk)"><i class="nb-edit"></i></a>
-          <a *ngIf='!role.getrole(404)' (click)="view({cust_id:item.cust_id_pk,id:item.id,branch:item.branch_fk})"><i class="far fa-eye 2x"></i></a>
-        </td> -->
         <td style="padding: 1px" class="last" data-title="'Action'">
           <div class="dropdown ghost-dropdown" ngbDropdown>
             <button type="button" style="margin-left: -10%" class="btn btn-sm btn-success dropdown-toggle"
@@ -285,35 +260,15 @@
             </ul>
           </div>
         </td>
-
-        <!-- <td [hidden]='!Custform.value["status_check"]'>
-          <a (click)="activeStb(item,item.purchase_flg==0)"><i
-              [ngStyle]="{'color': item.purchase_flg==1? 'green':'red'}"
-              [ngClass]="{'ion-close-round':item.purchase_flg==0 ? true:false,'ion-checkmark-round':item.purchase_flg!=0 ? true:false  }"
-              [attr.title]="item.purchase_flg==1 ? 'Active' : 'Deactive'"></i></a>
-        </td> -->
-        <!-- <td [hidden]='!Custform.value["status_check"]'>
-          <span *ngIf="item.purchase_flg==1"
-            style="background-color:#42f456;font-weight:bold;border-radius: 3px; padding: 4px;">Active</span>
-          <span *ngIf="item.purchase_flg==0"
-            style="background-color:#f44b42;font-weight:bold;border-radius: 3px; padding: 4px;">Deactive</span>
-        </td> -->
+        <td [hidden]="!Custform.value['headend']">{{ item.hdname }}</td>
         <td [hidden]="!Custform.value['caf_check']">{{ item.cafno }}</td>
         <td [hidden]="!Custform.value['custid_check']">{{ item.profileid }}</td>
         <td [hidden]="!Custform.value['subname_check']">{{ item.fullname }}</td>
         <td [hidden]="!Custform.value['addr_check']">
           {{ item.installation_addr }}
         </td>
-        <!-- <td [hidden]='!Custform.value["cas_check"]'>{{item.model_name}}</td> -->
-        <!-- <td [hidden]='!Custform.value["stb_check"]'>{{item.SNo}}</td> -->
         <td [hidden]="!Custform.value['stb_check']">{{ item.boxno }}</td>
-        <!-- <td>{{item.a_la_cart==0?'BasePack':item.a_la_cart==4? 'Boquet':N/A}}</td> -->
-        <!-- <td>{{item.pack_name}}</td> -->
-        <!-- <td [hidden]='!Custform.value["act_check"]'>{{item.active_date | date : 'd MMM y h:mm:ss a'}}</td>
-        <td [hidden]='!Custform.value["exp_check"]'>{{item.expiry_date | date : 'd MMM y h:mm:ss a'}}</td> -->
         <td [hidden]="!Custform.value['mob_check']">{{ item.mobile }}</td>
-        <!-- <td [hidden]='!Custform.value["optname_check"]'>{{item.ufirst + " " + item.ulast}}</td> -->
-        <!-- <td [hidden]='!Custform.value["loc_check"]'>{{item.loc_name}}</td> -->
       </tr>
       <tr>
         <td [hidden]="pagedItems.length != 0" colspan="13" style="text-align: center">
@@ -333,11 +288,5 @@
           (click)="page = pager.totalPages; getcustList()">Last</a>
       </ul>
     </div>
-    <!-- <div class="pagination-limit">
-           <select (change)='page=1;initiallist();' name="limit" [(ngModel)]='limit' class="form-control" >
-             <option *ngFor="let item of pageservice.limit" [ngValue]=item>{{item}}</option>
-          </select>
-      </div> -->
-    <!-- </div> -->
   </nb-card-body>
 </nb-card>

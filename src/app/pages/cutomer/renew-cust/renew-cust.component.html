@@ -1,0 +1,374 @@
+<nb-card>
+  <!-- <ngx-loading [show]="loading"
+        [config]="{animationType: ngxLoadingAnimationTypes.wanderingCubes, primaryColour: primaryColour, secondaryColour: secondaryColour, backdropBorderRadius: '3px'}">
+    </ngx-loading>
+    <toaster-container></toaster-container> -->
+  <nb-card-header>
+    Renew Subscriber
+    <div style="float: right; margin-top: -6px">
+      <button
+        style="margin-right: 4px"
+        type="button"
+        class="btn btn-sm btn-success"
+        (click)="renewval()"
+      >
+        Create
+      </button>
+      <button
+        type="button"
+        class="btn btn-sm btn-danger"
+        [routerLink]="['/pages/customer/view_cust']"
+      >
+        Back
+      </button>
+    </div>
+  </nb-card-header>
+  <nb-card-body>
+    <form
+      [formGroup]="RenewForm"
+      class="form-horizontal"
+      (ngSubmit)="renewval()"
+    >
+      <div class="row">
+        <div class="col-sm-4">
+          <label>Renewal Type</label>
+          <select
+            autofocus
+            #input
+            class="form-control"
+            name="renewal_type"
+            formControlName="renewal_type"
+          >
+            <option value="1">Immediate</option>
+            <option value="2">Schedule</option>
+          </select>
+        </div>
+        <div class="col-sm-4" *ngIf="RenewForm.value['renewal_type'] == 2">
+          <label>Schedule *</label>
+          <input
+            type="text"
+            #input
+            [owlDateTime]="schedule"
+            [owlDateTimeTrigger]="schedule"
+            class="form-control"
+            id="schedule"
+            formControlName="schedule"
+            placeholder="Time ON"
+          />
+          <owl-date-time #schedule></owl-date-time>
+          <small
+            *ngIf="RenewForm.hasError('required', 'schedule') && submit"
+            class="form-text error"
+            >Schedule time is required!
+          </small>
+        </div>
+      </div>
+    </form>
+    <hr style="border: 0px" />
+    <div class="row">
+      <div class="col-sm-6">
+        <label class="left">
+          <h5>Lco Balance : {{ data.deposit_amt | number : "1.0-2" }}</h5>
+        </label>
+      </div>
+    </div>
+    <table class="table table-header table-bordered table-striped">
+      <thead>
+        <th colspan="5">
+          <input
+            placeholder="Search Base Package Here"
+            class="form-control"
+            [(ngModel)]="searchbase"
+            style="
+              width: 30%;
+              border: none;
+              border-bottom: 2px solid;
+              font-size: 15px;
+            "
+          />
+        </th>
+      </thead>
+    </table>
+    <div class="table-body table-wrapper table-scroll">
+      <table class="table table-bordered table-striped">
+        <tbody>
+          <tr>
+            <th>Select One</th>
+            <th>Package Name</th>
+            <th>Quantity</th>
+            <th>Pack Price</th>
+            <th>Expiry Date</th>
+          </tr>
+          <tr
+            *ngFor="
+              let item of bpack | grdFilter : { pack_name: searchbase };
+              let i = index
+            "
+            style="text-transform: uppercase"
+          >
+            <td class="text-center">
+              <label class="container">
+                <input
+                  [disabled]="baseBackAct"
+                  (change)="disablePackage()"
+                  type="radio"
+                  name="sizecb"
+                  [value]="item.pack_id"
+                  [(ngModel)]="baseBack"
+                />
+                <span
+                  class="checkmark"
+                  [ngStyle]="{ opacity: baseBackAct == 1 ? '0.6' : '' }"
+                ></span>
+              </label>
+            </td>
+            <td>
+              <a (click)="channels(item)">{{ item.pack_name }}</a>
+            </td>
+            <td class="ng2-smart-th ng-star-inserted">
+              <div class="ng2-smart-filter ng-star-inserted">
+                <!-- <input [disabled]="baseBackAct" class="form-control" [(ngModel)]="item.quantity" type="number" placeholder="Quantity" style="width: 80px; height: 25px; padding: 1px"> -->
+                <select
+                  [disabled]="baseBackAct"
+                  class="form-control"
+                  [(ngModel)]="item.quantity"
+                  placeholder="Quantity"
+                  style="width: 80px; height: 25px; padding: 1px"
+                  (change)="selectThisMonth(item, item.unit_type, item.day)"
+                >
+                  <option value="">QTY</option>
+                  <option [ngValue]="1">1 Month</option>
+                  <option [ngValue]="2">2 Months</option>
+                  <option [ngValue]="3">3 Months</option>
+                  <option [ngValue]="4">4 Months</option>
+                  <option [ngValue]="5">5 Months</option>
+                  <option [ngValue]="6">6 Months</option>
+                  <option [ngValue]="7">7 Months</option>
+                  <option [ngValue]="8">8 Months</option>
+                  <option [ngValue]="9">9 Months</option>
+                  <option [ngValue]="10">10 Months</option>
+                  <option [ngValue]="11">11 Months</option>
+                  <option [ngValue]="12">12 Months</option>
+                </select>
+              </div>
+            </td>
+            <td>{{ item.mprice * (item.quantity || 0) }}</td>
+            <td>
+              {{
+                item.expiry_date || (item.unit_type == 1 ? day : months)
+                  | date : "dd-MM-yyyy"
+              }}
+            </td>
+          </tr>
+
+          <tr>
+            <td
+              [hidden]="bpack.length != 0"
+              colspan="5"
+              style="text-align: center"
+            >
+              No Data Found
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <table class="table table-header table-bordered table-striped">
+      <thead>
+        <th colspan="5">
+          <input
+            placeholder="Search Bouquet Here"
+            class="form-control"
+            [(ngModel)]="searchaddon"
+            style="
+              width: 30%;
+              border: none;
+              border-bottom: 2px solid;
+              font-size: 15px;
+            "
+          />
+        </th>
+      </thead>
+    </table>
+    <div class="table-body table-wrapper table-scroll">
+      <table class="table table-bordered table-striped">
+        <tr>
+          <th class="text-center">
+            <label class="containerbox"
+              >All
+              <input
+                type="checkbox"
+                name="all"
+                (change)="checkaddonpack($event.target.checked)"
+              />
+              <span class="checkmarkbox"></span>
+            </label>
+          </th>
+          <th>Package Name</th>
+          <th>Quantity</th>
+          <th>Pack Price</th>
+          <th>Expiry Date</th>
+        </tr>
+        <tr
+          *ngFor="
+            let item of addonpack | grdFilter : { pack_name: searchaddon };
+            let i = index
+          "
+          style="text-transform: uppercase"
+        >
+          <td class="text-center">
+            <label class="containerbox">
+              <input
+                [disabled]="item.active_pack == 1 || item.bandleFlg"
+                type="checkbox"
+                name="sizecb[]"
+                [(ngModel)]="item.state"
+              />
+              <span
+                class="checkmarkbox"
+                [ngStyle]="{
+                  opacity: item.active_pack == 1 || item.bandleFlg ? '0.5' : '1'
+                }"
+              ></span>
+            </label>
+          </td>
+          <td>
+            <a (click)="channels(item)">{{ item.pack_name }}</a>
+          </td>
+          <td class="ng2-smart-th ng-star-inserted">
+            <div class="ng2-smart-filter ng-star-inserted">
+              <!-- <input [disabled]="item.active_pack==1||item.bandleFlg" class="form-control" [(ngModel)]="item.quantity" type="number" placeholder="Quantity" style="width: 80px; height: 25px; padding: 1px"> -->
+              <select
+                [disabled]="item.active_pack == 1 || item.bandleFlg"
+                class="form-control"
+                [(ngModel)]="item.quantity"
+                placeholder="Quantity"
+                style="width: 80px; height: 25px; padding: 1px"
+                (change)="selectThisMonth(item, item.unit_type, item.day)"
+              >
+                <option value="" selected>QTY</option>
+                <option [ngValue]="1">1 Month</option>
+                <option [ngValue]="2">2 Months</option>
+                <option [ngValue]="3">3 Months</option>
+                <option [ngValue]="4">4 Months</option>
+                <option [ngValue]="5">5 Months</option>
+                <option [ngValue]="6">6 Months</option>
+                <option [ngValue]="7">7 Months</option>
+                <option [ngValue]="8">8 Months</option>
+                <option [ngValue]="9">9 Months</option>
+                <option [ngValue]="10">10 Months</option>
+                <option [ngValue]="11">11 Months</option>
+                <option [ngValue]="12">12 Months</option>
+              </select>
+            </div>
+          </td>
+          <td>{{ item.mprice * (item.quantity || 0) }}</td>
+          <td>
+            {{
+              item.expiry_date || (item.unit_type == 1 ? day : months)
+                | date : "dd-MM-yyyy"
+            }}
+          </td>
+        </tr>
+      </table>
+    </div>
+    <table class="table table-header table-bordered table-striped">
+      <thead>
+        <th colspan="5">
+          <input
+            placeholder="Search Alacarte Here..."
+            class="form-control"
+            [(ngModel)]="searchalcart"
+            style="
+              width: 40%;
+              border: none;
+              border-bottom: 2px solid;
+              font-size: 15px;
+            "
+          />
+        </th>
+      </thead>
+    </table>
+    <div class="table-body table-wrapper table-scroll">
+      <table class="table table-bordered table-striped">
+        <tr>
+          <th class="text-center">
+            <label class="containerbox"
+              >All
+              <input
+                type="checkbox"
+                name="all"
+                (change)="checkalcartepack($event.target.checked)"
+              />
+              <span class="checkmarkbox"></span>
+            </label>
+          </th>
+          <th>Package Name</th>
+          <th>Quantity</th>
+          <th>Pack Price</th>
+          <th>Expiry Date</th>
+        </tr>
+        <tr
+          *ngFor="
+            let item of alacartepack | grdFilter : { pack_name: searchalcart };
+            let i = index
+          "
+          style="text-transform: uppercase"
+        >
+          <td class="text-center">
+            <label class="containerbox">
+              <input
+                [disabled]="item.active_pack == 1 || item.bandleFlg"
+                type="checkbox"
+                name="sizecb[]"
+                [(ngModel)]="item.state"
+              />
+              <span
+                [ngStyle]="{
+                  opacity: item.active_pack == 1 || item.bandleFlg ? '0.5' : '1'
+                }"
+                class="checkmarkbox"
+              ></span>
+            </label>
+          </td>
+          <td>{{ item.pack_name }}</td>
+          <td class="ng2-smart-th ng-star-inserted">
+            <div class="ng2-smart-filter ng-star-inserted">
+              <!--  <input [disabled]="item.active_pack==1||item.bandleFlg" class="form-control" [(ngModel)]="item.quantity" type="number" placeholder="Quantity" style="width: 80px; height: 25px; padding: 1px"> -->
+              <select
+                [disabled]="item.active_pack == 1 || item.bandleFlg"
+                class="form-control"
+                [(ngModel)]="item.quantity"
+                placeholder="Quantity"
+                style="width: 80px; height: 25px; padding: 1px"
+                (change)="selectThisMonth(item, item.unit_type, item.day)"
+              >
+                <option value="" selected>QTY</option>
+                <option [ngValue]="1">1 Month</option>
+                <option [ngValue]="2">2 Months</option>
+                <option [ngValue]="3">3 Months</option>
+                <option [ngValue]="4">4 Months</option>
+                <option [ngValue]="5">5 Months</option>
+                <option [ngValue]="6">6 Months</option>
+                <option [ngValue]="7">7 Months</option>
+                <option [ngValue]="8">8 Months</option>
+                <option [ngValue]="9">9 Months</option>
+                <option [ngValue]="10">10 Months</option>
+                <option [ngValue]="11">11 Months</option>
+                <option [ngValue]="12">12 Months</option>
+              </select>
+            </div>
+          </td>
+          <td>{{ (item.quantity || 0) * item.mprice }}</td>
+          <td>
+            {{
+              item.expiry_date || (item.unit_type == 1 ? day : months)
+                | date : "dd-MM-yyyy"
+            }}
+          </td>
+        </tr>
+      </table>
+    </div>
+    <!-- </form> -->
+  </nb-card-body>
+</nb-card>

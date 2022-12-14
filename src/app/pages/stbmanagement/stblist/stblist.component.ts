@@ -44,23 +44,22 @@ export class StblistComponent implements OnInit {
     await this.getoperator();
     await this.getModel();
     await this.boxparing();
-    await this.vcparing();
+    // this.vcparing();
   }
   async initiallist() {
 
     this.liststb = await this.stb.liststb({index:(this.page - 1) * this.limit,
       limit:this.limit,
-      modelname: this.modelname,
-      box: this.stbopt,
+      bmid: this.modelname,
+      boxid: this.stbopt,
       vcid: this.vc,
       usertype : this.op_type,
       status: this.status,
-     // loc: this.loc,
-      profileid: this.profileid,
+      id: this.profileid,
       cdate: this.from_date,
       mdate: this.to_date,
       hdid: this.headend,
-      pair: this.pair,
+      pairflg: this.pair,
       assign: this.assign});
     console.log('list stb=====', this.liststb)
     this.data = this.liststb[0];
@@ -87,12 +86,13 @@ export class StblistComponent implements OnInit {
     console.log('listboxpair in funxction', this.listboxpair)
     const boxvc_data = this.listboxpair?.filter(x => x.boxid == boxno)
     console.log('stbno in aarray', boxno)
-    console.log('vcid', boxvc_data);
-    this.pair_status = boxvc_data.pairflg;
+    console.log('vcid here', boxvc_data);
+    this.pair_status = boxvc_data[0].pairflg;
+    console.log("pair status @@@@@",this.pair_status)
     this.listvc = [];
-    if (boxvc_data.vcid) {
-      console.log("boxdata@@@@@@@@", boxvc_data.vcid)
-      this.listvc = [{ vcid: boxvc_data.vcid, vcno: boxvc_data.vcno }]
+    if (boxvc_data[0].vcid) {
+      console.log("boxdata@@@@@@@@", boxvc_data[0].vcid)
+      this.listvc = [{ vcid: boxvc_data[0].vcid, vcno: boxvc_data[0].vcno }]
       console.log('listvc**********', this.listvc)
     } else {
       const data = []
@@ -100,7 +100,9 @@ export class StblistComponent implements OnInit {
         const value = { vcid: v.vcid, vcno: v.vcno }
         data.push(value)
         return data
+       
       }, [])
+      console.log("data",data)
       this.listvc = vclist
       console.log('vclist', vclist);
     }
@@ -108,7 +110,6 @@ export class StblistComponent implements OnInit {
 
 
   async getoperator(){
-
     this.operatortypelist = await this.operator.searchoperator({ usertype: this.op_type, hdid: this.headend })
     console.log('list operator', this.operatortypelist)
   }
@@ -118,13 +119,6 @@ export class StblistComponent implements OnInit {
     this.getmodellist = await this.stock.getstockmodel({});
     console.log('stb list',this.getmodellist)
   }
-
-
-
-
-
-
-
   getlist(page) {
     var total = Math.ceil(this.count / this.limit);
     let result = this.pageservice.pageValidator(this.page, page, total);
@@ -138,12 +132,7 @@ export class StblistComponent implements OnInit {
     this.pagedItems = this.data;
   }
 
-
-
-
-  addpair(){
-
-   
+  addpair(){   
       const modalRef = this.modal.open(StbparingComponent, { container: 'nb-layout', backdrop: false });
       modalRef.componentInstance.title = 'Paring/Unparing';
       modalRef.result.then((data) => {

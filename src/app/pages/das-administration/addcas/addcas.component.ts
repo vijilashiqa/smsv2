@@ -16,7 +16,8 @@ export class AddcasComponent implements OnInit {
    @Input() title: string;
   count;
   constructor(
-      private country: CountryService,   private toast: ToastrService,
+     //private country: CountryService,   
+     private toast: ToastrService,
      private headService: HeadendService,
      private activemodel : NgbActiveModal) { }
   async ngOnInit() {
@@ -24,7 +25,7 @@ export class AddcasComponent implements OnInit {
     // this.getCountry();
      if (this.item) {
       await this.createForm();
-console.log('iteam ==========',this.item)
+     console.log('iteam ==========',this.item)
     
     }
   }
@@ -46,20 +47,14 @@ console.log('iteam ==========',this.item)
         console.log('add...', this.addcasForm.value);
       }
     }
-  // async getCountry($event = '') {
-  //   this.count = await this.country.listcountry({});
-  //   console.log('country', this.count);
-  // }
   createForm() {
     this.addcasForm = new FormGroup({
-      // countryname: new FormControl(this.item ? this.item['country_fk'] : '', Validators.required),
       casname: new FormControl(this.item ? this.item['casname'] : '', Validators.required)
     });
   }
 
   
 close(){
-
   this.activemodel.close();
 }
 

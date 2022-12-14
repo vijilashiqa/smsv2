@@ -62,12 +62,7 @@ export class AddpackageComponent implements OnInit {
     console.log("cas type********",this.listhdcas)
   }
 
-  removeCas(){
-    // let resp = this.listhdcas.filter(x => x.casid == this.AddPackageForm.value['casid']).index
-    // console.log('Resp----',resp);
-    
-  }
-
+  
 
   async edit() {
     console.log('edit herer')

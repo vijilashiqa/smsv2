@@ -229,8 +229,7 @@
                         </td>
                         <td>
                            <a (click)="custrenewal(item, item.status == 0)"><i
-                                 [ngStyle]="{ color: item.status == 1 ? 'green' : 'red' }"
-                                 [ngClass]="{
+                                 [ngStyle]="{ color: item.status == 1 ? 'green' : 'red' }" [ngClass]="{
                         'ion-close-round': item.status == 0 ? true : false,
                         'ion-checkmark-round': item.status != 0 ? true : false
                       }" [attr.title]="item.status == 1 ? 'Active' : 'Deactive'"></i></a>
@@ -241,11 +240,7 @@
                         <td>{{ item.pack_name }}</td>
                         <td>{{ item.cust_price | number: "1.2-2" }}</td>
                         <td>{{ item.cust_price * 0.18 | number: "1.2-2" }}</td>
-                        <td>
-                           {{
-                           item.cust_price + item.cust_price * 0.18 | number: "1.2-2"
-                           }}
-                        </td>
+                        <td>{{item.cust_price + item.cust_price * 0.18 | number: "1.2-2"}}</td>
                         <td [hidden]="role.getroleval() < 699">
                            {{ item.detect_amt }}
                         </td>

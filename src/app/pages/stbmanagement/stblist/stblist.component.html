@@ -10,14 +10,14 @@
       <form [hidden]='!search' class="form-horizontal">
         <div class="modal-body">
           <div class="form-group row">
-            <div class="col-sm-3" (change)="getoperator();getModel();boxparing()">
+            <div class="col-sm-3" >
               <label>Headend</label>
-              <select name="headend" class="form-control" [(ngModel)]="headend">
-                <option value="">Select Headend</option>
-                <option *ngFor="let item of listhead" [ngValue]="item.hdid">
-                  {{ item.hdname }}
-                </option>
-              </select>
+              <auto-completen [(ngModel)]="headend"   id="headend"
+               (changed)="getoperator();getModel();boxparing()"
+              addclass="form-control" optValues="hdname"   name ="headend"
+              placeholder='Select Headend'  optId="hdid"
+              [item]="listhead">
+            </auto-completen> 
             </div>
             <div class="col-sm-3" (change)="getoperator()">
               <label>Operator Type</label>
@@ -33,7 +33,7 @@
               <label>Operator Name</label>
               <auto-completen
                 addclass="form-control"
-                optValues="profileid"
+                optValues="fullname"
                 name="operator_name"
                 placeholder="Select Operator"
                 Id="id"
@@ -55,43 +55,28 @@
           <div class="form-group row">
            <div class="col-sm-3">
             <label>STB Model</label>
-            <select name="model_opt" class="form-control" [(ngModel)]="modelname">
-              <option value="">Select Model</option>
-              <option *ngFor="let item of getmodellist" [ngValue]="item.bmid">
-                {{ item.modelname }}
-              </option>
-            </select>
+            <auto-completen [(ngModel)]="modelname"   id="modelname"
+            addclass="form-control" optValues="modelname"   name ="modelname"
+            placeholder='Select Model'  optId="bmid"
+            [item]="getmodellist">
+          </auto-completen> 
           </div>
           <div class="col-sm-3" >
             <label>STB  Number</label>
-            <!-- <auto-completen [(ngModel)]="stbopt" (changed)="vcparing()" id="stbopt"
+            <auto-completen [(ngModel)]="stbopt" (changed)="vcparing()" id="stbopt"
             addclass="form-control" optValues="boxno"   name ="stbopt"
             placeholder='Select STB Number'  optId="boxid"
             [item]="listboxpair">
-          </auto-completen> -->
-          <select name="stbopt" class="form-control" [(ngModel)]="stbopt">
-            <option value=""> Select STB  Number</option>
-            <option *ngFor="let item of listboxpair" [ngValue]="item.boxid">
-              {{ item.boxno }}
-            </option>
-          </select>
+          </auto-completen>
           </div>
+        <div class="col-sm-3">
+          <label>VC Number</label>
+           <select  name="vc"  class="form-control" [(ngModel)]="vc" name="vc"
+           placeholder='Select VC Number ' >
+          <option *ngFor='let item of listvc' [ngValue]=item.vcid>{{item.vcno}}</option>
+          </select>
+        </div>
 
-              
-          <div class="col-sm-3">
-            <label>VC Number</label>
-            <!-- <select 
-            name="vc"  class="form-control"   [(ngModel)]="vc"
-            placeholder='Select VC Number ' >
-           <option *ngFor='let item of listvc' [ngValue]=item.vcid>{{item.vcno}}</option>
-           </select> -->
-           <select name="vc" class="form-control" [(ngModel)]="vc">
-            <option value="">Select VC Numberr</option>
-            <option *ngFor="let item of listboxpair" [ngValue]="item.boxid">
-              {{ item.vcno }}
-            </option>
-          </select>
-          </div>
 
           <div class="col-sm-3">
             <label>Pair/Unpair</label>
@@ -144,21 +129,21 @@
           <th>Invoice NO</th>
           <th>VC Number</th>
           <th>Serial NO</th>
+          <th>Pair Status</th>
+          <th>Operator name</th>
+       
         </tr>
         <!-- <tr > -->
           <tr *ngFor="let item of pagedItems">
-            <!-- <td style="cursor:pointer;" [routerLink]="['/pages/stbmanagement/addstb']" [queryParams]="{id:item.stockinid}"><i class="nb-edit"></i></td> -->
             <td>{{item.hdname}}</td>
             <td>{{item.cas_name}}</td>
             <td>{{item.modelname}}</td>
             <td>{{item.invoiceno}}</td>
-            <td>{{item.vcno ||'--'}}</td>
+            <td>{{item.vcno||'--'}}</td>
             <td>{{item.boxno}}</td>
-            <!-- <td><i [ngStyle]="{'color': item.status==1? 'green':'red'}"
-              [ngClass]="{'ion-close-round':item.status==0 ? true:false,'ion-checkmark-round':item.status!=0 ? true:false  }"
-              [attr.title]="item.status==0 ? 'Active' : 'Deactive'"></i></td> -->
-            <!-- <td>{{item.stbprimary==1 ? 'SD':'HD'}}</td> -->
-
+            <td>{{item.pairflg == 1? 'paired':'unpair'}}</td>
+            <td>{{item.fullname||'--'}}</td>
+           
           </tr>
         </table>
         <div class="pagination">

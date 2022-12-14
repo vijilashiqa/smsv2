@@ -24,6 +24,12 @@ return await this.http.post("/role/editrole",params).toPromise();
 
 async getprolife(params){
 
-  return await this.http.post("role/getprofile",params).toPromise();
+  return await this.http.post("/role/getprofile",params).toPromise();
+}
+
+
+async getuserrole(params){
+
+  return await this.http.post("/role/getuserrole",params).toPromise();
 }
 }

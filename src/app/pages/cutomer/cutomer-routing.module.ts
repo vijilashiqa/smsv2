@@ -4,6 +4,7 @@ import { AddCustComponent } from "./add-cust/add-cust.component";
 import { CustListComponent } from "./cust-list/cust-list.component";
 import { CustTransferComponent } from "./cust-transfer/cust-transfer.component";
 import { EditCustComponent } from "./edit-cust/edit-cust.component";
+import { RenewCustComponent } from "./renew-cust/renew-cust.component";
 import { SurenderStbComponent } from "./surender-stb/surender-stb.component";
 import { ViewCustComponent } from "./view-cust/view-cust.component";
 
@@ -37,6 +38,11 @@ const routes: Routes = [
     path :"view-cust",
     component :ViewCustComponent
   },
+
+  {
+    path :"renew_cust",
+    component : RenewCustComponent
+  }
 ];
 
 @NgModule({

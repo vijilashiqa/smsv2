@@ -6,14 +6,15 @@ import { ITreeOptions } from 'angular-tree-component';
 import { toJS } from "mobx";
 import {  RoleusersevicesService } from '../../_services/roleusersevices.service';
 import { ToastrService } from 'ngx-toastr';
+import { OperatorService } from '../../_services/operator.service';
 @Component({
-  selector: 'ngx-edituserprofile',
-  templateUrl: './edituserprofile.component.html',
-  styleUrls: ['./edituserprofile.component.scss']
+  selector: 'ngx-roleedit-user',
+  templateUrl: './roleedit-user.component.html',
+  styleUrls: ['./roleedit-user.component.scss']
 })
-export class EdituserprofileComponent implements OnInit {
+export class RoleeditUserComponent implements OnInit {
   @ViewChild('tree') public tree;
-  EditUserProfileForm; edit;id;editrolel;
+  roledituser; edit;id;editrolel;
   submit: boolean;
   nodes = [
     {
@@ -342,46 +343,47 @@ export class EdituserprofileComponent implements OnInit {
     private router: Router,
     private aRoute: ActivatedRoute,
     private role :RoleusersevicesService,
+    private operator :OperatorService
   ) {
     this.edit = JSON.parse(localStorage.getItem('profile_e'));
     
   }
   ngOnInit() {
-  //  this.id = this.aRoute.snapshot.queryParams.id;
-   //console.log("id********",this.id)
     this.createForm();
-    if (this.edit)
-    console.log('edit**********',this.edit)
+    this.id = this.aRoute.snapshot.queryParams.id;
+    this.createForm();
+    if(this.id){
+      console.log('id***********************',this.id)
       this.editRole();
-  }
+
+    }
+
+      }
 
 async  editRole() {
   
- this.editrolel = await this.role.getRole({id : this.edit['id'] })
+ this.editrolel = await this.operator.getprofilerole({id : this.id })
  console.log("get edit role..........",this.editrolel)
  this.selectnodes(this.editrolel[0]['menurole']) ;
-//  console.log("nodessss////////",nodess)
-// }
-
   }
 
 async  AddProfile() {
   console.log('am here dfdf')
-    if (this.EditUserProfileForm.invalid) {
+    if (this.roledituser.invalid) {
       this.submit = true;
       return;
     }
-    var  val = this.EditUserProfileForm.value; 
-    if (this.edit) {
-      val['id'] = this.edit['id'];
-       this.EditUserProfileForm.value['menurole'] = this.selectednodes();
-      let result = await this.role.editrole(this.EditUserProfileForm.value);
+    var  val = this.roledituser.value; 
+    if (this.id) {
+      val['id'] = this.id;
+       this.roledituser.value['menurole'] = this.selectednodes();
+      let result = await this.operator.userprofileeditrole(this.roledituser.value);
       if (result && result[0].err_code == 0) {
         this.toast.success(result[0]['msg']);
-        this.router.navigate(['/pages/das-administration/list-profile'])
+        this.router.navigate(['/pages/users/userlist'])
       } else {
         this.toast.warning(result[0]['msg'])
-        console.log('add...', this.EditUserProfileForm.value);
+        console.log('add...', this.roledituser.value);
       }
     }   
   }
@@ -409,9 +411,9 @@ async  AddProfile() {
   }
 
   createForm() {
-    this.EditUserProfileForm = new FormGroup({
-      rolename: new FormControl(this.edit ? this.edit['rolename'] : '', Validators.required),
-      descr: new FormControl(this.edit ? this.edit['desc'] : '')
+    this.roledituser = new FormGroup({
+      // profileid: new FormControl(this.editrolel ? this.editrolel[0]['profileid'] : '', Validators.required),
+      // descr: new FormControl(this.edit ? this.edit['desc'] : '')
     });
   }
 

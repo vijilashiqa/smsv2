@@ -32,7 +32,8 @@ export class UserlistComponent implements OnInit {
       hdid: this.headend,
       status: this.status,
       usertype: this.op_type,
-      profileid:this.profileid});
+      id:this.profileid
+    });
     console.log('list stb=====', this.listoperator)
     this.data = this.listoperator[0];
     this.count = this.listoperator[1].count;

@@ -11,7 +11,7 @@
       <tr *ngFor="let item of pagedItems">
         <td ><a (click)='edit(item);'><i class="nb-edit"></i></a></td>
         <td>{{item.id}}</td>
-          <td>{{item.rolename}}</td>
+          <td>{{item.rolename | uppercase }}</td>
       </tr>
     </table>
   </nb-card-body>

@@ -31,27 +31,27 @@ export class GeoAddcountryComponent implements OnInit {
     
   }
  async Country() {
-    // this.submit = true;
-    // console.log('items============',this.item)
-    // if (!this.countryForm.valid) {
-    //   return;
-    // }
+    this.submit = true;
+    console.log('items============',this.item)
+    if (!this.countryForm.valid) {
+      return;
+    }
     let method = this.item ? 'editcountrygeo' : 'addcountrygeo'
     console.log('updatelist', method);
     if (this.item) this.countryForm.value['country_pk'] = this.item['country_pk']
-    console.log('countyr_pk========',this.item)
     let result = await this.country[method](this.countryForm.value)
+    console.log('countyr_pk========',this.result)
     if (result && result['status'] == 1) {
       this.toast.success(result['msg']);
       this.close();
     } else {
       this.toast.warning(result['msg'])
-      // console.log('add...', this.countryForm.value);
+       console.log('add...', this.countryForm.value);
     }
   }
 
 close(){
-  console.log('Status========= close----------');
+ // console.log('Status========= close----------');
     this.activeModal.close();
 }
 async createForm() {

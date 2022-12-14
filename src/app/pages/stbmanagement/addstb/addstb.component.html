@@ -8,17 +8,13 @@
         <div class="form-group row">
           <div class="col-sm-4">
             <label>Headend Name<span style="color: red">*</span></label>
-            <auto-completen [addclass]="{ error: submit && this.AddStbForm.controls.hdid.errors}" 
-                addclass="form-control" optValues="hdname" (changed)="
-                getcashead();
-                getModelcas();
-                getstbtype();
-                getInvoicefun();
-                typeClear('1');
-                getoperatortypef()
-              " formControlName="hdid" (keyUp)="getHeadend($event)" placeholder="Select Headend" optId="hdid"
-              [item]="listhead">
-            </auto-completen>
+            <auto-completen
+                [addclass]="{ 'error': submit && this.AddStbForm.controls.hdid.errors}" 
+                addclass="form-control" optValues="hdname" 
+                (changed)="getInvoicefun();getcashead();getModelcas();getstbtype();typeClear('1');getoperatortypef();" 
+                formControlName="hdid" (keyUp)="getHeadend()" placeholder="Select Headend" optId="hdid"
+                [item]="listhead">
+             </auto-completen>
             <div *ngIf="
                 this.AddStbForm.controls.hdid.errors &&
                 this.AddStbForm.controls.hdid.errors.required &&
@@ -29,9 +25,8 @@
           </div>
           <div class="col-sm-4">
             <label>Cas Name<span style="color: red">*</span></label>
-            <auto-completen [addclass]="{
-                error: submit && this.AddStbForm.controls.casid.errors
-              }" addclass="form-control" optValues="cas_name" (changed)="getcashead(); getModelcas()"
+            <auto-completen [addclass]="{ error: submit && this.AddStbForm.controls.casid.errors}"
+              addclass="form-control" optValues="cas_name" (changed)="getcashead(); getModelcas()"
               formControlName="casid" (keyUp)="getcashead($event)" placeholder="Select Case Type" optId="hdcasid"
               [item]="listhdcas">
             </auto-completen>
@@ -40,10 +35,9 @@
             </div>
           </div>
           <div class="col-sm-4">
-            <label class="control-label">STB Model*</label>
-            <auto-completen [addclass]="{
-                error: submit && this.AddStbForm.controls.modelid.errors
-              }" addclass="form-control" optValues="modelname"
+            <label >STB Model<span style="color: red">*</span></label>
+            <auto-completen [addclass]="{ error: submit && this.AddStbForm.controls.modelid.errors }"
+               addclass="form-control" optValues="modelname"
               (changed)="getInvoicefun(); setModelType(); getstbtype()" formControlName="modelid"
               (keyUp)="getModelcas()" placeholder="Select STB Model" optId="bmid" [item]="getmodel">
             </auto-completen>
@@ -56,26 +50,22 @@
         <br />
         <div class="form-group row">
           <div class="col-sm-6">
-            <label class="control-label">Invoice*</label>
-            <auto-completen [addclass]="{
-                error: submit && this.AddStbForm.controls.stockinwardid.errors
-              }" addclass="form-control" optValues="invoiceno" formControlName="stockinwardid"
-              (keyUp)="getInvoicefun()" placeholder="Select Invoice No" optId="stockinid" [item]="getinvoicedet">
+            <label class="control-label">Invoice<span style="color: red">*</span></label>
+            <auto-completen 
+              [addclass]="{error: submit && this.AddStbForm.controls.stockinwardid.errors}" 
+              addclass="form-control" optValues="invoiceno" formControlName="stockinwardid"
+              (keyUp)="getInvoicefun();" placeholder="Select Invoice No" optId="stockinid" [item]="getinvoicedet">
             </auto-completen>
-            <div *ngIf="
-                this.AddStbForm.controls.stockinwardid.errors &&
-                this.AddStbForm.controls.stockinwardid.errors.required &&
-                submit
+            <div *ngIf="this.AddStbForm.controls.stockinwardid.errors && this.AddStbForm.controls.stockinwardid.errors.required &&  submit
               " class="error-text">
               Invoice is required!
             </div>
           </div>
           <div class="col-sm-6">
-            <label class="control-label">STB Type *</label>
-            <select [ngClass]="{
-                'is-invalid': submit && AddStbForm.controls.stb_type.errors
-              }" name="stb_type" formControlName="stb_type" class="form-control">
-              <!-- <option value="">Select STB Type</option> -->
+            <label class="control-label">STB Type <span style="color: red">*</span></label>
+            <select [ngClass]="{ 'is-invalid': submit && AddStbForm.controls.stb_type.errors }"
+             name="stb_type" formControlName="stb_type" class="form-control">
+              <option value="">Select STB Type</option>
               <option *ngFor="let item of getstbtypeg" [ngValue]="item.stbtypeid">
                 {{ item.boxtypename }}
               </option>
@@ -126,20 +116,17 @@
         </div>
         <div class="row form-group" [hidden]="!AddStbForm.controls['status'].value">
           <div class="col-sm-6">
-            <label class="control-label">Serial Number*</label>
+            <label class="control-label">Serial Number<span style="color: red">*</span></label>
             <input type="text" class="form-control" name="boxno" formControlName="boxno"
               placeholder="Enter Sub-Distributor Name" [ngClass]="{
                 'is-invalid': submit && AddStbForm.controls.boxno.errors
               }" />
-            <small *ngIf="
-                AddStbForm.controls.boxno.errors &&
-                AddStbForm.controls.boxno.errors.required &&
-                submit
-              " class="invalid-feedback">Serial Name is required!
+            <small *ngIf="AddStbForm.controls.boxno.errors && AddStbForm.controls.boxno.errors.required && submit 
+            "class="invalid-feedback">Serial Name is required!
             </small>
           </div>
           <div class="col-sm-6">
-            <label class="control-label">VC Number*</label>
+            <label class="control-label">VC Number<span style="color: red">*</span></label>
             <input type="text" class="form-control" name="vcid" formControlName="vcid"
               placeholder="Enter Sub-Distributor Name"
               [ngClass]="{'is-invalid': submit && AddStbForm.controls.vcid.errors}" />
@@ -167,9 +154,7 @@
         </div>
         <div class="modal-footer">
           <button type="submit" status="success" nbButton>ADD</button>
-          <button type="button" status="danger" nbButton (click)="submit = false; createForm()">
-            Cancel
-          </button>
+          <button type="button" status="danger" nbButton (click)="submit = false; createForm()">Cancel </button>
         </div>
       </form>
     </nb-card-body>

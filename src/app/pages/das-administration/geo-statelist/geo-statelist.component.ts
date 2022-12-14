@@ -1,7 +1,7 @@
  import { Component, OnInit } from '@angular/core';
  import { CountryService, PagerService } from '../../_services';
 import { GeoAddstateComponent } from '../geo-addstate/geo-addstate.component';
-import { NgbModal, ModalDismissReasons, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'ngx-geo-statelist',

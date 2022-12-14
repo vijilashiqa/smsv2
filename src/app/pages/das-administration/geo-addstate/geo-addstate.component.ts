@@ -37,7 +37,7 @@ console.log('iteam ==========',this.item)
     }
     let method = this.item ? 'editstategeo' : 'addstategeo';
     if (this.item) this.stateForm.value['state_pk'] = this.item['state_pk'];
-      console.log('countyr_pk========',this.item)
+      console.log('statte pk========',this.item)
       let result = await this.country[method](this.stateForm.value)
       if (result && result['status'] == 1) {
         this.toast.success(result['msg']);

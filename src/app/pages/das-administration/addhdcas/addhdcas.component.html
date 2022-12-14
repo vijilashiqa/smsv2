@@ -1,95 +1,93 @@
-
 <div class="col-md-12">
-    <nb-card>
-       <nb-card-header> ADD Headend CAS</nb-card-header>
-       <nb-card-body>
-          <form [formGroup]="AddCASForm" class="form-horizontal "(ngSubmit)="addCas();" >
-             <div class="modal-body">
-                <div class="form-group row">
-                   <div class="col-sm-6">
-                            <label>Headend Name<span style="color:red">*</span></label>
-                            <auto-completen
-                           [addclass]="{ 'error': submit && this.AddCASForm.controls.hdid.errors }"
-                             optValues="hdname"
-                            formControlName="hdid" (keyUp)="getHeadend($event)"
-                            placeholder='Select Headend'  optId="hdid"
-                            [item]="listhead">
-                          </auto-completen>
-                          <div *ngIf="this.AddCASForm.controls.hdid.errors && (this.AddCASForm.controls.hdid.errors.required) && submit" class="error-text">
-                           Headend Name is required!
-                          </div>
-                   </div>
-                   <div class="col-sm-6">
-                         <label>CAS Name<span style="color:red">*</span></label>
-                            <auto-completen
-                            [addclass]="{ 'error': submit && this.AddCASForm.controls.casid.errors }"
-                           optValues="casname" name="casid" 
-                            formControlName="casid" (keyUp)="GetCas($event)"
-                          placeholder='Select CAS Name'  optId="casid"
-                            [item]="getcas">
-                          </auto-completen>
-                          <div *ngIf="this.AddCASForm.controls.casid.errors && (this.AddCASForm.controls.casid.errors.required) && submit" class="error-text">
-                           CAS Name is required!
-                          </div>
-                   </div>
-                </div>
-                <div class="form-group row">
-                   <div class="col-sm-6">
-                         <label>CAS Location<span style="color:red">*</span></label>
-                         <input type="text"   status="info" class="form-control" name="caslid" formControlName="caslid" placeholder=" Enter CAS Location  "
-                            [ngClass]="{ 'is-invalid': submit && this.AddCASForm.controls.caslid.errors }"/>
-                            <small *ngIf="this.AddCASForm.controls.caslid.errors && (this.AddCASForm.controls.caslid.errors.required) && submit"
-                            class="invalid-feedback">CAS Location is required! </small>
-                   </div>
-               
-                   <div class="col-sm-6">
-                     <label>IP<span style="color:red">*</span></label>
-                     <input type="text"   status="info" class="form-control" name="ip" formControlName="ip" placeholder=" Enter  IP Address "
-                            [ngClass]="{ 'is-invalid': submit && this.AddCASForm.controls.ip.errors }"/>
-                            <small *ngIf="this.AddCASForm.controls.ip.errors && (this.AddCASForm.controls.ip.errors.required) && submit"
-                            class="invalid-feedback">IP is required! </small>
-                   </div>
-                </div>
-                <div class="form-group row">
-
-                   <div class="col-sm-6">
-                     <label>Port<span style="color:red">*</span></label>
-                     <input type="text"   status="info" class="form-control" name="port" formControlName="port" placeholder=" Enter Port "
-                                                 [ngClass]="{ 'is-invalid': submit && this.AddCASForm.controls.port.errors }"/>
-                                                 <small *ngIf="this.AddCASForm.controls.port.errors && (this.AddCASForm.controls.port.errors.required) && submit"
-                                                 class="invalid-feedback">Port is required! </small>
+   <nb-card>
+      <nb-card-header> ADD Headend CAS</nb-card-header>
+      <nb-card-body>
+         <form [formGroup]="AddCASForm" class="form-horizontal " (ngSubmit)="addCas();">
+            <div class="modal-body">
+               <div class="form-group row">
+                  <div class="col-sm-6">
+                     <label>Headend Name<span style="color:red">*</span></label>
+                     <auto-completen [addclass]="{ 'error': submit && this.AddCASForm.controls.hdid.errors }"
+                        optValues="hdname" formControlName="hdid" (keyUp)="getHeadend($event)"
+                        placeholder='Select Headend' optId="hdid" [item]="listhead">
+                     </auto-completen>
+                     <div
+                        *ngIf="this.AddCASForm.controls.hdid.errors && (this.AddCASForm.controls.hdid.errors.required) && submit"
+                        class="error-text">
+                        Headend Name is required!
                      </div>
+                  </div>
+                  <div class="col-sm-6">
+                     <label>CAS Name<span style="color:red">*</span></label>
+                     <auto-completen [addclass]="{ 'error': submit && this.AddCASForm.controls.casid.errors }"
+                        optValues="casname" name="casid" formControlName="casid" (keyUp)="GetCas($event)"
+                        placeholder='Select CAS Name' optId="casid" [item]="getcas">
+                     </auto-completen>
+                     <div
+                        *ngIf="this.AddCASForm.controls.casid.errors && (this.AddCASForm.controls.casid.errors.required) && submit"
+                        class="error-text">
+                        CAS Name is required!
+                     </div>
+                  </div>
+               </div>
+               <div class="form-group row">
+                  <div class="col-sm-6">
+                     <label>CAS Location<span style="color:red">*</span></label>
+                     <input type="text" status="info" class="form-control" name="caslid" formControlName="caslid"
+                        placeholder=" Enter CAS Location  "
+                        [ngClass]="{ 'is-invalid': submit && this.AddCASForm.controls.caslid.errors }" />
+                     <small
+                        *ngIf="this.AddCASForm.controls.caslid.errors && (this.AddCASForm.controls.caslid.errors.required) && submit"
+                        class="invalid-feedback">CAS Location is required! </small>
+                  </div>
 
+                  <div class="col-sm-6">
+                     <label>IP<span style="color:red">*</span></label>
+                     <input type="text" status="info" class="form-control" name="ip" formControlName="ip"
+                        placeholder=" Enter  IP Address "
+                        [ngClass]="{ 'is-invalid': submit && this.AddCASForm.controls.ip.errors }" />
+                     <small
+                        *ngIf="this.AddCASForm.controls.ip.errors && (this.AddCASForm.controls.ip.errors.required) && submit"
+                        class="invalid-feedback">IP is required! </small>
+                  </div>
+               </div>
+               <div class="form-group row">
+                  <div class="col-sm-6">
+                     <label>Port<span style="color:red">*</span></label>
+                     <input type="text" status="info" class="form-control" name="port" formControlName="port"
+                        placeholder=" Enter Port "
+                        [ngClass]="{ 'is-invalid': submit && this.AddCASForm.controls.port.errors }" />
+                     <small
+                        *ngIf="this.AddCASForm.controls.port.errors && (this.AddCASForm.controls.port.errors.required) && submit"
+                        class="invalid-feedback">Port is required! </small>
+                  </div>
                   <div class="col-sm-6">
                      <label>CAS Installed Date <span style="color:red">*</span></label>
-                     <input type="date" class="form-control" formControlName="smsidate" 
-                      placeholder="Enter CAS Installation Date" 
-                      [ngClass]="{ 'is-invalid': submit && this.AddCASForm.controls.smsidate.errors }"
-                      />
-                      <small *ngIf="this.AddCASForm.controls.smsidate.errors && (this.AddCASForm.controls.smsidate.errors.required) && submit"
-                      class="invalid-feedback">CAS Installed Date is required! </small>
+                     <input type="date" class="form-control" formControlName="smsidate"
+                        placeholder="Enter CAS Installation Date"
+                        [ngClass]="{ 'is-invalid': submit && this.AddCASForm.controls.smsidate.errors }" />
+                     <small
+                        *ngIf="this.AddCASForm.controls.smsidate.errors && (this.AddCASForm.controls.smsidate.errors.required) && submit"
+                        class="invalid-feedback">CAS Installed Date is required! </small>
                   </div>
-               
-                </div>
-                <div class="form-group row">
-                
+               </div>
+               <div class="form-group row">
                   <div class="col-sm-6">
                      <label>SMS Integrated Date<span style="color:red">*</span></label>
-                     <input type="date" class="form-control" formControlName="casidate" 
-                     placeholder="Enter SMS Integrated Date" 
-                     [ngClass]="{ 'is-invalid': submit && this.AddCASForm.controls.casidate.errors }"/>
-                     <small *ngIf="this.AddCASForm.controls.casidate.errors && (this.AddCASForm.controls.casidate.errors.required) && submit"
-                     class="invalid-feedback">CAS & SMS Integrated Date is required! </small>
+                     <input type="date" class="form-control" formControlName="casidate"
+                        placeholder="Enter SMS Integrated Date"
+                        [ngClass]="{ 'is-invalid': submit && this.AddCASForm.controls.casidate.errors }" />
+                     <small
+                        *ngIf="this.AddCASForm.controls.casidate.errors && (this.AddCASForm.controls.casidate.errors.required) && submit"
+                        class="invalid-feedback">CAS & SMS Integrated Date is required! </small>
                   </div>
-                     </div>
-
-
-             </div>
-             <div class="modal-footer">
-               <button  type="submit" status="success" nbButton  >{{id ? 'Update' : 'Add'}}</button>
-                <button type="button" status="danger" nbButton (click)='createForm();submit=false'>Reset </button>
-             </div>
-          </form>
-       </nb-card-body>
-    </nb-card>
- </div>
+               </div>
+            </div>
+            <div class="modal-footer">
+               <button type="submit" status="success" nbButton>{{id ? 'Update' : 'Add'}}</button>
+               <button type="button" status="danger" nbButton (click)='createForm();submit=false'>Reset </button>
+            </div>
+         </form>
+      </nb-card-body>
+   </nb-card>
+</div>

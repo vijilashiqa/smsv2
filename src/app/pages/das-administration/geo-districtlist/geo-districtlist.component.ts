@@ -74,7 +74,7 @@ export class GeoDistrictlistComponent implements OnInit {
 
   EditDistrict(items) {
     const modalRef = this.modal.open(GeoAdddistrictComponent, { container: 'nb-layout', backdrop: false });
-    modalRef.componentInstance.title = 'Edit Country';
+    modalRef.componentInstance.title = 'Edit District';
     modalRef.componentInstance.item = items
     modalRef.result.then((data) => {
       this.initiallist();

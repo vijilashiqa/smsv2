@@ -1,10 +1,8 @@
 import { Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { BroadcasterService, CountryService, HeadendService } from '../../_services/index';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router } from '@angular/router';
-import { id } from '@swimlane/ngx-charts';
 import { OperatorService } from '../../_services/operator.service';
 import { sumValidator } from '../../_services/validator_service';
 @Component({
@@ -47,7 +45,6 @@ export class AddUserComponent implements OnInit {
     this.subdistributor();
     this.listlco();
     if (this.id) {
-      console.log('id.................', this.id);
       this.disabled = !this.disabled;
       this.editable = true
       this.editflag = true;
@@ -70,12 +67,13 @@ export class AddUserComponent implements OnInit {
     this.distShareShow = false;
     this.subdistshare=false;
     const [show_flag] = this.getlistcount.filter(({id}) => this.val['lcoid'] == id).map(item => item.dist_or_sub_flg)
+    console.log("show flaf@@@@@@@@",show_flag)
     if(show_flag == 2) this.distShareShow = !this.distShareShow;
     if(show_flag==3) this.subdistshare=!this.subdistshare;
   }
   async AddUser() {
     this.submit = true;
-    console.log('add...', this.val);
+   // console.log('add...', this.val);
     const invalid = [];
     const control = this.ctrl
     for (const name in control) {
@@ -84,13 +82,13 @@ export class AddUserComponent implements OnInit {
       }
     }
     if (this.AddUserForm.invalid) {
-      console.log('Invalid value -----', invalid);
+      //console.log('Invalid value -----', invalid);
       window.alert('Please fill mandatory fields');
       return;
     }
     let method = this.id ? 'editoperator' : 'addoperator'
-    console.log('ad id++++++++++++++++++++++++', this.id)
-    console.log('update user', method);
+    //console.log('ad id++++++++++++++++++++++++', this.id)
+    //  console.log('update user', method);
     if (this.id) this.AddUserForm.value['id'] = this.id
     let result = await this.operator[method](this.AddUserForm.value)
     if (result && result[0].err_code == 0) {
@@ -98,24 +96,24 @@ export class AddUserComponent implements OnInit {
       this.route.navigate(['/pages/users/userlist'])
     } else {
       this.toast.warning(result[0]['msg'])
-      console.log('add...', this.val);
+    // console.log('add...', this.val);
     }
 
   }
 
   async edit() {
-    console.log('edit herer', this.id)
+   // console.log('edit herer', this.id)
     this.editdata = await this.operator.geteditoperator({ id: this.id })
-    console.log('editdata .....', this.editdata)
+    //console.log('editdata .....', this.editdata)
     this.createForm();
   }
   async listoperator() {
     this.operatortypelist = await this.operator.searchoperator({ usertype: 666, hdid: this.AddUserForm.value['hdid'] })
-    console.log('list operator', this.operatortypelist)
+    //console.log('list operator', this.operatortypelist)
   }
   async subdistributor() {
     this.subdistributortype = await this.operator.searchoperator({ usertype: 555, hdid: this.AddUserForm.value['hdid'], distid: this.AddUserForm.value['distid'] })
-    console.log('list operator', this.subdistributortype)
+    //console.log('list operator', this.subdistributortype)
   }
   taxpayby() {
     this.AddUserForm.get('gstno').clearValidators();
@@ -197,30 +195,30 @@ export class AddUserComponent implements OnInit {
     this.AddUserForm.get('folino').updateValueAndValidity();
   }
   async getCountry($event = '') {
-    console.log('Country Event----', $event);
+   // console.log('Country Event----', $event);
     this.count = await this.country.listcountry({ like: $event });
-    console.log('country', this.count);
+  //  console.log('country', this.count);
   }
 
   async getstate($event = '') {
-    console.log('get state  calling-----', this.AddUserForm.value['country']);
+    //console.log('get state  calling-----', this.AddUserForm.value['country']);
     this.getstates = await this.country.liststate({ country_fk: this.AddUserForm.value['country'], like: $event });
   }
   async getdistrict($event = '') {
-    console.log('dist', $event);
-    console.log('get distric  calling-----', this.AddUserForm.value['state']);
+    //console.log('dist', $event);
+    //console.log('get distric  calling-----', this.AddUserForm.value['state']);
     this.dist = await this.country.listdistrict({ stateid: this.AddUserForm.value['state'], like: $event });
-    console.log('Get district data', this.dist);
+    //console.log('Get district data', this.dist);
 
   }
   async getcity($event = '') {
-    console.log('city...........', $event);
-    console.log('get distric  calling-----', this.AddUserForm.value['district']);
+   //console.log('city...........', $event);
+   // console.log('get distric  calling-----', this.AddUserForm.value['district']);
     this.citylist = await this.country.listcity({ district_id: this.AddUserForm.value['district'] });
   }
   async getarea($event = '') {
     this.listarea = await this.country.listarea({ city_id: this.AddUserForm.value['city'] });
-    console.log('area', this.listarea)
+    //console.log('area', this.listarea)
   }
 
 
@@ -266,7 +264,7 @@ export class AddUserComponent implements OnInit {
   async getHeadend($event = '') {
 
     this.listhead = await this.headService.getHeadend({ like: $event })
-    console.log(this.listhead)
+   // console.log(this.listhead)
   }
   createForm() {
     this.AddUserForm = this.fb.group({

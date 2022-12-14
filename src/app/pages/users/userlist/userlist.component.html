@@ -42,7 +42,8 @@
         </div>
         <div class="col-sm-3">
           <label>Operator Name</label>
-          <auto-completen addclass="form-control"  [(ngModel)]="profileid" optValues="profileid" name="operator_name" (changed)="listoperator()"
+          <auto-completen addclass="form-control"  [(ngModel)]="profileid" 
+            optValues="profileid" name="operator_name" (changed)="listoperator()"
             placeholder="Select Operator" Id="id" [item]="operatortypelist">
           </auto-completen>
         </div>
@@ -77,13 +78,23 @@
             <button type="button" class="btn btn-sm btn-success dropdown-toggle" data-bs-toggle="dropdown">
               Action
             </button>
-            <div class="dropdown-menu" style="min-width: 0rem">
+            <div class="dropdown-menu" style="min-width: 0rem" style="color: none !important; 
+             text-decoration: none !important;">
               <a class="dropdown-item" style="cursor: pointer" [routerLink]="['/pages/users/edit-user']"
                 [queryParams]="{ id: item.id }">
                 <i title="Edit Complaint" class="far fa-edit"></i>&nbsp;Edit
               </a>
-              <a class="dropdown-item" style="cursor: pointer" (click)="update(item)">
-                <i class="far fa-edit" title="Edit Complaint"></i>&nbsp;HD CAS
+              <a class="dropdown-item" (click)="update(item)">
+                <i class="far fa-edit" title="Edit Complaint"
+                ></i>&nbsp;HD CAS
+              </a>
+
+              <a class="dropdown-item" style="cursor: pointer"
+              [routerLink]="['/pages/users/role-user']"
+              style="cursor: pointer" style="color: none !important; 
+              text-decoration: none !important;" 
+                [queryParams]="{ id: item.id }" >
+                <i class="fa fa-magic" style="font-size: 13px !important;"></i>&nbsp;Edit Role
               </a>
             </div>
           </div>

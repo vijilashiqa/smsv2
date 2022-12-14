@@ -50,7 +50,7 @@ await this.getarea();
     }
     if (this.AddheadendForm.invalid ) {
        console.log('Invalid value -----',invalid);
- //     window.alert('Please fill mandatory fields');
+     window.alert('Please fill mandatory fields');
       return;
     }
     console.log('add...', this.val);

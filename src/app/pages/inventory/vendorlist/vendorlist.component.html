@@ -19,7 +19,7 @@
           <td ><a (click)="Editmake(item)" title="Update"><i class="nb-edit"></i></a></td>
           <td>{{item.hdname}}</td>
           <td>{{item.vendor_name}}</td>
-           <td><i [ngStyle]="{'color': item.status==1? 'green':'red'}"
+           <td><i [ngStyle]="{'color': item.status==1? 'red':'green'}"
               [ngClass]="{'ion-close-round':item.status==0 ? true:false,'ion-checkmark-round':item.status!=0 ? true:false  }"
               [attr.title]="item.status==0 ? 'Active' : 'Deactive'"></i></td>
         </tr>

@@ -71,7 +71,7 @@ export class PagesComponent {
             // link: '/pages/das-administration/das-administration',
             children: [
               {
-                title: 'List Profile',
+                title: 'List HD Profile',
                 link: '/pages/das-administration/list-profile',
 
               },

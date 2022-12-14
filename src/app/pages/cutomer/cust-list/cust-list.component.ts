@@ -22,7 +22,7 @@ export class CustListComponent implements OnInit {
   pager: any = {}; page: number = 1; opt: any = []; stbdet: any = [];
   pagedItems: any = []; locitem: any = []; branchitem: any = [];
   vcdet: any = []; Custform; limit: number = 25; headend = '';getpackagelist;
-  operator_name = ''; loc = ''; branch = ''; op_type = ''; listhead;
+  profileid = ''; loc = ''; branch = ''; op_type = ''; listhead;
   model_opt = ''; stbopt = ''; vc = ''; status = ''; to_cdate = '';
   from_date = ''; to_date = ''; head_opt = ''; address = ''; operatortypelist;
   pack: any = []; pack_type = ''; package = ''; from_cdate = ''; listvc; pair_status
@@ -49,7 +49,7 @@ export class CustListComponent implements OnInit {
     this.getModel();
     this.GetCas();
     this.boxparing();
-    // this.vcparing();
+     this.vcparing();
     this.getpackage();
   }
   async initiallist() {
@@ -58,21 +58,16 @@ export class CustListComponent implements OnInit {
       index: (this.page - 1) * this.limit,
       limit: this.limit,
       user_type: this.op_type,
-      id: this.operator_name,
+      userid: this.profileid,
       model: this.model_opt,
       boxno: this.stbopt,
       vc: this.vc,
       status: this.status,
-      loc: this.loc,
-      branch: this.branch,
-      start_date: this.from_date,
+      cby: this.from_date,
       end_date: this.to_date,
       hdid: this.headend,
-      address: this.address,
       pack_type: this.pack_type,
       package: this.package,
-      c_times: this.from_cdate,
-      c_timee: this.to_cdate,
       cas: this.castype,
     });
     console.log('list subscriber=====', this.listsubscriberl)
@@ -92,29 +87,32 @@ async getpackage(){
     console.log('listboxpair', this.listboxpair)
   }
 
-  // async vcparing() {
-  //   let boxno = this.stbopt;
-  //   console.log('listboxpair in funxction', this.listboxpair)
-  //   const boxvc_data = this.listboxpair?.filter(x => x.boxid == boxno)
-  //   console.log('stbno in aarray', boxno)
-  //   console.log('vcid', boxvc_data);
-  //   this.pair_status = boxvc_data.pairflg;
-  //   this.listvc = [];
-  //   if (boxvc_data.vcid) {
-  //     console.log("boxdata@@@@@@@@", boxvc_data.vcid)
-  //     this.listvc = [{ vcid: boxvc_data.vcid, vcno: boxvc_data.vcno }]
-  //     console.log('listvc**********', this.listvc)
-  //   } else {
-  //     const data = []
-  //     let vclist = this.listboxpair.filter(x => x.vcno !== 0 && x.vcno !== null).reduce((a, v) => {
-  //       const value = { vcid: v.vcid, vcno: v.vcno }
-  //       data.push(value)
-  //       return data
-  //     }, [])
-  //     this.listvc = vclist
-  //     console.log('vclist', vclist);
-  //   }
-  // }
+  async vcparing() {
+    let boxno = this.stbopt;
+    console.log('listboxpair in funxction', this.listboxpair)
+    const boxvc_data = this.listboxpair?.filter(x => x.boxid == boxno)
+    console.log('stbno in aarray', boxno)
+    console.log('vcid here', boxvc_data);
+    this.pair_status = boxvc_data[0].pairflg;
+    console.log("pair status @@@@@",this.pair_status)
+    this.listvc = [];
+    if (boxvc_data[0].vcid) {
+      console.log("boxdata@@@@@@@@", boxvc_data[0].vcid)
+      this.listvc = [{ vcid: boxvc_data[0].vcid, vcno: boxvc_data[0].vcno }]
+      console.log('listvc**********', this.listvc)
+    } else {
+      const data = []
+      let vclist = this.listboxpair.filter(x => x.vcno !== 0 && x.vcno !== null).reduce((a, v) => {
+        const value = { vcid: v.vcid, vcno: v.vcno }
+        data.push(value)
+        return data
+       
+      }, [])
+      console.log("data",data)
+      this.listvc = vclist
+      console.log('vclist', vclist);
+    }
+  }
 
 
   async GetCas($event = '') {
@@ -139,7 +137,7 @@ async getpackage(){
   }
 
   async getoperator() {
-    this.operatortypelist = await this.operator.listoperatortype({ usertype: this.op_type, hdid: this.headend })
+    this.operatortypelist = await this.operator.searchoperator({ usertype: this.op_type, hdid: this.headend })
     console.log('list operator', this.operatortypelist)
   }
 
@@ -150,13 +148,9 @@ async getpackage(){
     console.log(this.listhead)
   }
  
-
   async getModel() {
     this.getmodellist = await this.stock.getstockmodel({});
   }
-
-
-
   setPage() {
     this.pager = this.pageservice.getPager(this.count, this.page, this.limit);
     this.pagedItems = this.data;
@@ -176,6 +170,7 @@ async getpackage(){
       act_check: new FormControl(true),
       exp_check: new FormControl(true),
       addr_check: new FormControl(true),
+      headend : new FormControl(true)
     });
   }
 
@@ -186,7 +181,7 @@ async getpackage(){
   Download() {
     // this.cust.getcustList(
     // {
-    //   id: this.operator_name,
+    //   id: this.profileid,
     //   model: this.model_opt,
     //   box: this.stbopt,
     //   vc: this.vc,
@@ -233,8 +228,14 @@ async getpackage(){
     // });
   }
 
+
+  renew(item) {
+    localStorage.setItem('cust_data', JSON.stringify(item));
+    this.router.navigate(['/pages/customer/renew_cust'])
+  }
+
   getpack() {
-    let user = this.operator_name;
+    let user = this.profileid;
     // this.packs.getinvpack(
     //   {
     //     head_id: this.head_opt,

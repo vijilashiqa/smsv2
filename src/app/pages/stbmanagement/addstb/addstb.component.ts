@@ -53,12 +53,13 @@ export class AddstbComponent implements OnInit {
     private stb: StbmanagementService
   ) {}
 
-  ngOnInit() {
-    this.createForm();
-    this.getHeadend();
+async  ngOnInit() {
+ await   this.createForm();
+ await   this.getHeadend();
+  await  this.getInvoicefun();
     this.serialValidation();
- //   this.getoperator();
-    // this.getoperatortypef();
+
+
   }
 
   metavalue() {
@@ -88,7 +89,7 @@ export class AddstbComponent implements OnInit {
 
   clearValue(...value) {
     for (let i of value) {
-      console.log("clear value");
+   //   console.log("clear value");
       this.AddStbForm.get(i).clearValidators();
       this.AddStbForm.get(i).updateValueAndValidity();
     }
@@ -138,7 +139,6 @@ export class AddstbComponent implements OnInit {
       console.log("bulkResult????????????????? ", resp);
       if (resp && resp[0].err_code == 0) {
         this.toast.success(resp[0]["msg"]);
-        // console.log('add...', this.AddStbForm.value);
         this.route.navigate(["/pages/stbmanagement/stblist"]);
       } else {
         this.toast.warning(resp[0]["msg"]);
@@ -149,46 +149,33 @@ export class AddstbComponent implements OnInit {
     return this.AddStbForm.value;
   }
 
-  async getHeadend($event = "") {
+  async getHeadend() {
     this.listhead = await this.headend.getHeadend({});
   }
   async getcashead($event = "") {
-    this.listhdcas = await this.headend.listHdcas({
-      hdid: this.AddStbForm.value["hdid"],
-      like: $event,
-    });
+    this.listhdcas = await this.headend.listHdcas({ hdid: this.AddStbForm.value["hdid"],like: $event });
     this.listhdcas = this.listhdcas[0];
-    console.log("list hd cas", this.listhdcas);
+  //  console.log("list hd cas", this.listhdcas);
   }
 
   async getModelcas() {
-    this.getmodel = await this.stock.getstockmodel({
-      hdid: this.AddStbForm.value["hdid"],
-      hdcasid: this.AddStbForm.value["casid"],
-    });
+    this.getmodel = await this.stock.getstockmodel({ hdid: this.AddStbForm.value["hdid"], hdcasid: this.AddStbForm.value["casid"] });
   }
   async getstbtype() {
-    this.getstbtypeg = await this.stb.getstbtype({
-      hdid: this.AddStbForm.value["hdid"],
-      boxtypeid: this.AddStbForm.value["modelid"],
-    });
+    this.getstbtypeg = await this.stb.getstbtype({ hdid: this.AddStbForm.value["hdid"], boxtypeid: this.AddStbForm.value["modelid"]});
     console.log("getstb type", this.getstbtypeg);
   }
   async getInvoicefun() {
-    this.getinvoicedet = await this.stb.getinvoice({
-      hdid: this.AddStbForm.value["hdid"],
-      bmid: this.AddStbForm.value["modelid"],
-    });
-    console.log("get invoice", this.getinvoicedet);
+    this.getinvoicedet = await this.stb.getinvoice({ hdid: this.AddStbForm.value["hdid"], bmid: this.AddStbForm.value["modelid"] });
+   // console.log("get invoice", this.getinvoicedet);
   }
   typeClear(val = "1") {
     this.changeclear("casid", "modelid", "stb_type", "stockinwardid");
-    // else this.changeclear('stb_type')
   }
 
   typeClearopear(val = "1") {
     this.changeclear("lcoid");
-    // else this.changeclear('stb_type')
+
   }
 
   changeclear(...data) {
@@ -196,15 +183,8 @@ export class AddstbComponent implements OnInit {
       this.AddStbForm.controls[i].setValue("");
     }
   }
-
-
-
-
   async getoperatortypef() {
-    this.operatortype = await this.stb.getoperatortype({
-      usertype: this.AddStbForm.value["usertype"],
-      hdid: this.AddStbForm.value["hdid"],
-    });
+    this.operatortype = await this.stb.getoperatortype({ usertype: this.AddStbForm.value["usertype"], hdid: this.AddStbForm.value["hdid"] });
     console.log("operator type ", this.operatortype);
   }
 

@@ -80,22 +80,22 @@ export class CreateProfileComponent implements OnInit {
         {
           name: 'Geo Panel',
           children: [
-            {
-              name: 'Location',
-              children: [
-                { id: 20011, name: 'List Location' },
-                { id: 20012, name: 'Create Location ' },
-                { id: 20013, name: 'Edit Location ' },
-              ]
-            },
-            {
-              name: 'Branch',
-              children: [
-                { id: 20021, name: 'List Branch' },
-                { id: 20022, name: 'Create Branch ' },
-                { id: 20023, name: 'Edit Branch ' },
-              ]
-            },
+            // {
+            //   name: 'Location',
+            //   children: [
+            //     { id: 20011, name: 'List Location' },
+            //     { id: 20012, name: 'Create Location ' },
+            //     { id: 20013, name: 'Edit Location ' },
+            //   ]
+            // },
+            // {
+            //   name: 'Branch',
+            //   children: [
+            //     { id: 20021, name: 'List Branch' },
+            //     { id: 20022, name: 'Create Branch ' },
+            //     { id: 20023, name: 'Edit Branch ' },
+            //   ]
+            // },
             {
               name: 'Country',
               children: [

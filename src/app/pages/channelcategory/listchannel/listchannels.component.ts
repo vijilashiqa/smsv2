@@ -8,58 +8,57 @@ import { ChannelService } from '../../_services/channel.service';
   styleUrls: ['./listchannels.component.scss']
 })
 export class listChannelsComponent implements OnInit {
- broadcaster = ''; broadlist: any = [];genre='';listgener;lang;channelForm; pager: any = {}; page: number = 1; 
- pagedItems: any = []; limit = 25;getcitylist;data;count;listchannel;listhead;headendl;selectchannel
-  channel_name = '';submit: boolean; headend = ''; lcn_num = ''; language = '';broadcast
-   channel_type = ''; 
+  broadcaster = ''; broadlist: any = []; genre = ''; listgener; lang; channelForm; pager: any = {}; page: number = 1;
+  pagedItems: any = []; limit = 25; getcitylist; data; count; listchannel; listhead; headendl; selectchannel
+  channel_name = ''; submit: boolean; headend = ''; lcn_num = ''; language = ''; broadcast
+  channel_type = '';
   head: any = []; opt: any = [];
   channel_mode = '';
-  
- channellist: any = [];
+
+  channellist: any = [];
   constructor(
     private headService: HeadendService,
     private channelService: ChannelService,
-    private pageservice :PagerService,
-    private broadcasterService : BroadcasterService
+    private pageservice: PagerService,
+    private broadcasterService: BroadcasterService
   ) { }
 
-   async ngOnInit() {
+  async ngOnInit() {
     await this.initiallist();
     await this.getheadend();
     await this.listlang();
     await this.listgenre();
     await this.selectchanname()
-   
+
   }
-  async getheadend(){
-    console.log('name', );
+  async getheadend() {
+    console.log('name',);
     this.headendl = await this.headService.getHeadend({});
-    console.log('headendname',this.count);
+    console.log('headendname', this.headendl);
   }
-  async listlang(){
-    console.log('name', );
-    let result = await this.channelService.listlang({ hdid : this.headend});
-    this.lang =result[0]
-    console.log('langugae------',this.lang);
-  }
-  
- async listgenre(){
-    console.log('name', );
-    this.listgener = await this.channelService.selectgenere({  hdid : this.headend , langid : this.language });
-    console.log('geneerrrr',this.listgener);
-
+  async listlang() {
+    console.log('name',);
+    let result = await this.channelService.listlang({ hdid: this.headend });
+    this.lang = result[0]
+    console.log('langugae------', this.lang);
   }
 
+  async listgenre() {
+    console.log('name',);
+    this.listgener = await this.channelService.selectgenere({ hdid: this.headend, langid: this.language });
+    console.log('geneerrrr', this.listgener);
+  }
 
-  async selectchanname (){
-     this.selectchannel =await this.channelService.selectchanname({ hdid : this.headend })
-     console.log("select channel",this.selectchannel)
+
+  async selectchanname() {
+    this.selectchannel = await this.channelService.selectchanname({ hdid: this.headend })
+    console.log("select channel", this.selectchannel)
 
   }
   async initiallist() {
-    this.listchannel = await this.channelService.listchannel({index:(this.page - 1) * this.limit,
-      limit:this.limit,
-    //  id: 1,
+    this.listchannel = await this.channelService.listchannel({
+      index: (this.page - 1) * this.limit,
+      limit: this.limit,
       hdid: this.headend,
       bcid: this.broadcaster,
       chanlcm: this.lcn_num,
@@ -67,12 +66,13 @@ export class listChannelsComponent implements OnInit {
       genreid: this.genre,
       chantype: this.channel_type,
       chanmode: this.channel_mode,
-      channame: this.channel_name,});
+      chanid: this.channel_name,
+    });
     console.log('dfgvdg=====', this.listchannel)
     this.data = this.listchannel[0];
     this.count = this.listchannel[1].count;
     this.setPage();
-}
+  }
   getlist(page) {
     var total = Math.ceil(this.count / this.limit);
     let result = this.pageservice.pageValidator(this.page, page, total);
@@ -81,14 +81,14 @@ export class listChannelsComponent implements OnInit {
       this.initiallist();
     };
   }
-  async Getbroadcasteredit($event='') {
-      this.broadcast = await this.broadcasterService.getbroadcaster({hdid : this.headend});
-     console.log('result ********',this.broadcast)
+  async Getbroadcasteredit($event = '') {
+    this.broadcast = await this.broadcasterService.getbroadcaster({ hdid: this.headend });
+   // console.log('result ********', this.broadcast)
   }
   setPage() {
     this.pager = this.pageservice.getPager(this.count, this.page, this.limit);
     this.pagedItems = this.data;
-  }  
+  }
 
 
 }

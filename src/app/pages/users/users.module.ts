@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { TreeModule } from 'angular-tree-component';
 import { UsersRoutingModule } from './users-routing.module';
 import { AddUserComponent } from './add-user/add-user.component';
 import { CancelshareComponent } from './cancelshare/cancelshare.component';
@@ -20,6 +20,7 @@ import { AutoCompleteNModule } from '../auto-complete-module/auto-completen-modu
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 import { UserhdcasComponent } from './userhdcas/userhdcas.component';
 import { filterModule } from '../filter/filter-module';
+import { RoleeditUserComponent } from './roleedit-user/roleedit-user.component';
 @NgModule({
   declarations: [
     AddUserComponent,
@@ -30,7 +31,8 @@ import { filterModule } from '../filter/filter-module';
     UpdateShareComponent,
     WalletComponent,
     WalletlistComponent,
-    UserhdcasComponent
+    UserhdcasComponent,
+    RoleeditUserComponent
   ],
   imports: [
     CommonModule,
@@ -41,6 +43,7 @@ import { filterModule } from '../filter/filter-module';
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
     NbStepperModule,
+    TreeModule.forRoot(),
     NbTabsetModule,
     NbRouteTabsetModule,
     NbStepperModule,
@@ -56,8 +59,6 @@ import { filterModule } from '../filter/filter-module';
     AutoCompleteNModule,
     filterModule,
     FormsModule,
-  //  NgMultiSelectDropDownModule.forRoot()
-
   ],
 
    

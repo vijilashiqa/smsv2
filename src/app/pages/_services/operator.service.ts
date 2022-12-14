@@ -84,4 +84,9 @@ async searchoperator (params){
   return await this.http.post("/operator/searchoperator",params).toPromise();
 }
 
+async userprofileeditrole(params){
+  return await this.http.post("/operator/userprofileeditrole",params).toPromise();
+}
+
+
 }
