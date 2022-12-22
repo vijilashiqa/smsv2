@@ -20,7 +20,7 @@ export class GeoAddcityComponent implements OnInit {
     private toast: ToastrService, public activeModal: NgbActiveModal,) { }
 
 async  ngOnInit() {
-  this.createForm();
+    this.createForm();
     this.getCountry();
     console.log('item in onint',this.item)
     if (this.item) {
@@ -32,15 +32,22 @@ async  ngOnInit() {
   }
   async City() {
     this.submit = true;
-    console.log('items============ in city', this.item,'form',this.cityform)
-    if (!this.cityform.valid) {
-      console.log('invalid---------------');
-      
+    console.log('add...', this.val);
+    const invalid = [];
+    const control = this.ctrl
+    for (const name in control) {
+      if (control[name].invalid) {
+        invalid.push(name);
+      }
+    }
+    if (this.cityform.invalid ) {
+       console.log('Invalid value -----',invalid);
+     window.alert('Please fill mandatory fields');
       return;
     }
     let method = this.item ? 'editcitygeo' : 'addcitygeo';
     console.log('item*******',this.item)
-    if(this.item) this.val['city_id']=this.item['id']
+    if(this.item) this.val['id']=this.item['id']
     console.log('updatelist', method);
     let result = await this.country[method](this.cityform.value)
     console.log('result in add city fronennd',result);
@@ -54,15 +61,20 @@ async  ngOnInit() {
 
   
   typeclearcountry(val = '1') {
-    this.changeclear('stateid', 'districtid')
+    this.changeclear('state_fk', 'district_fk')
    
   }
 
   typeclearstate(val='1'){
  
-    this.changeclear('districtid')
+    this.changeclear('district_fk')
 
 
+  }
+
+
+  get ctrl() {
+    return this.cityform.controls
   }
 
   changeclear(...data) {
@@ -78,34 +90,34 @@ async  ngOnInit() {
     console.log('country', this.count);
   }
   async getstate($event = '') {
-    console.log('get state  calling-----', this.val['countryid']);
-    this.getstates = await this.country.liststate({ country_fk: this.val['countryid'],like:$event });
+    console.log('get state  calling-----', this.val['country_fk']);
+    this.getstates = await this.country.liststate({ country_fk: this.val['country_fk'],like:$event });
   }
   get val() {
     return this.cityform.value
   }
   async getdistrict($event = '') {
-       console.log('dist', $event);
-       console.log('get distric  calling-----', this.val['stateid']);
-      this.dist = await this.country.listdistrict({ stateid: this.val['stateid'],like:$event });
+      console.log('dist', $event);
+      console.log('get distric  calling-----', this.val['state_fk']);
+      this.dist = await this.country.listdistrict({ state_fk: this.val['state_fk'],like:$event });
       console.log('Get district data',this.dist);
       
   }
   async getcity($event = '') {
     console.log('city...........',$event);
-    console.log('get distric  calling-----', this.val['districtid']);
-      this.citylist = await this.country.listcity({ districtid: this.val['districtid'] });
+    console.log('get distric  calling-----', this.val['district_fk']);
+      this.citylist = await this.country.listcity({ district_fk: this.val['district_fk'] });
     }
   close(){
-    console.log('Status========= close----------');
+   // console.log('Status========= close----------');
     this.activeModal.close();
   }
   createForm() {
     this.cityform = new FormGroup({
-      stateid: new FormControl(this.item ? this.item['state_fk'] : '', Validators.required),
-      districtid: new FormControl(this.item ? this.item['district_fk'] : '', Validators.required),
-      cityname: new FormControl(this.item ? this.item['city_name'] : '', Validators.required),
-      countryid: new FormControl(this.item ? this.item['country_fk'] : '', Validators.required),
+      state_fk: new FormControl(this.item ? this.item['state_fk'] : '', Validators.required),
+      district_fk: new FormControl(this.item ? this.item['district_fk'] : '', Validators.required),
+      city_name: new FormControl(this.item ? this.item['city_name'] : '', Validators.required),
+      country_fk: new FormControl(this.item ? this.item['country_fk'] : '', Validators.required),
     });
   }
  

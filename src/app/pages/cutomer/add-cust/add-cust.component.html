@@ -157,7 +157,8 @@
             <auto-completen [addclass]="{
                 error: submit && this.AddCustForm.controls.country.errors
               }" addclass="form-control" optValues="name" formControlName="country" (keyUp)="getCountry($event)"
-              (changed)="getstate(); typeclearcountry('1')" placeholder="Select Country" id="id" [item]="count">
+              (changed)="getstate(); typeclearcountry('1')" placeholder="Select Country" optId="country_pk"
+               [item]="count">
             </auto-completen>
             <div *ngIf="
                 this.AddCustForm.controls.country.errors &&
@@ -190,10 +191,10 @@
             <auto-completen 
             [addclass]="{error: submit && this.AddCustForm.controls.district.errors}"
                addclass="form-control" 
-               optValues="name"
+               optValues="district_name"
                formControlName="district"
                (keyUp)="getdistrict($event)"
-               (changed)="getcity(); typecleardist()" placeholder="Select District" id="id" [item]="dist">
+               (changed)="getcity(); typecleardist()" placeholder="Select District" optId="district_pk" [item]="dist">
             </auto-completen>
             <div *ngIf="
                 this.AddCustForm.controls.district.errors &&
@@ -207,7 +208,7 @@
             <label>City<span style="color: red">*</span></label>
             <auto-completen [addclass]="{
                 error: submit && this.AddCustForm.controls.city.errors
-              }" addclass="form-control" optValues="name" (changed)="getarea(); typeclearcity('1')"
+              }" addclass="form-control" optValues="city_name" (changed)="getarea(); typeclearcity('1')"
               formControlName="city" (keyUp)="getcity($event)" placeholder="Select City" id="id" [item]="citylist">
             </auto-completen>
             <div *ngIf="
@@ -225,7 +226,8 @@
             <label>Area<span style="color: red">*</span></label>
             <auto-completen [addclass]="{
                 error: submit && this.AddCustForm.controls.area.errors
-              }" addclass="form-control" optValues="name" formControlName="area" (keyUp)="getarea($event)"
+              }" addclass="form-control"  optValues="area_name" 
+              formControlName="area" (keyUp)="getarea($event)"
               placeholder="Select Area" id="id" [item]="listarea">
             </auto-completen>
             <div *ngIf="

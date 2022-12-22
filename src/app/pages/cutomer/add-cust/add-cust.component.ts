@@ -298,7 +298,7 @@ export class AddCustComponent implements OnInit {
     this.getstates = await this.country.liststate({ country_fk: this.AddCustForm.value['country'], like: $event });
   }
   async getdistrict($event = '') {
-    this.dist = await this.country.listdistrict({ stateid: this.AddCustForm.value['state'], like: $event });
+    this.dist = await this.country.listdistrict({ state_fk: this.AddCustForm.value['state'], like: $event });
   }
   async getcity($event = '') {
     this.citylist = await this.country.listcity({ district_id: this.AddCustForm.value['district'] });

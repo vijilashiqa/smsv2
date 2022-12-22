@@ -47,7 +47,7 @@
                             [addclass]="{ 'error': submit && this.AddheadendForm.controls.countryid.errors }"
                             addclass="form-control" optValues="name"
                             formControlName="countryid" (keyUp)="getCountry($event)"
-                            (changed)="getstate();typeClear('1')" placeholder='Select Country' id="id"
+                            (changed)="getstate();typeClear('1')" placeholder='Select Country' optId="country_pk"
                             [item]="count">
                           </auto-completen>
                           <div *ngIf="this.AddheadendForm.controls.countryid.errors && (this.AddheadendForm.controls.countryid.errors.required) && submit" class="error-text">
@@ -74,10 +74,10 @@
                             <label>District <span style="color:red">*</span></label>
                             <auto-completen
                             [addclass]="{ 'error': submit && this.AddheadendForm.controls.districtid.errors }"
-                            addclass="form-control" optValues="name"
+                            addclass="form-control" optValues="district_name"
                             formControlName="districtid" (keyUp)="getdistrict($event) "
                             (changed)="getcity(); typedist('1')"
-                             placeholder='Select District' id="id"
+                             placeholder='Select District' optId="district_pk"
                             [item]="dist">
                           </auto-completen>
                           <div *ngIf="this.AddheadendForm.controls.districtid.errors && (this.AddheadendForm.controls.districtid.errors.required) && submit" class="error-text">
@@ -88,7 +88,7 @@
                             <label>City<span style="color:red">*</span></label>
                               <auto-completen
                               [addclass]="{ 'error': submit && this.AddheadendForm.controls.cityid.errors }"
-                              addclass="form-control" optValues="name"
+                              addclass="form-control" optValues="city_name"
                               formControlName="cityid" (keyUp)="getcity($event) "
                               (changed)="getarea();typeClearcity('1')"
                                placeholder='Select city' id="id"
@@ -104,7 +104,7 @@
                             <label>Area<span style="color:red">*</span></label>
                               <auto-completen
                               [addclass]="{ 'error': submit && this.AddheadendForm.controls.areaid.errors }"
-                              addclass="form-control" optValues="name"
+                              addclass="form-control" optValues="area_name"
                               formControlName="areaid" (keyUp)="getarea($event) "
                                placeholder='Select Area' id="id"
                               [item]="listarea">
@@ -255,8 +255,8 @@
                                   <label class="control-label">ISP Invoice Logo</label>
                                   <input type="file" formControlName="Logo" class="form-control"
                                      [ngClass]="{'form-control' : true,'form-control-danger':ctrl.Logo.invalid&&submit}" />
-                                     <small *ngIf="ctrl.hdname.errors &&(ctrl.Logo.errors.required) && submit"
-                                     class="invalid-feedback">Logo is required! </small>
+                                     <!-- <small *ngIf="ctrl.hdname.errors &&(ctrl.Logo.errors.required) && submit"
+                                     class="invalid-feedback">Logo is required! </small> -->
                                </div>
                             </div>
                          </div>

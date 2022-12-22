@@ -107,12 +107,11 @@ export class EditCustComponent implements OnInit {
   async getCountry($event = '') {
     this.count = await this.country.listcountry({ like: $event });
   }
-
   async getstate($event = '') {
     this.getstates = await this.country.liststate({ country_fk: this.editcust.value['country'], like: $event });
   }
   async getdistrict($event = '') {
-    this.dist = await this.country.listdistrict({ stateid: this.editcust.value['state'], like: $event });
+    this.dist = await this.country.listdistrict({ state_fk: this.editcust.value['state'], like: $event });
   }
   async getcity($event = '') {
     this.citylist = await this.country.listcity({ district_id: this.editcust.value['district'] });

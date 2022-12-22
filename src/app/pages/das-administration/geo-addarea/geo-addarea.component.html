@@ -13,27 +13,27 @@
         <div class="col-sm-6">
           <label>Country *</label>
           <auto-completen
-          [addclass]="{ 'error': submit && this.Areaform.controls.countryid.errors }"
+          [addclass]="{ 'error': submit && this.Areaform.controls.country_fk.errors }"
           addclass="form-control" optValues="name"
-          formControlName="countryid" (keyUp)="getCountry($event)"
-          (changed)="getstate();typeclearlcountry('1')" placeholder='Select Country' id="id"
+          formControlName="country_fk" (keyUp)="getCountry($event)"
+          (changed)="getstate();typeclearlcountry('1')" placeholder='Select Country' optId="country_pk"
           [item]="count">
         </auto-completen>
-        <div *ngIf="this.Areaform.controls.countryid.errors && (this.Areaform.controls.countryid.errors.required) && submit" class="error-text">
+        <div *ngIf="this.Areaform.controls.country_fk.errors && (this.Areaform.controls.country_fk.errors.required) && submit" class="error-text">
           Country Name is required!
          </div>
         </div>
         <div class="col-sm-6">
           <label>State *</label>
           <auto-completen
-                           [addclass]="{ 'error': submit && this.Areaform.controls.stateid.errors }"
+                           [addclass]="{ 'error': submit && this.Areaform.controls.state_fk.errors }"
                             addclass="form-control" optValues="name"
-                            formControlName="stateid" (keyUp)="getstate($event)"
+                            formControlName="state_fk" (keyUp)="getstate($event)"
                             (changed)="getdistrict();typeclearstate('1')"
                              placeholder='Select State' id="id"
                             [item]="getstates">
                           </auto-completen>
-                          <div *ngIf="this.Areaform.controls.stateid.errors && (this.Areaform.controls.stateid.errors.required) && submit" class="error-text">
+                          <div *ngIf="this.Areaform.controls.state_fk.errors && (this.Areaform.controls.state_fk.errors.required) && submit" class="error-text">
                             State Name is required!
                            </div>
         </div>
@@ -42,27 +42,27 @@
         <div class="col-sm-6">
           <label>District *</label>
           <auto-completen
-          [addclass]="{ 'error': submit && this.Areaform.controls.districtid.errors }"
-          addclass="form-control" optValues="name"
-          formControlName="districtid" (keyUp)="getdistrict($event) "
+          [addclass]="{ 'error': submit && this.Areaform.controls.district_fk.errors }"
+          addclass="form-control" optValues="district_name"
+          formControlName="district_fk" (keyUp)="getdistrict($event) "
           (changed)="getcity();typecleardis('1')"
-           placeholder='Select District' id="id"
+           placeholder='Select District'optId="district_pk"
           [item]="dist">
         </auto-completen>
-        <div *ngIf="this.Areaform.controls.districtid.errors && (this.Areaform.controls.districtid.errors.required) && submit" class="error-text">
+        <div *ngIf="this.Areaform.controls.district_fk.errors && (this.Areaform.controls.district_fk.errors.required) && submit" class="error-text">
           District Name is required!
          </div>
         </div>
         <div class="col-sm-6">
           <label>City *</label>
           <auto-completen
-          [addclass]="{ 'error': submit && this.Areaform.controls.cityid.errors }"
-          addclass="form-control" optValues="name"
-          formControlName="cityid" (keyUp)="getcity($event)" (changed)="getpincode()"
+          [addclass]="{ 'error': submit && this.Areaform.controls.city_fk.errors }"
+          addclass="form-control" optValues="city_name"
+          formControlName="city_fk" (keyUp)="getcity($event)" (changed)="getpincode()"
            placeholder='Select City' id="id"
           [item]="citylist">
         </auto-completen>
-        <div *ngIf="this.Areaform.controls.cityid.errors && (this.Areaform.controls.cityid.errors.required) && submit" class="error-text">
+        <div *ngIf="this.Areaform.controls.city_fk.errors && (this.Areaform.controls.city_fk.errors.required) && submit" class="error-text">
           City Name is required!
          </div>
         </div>
@@ -70,21 +70,21 @@
       <div class="form-group row">
         <div class="col-sm-6">
           <label>Area *</label>
-          <input type="text" class="form-control" name="areaname" formControlName="areaname" placeholder="Enter Area"
-            [ngClass]="{ 'is-invalid': submit && Areaform.controls.areaname.errors }"/>
-            <small *ngIf="Areaform.controls.areaname.errors &&(Areaform.controls.areaname.errors.required )&& submit"
+          <input type="text" class="form-control" name="area_name" formControlName="area_name" placeholder="Enter Area"
+            [ngClass]="{ 'is-invalid': submit && Areaform.controls.area_name.errors }"/>
+            <small *ngIf="Areaform.controls.area_name.errors &&(Areaform.controls.area_name.errors.required )&& submit"
             class="invalid-feedback">Area is required! </small>
         </div>
         <div class="col-sm-6">
           <label>PinCode *</label>
           <auto-completen
-          [addclass]="{ 'error': submit && this.Areaform.controls.pincode.errors }"
+          [addclass]="{ 'error': submit && this.Areaform.controls.pincode_fk.errors }"
           addclass="form-control" optValues="pincode"
-          formControlName="pincode" (keyUp)="listpincode($event) "
+          formControlName="pincode_fk" (keyUp)="listpincode($event) "
            placeholder='Select Pincode' id="id"
           [item]="listpincode">
         </auto-completen>
-        <div *ngIf="this.Areaform.controls.pincode.errors && (this.Areaform.controls.pincode.errors.required) && submit" class="error-text">
+        <div *ngIf="this.Areaform.controls.pincode_fk.errors && (this.Areaform.controls.pincode_fk.errors.required) && submit" class="error-text">
           Pincode  is required!
          </div>
         </div>

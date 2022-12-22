@@ -55,7 +55,7 @@ export class GeoAdddistrictComponent implements OnInit {
   }
 
   typecleardist(val = '1') {
-    this.changeclear('stateid')
+    this.changeclear('state_fk')
    
   }
 
@@ -74,8 +74,8 @@ export class GeoAdddistrictComponent implements OnInit {
     console.log('country', this.count);
   }
   async getstate($event = '') {
-    console.log('get state  calling-----', this.val['countryid']);
-    this.getstates = await this.country.liststate({ country_fk: this.val['countryid'],like:$event });
+    //console.log('get state  calling-----', this.val['countryid']);
+    this.getstates = await this.country.liststate({ country_fk: this.val['country_fk'],like:$event });
   }
   get val() {
     return this.districtForm.value
@@ -83,9 +83,9 @@ export class GeoAdddistrictComponent implements OnInit {
 
   createForm() {
     this.districtForm = new FormGroup({
-      countryid: new FormControl(this.item ? this.item['country_fk'] : '', Validators.required),
-      stateid: new FormControl(this.item ? this.item['state_fk'] : '', Validators.required),
-      districtName: new FormControl(this.item ? this.item['district_name'] : '', [Validators.required])
+      country_fk: new FormControl(this.item ? this.item['country_fk'] : '', Validators.required),
+      state_fk: new FormControl(this.item ? this.item['state_fk'] : '', Validators.required),
+      district_name: new FormControl(this.item ? this.item['district_name'] : '', [Validators.required])
     });
   }
   

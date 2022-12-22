@@ -195,30 +195,31 @@ export class AddUserComponent implements OnInit {
     this.AddUserForm.get('folino').updateValueAndValidity();
   }
   async getCountry($event = '') {
-   // console.log('Country Event----', $event);
+   console.log('Country Event----', $event);
     this.count = await this.country.listcountry({ like: $event });
-  //  console.log('country', this.count);
+   console.log('country', this.count);
   }
 
   async getstate($event = '') {
-    //console.log('get state  calling-----', this.AddUserForm.value['country']);
+    console.log('get state  calling-----', this.AddUserForm.value['country']);
     this.getstates = await this.country.liststate({ country_fk: this.AddUserForm.value['country'], like: $event });
   }
   async getdistrict($event = '') {
-    //console.log('dist', $event);
-    //console.log('get distric  calling-----', this.AddUserForm.value['state']);
-    this.dist = await this.country.listdistrict({ stateid: this.AddUserForm.value['state'], like: $event });
-    //console.log('Get district data', this.dist);
+    console.log('dist', $event);
+    console.log('get distric  calling-----', this.AddUserForm.value['state']);
+    this.dist = await this.country.listdistrict({ state_fk: this.AddUserForm.value['state'], like: $event });
+    console.log('Get district data', this.dist);
 
   }
   async getcity($event = '') {
-   //console.log('city...........', $event);
-   // console.log('get distric  calling-----', this.AddUserForm.value['district']);
+   console.log('city...........', $event);
+   console.log('get distric  calling-----', this.AddUserForm.value['district']);
     this.citylist = await this.country.listcity({ district_id: this.AddUserForm.value['district'] });
+    console.log('city *****',this.citylist)
   }
   async getarea($event = '') {
     this.listarea = await this.country.listarea({ city_id: this.AddUserForm.value['city'] });
-    //console.log('area', this.listarea)
+    console.log('area', this.listarea)
   }
 
 

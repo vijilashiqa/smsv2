@@ -94,24 +94,24 @@ export class PagesComponent {
               }
             ]
           },
-          {
-            title: 'Operator Setting',
-            // link: '/pages/das-administration/das-administration',
-            children: [
-              {
-                title: 'Operator Setting List',
-                link: '/pages/das-administration/operator-setting-list',
+          // {
+          //   title: 'Operator Setting',
+          //   // link: '/pages/das-administration/das-administration',
+          //   children: [
+          //     {
+          //       title: 'Operator Setting List',
+          //       link: '/pages/das-administration/operator-setting-list',
 
-              },
-              {
-                title: 'Add Operator Setting',
-                link: '/pages/das-administration/addoperator-setting',
+          //     },
+          //     {
+          //       title: 'Add Operator Setting',
+          //       link: '/pages/das-administration/addoperator-setting',
 
-              }
+          //     }
 
 
-            ]
-          },
+          //   ]
+          // },
           {
             title: 'CAS Management',
             // link: '/pages/das-administration/das-administration',
@@ -201,36 +201,36 @@ export class PagesComponent {
 
             ]
           },
-          {
-            title: 'Revenue share',
-            link: '/pages/das-administration/msorevenueshare',
-          },
-          {
-            title: 'Manage SMS Credits',
-            // link: '/pages/das-administration/das-administration',
-            children: [
-              {
-                title: 'List SMS Credits',
-                link: '/pages/das-administration/sms-creditslist',
+          // {
+          //   title: 'Revenue share',
+          //   link: '/pages/das-administration/msorevenueshare',
+          // },
+          // {
+          //   title: 'Manage SMS Credits',
+          //   // link: '/pages/das-administration/das-administration',
+          //   children: [
+          //     {
+          //       title: 'List SMS Credits',
+          //       link: '/pages/das-administration/sms-creditslist',
 
-              },
-              {
-                title: 'Add SMS Credits',
-                link: '/pages/das-administration/sms-addcredits',
+          //     },
+          //     {
+          //       title: 'Add SMS Credits',
+          //       link: '/pages/das-administration/sms-addcredits',
 
-              },
-              {
-                title: 'SMS Gateway List',
-                link: '/pages/das-administration/sms-gatelist',
+          //     },
+          //     {
+          //       title: 'SMS Gateway List',
+          //       link: '/pages/das-administration/sms-gatelist',
 
-              },
-              {
-                title: 'SMS Gateway',
-                link: '/pages/das-administration/sms-gate',
+          //     },
+          //     {
+          //       title: 'SMS Gateway',
+          //       link: '/pages/das-administration/sms-gate',
 
-              }
-            ]
-          },
+          //     }
+          //   ]
+          // },
 
         ],
       },
@@ -262,14 +262,14 @@ export class PagesComponent {
             title: 'Add Subscriber',
             link: '/pages/customer/add-cust',
           },
-          {
-            title: 'Transfer Subscriber',
-            link: '/pages/customer/cust-transfer',
-          },
-          {
-            title: 'Surrenderd Subscribers',
-            link: '/pages/customer/surender-stb',
-          },
+          // {
+          //   title: 'Transfer Subscriber',
+          //   link: '/pages/customer/cust-transfer',
+          // },
+          // {
+          //   title: 'Surrenderd Subscribers',
+          //   link: '/pages/customer/surender-stb',
+          // },
         ]
       },
       {
@@ -345,21 +345,21 @@ export class PagesComponent {
                 link: '/pages/channelcategory/addpackage',
 
               },
-              {
-                title: 'Add Package Share',
-                link: '/pages/channelcategory/addpackageshare',
+              // {
+              //   title: 'Add Package Share',
+              //   link: '/pages/channelcategory/addpackageshare',
 
-              },
-              {
-                title: 'List Package Share',
-                link: '/pages/channelcategory/packagesharelist',
+              // },
+              // {
+              //   title: 'List Package Share',
+              //   link: '/pages/channelcategory/packagesharelist',
 
-              },
-              {
-                title: 'List Package Product',
-                link: '/pages/channelcategory/listpackprod',
+              // },
+              // {
+              //   title: 'List Package Product',
+              //   link: '/pages/channelcategory/listpackprod',
 
-              },
+              // },
             ],
           },
         ],
@@ -438,39 +438,39 @@ export class PagesComponent {
             title: 'Upload Card',
             link: '/pages/stbmanagement/uploadcard',
           },
-          {
-            title: 'STB Cust Mapping ',
-            link: '/pages/stbmanagement/custmapping',
-          },
-          {
-            title: 'Bulk Vc Activation',
-            link: '/pages/stbmanagement/bulkvcactive',
-          },
-          {
-            title: 'Bulk Paring',
-            link: '/pages/stbmanagement/bulkpairing',
-          },
-          {
-            title: 'STB Terminal Upload',
-            link: '/pages/stbmanagement/stbterminal',
-          },
-          {
-            title: 'Bulk Acivation/Deactivation',
-            link: '/pages/stbmanagement/bulkactivation',
-          },
-          {
-            title: 'Bulk Service Extention',
-            link: '/pages/stbmanagement/bulkserviceactivation',
-          },
-          {
-            title: 'List Fault STB',
-            link: '/pages/stbmanagement/faultstb',
-          },
+        //  {
+          //   title: 'STB Cust Mapping ',
+          //   link: '/pages/stbmanagement/custmapping',
+          // },
+          // {
+          //   title: 'Bulk Vc Activation',
+          //   link: '/pages/stbmanagement/bulkvcactive',
+          // },
+          // {
+          //   title: 'Bulk Paring',
+          //   link: '/pages/stbmanagement/bulkpairing',
+          // },
+          // {
+          //   title: 'STB Terminal Upload',
+          //   link: '/pages/stbmanagement/stbterminal',
+          // },
+          // {
+          //   title: 'Bulk Acivation/Deactivation',
+          //   link: '/pages/stbmanagement/bulkactivation',
+          // },
+          // {
+          //   title: 'Bulk Service Extention',
+          //   link: '/pages/stbmanagement/bulkserviceactivation',
+          // },
+          // {
+          //   title: 'List Fault STB',
+          //   link: '/pages/stbmanagement/faultstb',
+          // },
 
-          {
-            title: 'STB Active/Deactive Logs',
-            link: '/pages/stbmanagement/stbactdeact',
-          },
+          // {
+          //   title: 'STB Active/Deactive Logs',
+          //   link: '/pages/stbmanagement/stbactdeact',
+          // },
         ],
 
       },

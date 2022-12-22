@@ -218,30 +218,32 @@ export class EditUserComponent implements OnInit {
   }
   async getCountry($event = '') {
     console.log('Country Event----', $event);
-    this.count = await this.country.listcountry({ like: $event });
+     this.count = await this.country.listcountry({ like: $event });
     console.log('country', this.count);
-  }
-
-  async getstate($event = '') {
-    console.log('get state  calling-----', this.edituser.value['country']);
-    this.getstates = await this.country.liststate({ country_fk: this.edituser.value['country'], like: $event });
-  }
-  async getdistrict($event = '') {
-    console.log('dist', $event);
-    console.log('get distric  calling-----', this.edituser.value['state']);
-    this.dist = await this.country.listdistrict({ stateid: this.edituser.value['state'], like: $event });
-    console.log('Get district data', this.dist);
-
-  }
-  async getcity($event = '') {
+   }
+ 
+   async getstate($event = '') {
+     console.log('get state  calling-----', this.edituser.value['country']);
+     this.getstates = await this.country.liststate({ country_fk: this.edituser.value['country'], like: $event });
+   }
+   async getdistrict($event = '') {
+     console.log('dist', $event);
+     console.log('get distric  calling-----', this.edituser.value['state']);
+     this.dist = await this.country.listdistrict({ state_fk: this.edituser.value['state'], like: $event });
+     console.log('Get district data', this.dist);
+ 
+   }
+   async getcity($event = '') {
     console.log('city...........', $event);
     console.log('get distric  calling-----', this.edituser.value['district']);
-    this.citylist = await this.country.listcity({ district_id: this.edituser.value['district'] });
-  }
-  async getarea($event = '') {
-    this.listarea = await this.country.listarea({ city_id: this.edituser.value['city'] });
-    console.log('area', this.listarea)
-  }
+     this.citylist = await this.country.listcity({ district_id: this.edituser.value['district'] });
+     console.log('city *****',this.citylist)
+   }
+   async getarea($event = '') {
+     this.listarea = await this.country.listarea({ city_id: this.edituser.value['city'] });
+     console.log('area', this.listarea)
+   }
+ 
 
 
   async listlco() {
@@ -327,7 +329,7 @@ export class EditUserComponent implements OnInit {
       area: new FormControl(this.editdata?.area || '', Validators.required),
       installation_addr: new FormControl(this.editdata?.installation_addr || '', Validators.required),
       billing_addr: new FormControl(this.editdata?.billing_addr || '', Validators.required),
-      addsflag: new FormControl(false),
+      addsflag: new FormControl(true),
       prooftype: new FormControl(this.editdata?.prooftype || '', Validators.required),
       proofno: new FormControl(this.editdata?.proofno || '', Validators.required),
       email: new FormControl(this.editdata?.email1 || '', [Validators.required, Validators.pattern("[0-9 A-Z a-z ,.`!@#$%^&*]*[@]{1}[a-z A-Z]*[.]{1}[a-z A-Z]{2,3}")]),

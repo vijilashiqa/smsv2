@@ -28,6 +28,7 @@ export class GeoAddareaComponent implements OnInit {
     if (this.item) {
 
       console.log('itemmm@@@@@@@@@',this.item)
+      this.getCountry();
       this.getstate();
       this.getdistrict();
       this.getcity();
@@ -41,7 +42,7 @@ export class GeoAddareaComponent implements OnInit {
       return;
     }
     let method = this.item ? 'editareageo' : 'addareageo';
-    if (this.item)this.Areaform.value['area_id'] = this.item['id']
+    if (this.item)this.Areaform.value['id'] = this.item['id']
     console.log('countyr_pk========',this.item)
       let result = await this.country[method](this.Areaform.value)
       if (result && result['status'] == 1) {
@@ -61,32 +62,34 @@ export class GeoAddareaComponent implements OnInit {
   }
 
   async getstate($event = '') {
-    console.log('get state  calling-----', this.val['countryid']);
-    this.getstates = await this.country.liststate({ country_fk: this.val['countryid'],like:$event });
+    console.log('get state  calling-----', this.val['country_fk']);
+    this.getstates = await this.country.liststate({ country_fk: this.val['country_fk'],like:$event });
   }
 
   get val() {
     return this.Areaform.value
   }
   async getdistrict($event = '') {
-      //  console.log('dist', $event);
-      //  console.log('get distric  calling-----', this.val['stateid']);
-      this.dist = await this.country.listdistrict({ stateid: this.val['stateid'],like:$event });
-      // console.log('Get district data',this.dist);
+       console.log('dist', $event);
+       console.log('get distric  calling-----', this.val['state_fk']);
+      this.dist = await this.country.listdistrict({ state_fk: this.val['state_fk'],like:$event });
+      console.log('Get district data',this.dist);
       
   }
   async getcity($event = '') {
     console.log('city...........',$event);
-    console.log('get distric  calling-----', this.val['districtid']);
-      this.citylist = await this.country.listcity({ district_id: this.val['districtid'] });
+    console.log('get distric  calling-----', this.val['district_fk']);
+      this.citylist = await this.country.listcity({ district_id: this.val['district_fk'] });
+      console.log('get city ************',this.citylist)
     }
   async getarea($event = '') {
   
-      this.listarea = await this.country.listarea({ city_id:this.val['cityid'] });
+      this.listarea = await this.country.listarea({ city_id:this.val['city_fk'] });
+      console.log("area list ",this.listarea)
      
   }  
   typeclearlcountry(val = "1") {
-    this.changeclear("stateid", "districtid" , "cityid");
+    this.changeclear("state_fk", "district_fk" , "city_fk");
   }
   changeclear(...data) {
     for (let i of data) {
@@ -95,13 +98,13 @@ export class GeoAddareaComponent implements OnInit {
   }
 
   typeclearstate(val = "1") {
-    this.changeclear( "districtid" , "cityid");
+    this.changeclear( "district_fk" , "city_fk");
   }
 
 
   typecleardis(val ='1'){
 
-    this.changeclear('cityid')
+    this.changeclear('city_fk')
   }
 
   async getpincode($event=''){
@@ -118,12 +121,12 @@ export class GeoAddareaComponent implements OnInit {
   }
   createForm() {
     this.Areaform = new FormGroup({
-      stateid: new FormControl(this.item ? this.item['state_fk'] : '', Validators.required),
-      districtid: new FormControl(this.item ? this.item['district_fk'] : '', Validators.required),
-      cityid: new FormControl(this.item ? this.item['city_fk'] : '', Validators.required),
-      countryid: new FormControl(this.item ? this.item['country_fk'] : '', Validators.required),
-      areaname: new FormControl(this.item ? this.item['area_name'] : '', Validators.required),
-      pincode: new FormControl(this.item ? this.item['pincode_fk'] : '', Validators.required),
+      state_fk: new FormControl(this.item ? this.item['state_fk'] : '', Validators.required),
+      district_fk: new FormControl(this.item ? this.item['district_fk'] : '', Validators.required),
+      city_fk: new FormControl(this.item ? this.item['city_fk'] : '', Validators.required),
+      country_fk: new FormControl(this.item ? this.item['country_fk'] : '', Validators.required),
+      area_name: new FormControl(this.item ? this.item['area_name'] : '', Validators.required),
+      pincode_fk: new FormControl(this.item ? this.item['pincode_fk'] : '', Validators.required),
     });
   }
 

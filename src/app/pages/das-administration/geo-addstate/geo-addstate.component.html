@@ -13,11 +13,11 @@
           <div class="col-sm-12">
             <label>Country *</label>
             <auto-completen
-            [addclass]="{ 'error': submit && this.stateForm.controls.countryname.errors }"
-              addclass="form-control" optValues="name" formControlName="countryname" (keyUp)="getCountry($event)"
-              placeholder='Select Country' id="id" [item]="count">
+            [addclass]="{ 'error': submit && this.stateForm.controls.country_fk.errors }"
+              addclass="form-control" optValues="name" formControlName="country_fk" (keyUp)="getCountry($event)"
+              placeholder='Select Country' optId="country_pk" [item]="count">
             </auto-completen>
-            <div *ngIf="this.stateForm.controls.countryname.errors && (this.stateForm.controls.countryname.errors.required) && submit" class="error-text">
+            <div *ngIf="this.stateForm.controls.country_fk.errors && (this.stateForm.controls.country_fk.errors.required) && submit" class="error-text">
               Country Name is required!
              </div>
           </div>
@@ -25,9 +25,9 @@
         <div class="form-group row">
           <div class="col-sm-12">
             <label>State *</label>
-            <input type="text" class="form-control" name="statename" formControlName="statename" placeholder="Enter State"
-            [ngClass]="{ 'is-invalid': submit && stateForm.controls.statename.errors }"/>
-            <small *ngIf="stateForm.controls.statename.errors &&(stateForm.controls.statename.errors.required )&& submit"
+            <input type="text" class="form-control" name="state_name" formControlName="state_name" placeholder="Enter State"
+            [ngClass]="{ 'is-invalid': submit && stateForm.controls.state_name.errors }"/>
+            <small *ngIf="stateForm.controls.state_name.errors &&(stateForm.controls.state_name.errors.required )&& submit"
             class="invalid-feedback">statename is required! </small>
           </div>
         </div>

@@ -14,13 +14,13 @@
           <label>Country *</label>
 
               <auto-completen
-              [addclass]="{ 'error': submit && this.districtForm.controls.countryid.errors }"
+              [addclass]="{ 'error': submit && this.districtForm.controls.country_fk.errors }"
               addclass="form-control" optValues="name"
-              formControlName="countryid" (keyUp)="getCountry($event)"
-              (changed)="getstate();typecleardist('1')" placeholder='Select Country' id="id"
+              formControlName="country_fk" (keyUp)="getCountry($event)"
+              (changed)="getstate();typecleardist('1')" placeholder='Select Country' optId="country_pk"
               [item]="count">
             </auto-completen>
-            <div *ngIf="this.districtForm.controls.countryid.errors && (this.districtForm.controls.countryid.errors.required) && submit" class="error-text">
+            <div *ngIf="this.districtForm.controls.country_fk.errors && (this.districtForm.controls.country_fk.errors.required) && submit" class="error-text">
               Country Name is required!
              </div>
             </div>
@@ -29,13 +29,13 @@
         <div class="col-sm-12">
           <label>State *</label>
             <auto-completen
-            [addclass]="{ 'error': submit && this.districtForm.controls.stateid.errors }"
+            [addclass]="{ 'error': submit && this.districtForm.controls.state_fk.errors }"
             addclass="form-control" optValues="name"
-            formControlName="stateid" (keyUp)="getstate($event)"
+            formControlName="state_fk" (keyUp)="getstate($event)"
              placeholder='Select State' id="id"
             [item]="getstates">
           </auto-completen>
-          <div *ngIf="this.districtForm.controls.stateid.errors && (this.districtForm.controls.stateid.errors.required) && submit" class="error-text">
+          <div *ngIf="this.districtForm.controls.state_fk.errors && (this.districtForm.controls.state_fk.errors.required) && submit" class="error-text">
             State Name is required!
            </div>
           </div>
@@ -43,10 +43,10 @@
       <div class="form-group row">
         <div class="col-sm-12">
           <label>District *</label>
-            <input type="text" class="form-control" name="districtName" formControlName="districtName" placeholder="Enter Distric"
-            [ngClass]="{ 'is-invalid': submit && districtForm.controls.districtName.errors }"/>
-            <small *ngIf="districtForm.controls.districtName.errors &&(districtForm.controls.districtName.errors.required )&& submit"
-            class="invalid-feedback">districtName is required! </small>
+            <input type="text" class="form-control" name="district_name" formControlName="district_name" placeholder="Enter Distric"
+            [ngClass]="{ 'is-invalid': submit && districtForm.controls.district_name.errors }"/>
+            <small *ngIf="districtForm.controls.district_name.errors &&(districtForm.controls.district_name.errors.required )&& submit"
+            class="invalid-feedback">Distric Name is required! </small>
             
         </div>
       </div>

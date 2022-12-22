@@ -53,8 +53,8 @@ console.log('iteam ==========',this.item)
   }
   createForm() {
     this.stateForm = new FormGroup({
-      countryname: new FormControl(this.item ? this.item['country_fk'] : '', Validators.required),
-      statename: new FormControl(this.item ? this.item['state_name'] : '', Validators.required)
+      country_fk: new FormControl(this.item ? this.item['country_fk'] : '', Validators.required),
+      state_name: new FormControl(this.item ? this.item['state_name'] : '', Validators.required)
     });
   }
 

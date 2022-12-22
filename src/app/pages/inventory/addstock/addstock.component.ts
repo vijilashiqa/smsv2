@@ -128,6 +128,7 @@ export class AddstockComponent implements OnInit {
       vendorid: new FormControl('', Validators.required),
       stocktype: new FormControl('', Validators.required),
       vendordetid: new FormControl('', Validators.required),
+      mtype:new FormControl('',Validators.required),
       stockinid: new FormArray([this.createMaterial()])
     });
   }

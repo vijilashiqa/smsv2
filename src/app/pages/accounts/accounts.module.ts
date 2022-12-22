@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { AutoCompleteNModule } from '../auto-complete-module/auto-completen-module';
 import { AccountsRoutingModule } from './accounts-routing.module';
 import { DepositlistComponent } from './depositlist/depositlist.component';
 import { AdddepositComponent } from './adddeposit/adddeposit.component';
@@ -26,6 +26,7 @@ import { ThemeModule } from '../../@theme/theme.module';
   ],
   imports: [
     CommonModule,
+    AutoCompleteNModule,
     AccountsRoutingModule,
     NbCardModule,
     NbTabsetModule,

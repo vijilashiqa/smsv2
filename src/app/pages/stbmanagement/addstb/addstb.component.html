@@ -11,7 +11,7 @@
             <auto-completen
                 [addclass]="{ 'error': submit && this.AddStbForm.controls.hdid.errors}" 
                 addclass="form-control" optValues="hdname" 
-                (changed)="getInvoicefun();getcashead();getModelcas();getstbtype();typeClear('1');getoperatortypef();" 
+                (changed)="getcashead();getModelcas();getInvoicefun();getstbtype();typeClear('1');getoperatortypef();" 
                 formControlName="hdid" (keyUp)="getHeadend()" placeholder="Select Headend" optId="hdid"
                 [item]="listhead">
              </auto-completen>

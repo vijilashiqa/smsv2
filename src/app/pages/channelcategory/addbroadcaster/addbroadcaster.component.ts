@@ -77,7 +77,6 @@ export class AddbroadcasterComponent implements OnInit {
     this.AddBroadcasterForm.get('password').updateValueAndValidity();
   }
   async getHeadend($event = '') {
-
     this.listhead = await this.headend.getHeadend({ like: $event })
     console.log(this.listhead)
   }
@@ -95,7 +94,7 @@ export class AddbroadcasterComponent implements OnInit {
   async getdistrict($event = '') {
     console.log('dist', $event);
     console.log('get distric  calling-----', this.AddBroadcasterForm.value['stateid']);
-    this.dist = await this.country.listdistrict({ stateid: this.AddBroadcasterForm.value['stateid'], like: $event });
+    this.dist = await this.country.listdistrict({ state_fk: this.AddBroadcasterForm.value['stateid'], like: $event });
     console.log('Get district data', this.dist);
 
   }
@@ -107,7 +106,6 @@ export class AddbroadcasterComponent implements OnInit {
   async getarea($event = '') {
     this.listarea = await this.country.listarea({ city_id:this.AddBroadcasterForm.value['cityid'] });
     console.log('area', this.listarea)
-   
 }
 
   async edit() {

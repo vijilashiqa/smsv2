@@ -43,15 +43,7 @@
                                         *ngIf="edituser.controls.password.errors &&(edituser.controls.password.errors.required )&& submit"
                                         class="invalid-feedback">Password is required! </small>
                                 </div>
-                                <!-- <div class="col-sm-6">
-                                    <label>Confirm Password <span style="color:red">*</span></label>
-                                    <input type="password" name="CPassword" formControlName="CPassword"
-                                        placeholder="Confirm Password" #input
-                                        [ngClass]="{'form-control' : true,'form-control-danger':edituser.value['password']!=edituser.value['CPassword']}" />
-                                    <small *ngIf="edituser.value['password']!=edituser.value['CPassword']"
-                                        class="form-text error">Passwords does not
-                                        Match! </small>
-                                </div> -->
+                
                                 <div class="col-sm-6">
                                     <label>Full Name <span style="color:red">*</span></label>
                                     <input type="text" class="form-control" name="fullname" formControlName="fullname"
@@ -62,20 +54,7 @@
                                         class="invalid-feedback">FirstName is required! </small>
                                 </div>
 
-
                             </div>
-                            <!-- <div class="form-group row">
-                              
-                                <div class="col-sm-6">
-                                    <label>Last Name </label>
-                                    <input type="text" class="form-control" name="lastname" formControlName="lastname"
-                                        placeholder="Enter LastName"
-                                        [ngClass]="{ 'is-invalid': submit && edituser.controls.lastname.errors }" />
-                                    <small
-                                        *ngIf="edituser.controls.lastname.errors &&(edituser.controls.lastname.errors.required )&& submit"
-                                        class="invalid-feedback">LastName is required! </small>
-                                </div>
-                            </div> -->
                             <div class="form-group row">
                                 <div class="col-sm-6">
                                     <label>Date Of Birth<span style="color:red">*</span></label>
@@ -127,7 +106,7 @@
                                         [addclass]="{ 'error': submit && this.edituser.controls.country.errors }"
                                         addclass="form-control" optValues="name" formControlName="country"
                                         (keyUp)="getCountry($event)" (changed)="getstate();typeclearcountry('1')"
-                                        placeholder='Select Country' id="id" [item]="count">
+                                        placeholder='Select Country' optId="country_pk" [item]="count">
                                     </auto-completen>
                                     <div *ngIf="this.edituser.controls.country.errors && (this.edituser.controls.country.errors.required) && submit"
                                         class="error-text">
@@ -153,9 +132,9 @@
                                     <label>District <span style="color:red">*</span></label>
                                     <auto-completen
                                         [addclass]="{ 'error': submit && this.edituser.controls.district.errors }"
-                                        addclass="form-control" optValues="name" formControlName="district"
+                                        addclass="form-control" optValues="district_name" formControlName="district"
                                         (keyUp)="getdistrict($event) " (changed)="getcity();typecleardist()"
-                                        placeholder='Select District' id="id" [item]="dist">
+                                        placeholder='Select District' optId="district_pk" [item]="dist">
                                     </auto-completen>
                                     <div *ngIf="this.edituser.controls.district.errors && (this.edituser.controls.district.errors.required) && submit"
                                         class="error-text">
@@ -166,7 +145,7 @@
                                     <label>City<span style="color:red">*</span></label>
                                     <auto-completen
                                         [addclass]="{ 'error': submit && this.edituser.controls.city.errors }"
-                                        addclass="form-control" optValues="name"
+                                        addclass="form-control" optValues="city_name"
                                         (changed)="getarea();typeclearcity('1')" formControlName="city"
                                         (keyUp)="getcity($event) " placeholder='Select City' id="id" [item]="citylist">
                                     </auto-completen>
@@ -182,7 +161,7 @@
                                     <label>Area<span style="color:red">*</span></label>
                                     <auto-completen
                                         [addclass]="{ 'error': submit && this.edituser.controls.area.errors }"
-                                        addclass="form-control" optValues="name" formControlName="area"
+                                        addclass="form-control" optValues="area_name" formControlName="area"
                                         (keyUp)="getarea($event) " placeholder='Select Area' id="id" [item]="listarea">
                                     </auto-completen>
                                     <div *ngIf="this.edituser.controls.area.errors && (this.edituser.controls.area.errors.required) && submit"
@@ -305,9 +284,7 @@
                         <div class="modal-body">
                             <div class="form-group row">
                                 <div class="col-sm-6"
-                                    (changed)='taxpayby(); listoperator();edituser.controls.subdistid.setValue("");operatortype();
-                                    '
-                                    >
+                                    (changed)='taxpayby(); listoperator();edituser.controls.subdistid.setValue("");operatortype();'>
                                     <label class="control-label">Operator Type<span style="color:red">*</span></label>
                                     <select class=form-control name="usertype" formControlName="usertype" 
                                         [ngClass]="{ 'is-invalid': submit && this.edituser.controls.usertype.errors }">
@@ -325,9 +302,7 @@
 
                             <div class="form-group row" *ngIf='edituser.value["usertype"]=="444" || 
                                                             edituser.value["usertype"]=="333"' 
-                                                            (changed)='operatortype() ;listoperator();
-                                                            '
-                                                            >
+                                                            (changed)='operatortype() ;listoperator();'>
                                 <div class="col-sm-6">
                                     <label>Distributor/Subdistributer<span style="color:red">*</span></label>
                                     <select class="form-control" 
@@ -357,7 +332,7 @@
                                     <label> Select Distributer Name<span style="color:red">*</span></label>
                                     <auto-completen
                                         [addclass]="{ 'error': submit && this.edituser.controls.distid.errors }"
-                                        addclass="form-control" optValues="business_name" formControlName="distid"
+                                        addclass="form-control" optValues="profileid" formControlName="distid"
                                         (changed)="listoperator();subdistributor()"
                                         placeholder='Select Distributer Name' Id="id" [item]="operatortypelist">
                                     </auto-completen>
@@ -402,9 +377,10 @@
 
                             <div class="form-group row">
                                 <div class="col-sm-6">
+                                    <!-- <label>{{showtext}} Name<span style="color:red">*</span></label> -->
                                     <label>{{edituser.value.usertype==444?'LCO':edituser.value.usertype==666?'Distributer':edituser.value.usertype==555?'Sub-Distributor':edituser.value.usertype==333?'Hotel':'Operator'}}&nbsp;Name<span style="color:red">*</span></label>
                                     <input type="text" class="form-control" name="business_name"
-                                        formControlName="business_name" placeholder="Enter  Name"
+                                        formControlName="business_name"   placeholder="Enter Name "
                                         [ngClass]="{ 'is-invalid': submit && this.edituser.controls.business_name.errors }" />
                                     <small
                                         *ngIf="this.edituser.controls.business_name.errors &&(this.edituser.controls.business_name.errors.required)&& submit"
@@ -449,15 +425,9 @@
                                         class="invalid-feedback">LCO Code is required! </small>
                                 </div>
                             </div>
-
-
-
-
-
-                            
                             <div class="form-group row" *ngIf='edituser.value["usertype"]=="444" ||
-                            ( edituser.value["usertype"]=="333" && edituser.value["dist_or_sub_flg"] =="4")||
-                           ( edituser.value["usertype"]=="333" && edituser.value["dist_or_sub_flg"] =="1" )||
+                             (edituser.value["usertype"]=="333" && edituser.value["dist_or_sub_flg"] =="4")||
+                             (edituser.value["usertype"]=="333" && edituser.value["dist_or_sub_flg"] =="1" )||
                             edituser.value["usertype"]=="666"||
                             edituser.value["usertype"]=="555 "||
                             edituser.value["usertype"]=="333" && edituser.value["dist_or_sub_flg"] =="2" '>
@@ -507,8 +477,8 @@
 
                             <div class="form-group row"
                                 *ngIf='!edituser.value["holderflg"]&&(edituser.value["usertype"]=="666" || 
-                            edituser.value["usertype"]=="444"||
-                             edituser.value["usertype"]=="555") ||
+                              edituser.value["usertype"]=="444"||
+                              edituser.value["usertype"]=="555") ||
                              !edituser.value["holderflg"]&&(edituser.value["usertype"]=="333" && edituser.value["dist_or_sub_flg"] =="4")||
                              !edituser.value["holderflg"]&&(edituser.value["usertype"]=="333" && edituser.value["dist_or_sub_flg"] =="3")||
                              !edituser.value["holderflg"]&&(edituser.value["usertype"]=="333" && edituser.value["dist_or_sub_flg"] =="4") ||
@@ -605,8 +575,7 @@
                     </nb-tab>
                     <nb-tab tabTitle="Revenue Share">
                         <div class="modal-body">
-                            <div class="form-group row"
-                                >
+                            <div class="form-group row">
                                 <div class="col-sm-6">
                                     <label>MSO Share</label>
                                     <input type="number" class="form-control" name="mso_share"
@@ -673,8 +642,7 @@
                             *ngIf='edituser.value["usertype"]=="333" && edituser.value["dist_or_sub_flg"] =="3" ||
                                    edituser.value["usertype"]=="333" && edituser.value["dist_or_sub_flg"] =="2"||
                                    edituser.value["usertype"]=="333" && edituser.value["dist_or_sub_flg"] =="4"||
-                                   edituser.value["usertype"]=="333" && edituser.value["dist_or_sub_flg"] =="1"
-                                   '>
+                                   edituser.value["usertype"]=="333" && edituser.value["dist_or_sub_flg"] =="1" '>
                                 <div class="col-sm-6">
                                     <label>Hotel Share</label>
                                     <input type="number" class="form-control" name="hotel_share"

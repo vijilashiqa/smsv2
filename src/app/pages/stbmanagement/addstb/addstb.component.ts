@@ -56,8 +56,8 @@ export class AddstbComponent implements OnInit {
 async  ngOnInit() {
  await   this.createForm();
  await   this.getHeadend();
-  await  this.getInvoicefun();
-    this.serialValidation();
+ await  this.getInvoicefun();
+ this.serialValidation();
 
 
   }

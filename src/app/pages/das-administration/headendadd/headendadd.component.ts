@@ -10,10 +10,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class HeadendaddComponent implements OnInit {
   submit: boolean; AddheadendForm; editflag = false;
-  state: any = []; district: any = []; city: any = [];editable: boolean = false; editdata = {}
-  pincode: any = []; area: any = []; headend; 
-  keyword = 'name'; value = "country_pk"; citylist; listarea; id;count; getstates; dist; 
-  initialValue;updateform;
+  state: any = []; district: any = []; city: any = []; editable: boolean = false; editdata = {}
+  pincode: any = []; area: any = []; headend;
+  keyword = 'name'; value = "country_pk"; citylist; listarea; id; count; getstates; dist;
+  initialValue; updateform;
   constructor(private country: CountryService,
     private headService: HeadendService,
     private toast: ToastrService,
@@ -34,8 +34,8 @@ export class HeadendaddComponent implements OnInit {
       await this.getCountry();
       await this.getstate();
       await this.getdistrict();
-await this.getcity();
-await this.getarea();
+      await this.getcity();
+      await this.getarea();
     }
   }
   async AddHeadend() {
@@ -48,9 +48,9 @@ await this.getarea();
         invalid.push(name);
       }
     }
-    if (this.AddheadendForm.invalid ) {
-       console.log('Invalid value -----',invalid);
-     window.alert('Please fill mandatory fields');
+    if (this.AddheadendForm.invalid) {
+      console.log('Invalid value -----', invalid);
+      window.alert('Please fill mandatory fields');
       return;
     }
     console.log('add...', this.val);
@@ -66,63 +66,49 @@ await this.getarea();
       console.log('add...', this.val);
     }
   }
-   
+
   async getCountry($event = '') {
     console.log('Country Event----', $event);
-    this.count = await this.country.listcountry({like:$event});
+    this.count = await this.country.listcountry({ like: $event });
     console.log('country', this.count);
   }
 
   async getstate($event = '') {
     console.log('get state  calling-----', this.val['countryid']);
-    this.getstates = await this.country.liststate({ country_fk: this.val['countryid'],like:$event });
+    this.getstates = await this.country.liststate({ country_fk: this.val['countryid'], like: $event });
   }
 
-  
+
   async getdistrict($event = '') {
-       console.log('dist', $event);
-       console.log('get distric  calling-----', this.val['stateid']);
-      this.dist = await this.country.listdistrict({ stateid: this.val['stateid'],like:$event });
-      console.log('Get district data',this.dist);
-      
+    console.log('dist', $event);
+    console.log('get distric  calling-----', this.val['stateid']);
+    this.dist = await this.country.listdistrict({ state_fk: this.val['stateid'], like: $event });
+    console.log('Get district data', this.dist);
+
   }
   async getcity($event = '') {
-    console.log('city...........',$event);
+    console.log('city...........', $event);
     console.log('get distric  calling-----', this.val['districtid']);
-      this.citylist = await this.country.listcity({ district_id: this.val['districtid'] });
-
-
-    }
-  async getarea($event = '') {
-  
-      this.listarea = await this.country.listarea({ city_id:this.val['cityid'] });
-     
+    this.citylist = await this.country.listcity({ district_id: this.val['districtid'] });
+    console.log('city *******', this.citylist)
   }
-
+  async getarea($event = '') {
+    this.listarea = await this.country.listarea({ city_id: this.val['cityid'] });
+    console.log('ares *******', this.listarea)
+  }
 
   typeClear(val = '1') {
-this.changeclear('stateid', 'areaid', 'districtid', 'cityid')
-   
+    this.changeclear('stateid', 'areaid', 'districtid', 'cityid')
   }
-
-
   typeClearstate(val = '1') {
- this.changeclear( 'areaid', 'districtid', 'cityid')
-   
+    this.changeclear('areaid', 'districtid', 'cityid')
   }
-
-
   typeClearcity(val = '1') {
-    this.changeclear( 'areaid')
-   
+    this.changeclear('areaid')
   }
-
   typedist(val = '1') {
-    this.changeclear( 'areaid', 'cityid')
-   
+    this.changeclear('areaid', 'cityid')
   }
-
-
   changeclear(...data) {
     for (let i of data) {
       this.AddheadendForm.controls[i].setValue('');
@@ -130,18 +116,9 @@ this.changeclear('stateid', 'areaid', 'districtid', 'cityid')
   }
 
   async edit() {
-
     console.log('edit herer')
     this.editdata = await this.headService.getheadendedit({ id: this.id });
     console.log('editdata .....', this.editdata)
-
-  }
-
-
-  async update (){
- 
-
-
   }
   createForm() {
     this.AddheadendForm = this.fb.group({
@@ -164,7 +141,7 @@ this.changeclear('stateid', 'areaid', 'districtid', 'cityid')
       cgst: new FormControl(this.editdata['cgst'] || '', Validators.required),
       igst: new FormControl(this.editdata['igst'] || '', Validators.required),
       gst: new FormControl(this.editdata['gst'] || '', Validators.required),
-      Logo: new FormControl(this.editdata['Logo'] ||'', Validators.required),
+      Logo: new FormControl(this.editdata['Logo'] || ''),
       com_invid: new FormControl(this.editdata['com_invid'] || '', Validators.required),
       postpaidtime: new FormControl(this.editdata['postpaidtime'] || '', Validators.required),
     });

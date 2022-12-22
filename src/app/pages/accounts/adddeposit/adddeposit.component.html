@@ -7,103 +7,136 @@
           <form [formGroup]="depositForm" class="form-horizontal" (ngSubmit)="deposit();">
              <div class="modal-body">
                 <div class="form-group row">
-                   <div class="col-sm-4">
-                      <label>Headend</label>
-                      <select (change)='depositForm.controls.operator_name.setValue("");getoperator();' name="headend"
-                         formControlName="headend">
-                         <option value="" selected>Select Headend</option>
-                      
-                      </select>
-                      <small  class="form-text error"> Select
-                         required Headend! </small>
+                  <div class="col-sm-4">
+                     <label>Headend Name<span style="color: red">*</span></label>
+                     <auto-completen
+                         [addclass]="{ 'error': submit && this.depositForm.controls.hdid.errors}" 
+                         addclass="form-control" optValues="hdname" (change)="getoperatortypef();"
+                         formControlName="hdid" (keyUp)="getHeadend()" placeholder="Select Headend" optId="hdid"
+                         [item]="listhead">
+                      </auto-completen>
+                     <div *ngIf="
+                         this.depositForm.controls.hdid.errors &&
+                         this.depositForm.controls.hdid.errors.required &&
+                         submit
+                       " class="error-text">
+                       Headend Name is required!
+                     </div>
                    </div>
                    <div class="col-sm-4">
-                      <label>Operator Type</label>
-                      <select 
-                         name="operator_type" formControlName="operator_type">
-                         <option value="" selected>Select Operator Type</option>
-                         <option value="1">LCO</option>
-                         <option value="2">Distributor</option>
-                         <option value="3">Sub-Distributor</option>
-                      </select>
-                      <small  class="form-text error">
-                         Select required Operator Type! </small>
+                     <label class="control-label">Operator Type<span style="color: red">*</span></label>
+                     <select class="form-control" name="role" formControlName="role" (change)="getoperatortypef();"
+                       [ngClass]="{'is-invalid': submit && this.depositForm.controls.role.errors}">
+                       <option value="">Select Operator Type</option>
+                       <option value="444">LCO</option>
+                       <option value="666">Distributor</option>
+                       <option value="555">Sub-Distributor</option>
+                       <option value="333">Hotel</option>
+                     </select>
+                     <small *ngIf="
+                         this.depositForm.controls.role.errors &&
+                         this.depositForm.controls.role.errors.required &&
+                         submit
+                       " class="invalid-feedback">Operator Type is required!
+                     </small>
                    </div>
                    <div class="col-sm-4">
-                      <label>Operator Name</label>
-                      <select name="operator_name" formControlName="operator_name" >
-                         <option value="" selected> Select Operator Name</option>
-                      </select>
-                      <small 
-                         class="form-text error">Select required Operator name! </small>
+                     <label>{{depositForm.value.role==444?'LCO':depositForm.value.role==666?'Distributer':depositForm.value.role==555?'Sub-Distributor':depositForm.value.role==333?'Hotel':'Operator'}}&nbsp;Name</label>
+                     <auto-completen [addclass]="{error: submit && this.depositForm.controls.userid.errors}"
+                      addclass="form-control" optValues="business_name" formControlName="userid" placeholder="Select LCO Name"
+                       Id="id" [item]="operatortype">
+                     </auto-completen>
+                     <div *ngIf="
+                         this.depositForm.controls.userid.errors &&
+                         this.depositForm.controls.userid.errors.required &&
+                         submit
+                       " class="error-text">
+                       Operator Name is required!
+                     </div>
                    </div>
                 </div>
                 <hr>
                 <div class="form-group row">
                    <div class="col-sm-6">
-                      <label> Deposit Type</label>
-                      <select (change)='paytype();' name="pay_type" formControlName="pay_type">
+                      <label>Payment Type</label>
+                      <select (change)='paytype();' 
+                      class="form-control" name="paymode" formControlName="paymode" 
+                       [ngClass]="{'is-invalid': submit && this.depositForm.controls.paymode.errors}">
                          <option value="" selected>Select Pay Type</option>
-                         <option value="1">Credit</option>
-                         <option value="2">Net Banking</option>
-                         <option value="3">Bank Deposit</option>
-                         <option value="4">Adjustment</option>
-                         <option value="5">Maintenance</option>
-                         <option value="6">Duplicate Deposit</option>
-                         <option value="7">Others</option>
+                         <option value="1">Cash</option>
+                         <option value="2">NetBanking</option>
+                         <option value="3">Cheque</option>
+                         <option value="4">Bank Deposit</option>
+                         <option value="5">UPI</option>
                       </select>
-                      <small class="form-text error">Select
-                         required Pay Type! </small>
+                      <small *ngIf="
+                      this.depositForm.controls.paymode.errors &&
+                      this.depositForm.controls.paymode.errors.required &&
+                      submit
+                    " class="invalid-feedback">Pay Type is required!
+                  </small>
                    </div>
  
+
+                   <div class="col-sm-6">
+                     <label>Payment Mode</label>
+                 <auto-completen [addclass]="{error: submit && this.depositForm.controls.deposit_type.errors}"
+                 addclass="form-control" optValues="dep_mode_name" formControlName="deposit_type" placeholder="Select Deposit Type"
+                  Id="id" [item]="depositlist">
+                </auto-completen>
+                <div *ngIf="
+                    this.depositForm.controls.deposit_type.errors &&
+                    this.depositForm.controls.deposit_type.errors.required &&
+                    submit
+                  " class="error-text">
+                  Deposit Type is required!
+                </div>
+                  </div>
                 </div>
  
                 <div class="form-group row">
                    <div class="col-sm-6">
-                      <label> Reason</label>
-                      <textarea name="reason"
-                         
-                         formControlName="reason"></textarea>
+                      <label>Reason</label>
+                         <textarea name="note" formControlName="note" class="form-control"
+                            [ngClass]="{ 'is-invalid': submit && this.depositForm.controls.note.errors }" placeholder="Enter Reason"></textarea>
                    </div>
                 </div>
                 <div class="form-group row">
-                   <div class="col-sm-6">
+                   <div class="col-sm-6" [hidden]="depositForm.value['paymode']!=2">
                       <label>UTR</label>
-                      <input type="text" name="utr"
-                        
-                         formControlName="utr">
-                      <small  class="form-text error">UTR required!
-                      </small>
+                         <textarea name="utr" formControlName="utr" class="form-control"
+                            [ngClass]="{ 'is-invalid': submit && this.depositForm.controls.utr.errors }" placeholder="Enter UTR"></textarea>
                    </div>
                 </div>
-                <div class="form-group row">
-                   <div class="col-sm-6">
-                      <label>Upload Challan</label>
-                      <input type="file" name="upload" 
-                      formControlName="upload">
-                      <small  class="form-text error">Pls Select
-                         Img! </small>
-                   </div>
-                   <div class="col-sm-6">
-                      <label>Challan</label>
-                      <img [src]="imageURL" style="width: 100%;height: 150px">
-                   </div>
-                </div>
+                <div class="form-group row" >
+                  <div  class="col-sm-6">
+                     <label>Upload Challan</label>
+                     <input type="file" name="upload" (change)="handleFile($event.target.files)"
+                        [ngClass]="{'form-control' : true,'form-control-danger':depositForm.controls.upload.invalid&&submit}"
+                        formControlName="upload">
+                        <small *ngIf="depositForm.controls.deposit_amount.errors && depositForm.controls.deposit_amount.errors.required && submit
+                        " class="invalid-feedback">Deposit Amount required!
+                        </small>
+                  </div>
+                  <div class="col-sm-6" *ngIf='imageURL'>
+                     <label>Challan</label>
+                     <img [src]="imageURL" style="width: 100%;height: 200px">
+                  </div>
+               </div>
                 <div class="form-group row">
                    <div class="col-sm-6">
                       <label>Deposit Amount</label>
-                      <input type="text" name="deposit_amount" formControlName="deposit_amount" placeholder="INR">
-                       
-                      <small 
-                         class="form-text error">Select required Deposit Amount! </small>
-                      <small
-                         class="form-text error">Enter The Valid Amount! </small>
+                      <input type="text" class="form-control" name="deposit_amount" formControlName="deposit_amount" placeholder="INR"
+                      [ngClass]="{ 'is-invalid': submit && depositForm.controls.deposit_amount.errors}" />
+                    <small *ngIf="depositForm.controls.deposit_amount.errors && depositForm.controls.deposit_amount.errors.required && submit
+                    " class="invalid-feedback">Deposit Amount required!
+                    </small>
                    </div>
                 </div>
              </div>
              <div class="modal-footer">
-                <button type="submit" class="btn btn-sm btn-success">Submit</button>
-                <button type="button" class="btn btn-sm btn-danger"
+                <button type="submit" class="btn btn-md btn-success">Submit</button>
+                <button type="button" class="btn btn-md btn-danger"
                    [routerLink]="['/pages/accounts/depositlist']">Cancel</button>
              </div>
           </form>
